@@ -7,11 +7,15 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
             !isLoggedIn
                 ? <ul className="navbar-nav">
                     <li className="nav-item">
-                        <a className="nav-link" href="signup.html">Signup</a>
+                        <Link href="signup">
+                            <a className="nav-link">Signup</a>
+                        </Link>
                     </li>
 
                     <li className="nav-item">
-                        <a className="nav-link" href="login.html">Login</a>
+                        <Link href="login">
+                            <a className="nav-link">Login</a>
+                        </Link>
                     </li>
                 </ul>
                 : (
