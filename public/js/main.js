@@ -1,25 +1,4 @@
 
-// Displaying the Sidebar
-$(document).ready(function () {
-
-   
-    $('#close-btn').on('click', function () {
-        // hide sidebar
-        $('.sidebar').toggleClass('active');
-    });
-
-    $('#open-btn').on('click', function () {
-        // open sidebar
-        $('.sidebar').toggleClass('active');
-    });
-    
-    // Displying the Account notification bar 
-    $('#account-profile').on('click', function () {
-        $('.account-container').toggle();
-    });
-    
-});
-
 // Displaying Modal
 $('#startup-lead').change(function() {
     $('.modal').modal('show');

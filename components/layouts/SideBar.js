@@ -2,10 +2,15 @@ import React from "react";
 import Link from "next/link";
 
 export default function SideBar({isLoggedIn = false}) {
+
+    const closeSideBarHandler = () => {
+        $('.sidebar').toggleClass('active');
+    }
+
     return (
         !isLoggedIn
             ? <div className="sidebar">
-                <button id="close-btn">
+                <button onClick={closeSideBarHandler}>
                     <img src="/images/icon/cancel.svg" alt=""/>
                 </button>
                 <ul>

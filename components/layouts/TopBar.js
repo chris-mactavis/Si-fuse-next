@@ -2,6 +2,15 @@ import React from "react";
 import Link from "next/link";
 
 export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount = false}) {
+
+    const openSideBarHandler = () => {
+        $('.sidebar').toggleClass('active');
+    }
+
+    const accountMenuHandler = () => {
+        $('.account-container').toggle();
+    }
+
     return <nav className="navbar navbar-expand-lg">
         {
             !isLoggedIn
@@ -20,10 +29,10 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
                 </ul>
                 : (
                     !whiteAccount
-                        ? <button id="account-profile" className="menu-btn">
+                        ? <button onClick={accountMenuHandler} className="menu-btn">
                             <img src="/images/icon/account.svg" alt="" className="img-fluid"/>
                         </button>
-                        : <button id="account-profile" className="menu-btn active-bar">
+                        : <button onClick={accountMenuHandler} className="menu-btn active-bar">
                             <img src="/images/icon/account-white.svg" alt="" className="img-fluid"/>
                         </button>
                 )
@@ -39,7 +48,7 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
             </Link>
         </div>
 
-        <button id="open-btn" className="menu-btn">
+        <button onClick={openSideBarHandler} className="menu-btn">
             {
                 redBar
                     ? <img src="/images/icon/button-red.svg" alt=""/>
