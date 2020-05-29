@@ -6,6 +6,7 @@ import ProfileThree from "../../components/profileForm/three";
 import Head from "next/head";
 
 export default function Profile() {
+
     return <Layout headerContent={null} headerClass="page-header no-bg" redBar page="profile" isLoggedIn>
         <Head>
             <title>Profile</title>

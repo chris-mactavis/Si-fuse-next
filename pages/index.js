@@ -1,10 +1,20 @@
 import Head from 'next/head'
 import Layout from "../components/layout";
-import React from "react";
+import React, {useEffect} from "react";
 import HeaderContent from "../components/header/HeaderContent";
 import Link from "next/link";
 
 export default function Home() {
+    useEffect(() => {
+        $('.posts-slider').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true,
+            autoplay: true,
+        });
+    }, [])
+
     return <Layout
         page="Home"
         headerContent={<HeaderContent/>}
