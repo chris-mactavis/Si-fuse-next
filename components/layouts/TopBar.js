@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount = false}) {
 
     const openSideBarHandler = () => {
-        console.log('here');
         $('.sidebar').toggleClass('active');
     }
 
