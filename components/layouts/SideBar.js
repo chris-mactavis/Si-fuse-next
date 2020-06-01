@@ -1,10 +1,20 @@
 import React from "react";
 import Link from "next/link";
+import {useDispatch} from "react-redux";
+import {logout} from "../../store/actions/auth";
+import ToggleSideBar from "../../utils/ToggleSideBar";
+import Router from 'next/router';
 
 export default function SideBar({isLoggedIn = false}) {
+    const dispatch = useDispatch();
 
     const closeSideBarHandler = () => {
-        $('.sidebar').toggleClass('active');
+        ToggleSideBar();
+    }
+
+    const logoutHandler = () => {
+        dispatch(logout());
+        Router.push('/');
     }
 
     return <>
@@ -28,11 +38,17 @@ export default function SideBar({isLoggedIn = false}) {
                         <a>Blog</a>
                     </Link>
                 </li>
-                <li>
-                    <Link href="/login">
-                        <a>Login</a>
-                    </Link>
-                </li>
+                {
+                    !isLoggedIn
+                        ? <li>
+                            <Link href="/login">
+                                <a>Login</a>
+                            </Link>
+                        </li>
+                        : <li>
+                            <a onClick={logoutHandler}>Logout</a>
+                        </li>
+                }
             </ul>
         </div>
         {
@@ -69,7 +85,7 @@ export default function SideBar({isLoggedIn = false}) {
                             </Link>
                         </li>
                         <li>
-                            <a href="#"><img src="/images/icon/logout-icon.svg" alt="" className="img-fluid"/> Logout</a>
+                            <a href="#" onClick={logoutHandler}><img src="/images/icon/logout-icon.svg" alt="" className="img-fluid"/> Logout</a>
                         </li>
                     </ul>
                 </div>

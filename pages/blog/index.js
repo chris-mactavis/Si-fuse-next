@@ -2,8 +2,9 @@ import React from "react";
 import Layout from "../../components/layout";
 import Head from "next/head";
 import Link from "next/link";
+import {profileMiddleWare} from "../../components/hoc/auth";
 
-export default function Blog() {
+const Blog = () => {
     return <Layout headerContent={<h1>Blog</h1>} page="Blog" headerClass="page-header blog">
         <Head>
             <title>Blog</title>
@@ -111,4 +112,6 @@ export default function Blog() {
             </div>
         </section>
     </Layout>
-}
+};
+
+export default profileMiddleWare(Blog);

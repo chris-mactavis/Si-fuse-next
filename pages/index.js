@@ -3,8 +3,9 @@ import Layout from "../components/layout";
 import React, {useEffect} from "react";
 import HeaderContent from "../components/header/HeaderContent";
 import Link from "next/link";
+import {profileMiddleWare} from "../components/hoc/auth";
 
-export default function Home() {
+const Home = () => {
     useEffect(() => {
         $('.posts-slider').slick({
             slidesToShow: 4,
@@ -281,3 +282,5 @@ export default function Home() {
 
     </Layout>
 }
+
+export default profileMiddleWare(Home);

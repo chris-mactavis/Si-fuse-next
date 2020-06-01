@@ -5,8 +5,11 @@ import SideBar from "./layouts/SideBar";
 import HeaderScroll from "./header/HeaderScroll";
 import Link from "next/link";
 import Footer from "./layouts/Footer";
+import Loader from "./UI/Loader";
+import {useSelector} from "react-redux";
 
-export default function Layout({children, page, headerClass, headerContent, redBar = false, isLoggedIn = false, whiteAccount = false}) {
+export default function Layout({children, page, headerClass, headerContent, redBar = false, whiteAccount = false}) {
+    const isLoggedIn = useSelector(state => state.auth.loggedIn);
     return (
         <>
             <Head>
@@ -48,6 +51,8 @@ export default function Layout({children, page, headerClass, headerContent, redB
                 <script src="/js/bootstrap.min.js"/>
                 <script src="/js/main.js"/>
             </Head>
+
+            <Loader />
 
             <header className={headerClass}>
                 <TopBar redBar={redBar} isLoggedIn={isLoggedIn} whiteAccount={whiteAccount}/>

@@ -4,8 +4,10 @@ import ProfileOne from "../../components/profileForm/one";
 import ProfileTwo from "../../components/profileForm/two";
 import ProfileThree from "../../components/profileForm/three";
 import Head from "next/head";
+import {auth} from "../../components/hoc/auth";
 
-export default function Profile() {
+
+const Profile = () => {
 
     return <Layout headerContent={null} headerClass="page-header no-bg" redBar page="profile" isLoggedIn>
         <Head>
@@ -18,3 +20,5 @@ export default function Profile() {
         <ProfileThree />
     </Layout>
 }
+
+export default auth(Profile);
