@@ -15,10 +15,7 @@ export default function LoginForm() {
 
     const loginHandler = async data => {
         await dispatch(loginAsync(data));
-        console.log('hhh');
-        Router.push('/profile');
-        console.log('xxx');
-        // Router.push(Cookies.get('redirectIntended') || '/');
+        Router.push(Cookies.get('redirectIntended') || '/');
         Cookies.remove('redirectIntended');
     };
 

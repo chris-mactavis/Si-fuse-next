@@ -17,7 +17,6 @@ export const auth = Component => {
     Wrapper.getInitialProps = async (ctx) => {
 
         let isLoggedIn;
-        console.log(isServer, 'isServer');
         if (isServer && ctx.res) {
             isLoggedIn = !!ctx.req.cookies.token;
             if (!isLoggedIn) {
@@ -76,31 +75,28 @@ export const withoutAuth = Component => {
 export const profileMiddleWare = Component => {
     const isServer = typeof window === 'undefined';
     const Wrapper = (props) => {
-        console.log(props.currentPage, 'currentPage');
         if (props.isLoggedIn && !props.hasProfile && !isServer && props.currentPage !== '/profile') {
-            console.log('got here');
             Router.push('/profile')
         }
-        console.log('here now');
         return <Component {...props} />
     }
 
     Wrapper.getInitialProps = async (ctx) => {
-
         let isLoggedIn, hasProfile, currentPage;
         if (isServer && ctx.res) {
             isLoggedIn = !!ctx.req.cookies.token;
-            hasProfile = !!ctx.req.cookies.hasProfile;
+            const user = ctx.req.cookies.user;
+            hasProfile = user ? JSON.parse(user).has_profile : false;
             currentPage = ctx.pathname;
-            console.log('looping');
             if (isLoggedIn && !hasProfile && currentPage !== '/profile') {
                 ctx.res.writeHead(302, {Location: '/profile'});
                 ctx.res.end();
             }
         } else {
             isLoggedIn = !!Cookies.get('token');
-            hasProfile = !!Cookies.get('hasProfile');
-            currentPage = '/login';
+            const user = Cookies.get('user');
+            hasProfile = user ? JSON.parse(user).has_profile : false;
+            currentPage = ctx.pathname;
         }
 
         const componentProps =
