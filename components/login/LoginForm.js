@@ -14,9 +14,13 @@ export default function LoginForm() {
     });
 
     const loginHandler = async data => {
-        await dispatch(loginAsync(data));
-        Router.push(Cookies.get('redirectIntended') || '/');
-        Cookies.remove('redirectIntended');
+        try {
+            await dispatch(loginAsync(data));
+            Router.push(Cookies.get('redirectIntended') || '/');
+            Cookies.remove('redirectIntended');
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     return <>

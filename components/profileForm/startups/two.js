@@ -1,12 +1,12 @@
 import {useDispatch} from "react-redux";
-import {incrementCurrentState} from "../../store/actions/profile";
+import {incrementCurrentState} from "../../../store/actions/profile";
 import React, {useCallback, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
-import Error from "../UI/ErrorSpan";
+import Error from "../../UI/ErrorSpan";
 import DropNCrop from "@synapsestudios/react-drop-n-crop";
-import axiosInstance from "../../config/axios";
-import {loader} from "../../store/actions/loader";
-import Token from "../../utils/Token";
+import axiosInstance from "../../../config/axios";
+import {loader} from "../../../store/actions/loader";
+import Token from "../../../utils/Token";
 
 export default function ProfileTwo({industries, startup, locations}) {
     const dispatch = useDispatch();
@@ -52,10 +52,6 @@ export default function ProfileTwo({industries, startup, locations}) {
             (values.industries.filter(industry => Boolean(industry)).length >= 1) || "Select at least one industry!"
         );
     }
-
-    useEffect(() => {
-        console.log(errors);
-    }, [errors]);
 
     const onChangePicture = value => {
         setProfilePicture(value);

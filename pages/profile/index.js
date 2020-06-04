@@ -1,26 +1,29 @@
 import Layout from "../../components/layout";
 import React from "react";
-import ProfileOne from "../../components/profileForm/one";
-import ProfileTwo from "../../components/profileForm/two";
-import ProfileThree from "../../components/profileForm/three";
-import ProfileFive from "../../components/profileForm/five";
+import ProfileOne from "../../components/profileForm/startups/one";
+import ProfileTwo from "../../components/profileForm/startups/two";
+import ProfileThree from "../../components/profileForm/startups/three";
+import ProfileFive from "../../components/profileForm/startups/five";
 import Head from "next/head";
 import {auth} from "../../components/hoc/auth";
 import {useSelector} from "react-redux";
 import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
-import {ProfileFour} from "../../components/profileForm/four";
+import {ProfileFour} from "../../components/profileForm/startups/four";
+import {User} from "../../utils/User";
+import InvestorBasicInfo from "../../components/profileForm/investors/one";
+import InvestorPreference from "../../components/profileForm/investors/two";
 
-const Profile = ({startup, industries, locations, stages}) => {
-
+const Profile = ({startup, industries, locations, stages, loggedInUser, investor}) => {
     const currentProfile = useSelector(state => state.profile.currentState);
+    const userType = loggedInUser.user_type.user_type;
 
     const ProfileComponent = () => {
         switch (currentProfile) {
             case 1:
-                return <ProfileOne startup={startup}/>;
+                return userType === 'Investor' ? <InvestorBasicInfo investor={investor} /> : <ProfileOne startup={startup} />;
             case 2:
-                return <ProfileTwo startup={startup} locations={locations} industries={industries}/>;
+                return userType === 'Investor' ? <InvestorPreference industries={industries} stages={stages} investor={investor} /> : <ProfileTwo startup={startup} locations={locations} industries={industries}/>;
             case 3:
                 return <ProfileThree startup={startup}/>;
             case 4:
@@ -43,8 +46,9 @@ const Profile = ({startup, industries, locations, stages}) => {
 
 Profile.getInitialProps = async ctx => {
     const token = Token(ctx);
+    const loggedInUser = User(ctx);
 
-    const {data: {startup, industries, locations, stages}} = await axiosInstance.get('profile-content', {
+    const {data: {startup, industries, locations, stages, investor}} = await axiosInstance.get('profile-content', {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -54,7 +58,9 @@ Profile.getInitialProps = async ctx => {
         startup,
         industries,
         locations,
-        stages
+        stages,
+        loggedInUser,
+        investor
     }
 }
 

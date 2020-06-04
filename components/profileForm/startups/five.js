@@ -1,11 +1,12 @@
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import {loader} from "../../store/actions/loader";
-import axiosInstance from "../../config/axios";
-import Token from "../../utils/Token";
+import {loader} from "../../../store/actions/loader";
+import axiosInstance from "../../../config/axios";
+import Token from "../../../utils/Token";
 import Router from "next/router";
 import Cookies from 'js-cookie';
+import {resetCurrentState} from "../../../store/actions/profile";
 
 export default function ProfileFive({startup}) {
     useEffect(() => {
@@ -21,7 +22,7 @@ export default function ProfileFive({startup}) {
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
-            const {data: response} = await axiosInstance.post('startups/market', data, {
+            await axiosInstance.post('startups/market', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -30,6 +31,7 @@ export default function ProfileFive({startup}) {
             let user = JSON.parse(Cookies.get('user'));
             user.has_profile = 1;
             Cookies.set('user', JSON.stringify(user));
+            // dispatch(resetCurrentState());
             Router.push('/');
         } catch (e) {
             console.log(e);

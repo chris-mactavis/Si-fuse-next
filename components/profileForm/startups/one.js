@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
-import {incrementCurrentState} from "../../store/actions/profile";
+import {incrementCurrentState} from "../../../store/actions/profile";
 import {useForm} from "react-hook-form";
-import Error from "../UI/ErrorSpan";
-import axiosInstance from "../../config/axios";
-import {loader} from "../../store/actions/loader";
+import Error from "../../UI/ErrorSpan";
+import axiosInstance from "../../../config/axios";
+import {loader} from "../../../store/actions/loader";
 import Cookies from "js-cookie";
 
 import DropNCrop from '@synapsestudios/react-drop-n-crop';
-
 
 export default function ProfileOne({startup}) {
     const dispatch = useDispatch();

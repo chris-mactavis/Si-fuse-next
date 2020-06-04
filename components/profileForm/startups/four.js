@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import {loader} from "../../store/actions/loader";
-import axiosInstance from "../../config/axios";
-import Token from "../../utils/Token";
-import {incrementCurrentState} from "../../store/actions/profile";
+import {loader} from "../../../store/actions/loader";
+import axiosInstance from "../../../config/axios";
+import Token from "../../../utils/Token";
+import {incrementCurrentState} from "../../../store/actions/profile";
 
 export const ProfileFour = ({startup}) => {
     const dispatch = useDispatch();
@@ -27,6 +27,10 @@ export const ProfileFour = ({startup}) => {
             dispatch(loader());
         }
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return <section className="profile profile-2 single-post">
         <div className="container-fluid">
@@ -96,13 +100,10 @@ export const ProfileFour = ({startup}) => {
 
                         <select name="funding_stage" ref={register} defaultValue={hasFinance() ? startup.finance.funding_stage: ''}>
                             <option value="">What funding are you around currently?</option>
+                            <option value="Ideation">Ideation</option>
                             <option value="Seed stage">Seed stage</option>
                             <option value="Early stage">Early stage</option>
                             <option value="Late stage">Late stage</option>
-                            <option value="Debt Financing">Debt Financing</option>
-                            <option value="Equity">Equity</option>
-                            <option value="Non-equity">Non-equity</option>
-                            <option value="Grant">Grant</option>
                         </select>
 
                         <select name="investment_ask" ref={register} defaultValue={hasFinance() ? startup.finance.investment_ask: ''}>

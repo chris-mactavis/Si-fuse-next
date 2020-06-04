@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
-import axiosInstance from "../../config/axios";
-import Token from "../../utils/Token";
+import axiosInstance from "../../../config/axios";
+import Token from "../../../utils/Token";
 import {useDispatch} from "react-redux";
-import {loader} from "../../store/actions/loader";
-import {incrementCurrentState} from "../../store/actions/profile";
+import {loader} from "../../../store/actions/loader";
+import {incrementCurrentState} from "../../../store/actions/profile";
 
 export default function ProfileThree({startup}) {
     useEffect(() => {

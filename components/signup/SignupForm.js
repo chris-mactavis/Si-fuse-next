@@ -109,16 +109,20 @@ export default function SignupForm({countries, userTypes}) {
                                id="pwd_confirm" placeholder="Confirm Password"/>
                         {errors.confirm_password && <Error>{errors.confirm_password.message}</Error>}
 
-                        <div className="d-block">
-                            <label htmlFor="female_owned">
-                                <input type="radio" ref={register} id="female_owned" name="startup_type_id" value={1}
-                                       defaultChecked/> &nbsp; Female Owned &nbsp;
-                            </label>
-                            <label htmlFor="female_led">
-                                <input type="radio" ref={register} id="female_led" name="startup_type_id"
-                                       value={2}/> &nbsp; Female Led
-                            </label>
-                        </div>
+                        {
+                            accountType === 2
+                                ? <div className="d-block">
+                                    <label htmlFor="female_owned">
+                                        <input type="radio" ref={register} id="female_owned" name="startup_type_id" value={1}
+                                               defaultChecked/> &nbsp; Female Owned &nbsp;
+                                    </label>
+                                    <label htmlFor="female_led">
+                                        <input type="radio" ref={register} id="female_led" name="startup_type_id"
+                                               value={2}/> &nbsp; Female Led
+                                    </label>
+                                </div>
+                                : null
+                        }
 
                         <button type="submit" className="btn btn-white">Sign
                             up
