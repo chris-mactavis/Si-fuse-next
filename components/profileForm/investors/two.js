@@ -6,7 +6,6 @@ import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import Router from "next/router";
 import Cookies from "js-cookie";
-import {resetCurrentState} from "../../../store/actions/profile";
 
 const InvestorPreference = ({investor, stages, industries}) => {
     const {register, handleSubmit} = useForm();
