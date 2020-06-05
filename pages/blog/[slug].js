@@ -1,11 +1,13 @@
 import Layout from "../../components/layout";
 import Head from "next/head";
 import React from "react";
+import axiosInstance from "../../config/axios";
 
-export default function SingleBlog() {
+export default function SingleBlog({blog}) {
+    const createMarkup = () => ({__html: blog.content});
     return <Layout page="SingleBlog" headerContent={null} headerClass="page-header no-bg" redBar>
         <Head>
-            <title>Single Title >>></title>
+            <title>{blog.title}</title>
         </Head>
 
         <section className="single-post">
@@ -13,75 +15,20 @@ export default function SingleBlog() {
                 <div className="row">
                     <div className="col">
                         <div className="white-bg">
-                            <img src="/images/blog-3.jpg" alt="" className="img-fluid blog-image"/>
+                            <img src={blog.image} alt="" className="img-fluid blog-image"/>
 
                             <div className="row">
                                 <div className="col-md-9 mx-auto">
                                     <div className="content">
-                                        <h1>African Future Tech and Energy Summit</h1>
+                                        <h1>{blog.title}</h1>
 
                                         <div className="category">
-                                            <p>Post category</p>
-                                            <p>10 min. read</p>
-                                            <p>2 <sup>nd</sup> Aug 2020</p>
+                                            <p>{blog.category.name}</p>
+                                            <p>{blog.estimated_reading_time} min. read</p>
+                                            <p>{blog.date_formatted_alt}</p>
                                         </div>
 
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                            laboris nisi ut aliquip ex ea commodo consequat. Duis
-                                            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat nulla Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                                            et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat.
-                                        </p>
-
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                                            dolore eu fugiat nulla Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing
-                                            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                            Ut enim ad minim veniam, quis nostrud
-                                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in
-                                            voluptate velit esse cillum dolore eu fugiat nulla Lorem ipsum dolor sit
-                                            amet, consectetur adipiscing elit, sed do
-                                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        </p>
-
-                                        <p>
-                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                                            ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum
-                                            dolore eu fugiat nulla Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit, sed do eiusmod tempor incididunt ut
-                                            labore et dolore magna aliqua.
-
-                                        </p>
-
-                                        <p>
-                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                                            ut aliquip ex ea commodo consequat. Duis aute
-                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                            fugiat nulla Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                                            et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.
-                                        </p>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                                            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                            Ut enim ad minim veniam, quis nostrud
-                                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in
-                                            voluptate velit esse cillum dolore eu fugiat nulla
-                                        </p>
+                                        <div dangerouslySetInnerHTML={createMarkup()}/>
                                     </div>
                                 </div>
                             </div>
@@ -91,4 +38,29 @@ export default function SingleBlog() {
             </div>
         </section>
     </Layout>
+}
+
+export async function getStaticPaths() {
+    const {data: response} = await axiosInstance.get('blogs-slugs');
+    const slugs = response.map(slug => ({
+        params: {
+            slug: slug.slug
+        }
+    }));
+    return {
+        paths: slugs,
+        fallback: false
+    }
+}
+
+export async function getStaticProps({params}) {
+    const slug = params.slug;
+
+    const {data: {data: blog}} = await axiosInstance.get(`blogs/${slug}`);
+
+    return {
+        props: {
+            blog
+        }
+    }
 }
