@@ -7,5 +7,5 @@ export const User = (ctx) => {
         return JSON.parse(ctx.req.cookies.user);
     }
 
-    return JSON.parse(Cookies.get('user'));
+    return Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
 }

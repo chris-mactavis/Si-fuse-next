@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useCallback} from "react";
 import Link from "next/link";
 import {useDispatch} from "react-redux";
 import {logout} from "../../store/actions/auth";
 import ToggleSideBar from "../../utils/ToggleSideBar";
 import Router from 'next/router';
+import {User} from "../../utils/User";
 
 export default function SideBar({isLoggedIn = false}) {
     const dispatch = useDispatch();
@@ -17,6 +18,8 @@ export default function SideBar({isLoggedIn = false}) {
         Router.push('/');
     }
 
+    const loggedInUser = User();
+
     return <>
         <div className="sidebar">
             <button onClick={closeSideBarHandler}>
@@ -28,11 +31,15 @@ export default function SideBar({isLoggedIn = false}) {
                         <a className="active">Home</a>
                     </Link>
                 </li>
-                <li>
-                    <Link href="/discover">
-                        <a>Discover</a>
-                    </Link>
-                </li>
+                {
+                    loggedInUser && loggedInUser.user_type.user_type === 'Investor'
+                        ? <li>
+                            <Link href="/discover">
+                                <a>Discover</a>
+                            </Link>
+                        </li>
+                        : null
+                }
                 <li>
                     <Link href="/blog">
                         <a>Blog</a>
@@ -85,7 +92,8 @@ export default function SideBar({isLoggedIn = false}) {
                             </Link>
                         </li>
                         <li>
-                            <a href="#" onClick={logoutHandler}><img src="/images/icon/logout-icon.svg" alt="" className="img-fluid"/> Logout</a>
+                            <a href="#" onClick={logoutHandler}><img src="/images/icon/logout-icon.svg" alt=""
+                                                                     className="img-fluid"/> Logout</a>
                         </li>
                     </ul>
                 </div>

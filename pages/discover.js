@@ -4,16 +4,20 @@ import React from "react";
 import HeaderContent from "../components/discover/HeaderContent";
 import Link from "next/link";
 import {auth, profileMiddleWare} from "../components/hoc/auth";
-import Cookies from 'js-cookie';
 import axiosInstance from "../config/axios";
 import {compose} from "redux";
+import {User} from "../utils/User";
+import Token from "../utils/Token";
+import nookies from "nookies";
+import Router from "next/router";
+import Cookies from 'js-cookie';
 
 const Discover = ({userType, data}) => {
     let {data: users, links, meta} = data;
-    console.log(users);
+    console.log(userType, users);
 
-    const StartupComponent = ({user: {company_logo, company_name, funding_stage, location}}) => {
-        return <div className="col-md-3">
+    const StartupComponent = ({user: {company_logo, company_name, funding_stage, location}, key}) => {
+        return <div className="col-md-3" key={key}>
             <Link href="startups/[slug]" as={`startups/x-triumphant`}>
                 <a className="card">
                     <div className="img-wrapper">
@@ -27,7 +31,7 @@ const Discover = ({userType, data}) => {
                     </div>
 
                     <div className="event-tag-location">
-                        <p>Fintech</p>
+                        <p className="align-self-start">Fintech</p>
                         {
                             userType === 'Investor' ? <p>{location.country}</p> : null
                         }
@@ -79,7 +83,8 @@ const Discover = ({userType, data}) => {
 
                 <div className="row">
                     {
-                        users.map(user => userType === 'Investor' ? <StartupComponent user={user}/> : <InvestorComponent user={user} />)
+                        users.map(user => userType === 'Investor' ? <StartupComponent key={user.id} user={user}/> :
+                            <InvestorComponent key={user.id} user={user}/>)
                     }
 
                     {/*<div className="col-md-3">*/}
@@ -155,16 +160,23 @@ const Discover = ({userType, data}) => {
 };
 
 Discover.getInitialProps = async (ctx) => {
-    let user, token;
-    if (typeof window === 'undefined') {
-        user = ctx.req.cookies.user;
-        token = ctx.req.cookies.token;
-    } else {
-        user = Cookies.get('user');
-        token = Cookies.get('token');
+    const user = User(ctx);
+    const token = Token(ctx);
+
+    if (!token) {
+        if (typeof window === 'undefined') {
+            nookies.set(ctx, 'redirectIntended', ctx.pathname, {});
+            ctx.res.writeHead(302, {Location: '/login'});
+            ctx.res.end();
+        } else {
+            console.log('adfasdfasdf');
+            Cookies.set('redirectIntended', '/discover');
+            Router.push('/login');
+            return {};
+        }
     }
 
-    const userType = JSON.parse(user).user_type.user_type;
+    const userType = user.user_type.user_type;
     const url = userType === 'Investor' ? '/investors/discover' : '/startups/discover';
 
     try {
@@ -174,8 +186,8 @@ Discover.getInitialProps = async (ctx) => {
             }
         });
         return {
-            user,
-            data
+            data,
+            userType
         }
     } catch (e) {
         console.log(e.response.data.message);

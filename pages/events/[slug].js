@@ -1,247 +1,293 @@
 import Layout from "../../components/layout";
 import Head from "next/head";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import axiosInstance from "../../config/axios";
+import {useForm} from "react-hook-form";
+import Error from "../../components/UI/ErrorSpan";
+import {User} from "../../utils/User";
+import Token from "../../utils/Token";
 
-export default function Events() {
-    return <Layout page="SingleEvent" headerContent={null} headerClass="page-header no-bg" redBar>
-        <Head>
-            <title>Single Event >>></title>
-        </Head>
+export default function Events({event, countries}) {
 
-        <section className="single-post">
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <div className="white-bg">
-                            <img src="/images/blog-3.jpg" alt="" className="img-fluid blog-image"/>
+    const createMarkup = () => ({__html: event.content});
 
-                            <div className="row">
-                                <div className="col-md-9 mx-auto">
-                                    <div className="content">
-                                        <h1>African Future Tech and Energy Summit</h1>
+    const [showRegister, setShowRegister] = useState(false);
+    const {register, handleSubmit, errors} = useForm();
+    const [countryFlag, setCountryFlag] = useState('');
+    const [currentUser, setCurrentUser] = useState(User());
 
-                                        <div className="event-category">
-                                            <div>
-                                                <p><img src="/images/icon/time.svg" alt=""/> 2<sup>nd</sup> Aug 2020</p>
-                                                <p><img src="/images/icon/date.svg" alt=""/> 12:00 - 2:00 (CAT)</p>
-                                                <p><img src="/images/icon/location.svg" alt=""/> 5, anexx plaza, Ikeja
-                                                    Lagos, Nigeria.</p>
+    const toggleRegisterForm = (e) => {
+        e.preventDefault();
+        setShowRegister(true);
+    }
+
+    const submitHandler = async data => {
+        try {
+            let formData = null;
+            if (event.is_free) {
+                formData = {...data, event_id: event.id};
+            } else {
+                const raveResponse = await payWithRave({...data, amount: event.amount, id: event.id});
+                console.log(raveResponse);
+                formData = {
+                    ...data,
+                    event_id: event.id,
+                    amount: raveResponse.tx.amount,
+                    txn_ref: raveResponse.tx.txRef,
+                    flw_ref: raveResponse.tx.flwRef,
+                    rave_ref: raveResponse.tx.raveRef
+                };
+            }
+            const {data: response} = await axiosInstance.post('user-events', formData, {
+                headers: {
+                    Authorization: `Bearer ${Token()}`
+                }
+            });
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+            // console.log(e.response.data.message);
+        }
+    }
+
+    const payWithRave = async ({email, amount, phone, id}) => {
+        return new Promise((resolve, reject) => {
+            const x = getpaidSetup({
+                PBFPubKey: 'FLWPUBK_TEST-26b715e6695e5b02f3b6b758a8fb365b-X',
+                customer_email: email,
+                amount: amount,
+                customer_phone: phone,
+                currency: "NGN",
+                txref: "event-" + id,
+                // meta: [{
+                //     metaname: "flightID",
+                //     metavalue: "AP1234"
+                // }],
+                onclose: function () {
+                },
+                callback: function (response) {
+                    if (
+                        response.data.chargeResponseCode == "00" ||
+                        response.data.chargeResponseCode == "0"
+                    ) {
+                        resolve(response);
+                        // redirect to a success page
+                    } else {
+                        // redirect to a failure page.
+                    }
+
+                    resolve(response);
+                    x.close(); // use this to close the modal immediately after payment.
+                }
+            });
+        })
+    }
+
+    const countryChangeHandler = e => {
+        const country = countries.find(country => country.id === +e.target.value);
+        setCountryFlag(country.flag);
+    }
+
+    // useEffect(() => {
+    //     console.log(event);
+    // }, [])
+
+    return <>
+        <Layout page="SingleEvent" headerContent={null} headerClass="page-header no-bg" redBar>
+            <Head>
+                <title>{event.title}</title>
+                <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+            </Head>
+
+            <section className="single-post">
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            <div className="white-bg">
+                                <img src={event.image} alt={event.title} className="img-fluid blog-image"/>
+
+                                <div className="row">
+                                    <div className="col-md-9 mx-auto">
+                                        <div className="content">
+                                            <h1>{event.title}</h1>
+
+                                            <div className="event-category">
+                                                <div>
+                                                    <p><img src="/images/icon/time.svg"
+                                                            alt=""/> {event.date_formatted_alt}
+                                                    </p>
+                                                    <p><img src="/images/icon/date.svg" alt=""/> 12:00 - 2:00 (CAT)</p>
+                                                    <p><img src="/images/icon/location.svg"
+                                                            alt=""/> {event.location + ', ' + event.country + '.'}</p>
+                                                </div>
+                                                <p className="color-red">{event.is_free ? 'Free' : 'Paid'} Event</p>
                                             </div>
 
-                                            <p className="color-red">Free Event</p>
-                                        </div>
+                                            <h5>About this Event</h5>
 
-                                        <h5>About this Event</h5>
+                                            <div dangerouslySetInnerHTML={createMarkup()}/>
 
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                            laboris nisi ut aliquip ex ea commodo consequat. Duis
-                                            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat nulla Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                                            et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat.
-                                        </p>
+                                            {
+                                                showRegister
+                                                    ? <div>
+                                                        <h5 className="mb-0">Register Event</h5>
+                                                        <form onSubmit={handleSubmit(submitHandler)}
+                                                              className="profile-details event-register">
+                                                            <div className="d-flex">
+                                                                <div className="input-container w-50 m-right">
+                                                                    <input name="first_name"
+                                                                           defaultValue={currentUser ? currentUser.first_name : ''}
+                                                                           ref={register({required: 'This field is required'})}
+                                                                           type="text" className="half-width"
+                                                                           placeholder="First Name"/>
+                                                                    {errors.first_name &&
+                                                                    <Error>{errors.first_name.message}</Error>}
+                                                                </div>
 
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                                            dolore eu fugiat nulla Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing
-                                            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                            Ut enim ad minim veniam, quis nostrud
-                                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in
-                                            voluptate velit esse cillum dolore eu fugiat nulla Lorem ipsum dolor sit
-                                            amet, consectetur adipiscing elit, sed do
-                                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        </p>
+                                                                <div className="input-container w-50">
+                                                                    <input name="last_name"
+                                                                           defaultValue={currentUser ? currentUser.last_name : ''}
+                                                                           ref={register({required: 'This field is required'})}
+                                                                           type="text"
+                                                                           className="half-width"
+                                                                           placeholder="Last Name"/>
+                                                                    {errors.last_name &&
+                                                                    <Error>{errors.last_name.message}</Error>}
+                                                                </div>
+                                                            </div>
 
-                                        <p>
-                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                                            ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum
-                                            dolore eu fugiat nulla Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit, sed do eiusmod tempor incididunt ut
-                                            labore et dolore magna aliqua.
+                                                            <div className="input-container">
+                                                                <input name="email"
+                                                                       defaultValue={currentUser ? currentUser.email : ''}
+                                                                       ref={register({required: 'This field is required'})}
+                                                                       type="text" className="full-width"
+                                                                       placeholder="Email Address"/>
+                                                                {errors.email &&
+                                                                <Error>{errors.email.message}</Error>}
+                                                            </div>
 
-                                        </p>
+                                                            <div className="d-flex">
+                                                                <div className="input-container small">
+                                                                    <select
+                                                                        ref={register({required: 'This field is required'})}
+                                                                        name="country_code"
+                                                                        id="flag"
+                                                                        className="m-right select-flag mb-0"
+                                                                        onChange={countryChangeHandler}
+                                                                        defaultValue={currentUser ? currentUser.country_id : ''}
+                                                                    >
+                                                                        <option value="">Country Code</option>
+                                                                        {
+                                                                            countries.map(
+                                                                                ({id, country, country_area_code}) =>
+                                                                                    <option value={id}
+                                                                                            key={id}>{`${country_area_code} (${country})`}</option>
+                                                                            )
+                                                                        }
+                                                                    </select>
+                                                                    {errors.country_code &&
+                                                                    <Error>{errors.country_code.message}</Error>}
+                                                                </div>
 
-                                        <p>
-                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                                            ut aliquip ex ea commodo consequat. Duis aute
-                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                            fugiat nulla Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                                            et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.
-                                        </p>
+                                                                <div className="input-container flex-grow-1">
+                                                                    <input name="phone"
+                                                                           ref={register({required: 'This field is required'})}
+                                                                           type="text"
+                                                                           className="w-sm-2 w-100"
+                                                                           placeholder="Phone Number"
+                                                                    />
+                                                                    {errors.phone &&
+                                                                    <Error>{errors.phone.message}</Error>}
+                                                                </div>
+                                                            </div>
 
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                                            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                            Ut enim ad minim veniam, quis nostrud
-                                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in
-                                            voluptate velit esse cillum dolore eu fugiat nulla
-                                        </p>
-
-                                        <div id="register-free">
-                                            <h5>Register Event</h5>
-                                            <form action="#" className="profile-details event-register">
-                                                <div className="d-flex">
-                                                    <input type="text" className="half-width m-right"
-                                                           placeholder="First Name"/>
-                                                    <input type="text" className="half-width"
-                                                           placeholder="Last Name"/>
-                                                </div>
-                                                <input type="text" className="full-width"
-                                                       placeholder="Email Address"/>
-                                                <div className="d-flex">
-                                                    <select name="" id="flag" className="w-sm m-right">
-                                                        <option>+234</option>
-                                                    </select>
-                                                    <input type="text" className="w-sm-2"
-                                                           placeholder="Phone Number"/>
-                                                </div>
-                                                <p>Your seat number is <span>36</span></p>
-                                                <button type="submit" className="btn full-width">Register
-                                                </button>
-                                            </form>
+                                                            {/*<p>Your seat number is <span>36</span></p>*/}
+                                                            {event.is_free ? null :
+                                                                <p className="ticket-price-span">Tickets Cost <span
+                                                                    className="col-green">#{event.amount_formatted}</span>,
+                                                                    click register to
+                                                                    pay and get your ticket</p>}
+                                                            <button type="submit" className="btn full-width">Register
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    : null
+                                            }
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="text-center button">
-                                <a href="#" id="btn-reg" className="btn">Register</a>
+                                {
+                                    showRegister
+                                        ? null
+                                        : <div className="text-center button">
+                                            <a href="#" onClick={toggleRegisterForm} id="btn-reg"
+                                               className="btn">Register</a>
+                                        </div>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section className="single-post">
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <div className="white-bg">
-                            <img src="/images/blog-3.jpg" alt="" className="img-fluid blog-image"/>
+        </Layout>
 
-                            <div className="row">
-                                <div className="col-md-9 mx-auto">
-                                    <div className="content">
-                                        <h1>African Future Tech and Energy Summit</h1>
+        <style jsx>{`
+            .input-container {
+                display: flex;
+                flex-direction: column;
+                margin-top: 4rem;
+            }
+            input {
+                width: 100%!important;
+                margin-bottom: 0!important;
+            }
+            .w-sm {
+                width: 100% !important;
+            }
+            .small {
+                width: 20% !important;
+                margin-right: 2rem;
+            }
+            .select-flag {
+                background: url(${countryFlag ? countryFlag : '/images/icon/flag.png'}) no-repeat left;
+                background-size: 30px;
+            }
+            .ticket-price-span {
+                margin-top: 4rem;
+            }
+            .btn {
+                margin-top: 2rem;
+            }
+        `}</style>
+    </>
+}
 
-                                        <div className="event-category">
-                                            <div>
-                                                <p><img src="/images/icon/time.svg" alt=""/> 2<sup>nd</sup> Aug 2020</p>
-                                                <p><img src="/images/icon/date.svg" alt=""/> 12:00 - 2:00 (CAT)</p>
-                                                <p><img src="/images/icon/location.svg" alt=""/> 5, anexx plaza, Ikeja
-                                                    Lagos, Nigeria.</p>
-                                            </div>
+export async function getStaticPaths() {
+    const {data: response} = await axiosInstance.get('events-slugs');
+    const slugs = response.map(slug => ({
+        params: {
+            slug: slug.slug
+        }
+    }));
 
-                                            <p className="color-red">Paid Event</p>
-                                        </div>
+    return {
+        paths: slugs,
+        fallback: false
+    }
+}
 
-                                        <h5>About this Event</h5>
+export async function getStaticProps({params}) {
+    const slug = params.slug;
 
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna
-                                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                            laboris nisi ut aliquip ex ea commodo consequat. Duis
-                                            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat nulla Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                                            et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat.
-                                        </p>
+    const {data: {data: event}} = await axiosInstance.get(`events/${slug}`);
+    const {data: countries} = await axiosInstance.get('countries');
 
-                                        <p>
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                                            dolore eu fugiat nulla Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing
-                                            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                            Ut enim ad minim veniam, quis nostrud
-                                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in
-                                            voluptate velit esse cillum dolore eu fugiat nulla Lorem ipsum dolor sit
-                                            amet, consectetur adipiscing elit, sed do
-                                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        </p>
-
-                                        <p>
-                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                                            ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum
-                                            dolore eu fugiat nulla Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing elit, sed do eiusmod tempor incididunt ut
-                                            labore et dolore magna aliqua.
-
-                                        </p>
-
-                                        <p>
-                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                                            ut aliquip ex ea commodo consequat. Duis aute
-                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                            fugiat nulla Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                                            et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat. Duis aute irure dolor in
-                                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.
-                                        </p>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                                            elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                            Ut enim ad minim veniam, quis nostrud
-                                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in
-                                            voluptate velit esse cillum dolore eu fugiat nulla
-                                        </p>
-
-                                        <div id="register-free">
-                                            <h5>Register Event</h5>
-                                            <form action="#" className="profile-details event-register">
-                                                <div className="d-flex">
-                                                    <input type="text" className="half-width m-right"
-                                                           placeholder="First Name"/>
-                                                    <input type="text" className="half-width"
-                                                           placeholder="Last Name"/>
-                                                </div>
-                                                <input type="text" className="full-width"
-                                                       placeholder="Email Address"/>
-                                                <div className="d-flex">
-                                                    <select name="" id="flag" className="w-sm m-right">
-                                                        <option>+234</option>
-                                                    </select>
-                                                    <input type="text" className="w-sm-2"
-                                                           placeholder="Phone Number"/>
-                                                </div>
-                                                <p>Your seat number is <span>36</span></p>
-                                                <button type="submit" className="btn full-width">Register
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="text-center button">
-                                <a href="#" id="btn-reg" className="btn">Register</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </Layout>
+    return {
+        props: {
+            event,
+            countries
+        }
+    }
 }
