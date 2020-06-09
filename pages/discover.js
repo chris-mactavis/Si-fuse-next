@@ -1,6 +1,6 @@
 import Layout from "../components/layout";
 import Head from "next/head";
-import React from "react";
+import React, {useState} from "react";
 import HeaderContent from "../components/discover/HeaderContent";
 import Link from "next/link";
 import {auth, profileMiddleWare} from "../components/hoc/auth";
@@ -11,14 +11,43 @@ import Token from "../utils/Token";
 import nookies from "nookies";
 import Router from "next/router";
 import Cookies from 'js-cookie';
+import {useDispatch} from "react-redux";
+import {loader} from "../store/actions/loader";
 
 const Discover = ({userType, data}) => {
     let {data: users, links, meta} = data;
+    const [allStartups, setStartups] = useState(users);
+    const [nextUrl, setNextUrl] = useState(links.next);
+    const [lastPage, setLastPage] = useState(meta.last_page);
+    const [currentPage, setCurrentPage] = useState(meta.current_page);
+
+    const dispatch = useDispatch();
+
+    const nextPageHandler = async e => {
+        e.preventDefault();
+        dispatch(loader());
+        try {
+            const {data: response} = await axiosInstance.get(`${nextUrl}&paginate=4`, {
+                headers: {
+                    'Authorization': `Bearer ${Token()}`
+                }
+            });
+            console.log(response);
+            setStartups(state => state.concat(response.data));
+            setNextUrl(response.links.next);
+            setLastPage(response.meta.last_page);
+            setCurrentPage(response.meta.current_page);
+            dispatch(loader());
+        } catch (error) {
+            console.log(error);
+            dispatch(loader());
+        }
+    }
     console.log(userType, users);
 
-    const StartupComponent = ({user: {company_logo, company_name, funding_stage, location}, key}) => {
+    const StartupComponent = ({user: {company_logo, company_name, funding_stage, location, user_id}, key}) => {
         return <div className="col-md-3" key={key}>
-            <Link href="startups/[slug]" as={`startups/x-triumphant`}>
+            <Link href="startups/[id]" as={`startups/${user_id}`}>
                 <a className="card">
                     <div className="img-wrapper">
                         <img className="card-img-top img-fluid" src={company_logo}/>
@@ -83,77 +112,21 @@ const Discover = ({userType, data}) => {
 
                 <div className="row">
                     {
-                        users.map(user => userType === 'Investor' ? <StartupComponent key={user.id} user={user}/> :
-                            <InvestorComponent key={user.id} user={user}/>)
+                        allStartups.map(
+                            user => userType === 'Investor'
+                                ? <StartupComponent key={user.id} user={user}/>
+                                : <InvestorComponent key={user.id} user={user}/>
+                        )
                     }
-
-                    {/*<div className="col-md-3">*/}
-                    {/*    <Link href="open-startup">*/}
-                    {/*        <a className="card">*/}
-                    {/*            <div className="img-wrapper">*/}
-                    {/*                <img className="card-img-top img-fluid" src="images/startup-2.png"/>*/}
-                    {/*                <span className="view">view <img src="images/icon/right.png" alt=""/></span>*/}
-                    {/*            </div>*/}
-
-                    {/*            <div className="background-text">*/}
-                    {/*                <p>Target Egypt Forum 2020</p>*/}
-                    {/*                <p>Late Stage</p>*/}
-                    {/*            </div>*/}
-
-                    {/*            <div className="event-tag-location">*/}
-                    {/*                <p>Fintech</p>*/}
-                    {/*                <p>Nigeria</p>*/}
-                    {/*            </div>*/}
-                    {/*        </a>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="col-md-3">*/}
-                    {/*    <Link href="open-startup">*/}
-                    {/*        <a className="card">*/}
-                    {/*            <div className="img-wrapper">*/}
-                    {/*                <img className="card-img-top img-fluid" src="images/startup-1.png"/>*/}
-                    {/*                <span className="view">view <img src="images/icon/right.png" alt=""/></span>*/}
-                    {/*            </div>*/}
-
-                    {/*            <div className="background-text">*/}
-                    {/*                <p>African Future Tech and Energy Summit</p>*/}
-                    {/*                <p>Middle Stage</p>*/}
-                    {/*            </div>*/}
-
-                    {/*            <div className="event-tag-location">*/}
-                    {/*                <p>Fintech</p>*/}
-                    {/*                <p>Nigeria</p>*/}
-                    {/*            </div>*/}
-                    {/*        </a>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="col-md-3">*/}
-                    {/*    <Link href="open-startup">*/}
-                    {/*        <a className="card">*/}
-                    {/*            <div className="img-wrapper">*/}
-                    {/*                <img className="card-img-top img-fluid" src="images/startup-3.png"/>*/}
-                    {/*                <span className="view">view <img src="images/icon/right.png" alt=""/></span>*/}
-                    {/*            </div>*/}
-
-                    {/*            <div className="background-text">*/}
-                    {/*                <p>X-Triumphant</p>*/}
-                    {/*                <p>Early Stage</p>*/}
-                    {/*            </div>*/}
-
-                    {/*            <div className="event-tag-location">*/}
-                    {/*                <p>Fintech</p>*/}
-                    {/*                <p>Nigeria</p>*/}
-                    {/*            </div>*/}
-                    {/*        </a>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
                 </div>
 
-                <div className="text-center button mt-5">
-                    <a href="#" className="btn">Load more</a>
-                </div>
+                {
+                    currentPage < lastPage
+                        ? <div className="text-center button mt-5">
+                            <a href="#" onClick={nextPageHandler} className="btn">Load more</a>
+                        </div>
+                        : null
+                }
             </div>
         </section>
     </Layout>
@@ -169,7 +142,6 @@ Discover.getInitialProps = async (ctx) => {
             ctx.res.writeHead(302, {Location: '/login'});
             ctx.res.end();
         } else {
-            console.log('adfasdfasdf');
             Cookies.set('redirectIntended', '/discover');
             Router.push('/login');
             return {};
@@ -177,7 +149,7 @@ Discover.getInitialProps = async (ctx) => {
     }
 
     const userType = user.user_type.user_type;
-    const url = userType === 'Investor' ? '/investors/discover' : '/startups/discover';
+    const url = userType === 'Investor' ? '/investors/discover?paginate=4' : '/startups/discover?paginate=4';
 
     try {
         const {data} = await axiosInstance.get(url, {

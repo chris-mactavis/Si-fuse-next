@@ -75,8 +75,8 @@ export const withoutAuth = Component => {
 export const profileMiddleWare = Component => {
     const isServer = typeof window === 'undefined';
     const Wrapper = (props) => {
-        if (props.isLoggedIn && !props.hasProfile && !isServer && props.currentPage !== '/profile') {
-            Router.push('/profile')
+        if (props.isLoggedIn && !props.hasProfile && !isServer && props.currentPage !== '/profile/edit') {
+            Router.push('/profile/edit')
         }
         return <Component {...props} />
     }
@@ -88,8 +88,8 @@ export const profileMiddleWare = Component => {
             const user = ctx.req.cookies.user;
             hasProfile = user ? JSON.parse(user).has_profile : false;
             currentPage = ctx.pathname;
-            if (isLoggedIn && !hasProfile && currentPage !== '/profile') {
-                ctx.res.writeHead(302, {Location: '/profile'});
+            if (isLoggedIn && !hasProfile && currentPage !== '/profile/edit') {
+                ctx.res.writeHead(302, {Location: '/profile/edit'});
                 ctx.res.end();
             }
         } else {

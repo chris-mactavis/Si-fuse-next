@@ -67,16 +67,16 @@ export const ProfileFour = ({startup}) => {
 
                         <select name="revenue_type" ref={register} defaultValue={hasFinance() ? startup.finance.revenue_type: ''}>
                             <option value="">Company is currently</option>
-                            <option value="post_revenue">Post Revenue</option>
-                            <option value="pre_revenue">Pre Revenue</option>
+                            <option value="Post revenue">Post Revenue</option>
+                            <option value="Pre revenue">Pre Revenue</option>
                         </select>
 
                         <select name="capital_needed_for" ref={register} defaultValue={hasFinance() ? startup.finance.capital_needed_for: ''}>
                             <option value="">Capital Needed for</option>
-                            <option value="post_revenue">Proof of concept</option>
-                            <option value="working_capital">Working capital</option>
-                            <option value="growth_capital">Growth capital</option>
-                            <option value="bridging_capital">Bridging capital</option>
+                            <option value="Proof of concept">Proof of concept</option>
+                            <option value="Working capital">Working capital</option>
+                            <option value="Growth capital">Growth capital</option>
+                            <option value="Bridging Capital">Bridging capital</option>
                         </select>
 
                         <select name="business_size" ref={register} defaultValue={hasFinance() ? startup.finance.business_size: ''}>

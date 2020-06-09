@@ -63,31 +63,31 @@ export default function SideBar({isLoggedIn = false}) {
                 ? <div className="account-container">
                     <ul>
                         <li>
-                            <Link href="profile">
+                            <Link href="/profile">
                                 <a><img src="/images/icon/profile-icon.svg" alt=""
                                         className="img-fluid"/> Profile</a>
                             </Link>
                         </li>
+                        {/*<li>*/}
+                        {/*    <Link href="/message">*/}
+                        {/*        <a><img src="/images/icon/message-icon.svg" alt=""*/}
+                        {/*                className="img-fluid"/> Message</a>*/}
+                        {/*    </Link>*/}
+                        {/*</li>*/}
                         <li>
-                            <Link href="message">
-                                <a><img src="/images/icon/message-icon.svg" alt=""
-                                        className="img-fluid"/> Message</a>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="connections">
+                            <Link href="/connections">
                                 <a><img src="/images/icon/connection-icon.svg" alt=""
                                         className="img-fluid"/> Connections</a>
                             </Link>
                         </li>
                         <li>
-                            <Link href="events">
+                            <Link href="/events">
                                 <a><img src="/images/icon/calendar-icon.svg" alt=""
                                         className="img-fluid"/> Event</a>
                             </Link>
                         </li>
                         <li>
-                            <Link href="settings">
+                            <Link href="/settings">
                                 <a><img src="/images/icon/setting.svg" alt="" className="img-fluid"/> Settings</a>
                             </Link>
                         </li>
