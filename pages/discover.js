@@ -13,6 +13,7 @@ import Router from "next/router";
 import Cookies from 'js-cookie';
 import {useDispatch} from "react-redux";
 import {loader} from "../store/actions/loader";
+import StartupComponent from "../components/discover/StartupComponent";
 
 const Discover = ({userType, data}) => {
     let {data: users, links, meta} = data;
@@ -43,59 +44,6 @@ const Discover = ({userType, data}) => {
             dispatch(loader());
         }
     }
-    console.log(userType, users);
-
-    const StartupComponent = ({user: {company_logo, company_name, funding_stage, location, user_id}, key}) => {
-        return <div className="col-md-3" key={key}>
-            <Link href="startups/[id]" as={`startups/${user_id}`}>
-                <a className="card">
-                    <div className="img-wrapper">
-                        <img className="card-img-top img-fluid" src={company_logo}/>
-                        <span className="view">view <img src="images/icon/right.png"/></span>
-                    </div>
-
-                    <div className="background-text">
-                        <p>{company_name}</p>
-                        <p>{funding_stage}</p>
-                    </div>
-
-                    <div className="event-tag-location">
-                        <p className="align-self-start">Fintech</p>
-                        {
-                            userType === 'Investor' ? <p>{location.country}</p> : null
-                        }
-                    </div>
-                </a>
-
-            </Link>
-        </div>
-    }
-
-    const InvestorComponent = ({user: {profile, interests}}) => {
-        return <div className="col-md-3">
-            <Link href="startups/[slug]" as={`startups/x-triumphant`}>
-                <a className="card">
-                    <div className="img-wrapper">
-                        <img className="card-img-top img-fluid" src={profile ? profile.profile_pic_url : null}/>
-                        <span className="view">view <img src="images/icon/right.png"/></span>
-                    </div>
-
-                    {/*<div className="background-text">*/}
-                    {/*    <p>{company_name}</p>*/}
-                    {/*    <p>{funding_stage}</p>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="event-tag-location">*/}
-                    {/*    <p>Fintech</p>*/}
-                    {/*    {*/}
-                    {/*        userType === 'Investor' ? <p>{location.country}</p> : null*/}
-                    {/*    }*/}
-                    {/*</div>*/}
-                </a>
-
-            </Link>
-        </div>
-    }
 
     return <Layout page="Discover" whiteAccount headerClass="discover page-header" headerContent={<HeaderContent/>}>
         <Head>
@@ -112,11 +60,7 @@ const Discover = ({userType, data}) => {
 
                 <div className="row">
                     {
-                        allStartups.map(
-                            user => userType === 'Investor'
-                                ? <StartupComponent key={user.id} user={user}/>
-                                : <InvestorComponent key={user.id} user={user}/>
-                        )
+                        allStartups.map(user => <StartupComponent key={user.id} user={user}/>)
                     }
                 </div>
 

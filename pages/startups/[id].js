@@ -6,15 +6,14 @@ import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
 import Profile from "../../components/Profile";
 
-export default function SingleStartup({startup: {company, product_services: services, finance, market}}) {
-
+export default function SingleStartup({startup: {company, product_services: services, finance, market}, id, isConnected}) {
     return <>
         <Layout headerContent={null} headerClass="page-header no-bg" redBar>
             <Head>
                 <title>{company.name}</title>
             </Head>
 
-            <Profile company={company} services={services} finance={finance} market={market} userType="startup" />
+            <Profile company={company} services={services} finance={finance} market={market} userType="startup" id={id} isConnected={isConnected} />
         </Layout>
         <style jsx>{`
             .services-stage {
@@ -34,6 +33,8 @@ SingleStartup.getInitialProps = async (ctx) => {
     });
 
     return {
-        startup: response.data
+        startup: response.data,
+        isConnected: response.is_connected,
+        id
     }
 }

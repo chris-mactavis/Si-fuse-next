@@ -1,7 +1,51 @@
-import React from "react";
+import React, {useState} from "react";
 import Router from "next/router";
+import axiosInstance from "../config/axios";
+import Token from "../utils/Token";
+import {useDispatch} from "react-redux";
+import {loader} from "../store/actions/loader";
 
-const Profile = ({company, services, finance, market, userType, profile, interests, hasEdit = false}) => {
+const Profile = ({company, services, finance, market, userType, profile, interests, hasEdit = false, id = null, isConnected = null}) => {
+
+    const [connected, setConnected] = useState(isConnected);
+
+    const dispatch = useDispatch();
+    const connectHandler = async () => {
+        dispatch(loader());
+        try {
+            const {data: response} = await axiosInstance.post(`investors/follows`, {
+                follower_id: id
+            }, {
+                headers: {
+                    Authorization: `Bearer ${Token()}`
+                }
+            });
+            setConnected(true);
+            dispatch(loader());
+        } catch (e) {
+            console.log(e.response.data.message);
+            dispatch(loader());
+        }
+
+    }
+
+    const disconnectHandler = async () => {
+        dispatch(loader());
+        try {
+            const {data: response} = await axiosInstance.post(`investors/unfollow`, {
+                follower_id: id
+            }, {
+                headers: {
+                    Authorization: `Bearer ${Token()}`
+                }
+            });
+            setConnected(false);
+            dispatch(loader());
+        } catch (e) {
+            console.log(e.response.data.message);
+            dispatch(loader());
+        }
+    }
 
     return <>
         <section className="startup-content">
@@ -12,7 +56,8 @@ const Profile = ({company, services, finance, market, userType, profile, interes
                             <div className="row">
                                 <div className="col-12">
                                     <div className="person">
-                                        {hasEdit && <span className="has-edit" onClick={() => Router.push('/profile/edit')}/>}
+                                        {hasEdit &&
+                                        <span className="has-edit" onClick={() => Router.push('/profile/edit')}/>}
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <div className="image">
@@ -51,7 +96,12 @@ const Profile = ({company, services, finance, market, userType, profile, interes
                                                 </div>
 
                                                 <div className="button-togo">
-                                                    <button type="button">Connect</button>
+                                                    {
+                                                        connected
+                                                            ?
+                                                            <button type="button" onClick={disconnectHandler}>Disconnect</button>
+                                                            : <button type="button" onClick={connectHandler}>Connect</button>
+                                                    }
                                                     {/*<button id="message" type="button">Message</button>*/}
                                                     <button type="button"
                                                             onClick={() => window.open(company.website, '_blank')}>Website
@@ -59,7 +109,7 @@ const Profile = ({company, services, finance, market, userType, profile, interes
                                                 </div>
 
                                                 <form className="startup-message" id="st-message">
-                                        <textarea name="message" id="message" cols="47" rows="10"
+                                                    <textarea name="message" id="message" cols="47" rows="10"
                                                   placeholder="Compose Message"/>
                                                     <div className="text-right">
                                                         <button type="submit">Send</button>
@@ -198,7 +248,8 @@ const Profile = ({company, services, finance, market, userType, profile, interes
                             <div className="row">
                                 <div className="col-12">
                                     <div className="person">
-                                        {hasEdit && <span className="has-edit" onClick={() => Router.push('/profile/edit')}/>}
+                                        {hasEdit &&
+                                        <span className="has-edit" onClick={() => Router.push('/profile/edit')}/>}
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <div className="image">

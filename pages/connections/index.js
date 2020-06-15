@@ -1,8 +1,12 @@
 import Layout from "../../components/layout";
 import Head from "next/head";
 import React from "react";
+import StartupComponent from "../../components/discover/StartupComponent";
+import axiosInstance from "../../config/axios";
+import Token from "../../utils/Token";
 
-export default function Connections() {
+export default function Connections({connections}) {
+    console.log(connections);
     return <Layout isLoggedIn whiteAccount headerContent={<h1>Connections</h1>} headerClass="page-header discover"
                    page="Connections">
         <Head>
@@ -16,235 +20,19 @@ export default function Connections() {
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-3.png"/>
-                                <span className="view">view <img src="/images/icon/right.png"/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>X-Triumphant</p>
-                                <p>Early Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
+                {
+                    connections.length > 0 && <div className="row">
+                        {
+                            connections.map(user => {
+                                return <StartupComponent key={user.id} user={user}/>
+                            })
+                        }
                     </div>
+                }
 
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-2.png"/>
-                                <span className="view">view <img src="/images/icon/right.png" alt=""/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>Target Egypt Forum 2020</p>
-                                <p>Late Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-1.png"/>
-                                <span className="view">view <img src="/images/icon/right.png" alt=""/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>African Future Tech and Energy Summit</p>
-                                <p>Middle Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-3.png"/>
-                                <span className="view">view <img src="/images/icon/right.png" alt=""/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>X-Triumphant</p>
-                                <p>Early Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-3.png"/>
-                                <span className="view">view <img src="/images/icon/right.png" /></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>X-Triumphant</p>
-                                <p>Early Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-2.png"/>
-                                <span className="view">view <img src="/images/icon/right.png" alt=""/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>Target Egypt Forum 2020</p>
-                                <p>Late Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-1.png"/>
-                                <span className="view">view <img src="/images/icon/right.png" alt=""/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>African Future Tech and Energy Summit</p>
-                                <p>Middle Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-3.png"/>
-                                <span className="view">view <img src="/images/icon/right.png" alt=""/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>X-Triumphant</p>
-                                <p>Early Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-3.png"/>
-                                <span className="view">view <img src="images/icon/right.png"/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>X-Triumphant</p>
-                                <p>Early Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-2.png"/>
-                                <span className="view">view <img src="/images/icon/right.png" alt=""/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>Target Egypt Forum 2020</p>
-                                <p>Late Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-1.png"/>
-                                <span className="view">view <img src="/images/icon/right.png" alt=""/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>African Future Tech and Energy Summit</p>
-                                <p>Middle Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3">
-                        <a href="open-startup.html" className="card">
-                            <div className="img-wrapper">
-                                <img className="card-img-top img-fluid" src="/images/startup-3.png"/>
-                                <span className="view">view <img src="/images/icon/right.png" alt=""/></span>
-                            </div>
-
-                            <div className="background-text">
-                                <p>X-Triumphant</p>
-                                <p>Early Stage</p>
-                            </div>
-
-                            <div className="event-tag-location">
-                                <p>Fintech</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                {
+                    connections.length === 0 && <span>No Connections!</span>
+                }
 
                 {/*<div class="text-center button mt-5">*/}
                 {/*    <a href="#" class="btn">Load more</a>*/}
@@ -252,4 +40,16 @@ export default function Connections() {
             </div>
         </section>
     </Layout>
+}
+
+Connections.getInitialProps = async ctx => {
+    const {data: {data: connections}} = await axiosInstance.get('investors/follows', {
+        headers: {
+            Authorization: `Bearer ${Token(ctx)}`
+        }
+    });
+
+    return {
+        connections
+    }
 }
