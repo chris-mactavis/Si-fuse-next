@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT} from "../actions/auth";
+import {LOGIN, LOGOUT, STORE_USER} from "../actions/auth";
 import Cookies from 'js-cookie';
 
 const token = Cookies.get('token'), user = Cookies.get('user');
@@ -26,6 +26,11 @@ const auth = (state = initialState, action) => {
                 user: null,
                 token: null,
                 loggedIn: false
+            }
+        case STORE_USER:
+            return {
+                ...state,
+                user: action.user
             }
         default:
             return state;

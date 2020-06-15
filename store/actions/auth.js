@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 
 export const LOGIN = 'LOGIN';
 export const STORE_AUTH = 'STORE_AUTH';
+export const STORE_USER = 'STORE_USER';
 export const LOGOUT = 'LOGOUT';
 
 export const loginAsync = data => {
@@ -41,3 +42,12 @@ export const storeAuth = data => {
         data
     }
 };
+
+export const storeUser = user => {
+    Cookies.set('user', JSON.stringify(user));
+
+    return {
+        type: STORE_USER,
+        user
+    }
+}
