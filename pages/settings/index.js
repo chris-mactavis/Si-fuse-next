@@ -94,7 +94,7 @@ export default function Settings({user}) {
                                     <div className={`half-width ${!showForm ? 'faded' : ''}`}>
                                         <label htmlFor="password">Change password</label>
                                         <input className="full-width half-width" name="password" type="password" ref={register()}
-                                               placeholder="New password"/>
+                                               placeholder="New Password"/>
                                         {errors.password && <ErrorSpan>{errors.password.message}</ErrorSpan>}
                                     </div>
 
@@ -106,15 +106,15 @@ export default function Settings({user}) {
                                     </div>
                                 </div>
 
-                                <div className={`half-width mtop ${!showForm ? 'faded' : ''}`}>
-                                    <label>Account</label>
-                                    <button className="del">Delete my account</button>
-                                </div>
+                                {/*<div className={`half-width mtop ${!showForm ? 'faded' : ''}`}>*/}
+                                {/*    <label>Account</label>*/}
+                                {/*    <button className="del">Delete my account</button>*/}
+                                {/*</div>*/}
 
                                 {
-                                    !showForm && <div className="half-width m-bottom">
+                                    !showForm && <div className="half-width m-bottom mtop">
                                         <label>Enter Current password to edit account</label>
-                                        <input type="password" defaultValue={passwordField} onChange={($event) => {
+                                        <input type="password" placeholder="Current Password" defaultValue={passwordField} onChange={($event) => {
                                             setPasswordField($event.target.value)
                                         }} className="full-width"/>
                                         {passwordError &&
@@ -128,7 +128,7 @@ export default function Settings({user}) {
                                         showForm
                                             ? <button type="submit"
                                                       className="btn m-bottom">
-                                                Update
+                                                SAVE CHANGES
                                             </button>
                                             : <button type="button" onClick={validatePasswordHandler}
                                                       className="btn m-bottom">

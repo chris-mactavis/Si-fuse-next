@@ -1,0 +1,31 @@
+* {
+  outline: none !important;
+
+  &:active, &:focus, &:hover, &::-moz-focus-inner {
+    outline: none !important;
+  }
+
+  &::-moz-focus-inner {
+    border: 0 !important;
+  }
+}
+
+input:focus, textarea:focus, select:focus, option:focus button{
+  outline: none !important;
+}
+
+.m-bottom {
+  margin-bottom: 8rem !important;
+}
+
+.m-bottom-small {
+  margin-bottom: 3rem;
+}
+
+.m-right {
+  margin-right: 2rem;
+}
+
+.white-bg{
+  background: white;
+}

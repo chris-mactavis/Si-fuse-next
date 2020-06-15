@@ -1,0 +1,85 @@
+.btn{
+  color: $color-black;
+  border: 2px solid;
+  font-size: 2rem;
+  padding: 20px 86px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  letter-spacing: .5rem;
+  font-weight: 600;
+  z-index: 1;
+  position: relative;
+  border-radius: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: $orange-red;
+    color: #fff;
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transition: width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,background-color 0.1s,-webkit-transform 0.2s;
+    transition: width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,background-color 0.1s,-webkit-transform 0.2s;
+    transition: transform 0.2s,width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,background-color 0.1s;
+    transition: transform 0.2s,width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,background-color 0.1s,-webkit-transform 0.2s;
+    z-index: -1;
+  }
+
+  &:hover::before {
+    transform: scaleY(1);
+    width: 100%;
+    color: #fff;
+  }
+
+  &:hover {
+    color: #fff;
+    border-color: $orange-red;
+  }
+
+}
+
+.btn-white {
+  width: 100%;
+  color: #fff;
+  margin-bottom: 5rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: #fff;
+    color: #000;
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transition: width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,background-color 0.1s,-webkit-transform 0.2s;
+    transition: width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,background-color 0.1s,-webkit-transform 0.2s;
+    transition: transform 0.2s,width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,background-color 0.1s;
+    transition: transform 0.2s,width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,background-color 0.1s,-webkit-transform 0.2s;
+    z-index: -1;
+  }
+
+  &:hover::before {
+    transform: scaleY(1);
+    width: 100%;
+    color: #000;
+  }
+
+  &:hover {
+    color: #000;
+    border-color: #fff;
+  }
+}
+
+.btn-profile {
+  width: 100%;
+  font-size: 2rem;
+  padding:  24px 86px;
+}

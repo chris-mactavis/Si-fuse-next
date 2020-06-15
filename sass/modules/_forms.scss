@@ -1,0 +1,396 @@
+form {
+  &.search {
+    select:not(multiple) {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding: 15px 60px 15px 30px;
+      font-size: 17px;
+      cursor: pointer;
+      border: 1px solid #fff;
+      background: url(/images/icon/drop-down.svg) no-repeat calc(100% - 17px) center;
+      background-size: 16px;
+      margin-right: 20px;
+      text-align: left;
+      text-transform: uppercase;
+      color: #fff;
+      margin-right: -5px;
+      border-radius: 0;
+      letter-spacing: .2rem;
+    }
+  }
+
+  &.sign-up {
+    width: 70%;
+    margin: 0 auto;
+
+    input {
+      background: transparent;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #fff;
+    }
+
+    select:not(multiple) {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: url(/images/icon/drop-down.svg) no-repeat calc(100% - 17px) center;
+      background-size: 16px;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      outline: none;
+      border-radius: 0;
+      border-bottom: 2px solid;
+    }
+  }
+
+  &.startup-message {
+    padding: 1rem 2rem;
+    box-shadow: -1px 2px 12px 0px rgba(0, 0, 0, 0.3);
+    line-height: 21px;
+    z-index: 1;
+    position: absolute;
+    right: 77px;
+    top: 321px;
+    background: #fff;
+    display: none;
+
+    textarea {
+      border-color: #AFAFAF;
+      padding: .5rem;
+      resize: none;
+      outline: none;
+
+      ::placeholder {
+        color: $color-black;
+      }
+    }
+
+    button {
+      background: transparent;
+      outline: none;
+      border: none;
+      color: $orange-red;
+      padding: 0;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      padding-top: 2rem;
+    }
+  }
+
+  &.profile-details {
+    width: 70%;
+    margin: 0 auto;
+
+    label {
+      display: block;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    #image-upload {
+      width: 25%;
+      height: 20vh;
+      cursor: pointer;
+      margin-bottom: 3rem;
+      border: 3px dotted $dark-light;
+      position: relative;
+
+      &::before {
+        content: url(/images/icon/upload-image-icon.svg);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &::-webkit-file-upload-button {
+        visibility: hidden;
+      }
+
+      &[type="file"] {
+        color: transparent;
+      }
+    }
+
+    input {
+      border-left: 0;
+      border-top: 0;
+      border-right: 0;
+      padding: .5rem 0;
+      border-bottom: 2px solid $color-black-2;
+      margin-bottom: 4rem;
+      outline: none;
+
+      &::placeholder {
+        color: $color-black-2;
+      }
+    }
+
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .small-width {
+      width: 25%;
+      margin-right: 2rem;
+    }
+
+    .medium-width {
+      width: 75%;
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .half-width {
+      width: 50%;
+    }
+
+    textarea {
+      border: 2px solid $color-black-2;
+      outline: none;
+      padding: 1rem;
+      margin-bottom: 4rem;
+      resize: none;
+    }
+
+    .checkout-label {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      padding-left: 3rem;
+      margin-right: 2rem;
+      font-weight: normal;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .checkout-custom {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 23px;
+        width: 25px;
+        background-color: transparent;
+        transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        border: 3px solid $color-black-2;
+
+        &::after {
+          position: absolute;
+          content: "";
+          left: 12px;
+          top: 12px;
+          height: 0px;
+          width: 0px;
+          border: solid #FFF;
+          border-width: 0 3px 3px 0;
+          -webkit-transform: rotate(0deg) scale(0);
+          -ms-transform: rotate(0deg) scale(0);
+          transform: rotate(0deg) scale(0);
+          opacity: 1;
+          transition: all 0.3s ease-out;
+          -webkit-transition: all 0.3s ease-out;
+          -moz-transition: all 0.3s ease-out;
+          -ms-transition: all 0.3s ease-out;
+          -o-transition: all 0.3s ease-out;
+        }
+      }
+    }
+
+    .checkout-label input:checked ~ .checkout-custom {
+      background-color: $orange-red;
+      -webkit-transform: rotate(0deg) scale(1);
+      -ms-transform: rotate(0deg) scale(1);
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+      border: 2px solid $orange-red;
+    }
+
+    .checkout-label input:checked ~ .checkout-custom::after {
+      -webkit-transform: rotate(45deg) scale(1);
+      -ms-transform: rotate(45deg) scale(1);
+      transform: rotate(45deg) scale(1);
+      opacity: 1;
+      left: 8px;
+      top: 3px;
+      width: 6px;
+      height: 12px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      background-color: transparent;
+      border-radius: 0;
+    }
+
+    #video-upload {
+      width: 100%;
+      background: transparent;
+      padding: .5rem;
+      cursor: pointer;
+      margin-bottom: 3rem;
+      border: 3px dotted $dark-light;
+      position: relative;
+      color: $dark-light;
+      font-weight: normal;
+
+      &::before {
+        content: url(/images/icon/upload-1.svg);
+        position: absolute;
+        top: 50%;
+        right: 25px;
+        transform: translate(-50%, -50%);
+      }
+
+      &::after {
+        content: url(/images/icon/upload-2.svg);
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .input-file[type="file"] {
+      display: none;
+    }
+
+    select:not(multiple) {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+      border-left: 0;
+      border-top: 0;
+      border-right: 0;
+      padding: .5rem 0;
+      border-bottom: 2px solid $color-black-2;
+      margin-bottom: 4rem;
+      outline: none;
+      background: url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 25px) center;
+      width: 100%;
+      border-radius: 0;
+      color: $color-black-2;
+    }
+  }
+
+  &.recovery-pwd {
+    background: #fff;
+    padding: 3rem 7rem;
+    width: 90%;
+    margin: 0 auto;
+
+    .faded {
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    input {
+      border-left: 0;
+      border-top: 0;
+      border-right: 0;
+      padding: .5rem 0;
+      border-bottom: 2px solid $color-black-2;
+      margin-bottom: 4rem;
+      outline: none;
+    }
+
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+
+    .half-width {
+      width: 50%;
+      margin-right: 2rem;
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .del {
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: $orange-red;
+      margin-bottom: 4rem;
+      padding: 0;
+      text-transform: uppercase;
+    }
+
+    p {
+      color: $orange-red;
+      font-size: 1.5rem;
+      margin-bottom: 0;
+    }
+
+  }
+
+  &.event-register {
+    width: 100%;
+
+    .m-right {
+      margin-right: 2rem;
+    }
+
+    .w-sm {
+      width: 15%;
+    }
+
+    .w-sm-2 {
+      width: 85%;
+    }
+
+    span {
+      color: $orange-red;
+      font-weight: bold;
+    }
+
+    span.col-green {
+      color: $color-green;
+    }
+
+    select:not(multiple) {
+      background: url(/images/icon/flag.svg) no-repeat left;
+      padding-left: 4rem;
+    }
+  }
+
+}
