@@ -277,6 +277,14 @@ header {
   &.about {
     background-image: url(/images/about-banner.png);
   }
+
+  &.disclaimer {
+    background-image: url(/images/disclaimer.svg);
+  }
+
+  &.contact-us {
+    background-image: url(/images/contact-us.svg);
+  }
   
   &.no-bg {
     background: #ECEFF1;

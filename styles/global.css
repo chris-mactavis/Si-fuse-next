@@ -727,6 +727,11 @@ form.event-register select:not(multiple) {
   border-color: #fff;
 }
 
+.btn-red {
+  background: #D12B19;
+  color: white;
+}
+
 .btn-profile {
   width: 100%;
   font-size: 2rem;
@@ -1365,18 +1370,31 @@ section.about {
 section.about .white-bg {
   padding: 60px 0;
 }
-section.about article {
-  margin-bottom: 50px;
+section.about .red-bg {
+  padding: 60px 0;
+  margin-bottom: 10rem;
+  background: #D12B19;
 }
-section.about article h3 {
-  color: #D32907;
-  font-size: 24px;
-  text-transform: none;
+section.about h5 {
+  font-size: 20px;
   font-family: "Fira Sans", sans-serif;
-  margin-bottom: 10px;
+  font-weight: bold;
+  line-height: 150%;
 }
-section.about article h3::after {
-  content: "?";
+section.about p {
+  font-size: 15px;
+  margin-bottom: 0;
+  color: #6B6B6B;
+}
+section.about .about-story h5 {
+  font-size: 26px;
+  color: white;
+  text-align: center;
+}
+section.about .about-story p {
+  color: white;
+  font-size: 13px;
+  line-height: 2;
 }
 
 * {
@@ -1750,6 +1768,12 @@ header.faqs {
 }
 header.about {
   background-image: url(/images/about-banner.png);
+}
+header.disclaimer {
+  background-image: url(/images/disclaimer.svg);
+}
+header.contact-us {
+  background-image: url(/images/contact-us.svg);
 }
 header.no-bg {
   background: #ECEFF1;

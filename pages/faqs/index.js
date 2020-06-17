@@ -19,7 +19,7 @@ const Faqs = ({faqs}) => {
                                 <div className="col-md-9 mx-auto">
                                     {
                                         faqs.map(
-                                            ({question, answer, id}) => <article id={id}>
+                                            ({question, answer, id}) => <article key={id}>
                                                 <h3>
                                                     {question}
                                                 </h3>

@@ -679,109 +679,110 @@ section {
 
   &.startup-content {
     @extend .bg;
+
     .person {
+      background: #fff;
+      padding: 50px;
+      margin-bottom: 30px;
+
+      .image {
         background: #fff;
-        padding: 50px;
-        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 2.5rem;
+        flex-wrap: wrap;
 
-        .image {
-            background: #fff;
-            display: flex;
-            align-items: center;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-
-            .person-logo {
-            margin-right: 3rem;
-            }
-
-            p {
-            margin-bottom: 0;
-            }
-
-            .small-icons {
-            margin-right: 1rem;
-            }
+        .person-logo {
+          margin-right: 3rem;
         }
 
-        .button-togo {
-            display: flex;
-            flex-wrap: wrap;
-
-            button {
-            background: transparent;
-            padding: 0.5rem 2.5rem;
-            letter-spacing: 0.3rem;
-            text-transform: uppercase;
-            border: 2px solid;
-            transition: all 0.3s;
-            margin: 0 2rem 2rem 0;
-
-            &:hover {
-                color: #fff;
-                background-color: $orange-red;
-                border-color: $orange-red;
-            }
-
-            &:focus {
-                outline: none;
-            }
-            }
+        p {
+          margin-bottom: 0;
         }
 
-        .bold-text {
-            font-weight: 600;
-            margin-bottom: 1rem;
+        .small-icons {
+          margin-right: 1rem;
+        }
+      }
+
+      .button-togo {
+        display: flex;
+        flex-wrap: wrap;
+
+        button {
+          background: transparent;
+          padding: 0.5rem 2.5rem;
+          letter-spacing: 0.3rem;
+          text-transform: uppercase;
+          border: 2px solid;
+          transition: all 0.3s;
+          margin: 0 2rem 2rem 0;
+
+          &:hover {
+            color: #fff;
+            background-color: $orange-red;
+            border-color: $orange-red;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      .bold-text {
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .small-text {
+        font-size: 1.5rem;
+        margin-bottom: 3rem;
+        text-align: justify;
+      }
+
+      .color-green {
+        color: $color-green;
+      }
+
+      .about-person {
+        .text-sm {
+          font-size: 1.5rem;
+        }
+      }
+
+      .startup-info {
+        p.red {
+          color: $orange-red;
+          margin-bottom: 1.5rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.1rem;
         }
 
-        .small-text {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            text-align: justify;
+        img {
+          margin: 50px 0 10px 0;
         }
+      }
 
-        .color-green {
-            color: $color-green;
-        }
-
-        .about-person {
-            .text-sm {
-            font-size: 1.5rem;
-            }
-        }
-
-        .startup-info {
-            p.red {
-            color: $orange-red;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            }
-
-            img {
-            margin: 50px 0 10px 0;
-            }
-        }
-
-        .summary {
-            padding-top: 4rem;
-        }
+      .summary {
+        padding-top: 4rem;
+      }
     }
-}
+  }
 
-  &.faqs{
+  &.faqs {
     //padding: 6rem 0;
     background: $light-grey;
 
-    .white-bg{
+    .white-bg {
       padding: 60px 0;
     }
 
-    article{
+    article {
       margin-bottom: 50px;
 
-      h3{
+      h3 {
         color: #D32907;
         font-size: 24px;
         text-transform: none;
@@ -789,35 +790,52 @@ section {
         margin-bottom: 10px;
         //font-weight: bold;
 
-        &::after{
+        &::after {
           content: '?';
         }
       }
     }
   }
 
-  &.about{
+  &.about {
     //padding: 6rem 0;
     background: $light-grey;
+    //margin-bottom: 10rem;
 
-    .white-bg{
+    .white-bg {
       padding: 60px 0;
     }
 
-    article{
-      margin-bottom: 50px;
+    .red-bg {
+      padding: 60px 0;
+      margin-bottom: 10rem;
+      background: $orange-red;
+    }
 
-      h3{
-        color: #D32907;
-        font-size: 24px;
-        text-transform: none;
-        font-family: $firasans;
-        margin-bottom: 10px;
-        //font-weight: bold;
+    h5 {
+      font-size: 20px;
+      font-family: $firasans;
+      font-weight: bold;
+      line-height: 150%;
+    }
 
-        &::after{
-          content: '?';
-        }
+    p {
+      font-size: 15px;
+      margin-bottom: 0;
+      color: #6B6B6B;
+    }
+
+    .about-story {
+      h5 {
+        font-size: 26px;
+        color: white;
+        text-align: center;
+      }
+
+      p {
+        color: white;
+        font-size: 13px;
+        line-height: 2;
       }
     }
   }

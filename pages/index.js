@@ -4,9 +4,17 @@ import React, {useEffect} from "react";
 import HeaderContent from "../components/header/HeaderContent";
 import Link from "next/link";
 import {profileMiddleWare} from "../components/hoc/auth";
+import axiosInstance from "../config/axios";
 
-const Home = () => {
+const Home = ({events, blogs}) => {
     useEffect(() => {
+        $('.event-slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows: true,
+            autoplay: true,
+        });
+
         $('.posts-slider').slick({
             slidesToShow: 4,
             slidesToScroll: 1,
@@ -92,113 +100,32 @@ const Home = () => {
                 </div>
 
                 <div className="row event-slider">
-                    <div className="col-md-4">
-                        <div className="card">
-                            <div className="position-relative">
-                                <img className="card-img-top img-fluid" src="images/blog-6.jpg"/>
-                                <a className="view" href="#">view <img src="images/icon/right.png" alt=""/></a>
-                            </div>
+                    {
+                        events.map(({id, date_formatted, image, country, title, slug}) => <div className="col-md-4"
+                                                                                               key={id}>
+                                <Link href="events/[slug]" as={`events/${slug}`}>
+                                    <a>
+                                        <div className="card">
+                                            <div className="position-relative">
+                                                <img className="card-img-top img-fluid" src={image}/>
+                                                <a className="view" href="#">view <img src="images/icon/right.png" alt=""/></a>
+                                            </div>
 
-                            <div className="background-text">
-                                <p>X-Triumphant</p>
-                            </div>
+                                            <div className="background-text">
+                                                <p>{title}</p>
+                                            </div>
 
-                            <div className="meta">
-                                <p>Sat. 9, Jun. 2020</p>
-                                <p>Nigeria</p>
+                                            <div className="meta">
+                                                <p>{date_formatted}</p>
+                                                <p>{country}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </Link>
                             </div>
-                        </div>
-                    </div>
+                        )
 
-                    <div className="col-md-4">
-                        <div className="card">
-                            <div className="position-relative">
-                                <img className="card-img-top img-fluid" src="images/blog-5.jpg"/>
-                                <a className="view" href="#">view <img src="images/icon/right.png" alt=""/></a>
-                            </div>
-
-                            <div className="background-text">
-                                <p>Target Egypt Forum 2020</p>
-                            </div>
-
-                            <div className="meta">
-                                <p>Mon. 24, Nov. 2020</p>
-                                <p>Kenya</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-md-4">
-                        <div className="card">
-                            <div className="position-relative">
-                                <img className="card-img-top img-fluid" src="images/blog-4.jpg"/>
-                                <a className="view" href="#">view <img src="images/icon/right.png" alt=""/></a>
-                            </div>
-
-                            <div className="background-text">
-                                <p>African Future Tech and Energy Summit</p>
-                            </div>
-
-                            <div className="meta">
-                                <p>Tue. 01, Oct. 2020</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-md-4">
-                        <div className="card">
-                            <div className="position-relative">
-                                <img className="card-img-top img-fluid" src="images/blog-6.jpg"/>
-                                <a className="view" href="#">view <img src="images/icon/right.png" alt=""/></a>
-                            </div>
-
-                            <div className="background-text">
-                                <p>X-Triumphant</p>
-                            </div>
-
-                            <div className="meta">
-                                <p>Sat. 9, Jun. 2020</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-md-4">
-                        <div className="card">
-                            <div className="position-relative">
-                                <img className="card-img-top img-fluid" src="images/blog-5.jpg"/>
-                                <a className="view" href="#">view <img src="images/icon/right.png" alt=""/></a>
-                            </div>
-
-                            <div className="background-text">
-                                <p>Target Egypt Forum 2020</p>
-                            </div>
-
-                            <div className="meta">
-                                <p>Mon. 24, Nov. 2020</p>
-                                <p>Kenya</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-md-4">
-                        <div className="card">
-                            <div className="position-relative">
-                                <img className="card-img-top img-fluid" src="images/blog-4.jpg"/>
-                                <a className="view" href="#">view <img src="images/icon/right.png" alt=""/></a>
-                            </div>
-
-                            <div className="background-text">
-                                <p>African Future Tech and Energy Summit</p>
-                            </div>
-
-                            <div className="meta">
-                                <p>Tue. 01, Oct. 2020</p>
-                                <p>Nigeria</p>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
 
                 <div className="text-center button mt-5">
@@ -221,54 +148,18 @@ const Home = () => {
 
             <div className="container-fluid">
                 <div className="row posts-slider">
-                    <div className="col-md-3 px-0">
-                        <a className="post" href="#" style={{backgroundImage: `url(${require('../public/images/post-1.png')})`}}>
-                            <p>Access to Capital And The Future of Fintech in Zambia</p>
-                        </a>
-                    </div>
+                    {
+                        blogs.map(({slug, id, title, image}) => <div className="col-md-3 px-0" key={id}>
+                                <Link href="blog/[slug]" as={`blog/${slug}`}>
+                                    <a className="post"
+                                       style={{backgroundImage: `url(${image})`}}>
+                                        <p>{title}</p>
+                                    </a>
+                                </Link>
+                            </div>
+                        )
 
-                    <div className="col-md-3 px-0">
-                        <a className="post" href="#" style={{backgroundImage: `url(${require('../public/images/post-2.png')})`}}>
-                            <p>8 Steps to Starting Your Own Business</p>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3 px-0">
-                        <a className="post" href="#" style={{backgroundImage: `url(${require('../public/images/events-1.png')})`}}>
-                            <p>The Complete, 12-Step Guide to Starting a Business</p>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3 px-0">
-                        <a className="post" href="#" style={{backgroundImage: `url(${require('../public/images/events-2.png')})`}}>
-                            <p>The Complete, 12-Step Guide to Starting a Business</p>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3 px-0">
-                        <a className="post" href="#" style={{backgroundImage: `url(${require('../public/images/post-1.png')})`}}>
-                            <p>Access to Capital And The Future of Fintech in Zambia</p>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3 px-0">
-                        <a className="post" href="#" style={{backgroundImage: `url(${require('../public/images/post-2.png')})`}}>
-                            <p>8 Steps to Starting Your Own Business</p>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3 px-0">
-                        <a className="post" href="#" style={{backgroundImage: `url(${require('../public/images/events-1.png')})`}}>
-                            <p>The Complete, 12-Step Guide to Starting a Business</p>
-                        </a>
-                    </div>
-
-                    <div className="col-md-3 px-0">
-                        <a className="post" href="#" style={{backgroundImage: `url(${require('../public/images/events-2.png')})`}}>
-                            <p>The Complete, 12-Step Guide to Starting a Business</p>
-                        </a>
-                    </div>
-
+                    }
                 </div>
             </div>
 
@@ -281,6 +172,15 @@ const Home = () => {
 
 
     </Layout>
+}
+
+Home.getInitialProps = async ctx => {
+    const {data: {blogs, events}} = await axiosInstance.get('home-page');
+
+    return {
+        events,
+        blogs
+    }
 }
 
 export default profileMiddleWare(Home);
