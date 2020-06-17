@@ -50,7 +50,7 @@ const aboutUs = () => {
                                                 capital and a community in the process.
                                             </p>
                                             <Link href="/faqs">
-                                                <a className="btn btn-red w-100">FAQ</a>
+                                                <a className="btn w-100">FAQ</a>
                                             </Link>
                                         </div>
 

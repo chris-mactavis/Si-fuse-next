@@ -840,4 +840,29 @@ section {
     }
   }
 
+  &.contact-us {
+    background: #F8F8F8;
+    .white-bg {
+      padding: 60px 0;
+      margin-top: -60px;
+      margin-bottom: 60px;
+    }
+
+    form {
+      padding: 0 7rem;
+
+      input, textarea, button {
+        margin-top: 4rem;
+        margin-bottom: 0!important;
+      }
+
+      textarea {
+        border: 2px solid $color-black-2;
+        outline: none;
+        padding: 1rem;
+        resize: none;
+      }
+    }
+  }
+
 }

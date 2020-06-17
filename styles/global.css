@@ -727,11 +727,6 @@ form.event-register select:not(multiple) {
   border-color: #fff;
 }
 
-.btn-red {
-  background: #D12B19;
-  color: white;
-}
-
 .btn-profile {
   width: 100%;
   font-size: 2rem;
@@ -1395,6 +1390,27 @@ section.about .about-story p {
   color: white;
   font-size: 13px;
   line-height: 2;
+}
+section.contact-us {
+  background: #F8F8F8;
+}
+section.contact-us .white-bg {
+  padding: 60px 0;
+  margin-top: -60px;
+  margin-bottom: 60px;
+}
+section.contact-us form {
+  padding: 0 7rem;
+}
+section.contact-us form input, section.contact-us form textarea, section.contact-us form button {
+  margin-top: 4rem;
+  margin-bottom: 0 !important;
+}
+section.contact-us form textarea {
+  border: 2px solid #6B6B6B;
+  outline: none;
+  padding: 1rem;
+  resize: none;
 }
 
 * {
