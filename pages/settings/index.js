@@ -74,7 +74,7 @@ export default function Settings({user}) {
                     <div className="row">
                         <div className="col-12">
                             <form className="recovery-pwd" onSubmit={handleSubmit(updateFormHandler)}>
-                                <div className="d-flex">
+                                <div className="d-flex multi">
                                     <div className={`half-width ${!showForm ? 'faded' : ''}`}>
                                         <label htmlFor="email">Email</label>
                                         <input className="full-width half-width" type="text" name="email" ref={register({required: 'This field is required'})}
@@ -83,14 +83,14 @@ export default function Settings({user}) {
                                     </div>
 
                                     <div className={`half-width ${!showForm ? 'faded' : ''}`}>
-                                        <label htmlFor="phone">Phone</label>
+                                        <label htmlFor="phone" className="phone-label">Phone</label>
                                         <input className="full-width half-width" type="number" name="phone" ref={register({required: 'This field is required'})}
                                                placeholder="080 XXX XXX XX" defaultValue={user.phone}/>
                                         {errors.phone && <ErrorSpan>{errors.phone.message}</ErrorSpan>}
                                     </div>
                                 </div>
 
-                                <div className="d-flex mtop">
+                                <div className="d-flex mtop multi">
                                     <div className={`half-width ${!showForm ? 'faded' : ''}`}>
                                         <label htmlFor="password">Change password</label>
                                         <input className="full-width half-width" name="password" type="password" ref={register()}
@@ -99,8 +99,8 @@ export default function Settings({user}) {
                                     </div>
 
                                     <div className={`half-width ${!showForm ? 'faded' : ''}`}>
-                                        <label>&nbsp;</label>
-                                        <input className="full-width half-width" name="password_confirmation" type="password" ref={register()}
+                                        <label className="d-none d-sm-block">&nbsp;</label>
+                                        <input className="full-width half-width phone-label" name="password_confirmation" type="password" ref={register()}
                                                placeholder="Confirm Password"/>
                                         {passwordConfirmError && <ErrorSpan>Passwords doesn't match!</ErrorSpan>}
                                     </div>
@@ -127,7 +127,7 @@ export default function Settings({user}) {
                                     {
                                         showForm
                                             ? <button type="submit"
-                                                      className="btn m-bottom">
+                                                      className="btn m-bottom mt-5">
                                                 SAVE CHANGES
                                             </button>
                                             : <button type="button" onClick={validatePasswordHandler}

@@ -12,8 +12,16 @@ header {
       transform: translateY(-50%);
       top: 50%;
 
+      @media only screen and (max-width: $mobile_width) {
+        margin: 0 30px;
+      }
+
       .social-icons {
         margin: 20px 100px 0 0;
+
+        @media only screen and (max-width: $mobile_width) {
+          display: none;
+        }
 
         a {
           display: flex;
@@ -36,12 +44,29 @@ header {
         margin: 0;
         line-height: 1.6;
 
+        @media only screen and (max-width: $wide_width) {
+          font-size: 5.5rem;
+        }
+
+        @media only screen and (max-width: $desktop_width) {
+          font-size: 4.5rem;
+        }
+
+        @media only screen and (max-width: $mobile_width) {
+          font-size: 3rem;
+          letter-spacing: 4px;
+        }
+
         span {
           background: #fff;
           color: $orange-red;
           line-height: 0.9;
           display: inline-block;
           padding: 20px 12px 0;
+
+          @media only screen and (max-width: $mobile_width) {
+            padding: 20px 12px 9px;
+          }
         }
       }
     }
@@ -80,12 +105,12 @@ header {
           width: 51%;
           background: #fff;
         }
-  
+
         &::before {
           left: 0;
           transform: skew(0deg, 30deg);
         }
-  
+
         &::after {
           right: 0;
           width: 50%;
@@ -185,7 +210,7 @@ header {
     height: 70vh;
     background-size: cover !important;
     position: relative;
-  
+
     h1 {
       font-size: 7.5rem;
       text-transform: uppercase;
@@ -199,14 +224,27 @@ header {
       transform: translate(-50%, -50%);
       -webkit-text-stroke-width: 2px;
       -webkit-text-stroke-color: white;
+
+      @media only screen and (max-width: $desktop_width) {
+        font-size: 5rem;
+      }
+
+      @media only screen and (max-width: $mobile_width) {
+        font-size: 3.5rem;
+      }
     }
-  
+
     .center-box {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-  
+
+      @media only screen and (max-width: $tablet_width) {
+        transform: translateY(-50%);
+        left: unset;
+      }
+
       h1 {
         text-align: center;
         margin-bottom: 10px;
@@ -218,31 +256,31 @@ header {
         -webkit-text-stroke-width: 2px;
         -webkit-text-stroke-color: white;
       }
-  
+
       //color: transparent;
       //-webkit-text-stroke-width: 2px;
       //-webkit-text-stroke-color: white;
     }
-  
+
     //.discover-logo {
     //  margin: 0 auto;
     //}
-  
+
     &.blog {
       background: url(/images/blog-banner.jpg);
     }
   }
-  
+
   &.discover {
     background-image: url(/images/discover-banner.jpg);
-  
+
     .search-boxes {
-      //position: absolute;
-      //top: 68%;
-      //left: 50%;
-      //transform: translate(-50%, -50%);
       width: max-content;
-  
+
+      @media only screen and (max-width: $desktop_width) {
+        width: 100%;
+      }
+
       .button-search {
         padding: 15px 30px;
         background: white;
@@ -251,7 +289,15 @@ header {
         letter-spacing: .2rem;
         border: 1px solid white;
         color: #655E54;
-  
+
+        @media only screen and (max-width: $desktop_width) {
+          width: 100%;
+        }
+
+        @media only screen and (max-width: $mobile_width) {
+          font-size: 13px;
+        }
+
         img {
           height: 16px;
           position: relative;
@@ -260,12 +306,12 @@ header {
       }
     }
   }
-  
+
   &.single-events {
     background: $light-grey;
     height: 10vh;
   }
-  
+
   &.events {
     background-image: url(/images/events-banner.jpg);
   }
@@ -285,39 +331,55 @@ header {
   &.contact-us {
     background-image: url(/images/contact-us.svg);
   }
-  
+
   &.no-bg {
     background: #ECEFF1;
     height: auto;
-  
+
     nav.navbar ul.navbar-nav li.nav-item .nav-link {
       color: $orange-red;
-  
+
       &:after {
         background-color: $orange-red;
       }
     }
   }
-  
+
   &.open-startup {
     background: $light-grey url(/images/startup-profile-bg.svg);
   }
-  
+
   //Sidebar 1
   .sidebar {
     background-color: $dark-brown;
     position: fixed;
     top: 0;
-    right: -470px;
-    z-index: 5;
+    right: -700px;
+    z-index: 9999;
     height: 100vh;
     width: 25%;
     transition: all .4s ease-in-out;
-  
+
+    @media only screen and (max-width: $wide_width) {
+      width: 30%;
+    }
+
+    @media only screen and (max-width: $desktop_width) {
+      width: 40%;
+    }
+
+    @media only screen and (max-width: $tablet_width) {
+      width: 50%;
+    }
+
+    @media only screen and (max-width: $mobile_width) {
+      width: 90%;
+    }
+
     &.active {
       right: 0;
     }
-  
+
     button {
       position: absolute;
       right: 47px;
@@ -325,47 +387,50 @@ header {
       margin-bottom: 2rem;
       border: none;
       background: transparent;
-  
+
       &:focus {
         outline: none;
       }
     }
-  
+
     .active {
       color: #fff;
     }
-  
+
     ul {
       margin: 120px 0 0;
       position: absolute;
       right: 54px;
       text-align: right;
       list-style: none;
-  
+
       li {
         margin-bottom: 4rem;
-  
+
         a {
           text-transform: uppercase;
           font-size: 40px;
           font-family: $league-spartan;
           color: #BF8C83;
-  
+
+          @media only screen and (max-width: $mobile_width) {
+            font-size: 35px;
+          }
         }
       }
     }
-  
+
     .icon-right-display {
       display: flex;
       align-items: baseline;
-  
+
       img {
         margin-left: 2rem;
         display: none;
       }
     }
   }
-  
+
   // Account Notifification bar
   .account-container {
     display: none;
@@ -377,10 +442,18 @@ header {
     left: 67px;
     box-shadow: 2px 2px 7px 6px rgba(0,0,0,.2);
 
+    @media only screen and (max-width: $desktop_width) {
+      left: 27px;
+    }
+
     ul {
       padding: 40px 50px 50px 20px;
       margin-bottom: 0;
       margin: 10px;
+
+      @media only screen and (max-width: $mobile_width) {
+        padding: 40px 50px 15px 20px;
+      }
 
       li {
         margin-bottom: 40px;
@@ -405,18 +478,24 @@ header {
 
     }
   }
-  
-  
+
+
   &.signup {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/signup-banner.png);
     height: 100vh;
     background-size: cover;
     position: relative;
-  
+
     .signup-content {
       @include abs-center;
       color: #fff;
-  
+
+      @media only screen and (max-width: $mobile_width) {
+        left: unset;
+        transform: translateY(-50%);
+        width: 100%;
+      }
+
       h1 {
         font-size: 7.5rem;
         text-transform: uppercase;
@@ -427,70 +506,86 @@ header {
         -webkit-text-stroke-width: 2px;
         -webkit-text-stroke-color: white;
         text-align: center;
+
+        @media only screen and (max-width: $tablet_width) {
+          font-size: 5rem;
+        }
+
+        @media only screen and (max-width: $mobile_width) {
+          font-size: 4rem;
+        }
       }
-  
+
       p {
         color: inherit;
         margin-bottom: 3rem;
+
+        @media only screen and (max-width: $mobile_width) {
+          text-align: center;
+        }
       }
-  
+
       .image-containers {
         display: flex;
         align-items: center;
         justify-content: space-around;
-  
+
         img {
           height: 9rem;
           margin-bottom: 1rem;
         }
-  
+
         a:nth-last-child(2) {
           position: relative;
-  
+
           &::before {
             content: '';
             position: absolute;
             top: 0;
-            right: -45px;
+            right: -30px;
             width: .2rem;
             height: 14rem;
             background: #fff;
+
+            @media only screen and (max-width: $desktop_width) {
+              display: none;
+            }
           }
-  
+
         }
-  
+
         p {
           text-transform: uppercase;
           text-align: center;
           font-size: 2.5rem;
         }
       }
-  
+
       .icons {
         text-align: center;
         margin-bottom: 1rem;
-  
+
         button {
           background: none;
           border: 0;
-  
+
           &:not(:last-child) {
             margin-right: 2rem;
           }
-  
+
           &:focus {
             outline: none;
           }
         }
-  
+
       }
-  
+
       .investor-p {
         text-transform: uppercase;
         text-align: center;
         font-size: 2.5rem;
         position: relative;
-  
+
         &::before {
           content: '';
           position: absolute;
@@ -500,7 +595,7 @@ header {
           height: .1rem;
           background: #fff;
         }
-  
+
         &::after {
           content: '';
           position: absolute;
@@ -511,25 +606,25 @@ header {
           background: #fff;
         }
       }
-  
+
     }
-  
+
     .discover-logo {
       margin-left: -18.09rem;
     }
-  
+
   }
-  
+
   &.login {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/login-banner.png);
-  
+
     .signup-content {
-  
+
       h4 {
         margin-bottom: 8rem;
       }
     }
   }
-  
+
 }
 

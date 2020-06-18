@@ -91,8 +91,13 @@ export default function ProfileOne({startup}) {
                             <p className="fade">Marketing</p>
                         </div>
                     </div>
-                    <div className="col-md-9">
+                    <div className="col-lg-9 col-12">
                         <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
+                            <div className="numbers num-alone">
+                                <div className="number">1</div>
+                                <p>Basic information</p>
+                            </div>
+
                             <label htmlFor="profile-pic">Profile Picture</label>
                             <DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}}
                                        value={profilePicture}/>

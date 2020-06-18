@@ -64,6 +64,10 @@ export const ProfileFour = ({startup}) => {
                 </div>
                 <div className="col-md-9">
                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
+                        <div className="numbers num-alone">
+                            <div className="number">4</div>
+                            <p>Finance</p>
+                        </div>
 
                         <select name="revenue_type" ref={register} defaultValue={hasFinance() ? startup.finance.revenue_type: ''}>
                             <option value="">Company is currently</option>

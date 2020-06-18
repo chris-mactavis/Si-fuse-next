@@ -130,7 +130,7 @@ const Profile = ({company, services, finance, market, userType, profile, interes
 
                                                         <div className="text-center">
                                                             <p className="bold-text">Industry</p>
-                                                            <p className="text-sm">{company.industries[0].industry.industry}</p>
+                                                            <p className="text-sm">{company.industries.length > 0 ? company.industries[0].industry.industry : ''}</p>
                                                         </div>
 
                                                         <div className="text-center">

@@ -73,8 +73,12 @@ export default function ProfileThree({startup}) {
                         <p className="fade">Marketing</p>
                     </div>
                 </div>
-                <div className="col-md-9">
+                <div className="col-lg-9 col-12">
                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
+                        <div className="numbers num-alone">
+                            <div className="number">3</div>
+                            <p>Product and Services</p>
+                        </div>
 
                         <label htmlFor="industry">Company Stage</label>
 

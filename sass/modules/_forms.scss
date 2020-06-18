@@ -1,5 +1,10 @@
 form {
   &.search {
+
+    @media only screen and (max-width: $desktop_width) {
+      width: 100%;
+    }
+
     select:not(multiple) {
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -16,12 +21,33 @@ form {
       margin-right: -5px;
       border-radius: 0;
       letter-spacing: .2rem;
+
+      @media only screen and (max-width: $desktop_width) {
+        width: 100%;
+      }
+
+      @media only screen and (max-width: $tablet_width) {
+        width: 50%;
+      }
+
+      @media only screen and (max-width: $mobile_width) {
+        font-size: 10px;
+      }
     }
   }
 
   &.sign-up {
     width: 70%;
     margin: 0 auto;
+
+    @media only screen and (max-width: $tablet_width) {
+      width: 100%;
+    }
+
+    @media only screen and (max-width: $mobile_width) {
+      left: unset;
+      padding: 10px;
+    }
 
     input {
       background: transparent;
@@ -31,6 +57,10 @@ form {
       margin-bottom: 2rem;
       padding-bottom: 1rem;
       outline: none;
+
+      @media only screen and (max-width: $mobile_width) {
+        padding-left: 10px;
+      }
     }
 
     input::placeholder {
@@ -59,10 +89,26 @@ form {
     line-height: 21px;
     z-index: 1;
     position: absolute;
-    right: 77px;
-    top: 321px;
+    right: -36px;
+    top: 347px;
     background: #fff;
     display: none;
+
+    @media only screen and (max-width: $desktop_width) {
+      right: -175px;
+      top: 348px;
+    }
+
+    @media only screen and (max-width: $tablet_width) {
+      right: -150px;
+      top: 337px;
+    }
+
+    @media only screen and (max-width: $mobile_width) {
+      width: 100%;
+      right: 0px;
+      top:  347px;
+    }
 
     textarea {
       border-color: #AFAFAF;
@@ -70,26 +116,34 @@ form {
       resize: none;
       outline: none;
 
+      @media only screen and (max-width: $mobile_width) {
+        width: 100%;
+      }
+
       ::placeholder {
         color: $color-black;
       }
     }
 
-    button {
-      background: transparent;
-      outline: none;
-      border: none;
-      color: $orange-red;
-      padding: 0;
-      font-size: 1.4rem;
-      text-transform: uppercase;
-      padding-top: 2rem;
-    }
+    //button {
+    //  background: transparent;
+    //  outline: none;
+    //  border: none;
+    //  color: $orange-red;
+    //  padding: 0;
+    //  font-size: 1.4rem;
+    //  text-transform: uppercase;
+    //  padding-top: 2rem;
+    //}
   }
 
   &.profile-details {
     width: 70%;
     margin: 0 auto;
+
+    @media only screen and (max-width: $desktop_width) {
+      width: 100%;
+    }
 
     label {
       display: block;
@@ -104,6 +158,10 @@ form {
       margin-bottom: 3rem;
       border: 3px dotted $dark-light;
       position: relative;
+
+      @media only screen and (max-width: $mobile_width) {
+        width: 50%;
+      }
 
       &::before {
         content: url(/images/icon/upload-image-icon.svg);
@@ -150,6 +208,13 @@ form {
     .small-width {
       width: 25%;
       margin-right: 2rem;
+    }
+
+    .small-width-sm {
+
+      @media only screen and (max-width: $mobile_width) {
+        width: 100%;
+      }
     }
 
     .medium-width {
@@ -302,6 +367,11 @@ form {
     width: 90%;
     margin: 0 auto;
 
+    @media only screen and (max-width: $tablet_width) {
+      padding: 2rem 2rem;
+      width: 100%;
+    }
+
     .faded {
       opacity: .5;
       pointer-events: none;
@@ -335,10 +405,20 @@ form {
       -moz-appearance: textfield;
     }
 
+    .d-flex {
+      @media only screen and (max-width: $tablet_width) {
+        flex-wrap: wrap;
+      }
+    }
+
 
     .half-width {
       width: 50%;
       margin-right: 2rem;
+
+      @media only screen and (max-width: $tablet_width) {
+        width: 100%;
+      }
     }
 
     .full-width {
@@ -353,6 +433,10 @@ form {
       margin-bottom: 4rem;
       padding: 0;
       text-transform: uppercase;
+
+      @media only screen and (max-width: $mobile_width) {
+        margin-bottom: 2rem;
+      }
     }
 
     p {
@@ -372,10 +456,18 @@ form {
 
     .w-sm {
       width: 15%;
+
+      @media only screen and (max-width: $mobile_width) {
+        width: 30%;
+      }
     }
 
     .w-sm-2 {
       width: 85%;
+
+      @media only screen and (max-width: $mobile_width) {
+        width: 70%;
+      }
     }
 
     span {

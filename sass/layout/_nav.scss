@@ -6,9 +6,21 @@ nav.navbar {
   position: relative;
   height: 64px;
 
+  @media only screen and (max-width: $desktop_width) {
+    padding: 0 2rem 0 2rem;
+  }
+
+  @media only screen and (max-width: $mobile_width) {
+    padding: 0 2rem 0 2rem;
+  }
+
   ul.navbar-nav {
     flex-direction: row;
     flex-wrap: inherit;
+
+    @media only screen and (max-width: $tablet_width) {
+      display: none;
+    }
 
     li.nav-item {
       position: relative;
@@ -63,6 +75,10 @@ nav.navbar {
     left: 50%;
     transform: translateX(-50%);
 
+    @media only screen and (max-width: $tablet_width) {
+      display: none;
+    }
+
     .clip {
       height: 64px;
     }
@@ -106,4 +122,15 @@ nav.navbar {
     }
     
   }
+
+  .logo-small-screen {
+    display: none;
+
+    @media only screen and (max-width: $tablet_width) {
+      display: block;
+      max-width: 70px;
+      padding: 8px;
+    }
+  }
+
 }

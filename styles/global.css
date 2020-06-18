@@ -280,7 +280,7 @@ h4 {
 }
 
 h5 {
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-family: "League Spartan", sans-serif;
   color: #3E3E3E;
 }
@@ -315,6 +315,11 @@ a:hover {
   text-decoration: none;
 }
 
+@media only screen and (max-width: 992px) {
+  form.search {
+    width: 100%;
+  }
+}
 form.search select:not(multiple) {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -332,9 +337,35 @@ form.search select:not(multiple) {
   border-radius: 0;
   letter-spacing: 0.2rem;
 }
+@media only screen and (max-width: 992px) {
+  form.search select:not(multiple) {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  form.search select:not(multiple) {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 576px) {
+  form.search select:not(multiple) {
+    font-size: 10px;
+  }
+}
 form.sign-up {
   width: 70%;
   margin: 0 auto;
+}
+@media only screen and (max-width: 768px) {
+  form.sign-up {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 576px) {
+  form.sign-up {
+    left: unset;
+    padding: 10px;
+  }
 }
 form.sign-up input {
   background: transparent;
@@ -344,6 +375,11 @@ form.sign-up input {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   outline: none;
+}
+@media only screen and (max-width: 576px) {
+  form.sign-up input {
+    padding-left: 10px;
+  }
 }
 form.sign-up input::placeholder {
   color: #fff;
@@ -368,10 +404,29 @@ form.startup-message {
   line-height: 21px;
   z-index: 1;
   position: absolute;
-  right: 77px;
-  top: 321px;
+  right: -36px;
+  top: 347px;
   background: #fff;
   display: none;
+}
+@media only screen and (max-width: 992px) {
+  form.startup-message {
+    right: -175px;
+    top: 348px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  form.startup-message {
+    right: -150px;
+    top: 337px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  form.startup-message {
+    width: 100%;
+    right: 0px;
+    top: 347px;
+  }
 }
 form.startup-message textarea {
   border-color: #AFAFAF;
@@ -379,23 +434,23 @@ form.startup-message textarea {
   resize: none;
   outline: none;
 }
+@media only screen and (max-width: 576px) {
+  form.startup-message textarea {
+    width: 100%;
+  }
+}
 form.startup-message textarea ::placeholder {
   color: #3E3E3E;
-}
-form.startup-message button {
-  background: transparent;
-  outline: none;
-  border: none;
-  color: #D12B19;
-  padding: 0;
-  font-size: 1.4rem;
-  text-transform: uppercase;
-  padding-top: 2rem;
 }
 form.profile-details {
   width: 70%;
   margin: 0 auto;
   /* Firefox */
+}
+@media only screen and (max-width: 992px) {
+  form.profile-details {
+    width: 100%;
+  }
 }
 form.profile-details label {
   display: block;
@@ -409,6 +464,11 @@ form.profile-details #image-upload {
   margin-bottom: 3rem;
   border: 3px dotted #DADADA;
   position: relative;
+}
+@media only screen and (max-width: 576px) {
+  form.profile-details #image-upload {
+    width: 50%;
+  }
 }
 form.profile-details #image-upload::before {
   content: url(/images/icon/upload-image-icon.svg);
@@ -446,6 +506,11 @@ form.profile-details input[type=number] {
 form.profile-details .small-width {
   width: 25%;
   margin-right: 2rem;
+}
+@media only screen and (max-width: 576px) {
+  form.profile-details .small-width-sm {
+    width: 100%;
+  }
 }
 form.profile-details .medium-width {
   width: 75%;
@@ -510,12 +575,12 @@ form.profile-details .checkout-label .checkout-custom::after {
   -o-transition: all 0.3s ease-out;
 }
 form.profile-details .checkout-label input:checked ~ .checkout-custom {
-  background-color: #D12B19;
+  background-color: #D32907;
   -webkit-transform: rotate(0deg) scale(1);
   -ms-transform: rotate(0deg) scale(1);
   transform: rotate(0deg) scale(1);
   opacity: 1;
-  border: 2px solid #D12B19;
+  border: 2px solid #D32907;
 }
 form.profile-details .checkout-label input:checked ~ .checkout-custom::after {
   -webkit-transform: rotate(45deg) scale(1);
@@ -582,6 +647,12 @@ form.recovery-pwd {
   margin: 0 auto;
   /* Firefox */
 }
+@media only screen and (max-width: 768px) {
+  form.recovery-pwd {
+    padding: 2rem 2rem;
+    width: 100%;
+  }
+}
 form.recovery-pwd .faded {
   opacity: 0.5;
   pointer-events: none;
@@ -609,9 +680,19 @@ form.recovery-pwd input[type=number]::-webkit-inner-spin-button {
 form.recovery-pwd input[type=number] {
   -moz-appearance: textfield;
 }
+@media only screen and (max-width: 768px) {
+  form.recovery-pwd .d-flex {
+    flex-wrap: wrap;
+  }
+}
 form.recovery-pwd .half-width {
   width: 50%;
   margin-right: 2rem;
+}
+@media only screen and (max-width: 768px) {
+  form.recovery-pwd .half-width {
+    width: 100%;
+  }
 }
 form.recovery-pwd .full-width {
   width: 100%;
@@ -620,13 +701,18 @@ form.recovery-pwd .del {
   border: 0;
   outline: none;
   background: transparent;
-  color: #D12B19;
+  color: #D32907;
   margin-bottom: 4rem;
   padding: 0;
   text-transform: uppercase;
 }
+@media only screen and (max-width: 576px) {
+  form.recovery-pwd .del {
+    margin-bottom: 2rem;
+  }
+}
 form.recovery-pwd p {
-  color: #D12B19;
+  color: #D32907;
   font-size: 1.5rem;
   margin-bottom: 0;
 }
@@ -639,11 +725,21 @@ form.event-register .m-right {
 form.event-register .w-sm {
   width: 15%;
 }
+@media only screen and (max-width: 576px) {
+  form.event-register .w-sm {
+    width: 30%;
+  }
+}
 form.event-register .w-sm-2 {
   width: 85%;
 }
+@media only screen and (max-width: 576px) {
+  form.event-register .w-sm-2 {
+    width: 70%;
+  }
+}
 form.event-register span {
-  color: #D12B19;
+  color: #D32907;
   font-weight: bold;
 }
 form.event-register span.col-green {
@@ -668,6 +764,11 @@ form.event-register select:not(multiple) {
   position: relative;
   border-radius: 0;
 }
+@media only screen and (max-width: 576px) {
+  .btn {
+    padding: 20px 40px;
+  }
+}
 .btn::before {
   content: "";
   position: absolute;
@@ -675,7 +776,7 @@ form.event-register select:not(multiple) {
   left: 0;
   height: 100%;
   width: 3px;
-  background-color: #D12B19;
+  background-color: #D32907;
   color: #fff;
   -webkit-transform: scaleY(0);
   transform: scaleY(0);
@@ -692,7 +793,7 @@ form.event-register select:not(multiple) {
 }
 .btn:hover {
   color: #fff;
-  border-color: #D12B19;
+  border-color: #D32907;
 }
 
 .btn-white {
@@ -732,6 +833,12 @@ form.event-register select:not(multiple) {
   font-size: 2rem;
   padding: 24px 86px;
 }
+@media only screen and (max-width: 576px) {
+  .btn-profile {
+    font-size: 1.5rem;
+    padding: 17px 20px;
+  }
+}
 
 section.image-text {
   padding: 7.5rem 0;
@@ -739,13 +846,43 @@ section.image-text {
 section.image-text .investors {
   margin-top: 60px;
 }
+@media only screen and (max-width: 576px) {
+  section.image-text .investors {
+    margin-top: 0;
+  }
+}
 section.image-text .investors .img-01 {
   height: 100px;
   margin-bottom: -38px;
 }
+@media only screen and (max-width: 1200px) {
+  section.image-text .investors .img-01 {
+    margin-bottom: -32px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  section.image-text .investors .img-01 {
+    height: 75px;
+  }
+}
 section.image-text .investors h3 {
   text-align: right;
   position: relative;
+}
+@media only screen and (max-width: 992px) {
+  section.image-text .investors h3 {
+    text-align: left;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  section.image-text .investors h3 {
+    font-size: 3.5rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  section.image-text .investors h3 {
+    font-size: 3rem;
+  }
 }
 section.image-text .investors h3::before {
   content: "";
@@ -755,7 +892,20 @@ section.image-text .investors h3::before {
   width: 32rem;
   z-index: -1;
   height: 0.7rem;
-  background: #D12B19;
+  background: #D32907;
+}
+@media only screen and (max-width: 992px) {
+  section.image-text .investors h3::before {
+    left: -3px;
+    right: 0;
+  }
+}
+@media only screen and (max-width: 576px) {
+  section.image-text .investors h3::before {
+    z-index: 0;
+    bottom: 2px;
+    width: 25rem;
+  }
 }
 section.image-text .investors p {
   text-align: right;
@@ -763,15 +913,25 @@ section.image-text .investors p {
   font-size: 20px;
   line-height: 1.7;
 }
+@media only screen and (max-width: 992px) {
+  section.image-text .investors p {
+    text-align: left;
+  }
+}
 section.image-text .investors a {
   display: flex;
   align-items: center;
-  color: #D12B19;
+  color: #D32907;
   text-transform: uppercase;
   text-align: right;
   justify-content: flex-end;
   letter-spacing: 0.5rem;
   font-size: 1.5rem;
+}
+@media only screen and (max-width: 992px) {
+  section.image-text .investors a {
+    justify-content: flex-start;
+  }
 }
 section.image-text .investors a img {
   margin-left: 1rem;
@@ -781,6 +941,11 @@ section.image-text .investors a img {
 }
 section.image-text .startups .img-02 {
   margin-left: 20rem;
+}
+@media only screen and (max-width: 992px) {
+  section.image-text .startups .img-02 {
+    margin-left: 0;
+  }
 }
 section.image-text .startups h3 {
   text-align: left;
@@ -803,6 +968,11 @@ section.events .event-slider {
 }
 section.events h2 {
   margin-bottom: 2rem;
+}
+@media only screen and (max-width: 576px) {
+  section.events h2 {
+    font-size: 3.5rem;
+  }
 }
 section.events .card {
   border: none;
@@ -854,11 +1024,17 @@ section.events .background-text p:nth-child(1) {
   margin-bottom: 5px;
   height: 50px;
 }
+@media only screen and (max-width: 992px) {
+  section.events .background-text p:nth-child(1) {
+    margin-bottom: 20px;
+  }
+}
 section.events .background-text p:nth-child(2) {
   font-size: 1.3rem;
 }
 section.events .event-tag-location {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin: 1rem 1.5rem 1rem 1.5rem;
 }
@@ -874,7 +1050,6 @@ section.events .event-tag-location p:nth-child(1) {
   font-weight: normal;
   font-size: 1.3rem;
   color: #fff;
-  margin-bottom: 16px;
 }
 section.events .event-tag-location p:nth-child(2) {
   font-size: 1.3rem;
@@ -962,39 +1137,51 @@ section.posts .slick-dots {
   bottom: -36px;
 }
 section.posts .message-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 1.5rem 3rem;
   background: #fff;
-  color: #6B6B6B;
   margin-bottom: 2rem;
 }
 section.posts .message-box .message-image {
   width: 100px;
   height: 100px;
+  margin: 0 auto;
 }
 section.posts .message-box .message-image img {
   border-radius: 50%;
 }
+section.posts .message-box p {
+  padding-top: 30px;
+  color: #6B6B6B;
+  margin-bottom: 0;
+}
+@media only screen and (max-width: 768px) {
+  section.posts .message-box p {
+    padding-top: 20px;
+  }
+}
 section.posts .message-box .name {
-  width: 20%;
   text-align: center;
 }
-section.posts .message-box .content {
-  margin-top: 2rem;
-  width: 60%;
+section.posts .message-box .message-info {
+  text-align: right;
 }
-section.posts .message-box .content p {
-  text-align: justify;
+@media only screen and (max-width: 768px) {
+  section.posts .message-box .message-info {
+    text-align: justify;
+  }
 }
-section.posts .message-box .content .date {
+section.posts .message-box .message-info .date {
   margin-bottom: 0;
   font-size: 1.5rem;
   text-align: right;
 }
 section .button {
   margin-top: 64px;
+}
+@media only screen and (max-width: 992px) {
+  section .button {
+    margin-top: 50px !important;
+  }
 }
 section.blog {
   padding: 0 0 6rem 0;
@@ -1061,6 +1248,16 @@ section.discover .card .img-wrapper {
   padding: 15px;
   position: relative;
 }
+@media only screen and (max-width: 576px) {
+  section.single-post {
+    padding: 60px 10px 60px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  section.single-post .multi .phone-label {
+    margin-top: 4rem;
+  }
+}
 section.single-post .blog-image {
   width: 100%;
   height: 400px;
@@ -1075,12 +1272,22 @@ section.single-post .content {
   background: #fff;
   margin-top: -60px;
 }
+@media only screen and (max-width: 576px) {
+  section.single-post .content {
+    padding: 20px;
+  }
+}
 section.single-post .content h1 {
   font-size: 36px;
   font-family: "Fira Sans", sans-serif;
   padding: 0;
   margin: 0 0 30px;
   text-align: center;
+}
+@media only screen and (max-width: 768px) {
+  section.single-post .content h1 {
+    font-size: 25px;
+  }
 }
 section.single-post .content h5 {
   font-size: 2rem;
@@ -1097,6 +1304,11 @@ section.single-post .content .category {
   margin-bottom: 40px;
   position: relative;
 }
+@media only screen and (max-width: 576px) {
+  section.single-post .content .category {
+    flex-wrap: wrap;
+  }
+}
 section.single-post .content .category::before {
   content: "";
   height: 40px;
@@ -1107,6 +1319,11 @@ section.single-post .content .category::before {
   position: absolute;
   z-index: 1;
 }
+@media only screen and (max-width: 576px) {
+  section.single-post .content .category::before {
+    height: 75px;
+  }
+}
 section.single-post .content .category p {
   font-size: 1.5rem;
   font-weight: normal;
@@ -1115,6 +1332,12 @@ section.single-post .content .category p {
   z-index: 10;
   color: black;
 }
+@media only screen and (max-width: 576px) {
+  section.single-post .content .category p {
+    margin-bottom: 10px;
+    margin-right: 15px;
+  }
+}
 section.single-post .content .category p:first-child {
   text-transform: uppercase;
 }
@@ -1122,6 +1345,7 @@ section.single-post .content .event-category {
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
+  flex-wrap: wrap;
 }
 section.single-post .content .event-category p {
   font-size: 1.5rem;
@@ -1134,7 +1358,7 @@ section.single-post .content .event-category p img {
   margin-right: 0.5rem;
 }
 section.single-post .content .event-category .color-red {
-  color: #D12B19;
+  color: #D32907;
   text-transform: uppercase;
 }
 section.single-post .content #register-free {
@@ -1160,30 +1384,61 @@ section.modal .modal-body.notice-message .modal-body {
 section.profile {
   padding: 80px 60px 60px 60px;
 }
+@media only screen and (max-width: 992px) {
+  section.profile {
+    padding: 40px 20px 60px 20px;
+  }
+}
 section.profile .row {
   padding: 5rem 5rem 20rem 5rem;
   background: #fff;
+}
+@media only screen and (max-width: 992px) {
+  section.profile .row {
+    padding: 5rem 2rem 10rem 2rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  section.profile .row {
+    padding: 3rem 2rem 5rem 2rem;
+  }
 }
 section.profile .numbers {
   padding-bottom: 25rem;
   display: flex;
   align-items: baseline;
 }
+@media only screen and (max-width: 992px) {
+  section.profile .numbers {
+    display: none;
+  }
+}
 section.profile .numbers .number {
   width: 3rem;
   height: 3rem;
   display: flex;
-  border: 3px solid #D12B19;
+  border: 3px solid #D32907;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   font-weight: 600;
-  color: #D12B19;
+  color: #D32907;
 }
 section.profile .numbers p {
-  color: #D12B19;
+  color: #D32907;
   font-weight: bold;
   margin-left: 5rem;
+}
+section.profile .num-alone {
+  padding-bottom: 0;
+}
+@media only screen and (max-width: 992px) {
+  section.profile .num-alone {
+    display: flex;
+  }
+}
+section.profile .num-alone p {
+  margin-left: 1rem;
 }
 section.profile .only {
   position: relative;
@@ -1195,7 +1450,7 @@ section.profile .only::before {
   left: 13px;
   width: 0.4rem;
   height: 90%;
-  background: #D12B19;
+  background: #D32907;
   opacity: 0.5;
 }
 section.profile .only::after {
@@ -1205,7 +1460,7 @@ section.profile .only::after {
   left: 13px;
   width: 0.4rem;
   height: 90%;
-  background: #D12B19;
+  background: #D32907;
   opacity: 0.5;
 }
 section.profile .fade {
@@ -1225,19 +1480,20 @@ section.message-read {
   padding-top: 100px;
 }
 section.message-read .open-message {
-  padding: 2.5rem 4rem 1rem;
+  padding: 2.5rem 4rem 2rem;
   color: #6B6B6B;
   background: #fff;
   position: relative;
 }
-section.message-read .open-message::before {
-  content: "";
-  width: 0.3rem;
-  height: 23rem;
-  background: #dadada;
-  position: absolute;
-  right: 9px;
-  top: 32%;
+@media only screen and (max-width: 768px) {
+  section.message-read .open-message {
+    padding: 2.5rem 3rem 2rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  section.message-read .open-message {
+    padding: 2.5rem 2rem 2rem;
+  }
 }
 section.message-read .open-message .name {
   display: flex;
@@ -1258,7 +1514,7 @@ section.message-read .open-message .msg {
 section.message-read .open-message button {
   background: none;
   border: 0;
-  color: #D12B19;
+  color: #D32907;
   outline: none;
   text-transform: uppercase;
   font-weight: bold;
@@ -1270,75 +1526,202 @@ section.message-read .open-message textarea {
   padding: 1rem;
   resize: none;
 }
-section.startup-content .person {
-  background: #fff;
-  padding: 50px;
-  margin-bottom: 30px;
+section.message-read .open-message #cancel-message img {
+  max-height: 20px;
+  margin-bottom: 10px;
 }
-section.startup-content .person .image {
+section.message-read .open-message .bold {
+  margin-bottom: 10px;
+}
+section.message-read .open-message .reply-details {
+  display: none;
+}
+@media only screen and (max-width: 576px) {
+  section.startup-content {
+    padding: 60px 0 60px;
+  }
+}
+section.startup-content p {
+  margin-bottom: 15px;
+}
+section.startup-content .profile-name {
+  font-size: 20px;
+}
+section.startup-content .startup-sidebar {
+  position: fixed;
+  width: 350px;
+  z-index: 9999;
+}
+@media only screen and (max-width: 1300px) {
+  section.startup-content .startup-sidebar {
+    width: 300px;
+  }
+}
+@media only screen and (max-width: 992px) {
+  section.startup-content .startup-sidebar {
+    width: 210px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  section.startup-content .startup-sidebar {
+    position: unset;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+}
+section.startup-content .startup-sidebar .profile-content {
+  padding: 25px 0;
   background: #fff;
+  text-align: center;
+}
+section.startup-content .startup-sidebar .profile-content .img-profile {
+  margin-bottom: 15px;
+}
+section.startup-content .startup-sidebar .profile-content .social-icons {
+  margin-bottom: 10px;
+}
+section.startup-content .startup-sidebar .profile-content .social-icons a {
+  margin-right: 10px;
+}
+section.startup-content .startup-sidebar .profile-content button {
+  background: transparent;
+  border: 1px solid #D32907;
+  color: #D32907;
+  padding: 5px 13px;
+}
+section.startup-content .startup-sidebar .profile-content button:hover {
+  background: #D32907;
+  color: #fff;
+}
+section.startup-content .startup-sidebar .profile-content .edit-profile-btn {
+  background: #D32907;
+  border: none;
+  color: #fff;
+  padding: 5px 7px;
+}
+section.startup-content .startup-sidebar .profile-content #message {
+  margin-left: 10px;
+}
+section.startup-content .startup-sidebar .startup-link-view {
+  color: #fff;
+  width: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
-}
-section.startup-content .person .image .person-logo {
-  margin-right: 3rem;
-}
-section.startup-content .person .image p {
-  margin-bottom: 0;
-}
-section.startup-content .person .image .small-icons {
-  margin-right: 1rem;
-}
-section.startup-content .person .button-togo {
-  display: flex;
-  flex-wrap: wrap;
-}
-section.startup-content .person .button-togo button {
-  background: transparent;
-  padding: 0.5rem 2.5rem;
-  letter-spacing: 0.3rem;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #D32907;
+  border: none;
   text-transform: uppercase;
-  border: 2px solid;
-  transition: all 0.3s;
-  margin: 0 2rem 2rem 0;
+  margin-bottom: 2px;
 }
-section.startup-content .person .button-togo button:hover {
-  color: #fff;
-  background-color: #D12B19;
-  border-color: #D12B19;
+@media only screen and (max-width: 992px) {
+  section.startup-content .startup-sidebar .startup-link-view {
+    padding: 15px 10px;
+    font-size: 12px;
+  }
 }
-section.startup-content .person .button-togo button:focus {
-  outline: none;
-}
-section.startup-content .person .bold-text {
+section.startup-content h5 {
+  font-family: "Fira Sans", sans-serif;
+  color: #D32907;
+  margin-bottom: 20px;
   font-weight: 600;
-  margin-bottom: 1rem;
+  text-transform: uppercase;
 }
-section.startup-content .person .small-text {
-  font-size: 1.5rem;
-  margin-bottom: 3rem;
+section.startup-content .startup-description {
+  background: #fff;
+  padding: 20px 20px;
+  margin-bottom: 30px;
+}
+section.startup-content .startup-description img {
+  margin-bottom: 20px;
+}
+section.startup-content .startup-description .text-description {
   text-align: justify;
 }
-section.startup-content .person .color-green {
+section.startup-content .startup-description a {
+  color: #0008C4;
+  font-weight: normal;
+}
+section.startup-content .startup-description .color-green {
   color: #04CF00;
 }
-section.startup-content .person .about-person .text-sm {
-  font-size: 1.5rem;
+section.startup-content .startup-description .p-move-down {
+  margin-bottom: 22px;
 }
-section.startup-content .person .startup-info p.red {
-  color: #D12B19;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  text-transform: uppercase;
+section.startup-content .startup-description .product-img-list img {
+  max-width: 100px;
+  margin: 0 30px 30px 0;
+}
+section.startup-content .investors-description {
+  padding: 30px 20px;
+  background: #fff;
+  margin-bottom: 20px;
+}
+section.startup-content .investors-description .profile-details {
+  text-align: left;
+}
+section.startup-content .investors-description .profile-details .p-head {
+  font-size: 20px;
+}
+section.startup-content .investors-description .profile-details p:nth-child(2) {
+  text-align: justify;
+}
+section.startup-content .investors-description .profile-details p:nth-child(3) {
+  margin-top: 40px;
+}
+section.startup-content .investors-description .profile-details ul {
+  display: flex;
+  padding-left: 0;
+  margin-bottom: 26px;
+}
+@media only screen and (max-width: 992px) {
+  section.startup-content .investors-description .profile-details ul {
+    margin-bottom: 0;
+  }
+}
+section.startup-content .investors-description .profile-details ul li:nth-child(1) {
+  background: #51B8D9;
+  border-radius: 10px;
+  padding: 6px 5px;
   letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 1.3rem;
+  color: #fff;
+  margin-right: 20px;
 }
-section.startup-content .person .startup-info img {
-  margin: 50px 0 10px 0;
+section.startup-content .investors-description .profile-details ul li:nth-child(2) {
+  background: #4BDB73;
+  border-radius: 10px;
+  padding: 6px 5px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 1.3rem;
+  color: #fff;
 }
-section.startup-content .person .summary {
-  padding-top: 4rem;
+section.startup-content .investors-description .investors-profile {
+  text-align: center;
+}
+section.startup-content .investors-description .investors-profile .img-profile {
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+section.startup-content .investors-description .investors-profile .investor-name {
+  font-size: 20px;
+}
+section.startup-content .investors-description .investors-profile .edit-investors-profile {
+  background: transparent;
+  border: 1px solid #D32907;
+  color: #D32907;
+  padding: 5px 13px;
+}
+section.startup-content .investors-description .investors-profile .edit-investors-profile:hover {
+  background: #D32907;
+  color: #fff;
+}
+section.investors-bg {
+  background: #ECEFF1;
 }
 section.faqs {
   background: #F8F8F8;
@@ -1368,7 +1751,7 @@ section.about .white-bg {
 section.about .red-bg {
   padding: 60px 0;
   margin-bottom: 10rem;
-  background: #D12B19;
+  background: #D32907;
 }
 section.about h5 {
   font-size: 20px;
@@ -1494,9 +1877,24 @@ nav.navbar {
   position: relative;
   height: 64px;
 }
+@media only screen and (max-width: 992px) {
+  nav.navbar {
+    padding: 0 2rem 0 2rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  nav.navbar {
+    padding: 0 2rem 0 2rem;
+  }
+}
 nav.navbar ul.navbar-nav {
   flex-direction: row;
   flex-wrap: inherit;
+}
+@media only screen and (max-width: 768px) {
+  nav.navbar ul.navbar-nav {
+    display: none;
+  }
 }
 nav.navbar ul.navbar-nav li.nav-item {
   position: relative;
@@ -1539,6 +1937,11 @@ nav.navbar .logo-container {
   left: 50%;
   transform: translateX(-50%);
 }
+@media only screen and (max-width: 768px) {
+  nav.navbar .logo-container {
+    display: none;
+  }
+}
 nav.navbar .logo-container .clip {
   height: 64px;
 }
@@ -1567,11 +1970,21 @@ nav.navbar .active-bar::before {
   content: "";
   width: 10px;
   height: 10px;
-  background: #D12B19;
+  background: #D32907;
   border-radius: 50%;
   position: absolute;
   top: 0;
   right: 7px;
+}
+nav.navbar .logo-small-screen {
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+  nav.navbar .logo-small-screen {
+    display: block;
+    max-width: 70px;
+    padding: 8px;
+  }
 }
 
 footer {
@@ -1602,6 +2015,11 @@ footer .social-icons {
 footer .social-icons a {
   margin-bottom: 24px;
 }
+@media only screen and (max-width: 992px) {
+  footer .social-icons a {
+    margin-left: 10px;
+  }
+}
 footer a {
   font-weight: normal;
 }
@@ -1623,8 +2041,18 @@ header.homepage .header-wrapper {
   transform: translateY(-50%);
   top: 50%;
 }
+@media only screen and (max-width: 576px) {
+  header.homepage .header-wrapper {
+    margin: 0 30px;
+  }
+}
 header.homepage .header-wrapper .social-icons {
   margin: 20px 100px 0 0;
+}
+@media only screen and (max-width: 576px) {
+  header.homepage .header-wrapper .social-icons {
+    display: none;
+  }
 }
 header.homepage .header-wrapper .social-icons a {
   display: flex;
@@ -1644,12 +2072,33 @@ header.homepage .header-wrapper h1 {
   margin: 0;
   line-height: 1.6;
 }
+@media only screen and (max-width: 1300px) {
+  header.homepage .header-wrapper h1 {
+    font-size: 5.5rem;
+  }
+}
+@media only screen and (max-width: 992px) {
+  header.homepage .header-wrapper h1 {
+    font-size: 4.5rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  header.homepage .header-wrapper h1 {
+    font-size: 3rem;
+    letter-spacing: 4px;
+  }
+}
 header.homepage .header-wrapper h1 span {
   background: #fff;
-  color: #D12B19;
+  color: #D32907;
   line-height: 0.9;
   display: inline-block;
   padding: 20px 12px 0;
+}
+@media only screen and (max-width: 576px) {
+  header.homepage .header-wrapper h1 span {
+    padding: 20px 12px 9px;
+  }
 }
 header.homepage .scroll {
   display: block;
@@ -1775,11 +2224,27 @@ header.page-header h1 {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: white;
 }
+@media only screen and (max-width: 992px) {
+  header.page-header h1 {
+    font-size: 5rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  header.page-header h1 {
+    font-size: 3.5rem;
+  }
+}
 header.page-header .center-box {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+@media only screen and (max-width: 768px) {
+  header.page-header .center-box {
+    transform: translateY(-50%);
+    left: unset;
+  }
 }
 header.page-header .center-box h1 {
   text-align: center;
@@ -1801,6 +2266,11 @@ header.discover {
 header.discover .search-boxes {
   width: max-content;
 }
+@media only screen and (max-width: 992px) {
+  header.discover .search-boxes {
+    width: 100%;
+  }
+}
 header.discover .search-boxes .button-search {
   padding: 15px 30px;
   background: white;
@@ -1809,6 +2279,16 @@ header.discover .search-boxes .button-search {
   letter-spacing: 0.2rem;
   border: 1px solid white;
   color: #655E54;
+}
+@media only screen and (max-width: 992px) {
+  header.discover .search-boxes .button-search {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 576px) {
+  header.discover .search-boxes .button-search {
+    font-size: 13px;
+  }
 }
 header.discover .search-boxes .button-search img {
   height: 16px;
@@ -1839,10 +2319,10 @@ header.no-bg {
   height: auto;
 }
 header.no-bg nav.navbar ul.navbar-nav li.nav-item .nav-link {
-  color: #D12B19;
+  color: #D32907;
 }
 header.no-bg nav.navbar ul.navbar-nav li.nav-item .nav-link:after {
-  background-color: #D12B19;
+  background-color: #D32907;
 }
 header.open-startup {
   background: #F8F8F8 url(/images/startup-profile-bg.svg);
@@ -1851,11 +2331,31 @@ header .sidebar {
   background-color: #811A06;
   position: fixed;
   top: 0;
-  right: -470px;
-  z-index: 5;
+  right: -700px;
+  z-index: 9999;
   height: 100vh;
   width: 25%;
   transition: all 0.4s ease-in-out;
+}
+@media only screen and (max-width: 1300px) {
+  header .sidebar {
+    width: 30%;
+  }
+}
+@media only screen and (max-width: 992px) {
+  header .sidebar {
+    width: 40%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  header .sidebar {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 576px) {
+  header .sidebar {
+    width: 90%;
+  }
 }
 header .sidebar.active {
   right: 0;
@@ -1890,6 +2390,11 @@ header .sidebar ul li a {
   font-family: "League Spartan", sans-serif;
   color: #BF8C83;
 }
+@media only screen and (max-width: 576px) {
+  header .sidebar ul li a {
+    font-size: 35px;
+  }
+}
 header .sidebar .icon-right-display {
   display: flex;
   align-items: baseline;
@@ -1908,10 +2413,20 @@ header .account-container {
   left: 67px;
   box-shadow: 2px 2px 7px 6px rgba(0, 0, 0, 0.2);
 }
+@media only screen and (max-width: 992px) {
+  header .account-container {
+    left: 27px;
+  }
+}
 header .account-container ul {
   padding: 40px 50px 50px 20px;
   margin-bottom: 0;
   margin: 10px;
+}
+@media only screen and (max-width: 576px) {
+  header .account-container ul {
+    padding: 40px 50px 15px 20px;
+  }
 }
 header .account-container ul li {
   margin-bottom: 40px;
@@ -1942,6 +2457,13 @@ header.signup .signup-content {
   transform: translate(-50%, -50%);
   color: #fff;
 }
+@media only screen and (max-width: 576px) {
+  header.signup .signup-content {
+    left: unset;
+    transform: translateY(-50%);
+    width: 100%;
+  }
+}
 header.signup .signup-content h1 {
   font-size: 7.5rem;
   text-transform: uppercase;
@@ -1953,9 +2475,24 @@ header.signup .signup-content h1 {
   -webkit-text-stroke-color: white;
   text-align: center;
 }
+@media only screen and (max-width: 768px) {
+  header.signup .signup-content h1 {
+    font-size: 5rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  header.signup .signup-content h1 {
+    font-size: 4rem;
+  }
+}
 header.signup .signup-content p {
   color: inherit;
   margin-bottom: 3rem;
+}
+@media only screen and (max-width: 576px) {
+  header.signup .signup-content p {
+    text-align: center;
+  }
 }
 header.signup .signup-content .image-containers {
   display: flex;
@@ -1973,10 +2510,15 @@ header.signup .signup-content .image-containers a:nth-last-child(2)::before {
   content: "";
   position: absolute;
   top: 0;
-  right: -45px;
+  right: -30px;
   width: 0.2rem;
   height: 14rem;
   background: #fff;
+}
+@media only screen and (max-width: 992px) {
+  header.signup .signup-content .image-containers a:nth-last-child(2)::before {
+    display: none;
+  }
 }
 header.signup .signup-content .image-containers p {
   text-transform: uppercase;

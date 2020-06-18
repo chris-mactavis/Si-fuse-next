@@ -71,6 +71,10 @@ export default function ProfileFive({startup}) {
 
                 <div className="col-md-9">
                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
+                        <div className="numbers num-alone">
+                            <div className="number">5</div>
+                            <p>Marketing</p>
+                        </div>
                         <label>What is your addressable Market?</label>
                         <textarea ref={register} defaultValue={hasMarketing() ? startup.market.addressable_market : ''} className="full-width" name="addressable_market" id="" cols="30" rows="5"/>
 

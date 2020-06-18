@@ -37,6 +37,11 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
                         </button>
                 )
         }
+        <Link href="/">
+            <a>
+                <img src="/images/logo.png" alt="" class="logo-small-screen"/>
+            </a>
+        </Link>
 
         <div className="logo-container">
             <img className="clip" src="/images/clip.png" alt=""/>

@@ -112,7 +112,10 @@ export default function ProfileTwo({industries, startup, locations}) {
 
                     <div className="col-md-9">
                         <form onSubmit={handleSubmit(submitHandler)} className="profile-details">
-
+                            <div className="numbers num-alone">
+                                <div className="number">2</div>
+                                <p>Your company</p>
+                            </div>
                             <label htmlFor="profile-pic">Profile Picture</label>
                             <DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}}
                                        value={profilePicture}/>
@@ -165,13 +168,13 @@ export default function ProfileTwo({industries, startup, locations}) {
 
                             <label htmlFor="Social links" className="social-links">Social links</label>
                             <div className="d-flex flex-wrap">
-                                <input ref={register} name="facebook" type="text" className="small-width mt-0" defaultValue={hasCompany() ? startup.company.facebook : ''}
+                                <input ref={register} name="facebook" type="text" className="small-width small-width-sm mt-0" defaultValue={hasCompany() ? startup.company.facebook : ''}
                                        placeholder="Facebook"/>
-                                <input ref={register} name="instagram" type="text" className="small-width mt-0" defaultValue={hasCompany() ? startup.company.instagram : ''}
+                                <input ref={register} name="instagram" type="text" className="small-width small-width-sm mt-0" defaultValue={hasCompany() ? startup.company.instagram : ''}
                                        placeholder="Instagram"/>
-                                <input ref={register} name="twitter" type="text" className="small-width mt-0" defaultValue={hasCompany() ? startup.company.twitter : ''}
+                                <input ref={register} name="twitter" type="text" className="small-width small-width-sm mt-0" defaultValue={hasCompany() ? startup.company.twitter : ''}
                                        placeholder="Twitter"/>
-                                <input ref={register} name="linkedin" type="text" className="small-width" defaultValue={hasCompany() ? startup.company.linkedin : ''}
+                                <input ref={register} name="linkedin" type="text" className="small-width small-width-sm" defaultValue={hasCompany() ? startup.company.linkedin : ''}
                                        placeholder="LinkedIn"/>
                             </div>
 

@@ -12,6 +12,10 @@
   position: relative;
   border-radius: 0;
 
+  @media only screen and (max-width: $mobile_width) {
+    padding: 20px 40px;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -82,4 +86,10 @@
   width: 100%;
   font-size: 2rem;
   padding:  24px 86px;
+
+
+  @media only screen and (max-width: $mobile_width) {
+    font-size: 1.5rem;
+    padding: 17px 20px;
+  }
 }

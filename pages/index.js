@@ -13,6 +13,33 @@ const Home = ({events, blogs}) => {
             slidesToScroll: 1,
             arrows: true,
             autoplay: true,
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 1071,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true,
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true,
+                    }
+                },
+            ]
         });
 
         $('.posts-slider').slick({
@@ -21,6 +48,29 @@ const Home = ({events, blogs}) => {
             arrows: false,
             dots: true,
             autoplay: true,
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 1071,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                },
+            ]
         });
 
         $('a[href*="#"]:not([href="#"])').click(function () {
@@ -49,9 +99,9 @@ const Home = ({events, blogs}) => {
         <section id="second-section" className="image-text">
             <div className="container">
                 <div className="row mb-5">
-                    <div className="col-md-10 mx-auto">
+                    <div className="col-lg-10 col-12 mx-auto">
                         <div className="row">
-                            <div className="col-md-5">
+                            <div className="col-lg-5 col-sm-7 col-12 mx-auto">
                                 <div className="investors">
                                     <img className="img-01" src="images/icon/01.png" alt=""/>
 
@@ -64,7 +114,7 @@ const Home = ({events, blogs}) => {
                                 </div>
                             </div>
 
-                            <div className="col-md-6 offset-md-1">
+                            <div className="col-md-6 offset-md-1 d-none d-lg-block">
                                 <img className="img-fluid" src="images/investors.png" alt=""/>
                             </div>
                         </div>
@@ -72,11 +122,11 @@ const Home = ({events, blogs}) => {
                 </div>
 
                 <div className="row">
-                    <div className="col-md-5">
+                    <div className="col-md-5 d-none d-lg-block">
                         <img className="img-fluid" src="images/startups.png" alt=""/>
                     </div>
 
-                    <div className="col-md-6 offset-md-1">
+                    <div className="col-lg-6 offset-md-1 col-sm-7 col-12 mx-auto">
                         <div className="investors startups">
                             <img className="img-01 img-02" src="images/icon/02.png" alt=""/>
                             <h3>For startups</h3>

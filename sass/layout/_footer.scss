@@ -28,6 +28,10 @@ footer {
 
     a {
       margin-bottom: 24px;
+
+      @media only screen and (max-width: $desktop_width) {
+        margin-left: 10px;
+      }
     }
   }
 

@@ -18,6 +18,12 @@
     }
 
     @if wide==$res {
+        @media only screen and (max-width: $min_wide_width) {
+            @content;
+        }
+    }
+
+    @if wide==$res {
         @media only screen and (max-width: $wide_width) {
             @content;
         }
@@ -47,6 +53,7 @@
 }
 
 $wide_width: 1300px;
+$min_wide_width: 1200px;
 $desktop_width: 992px;
-$tablet_width:  767px;
+$tablet_width:  768px;
 $mobile_width: 576px;
