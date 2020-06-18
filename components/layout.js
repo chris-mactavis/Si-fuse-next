@@ -7,6 +7,7 @@ import Link from "next/link";
 import Footer from "./layouts/Footer";
 import Loader from "./UI/Loader";
 import {useSelector} from "react-redux";
+import Notifier from "./UI/Notifier";
 
 export default function Layout({children, page, headerClass, headerContent, redBar = false, whiteAccount = false}) {
     const isLoggedIn = useSelector(state => state.auth.loggedIn);
@@ -54,6 +55,8 @@ export default function Layout({children, page, headerClass, headerContent, redB
 
             <Loader />
 
+            <Notifier />
+
             <header className={headerClass}>
                 <TopBar redBar={redBar} isLoggedIn={isLoggedIn} whiteAccount={whiteAccount}/>
 
@@ -67,8 +70,6 @@ export default function Layout({children, page, headerClass, headerContent, redB
             {children}
 
             <Footer />
-
-
         </>
     )
 }

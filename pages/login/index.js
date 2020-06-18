@@ -5,6 +5,7 @@ import {withoutAuth} from "../../components/hoc/auth";
 import React from 'react';
 
 const Login = () => {
+
     return <Layout headerContent={<LoginForm />} page="Login" headerClass="signup">
         <Head>
             <title>Login</title>

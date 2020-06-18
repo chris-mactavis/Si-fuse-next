@@ -5,6 +5,7 @@ import {loginAsync} from "../../store/actions/auth";
 import Error from "../UI/ErrorSpan";
 import Router from "next/router";
 import Cookies from 'js-cookie';
+import {showNotifier, toggleNotifier} from "../../store/actions/notifier";
 
 export default function LoginForm() {
     const dispatch = useDispatch();
@@ -16,10 +17,11 @@ export default function LoginForm() {
     const loginHandler = async data => {
         try {
             await dispatch(loginAsync(data));
+            dispatch(showNotifier('Logged In'));
             Router.push(Cookies.get('redirectIntended') || '/');
             Cookies.remove('redirectIntended');
         } catch (e) {
-            console.log(e);
+            console.log(e, 'the error');
         }
     };
 

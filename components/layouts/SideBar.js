@@ -5,6 +5,7 @@ import {logout} from "../../store/actions/auth";
 import ToggleSideBar from "../../utils/ToggleSideBar";
 import Router from 'next/router';
 import {User} from "../../utils/User";
+import {showNotifier} from "../../store/actions/notifier";
 
 export default function SideBar({isLoggedIn = false}) {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export default function SideBar({isLoggedIn = false}) {
 
     const logoutHandler = () => {
         dispatch(logout());
+        dispatch(showNotifier('Logged Out'));
         Router.push('/');
     }
 

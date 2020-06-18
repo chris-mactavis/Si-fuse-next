@@ -17,7 +17,7 @@ const ContactUs = ({user}) => {
     const loginHandler = async data => {
         dispatch(loader());
         try {
-            const {data: response} = await axiosInstance.post('contact', data, {
+            await axiosInstance.post('contact', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }

@@ -1,6 +1,7 @@
 import axiosInstance from "../../config/axios";
 import {loader} from "./loader";
 import Cookies from 'js-cookie';
+import {showNotifier} from "./notifier";
 
 export const LOGIN = 'LOGIN';
 export const STORE_AUTH = 'STORE_AUTH';
@@ -19,8 +20,9 @@ export const loginAsync = data => {
                 dispatch(storeAuth({token, user}));
             }
         } catch (e) {
+            dispatch(showNotifier(e.response.data.message, 'danger'));
             dispatch(loader());
-            console.log(e);
+            throw new Error(e.response.data.message);
         }
     }
 }

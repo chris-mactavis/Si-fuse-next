@@ -1443,6 +1443,49 @@ input:focus, textarea:focus, select:focus, option:focus button {
   background: white;
 }
 
+.notification {
+  position: fixed;
+  display: flex;
+  bottom: 20px;
+  right: -40px;
+  z-index: 100;
+  opacity: 0;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
+  padding: 10px 30px 10px 60px;
+  transition: 0.3s all;
+  background-color: white;
+}
+.notification::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  background-size: cover;
+  transform: translateY(-50%);
+}
+.notification.success {
+  color: green;
+}
+.notification.success::before {
+  background-image: url("/images/icon/tick.png");
+}
+.notification.danger {
+  color: #D12B19;
+}
+.notification.danger::before {
+  background-image: url("/images/icon/alert.png");
+}
+.notification.show {
+  display: block;
+  right: 20px;
+  opacity: 1;
+}
+.notification span {
+  cursor: pointer;
+}
+
 nav.navbar {
   font-size: 1.6rem;
   padding: 0 6rem 0 6rem;
