@@ -485,4 +485,10 @@ form {
     }
   }
 
+  &.overview-form {
+    textarea, input, select {
+      margin-bottom: 1rem !important;
+    }
+  }
+
 }

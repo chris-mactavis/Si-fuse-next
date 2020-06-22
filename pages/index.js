@@ -91,6 +91,7 @@ const Home = ({events, blogs}) => {
         page="Home"
         headerContent={<HeaderContent/>}
         headerClass="homepage"
+        whiteAccount
     >
         <Head>
             <title>SI Fuse</title>

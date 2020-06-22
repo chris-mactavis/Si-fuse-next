@@ -71,7 +71,7 @@ export default function ProfileFive({startup}) {
 
                 <div className="col-md-9">
                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
-                        <div className="numbers num-alone">
+                        <div className="numbers d-md-none num-alone">
                             <div className="number">5</div>
                             <p>Marketing</p>
                         </div>

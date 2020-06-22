@@ -58,7 +58,7 @@ const InvestorPreference = ({investor, stages, industries}) => {
 
                     <div className="col-lg-9 col-12">
                         <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
-                            <div className="numbers num-alone">
+                            <div className="numbers d-md-none num-alone">
                                 <div className="number">2</div>
                                 <p>Your company</p>
                             </div>

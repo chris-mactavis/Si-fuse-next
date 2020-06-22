@@ -39,7 +39,7 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
         }
         <Link href="/">
             <a>
-                <img src="/images/logo.png" alt="" class="logo-small-screen"/>
+                <img src="/images/logo.png" alt="" className="logo-small-screen"/>
             </a>
         </Link>
 

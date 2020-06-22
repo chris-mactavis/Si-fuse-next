@@ -839,49 +839,6 @@ section {
   &.startup-content {
     @extend .bg;
 
-    //.person {
-    //  background: #fff;
-    //  padding: 50px;
-    //  margin-bottom: 30px;
-    //
-    //  .image {
-    //    background: #fff;
-    //    display: flex;
-    //    align-items: center;
-    //    margin-bottom: 2.5rem;
-    //    flex-wrap: wrap;
-    //
-    //    .person-logo {
-    //      margin-right: 3rem;
-    //    }
-    //
-    //    p {
-    //      margin-bottom: 0;
-    //    }
-    //
-    //    .small-icons {
-    //      margin-right: 1rem;
-    //    }
-    //  }
-    //
-    //  .button-togo {
-    //    display: flex;
-    //    flex-wrap: wrap;
-    //
-    //    button {
-    //      background: transparent;
-    //      padding: 0.5rem 2.5rem;
-    //      letter-spacing: 0.3rem;
-    //      text-transform: uppercase;
-    //      border: 2px solid;
-    //      transition: all 0.3s;
-    //      margin: 0 2rem 2rem 0;
-    //
-    //      &:hover {
-    //        color: #fff;
-    //        background-color: $orange-red;
-    //        border-color: $orange-red;
-    //      }
     @media only screen and (max-width: $mobile_width) {
       padding: 60px 0 60px;
     }
@@ -897,7 +854,7 @@ section {
     .startup-sidebar {
       position: fixed;
       width: 350px;
-      z-index: 9999;
+      z-index: 100;
 
       @media only screen and (max-width: $wide_width) {
         width: 300px;
@@ -919,14 +876,11 @@ section {
         text-align: center;
 
         .img-profile {
+          max-width: 130px;
           margin-bottom: 15px;
+          cursor: pointer;
         }
 
-
-        //&:focus {
-        //    outline: none;
-        //  }
-        //}
         .social-icons {
           margin-bottom: 10px;
 
@@ -998,6 +952,70 @@ section {
 
       img {
         margin-bottom: 20px;
+      }
+
+      .player-thumbnail {
+        position: relative;
+        width: 100%;
+
+        video {
+          width: 100%;
+          cursor: pointer;
+        }
+
+        &::before {
+          content: '';
+
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 40px;
+          height: 40px;
+
+          background-image: url("/images/icon/play.svg");
+          background-size: contain;
+          background-repeat: no-repeat;
+
+          cursor: pointer;
+        }
+      }
+
+      &:hover {
+        .edit-icon {
+          display: block;
+
+
+        }
+      }
+
+      .industry-paragraph {
+        overflow-x: scroll;
+        display: flex;
+        align-items: center;
+        margin-bottom: 14px !important;
+
+        .industry-span {
+          margin-right: 2px;
+          margin-bottom: 0;
+          line-height: 1;
+
+          &::after {
+            content: ',';
+          }
+        }
+      }
+
+      .edit-icon {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        cursor: pointer;
+        display: none;
+
+        @media only screen and (max-width: $desktop_width) {
+          display: block;
+        }
       }
 
       .text-description {
@@ -1110,6 +1128,7 @@ section {
         .img-profile {
           border-radius: 50%;
           margin-bottom: 20px;
+          cursor: pointer;
         }
 
         .investor-name {

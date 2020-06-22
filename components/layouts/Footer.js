@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import {User} from "../../utils/User";
 
 export default function Footer() {
     return <footer>
@@ -57,11 +58,15 @@ export default function Footer() {
                             </Link>
                         </li>
 
-                        <li>
-                            <Link href="/discover">
-                                <a> Discover</a>
-                            </Link>
-                        </li>
+                        {
+                            User() && User().user_type.user_type === 'Investor'
+                                ? <li>
+                                    <Link href="/discover">
+                                        <a> Discover</a>
+                                    </Link>
+                                </li>
+                                : null
+                        }
                     </ul>
                 </div>
 

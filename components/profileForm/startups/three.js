@@ -18,19 +18,9 @@ export default function ProfileThree({startup}) {
 
     const onSubmitHandler = async data => {
         dispatch(loader());
-        let formData = new FormData();
-        Object.keys(data).forEach(key => {
-            if (key === 'pitch_video' && data[key].length > 0) {
-                formData.append(key, data[key][0]);
-            } else if (key === 'product_image' && data[key].length > 0) {
-                formData.append(key, data[key][0]);
-            } else {
-                formData.append(key, data[key]);
-            }
-        });
 
         try {
-            await axiosInstance.post('startups/product-service', formData, {
+            const {data: response} = await axiosInstance.post('startups/product-service', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -75,7 +65,7 @@ export default function ProfileThree({startup}) {
                 </div>
                 <div className="col-lg-9 col-12">
                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
-                        <div className="numbers num-alone">
+                        <div className="numbers d-md-none num-alone">
                             <div className="number">3</div>
                             <p>Product and Services</p>
                         </div>
@@ -120,23 +110,21 @@ export default function ProfileThree({startup}) {
                         <textarea ref={register} className="full-width" name="value_proposition" id="" cols="30"
                                   rows="5" defaultValue={hasProduct() ? startup.product_services.value_proposition : ''}/>
 
-                        <label id="video-upload">
-                            <input ref={register} className="input-file" title="&nbsp;" type="file" name="product_video"
-                                   required="" capture/>
-                            Product Video
-                        </label>
+                        <label>Product Images</label>
+                        <input ref={register} className="full-width" name="product_images" placeholder="e.g. https://image.com/one.jpg, https://image.com/two.jpg"
+                                  defaultValue={hasProduct() ? startup.product_services.product_image_string : ''}/>
 
-                        <label id="video-upload" className="mt-5">
-                            <input ref={register} className="input-file" title="&nbsp;" type="file" name="product_image"
-                                   required="" capture/>
-                            Profile Picture
-                        </label>
+                        <label>Product Video</label>
+                        <input ref={register} type="url" className="full-width" name="product_video_url" placeholder="Product Video Url"
+                                  defaultValue={hasProduct() ? startup.product_services.product_video_url : ''}/>
 
-                        <label id="video-upload" className="mt-5">
-                            <input ref={register} className="input-file" title="&nbsp;" type="file" name="pitch_video"
-                                   required="" capture/>
-                            Pitch Video
-                        </label>
+                        <label>Pitch Video</label>
+                        <input ref={register} type="url" className="full-width" name="pitch_video_url" placeholder="Pitch Video Url"
+                               defaultValue={hasProduct() ? startup.product_services.pitch_video_url : ''}/>
+
+                        <label>Product Documentation</label>
+                        <input ref={register} type="url" className="full-width" name="product_documentation" placeholder="Product Documentation Url"
+                               defaultValue={hasProduct() ? startup.product_services.product_documentation : ''}/>
 
                         <button className="btn btn-profile" type="submit">Save & Next</button>
                     </form>

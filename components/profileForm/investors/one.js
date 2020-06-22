@@ -73,7 +73,7 @@ const InvestorBasicInfo = ({investor}) => {
 
                     <div className="col-lg-9 col-12">
                         <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
-                            <div className="numbers num-alone">
+                            <div className="numbers d-md-none num-alone">
                                 <div className="number">1</div>
                                 <p>Basic information</p>
                             </div>

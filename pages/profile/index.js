@@ -6,15 +6,14 @@ import Token from "../../utils/Token";
 import Profile from "../../components/Profile";
 import {User} from "../../utils/User";
 
-export default function ProfilePage({startup: {company, product_services: services, finance, market, profile, interests}, userType}) {
-    console.log(userType, interests);
+export default function ProfilePage({data: {company, product_services: services, finance, market, profile, interests, connections}, userType, profileContent}) {
     return <>
         <Layout headerContent={null} headerClass="page-header no-bg" redBar>
             <Head>
                 <title>My Profile</title>
             </Head>
 
-            <Profile company={company} services={services} finance={finance} market={market} profile={profile} interests={interests} userType={userType} hasEdit />
+            <Profile company={company} services={services} finance={finance} market={market} profile={profile} interests={interests} userType={userType} hasEdit profileContent={profileContent} connections={connections} />
         </Layout>
         <style jsx>{`
             .services-stage {
@@ -27,15 +26,18 @@ export default function ProfilePage({startup: {company, product_services: servic
 
 ProfilePage.getInitialProps = async (ctx) => {
     const user = User(ctx);
-    const url = user.user_type.user_type === 'Investor' ? 'investors' : 'startups';
-    const {data: response} = await axiosInstance.get(url, {
+    const headers = {
         headers: {
             Authorization: `Bearer ${Token(ctx)}`
         }
-    });
+    };
+    const url = user.user_type.user_type === 'Investor' ? 'investors' : 'startups';
+    const {data: response} = await axiosInstance.get(url, headers);
+    const {data: profileContent} = await axiosInstance.get('profile-content', headers);
 
     return {
-        startup: response.data,
-        userType: user.user_type.user_type
+        data: response.data,
+        userType: user.user_type.user_type,
+        profileContent
     }
 }

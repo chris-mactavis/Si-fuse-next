@@ -437,7 +437,7 @@ header {
     width: max-content;
     height: auto;
     background: #fff;
-    z-index: 1;
+    z-index: 110;
     position: absolute;
     left: 67px;
     box-shadow: 2px 2px 7px 6px rgba(0,0,0,.2);
@@ -447,8 +447,7 @@ header {
     }
 
     ul {
-      padding: 40px 50px 50px 20px;
-      margin-bottom: 0;
+      padding: 40px 50px 0 20px;
       margin: 10px;
 
       @media only screen and (max-width: $mobile_width) {

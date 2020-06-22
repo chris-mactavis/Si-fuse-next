@@ -12,6 +12,11 @@
   position: relative;
   border-radius: 0;
 
+  &.btn-sm {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+
   @media only screen and (max-width: $mobile_width) {
     padding: 20px 40px;
   }

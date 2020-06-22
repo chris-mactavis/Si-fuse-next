@@ -64,7 +64,7 @@ export const ProfileFour = ({startup}) => {
                 </div>
                 <div className="col-md-9">
                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
-                        <div className="numbers num-alone">
+                        <div className="numbers d-md-none num-alone">
                             <div className="number">4</div>
                             <p>Finance</p>
                         </div>

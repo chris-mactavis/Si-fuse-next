@@ -76,12 +76,16 @@ export default function SideBar({isLoggedIn = false}) {
                         {/*                className="img-fluid"/> Message</a>*/}
                         {/*    </Link>*/}
                         {/*</li>*/}
-                        <li>
-                            <Link href="/connections">
-                                <a><img src="/images/icon/connection-icon.svg" alt=""
-                                        className="img-fluid"/> Connections</a>
-                            </Link>
-                        </li>
+                        {
+                            loggedInUser && loggedInUser.user_type.user_type === 'Investor'
+                                ? <li>
+                                    <Link href="/connections">
+                                        <a><img src="/images/icon/connection-icon.svg" alt=""
+                                                className="img-fluid"/> Connections</a>
+                                    </Link>
+                                </li>
+                                : null
+                        }
                         <li>
                             <Link href="/events">
                                 <a><img src="/images/icon/calendar-icon.svg" alt=""

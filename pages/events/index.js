@@ -30,7 +30,7 @@ export default function Events({data: {data: events, links: {next}, meta: {curre
         }
     }
 
-    return <Layout page="Events" headerClass="page-header events" headerContent={<h1>Events</h1>}>
+    return <Layout page="Events" headerClass="page-header events" headerContent={<h1>Events</h1>} whiteAccount>
         <Head>
             <title>Events</title>
         </Head>

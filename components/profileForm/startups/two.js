@@ -112,7 +112,7 @@ export default function ProfileTwo({industries, startup, locations}) {
 
                     <div className="col-md-9">
                         <form onSubmit={handleSubmit(submitHandler)} className="profile-details">
-                            <div className="numbers num-alone">
+                            <div className="numbers d-md-none num-alone">
                                 <div className="number">2</div>
                                 <p>Your company</p>
                             </div>
@@ -185,13 +185,6 @@ export default function ProfileTwo({industries, startup, locations}) {
                             <label htmlFor="value-proposition">Value Proposition</label>
                             <textarea ref={register} className="full-width mt-0" name="value_proposition" defaultValue={hasCompany() ? startup.company.value_proposition : ''}
                                       id="value-proposition" cols="30" rows="5"/>
-
-                            <label htmlFor="Video/Image">Video / Image of Picture</label>
-                            <label id="video-upload">
-                                <input className="input-file" title="&nbsp;" type="file" name="Video_image"
-                                       required="" capture/>
-                                Upload Video
-                            </label>
 
                             <button className="btn btn-profile" type="submit">Save & Next</button>
                         </form>
