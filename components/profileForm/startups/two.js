@@ -23,7 +23,7 @@ export default function ProfileTwo({industries, startup, locations}) {
 
     useEffect(() => {
         setProfilePicture({
-            result: startup.company.logo_url,
+            result: startup.company && startup.company.logo_url ? startup.company.logo_url : [],
             filename: null,
             filetype: null,
             src: null,

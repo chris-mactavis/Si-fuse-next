@@ -15,7 +15,7 @@ export default function ProfileOne({startup}) {
 
     useEffect(() => {
         setProfilePicture({
-            result: startup.profile.profile_pic_url,
+            result: startup.profile && startup.profile.profile_pic_url ? startup.profile.profile_pic_url : [],
             filename: null,
             filetype: null,
             src: null,
