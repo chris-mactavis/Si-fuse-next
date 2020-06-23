@@ -6,6 +6,7 @@ import Error from "../UI/ErrorSpan";
 import Router from "next/router";
 import Cookies from 'js-cookie';
 import {showNotifier, toggleNotifier} from "../../store/actions/notifier";
+import React from "react";
 
 export default function LoginForm() {
     const dispatch = useDispatch();
@@ -45,7 +46,7 @@ export default function LoginForm() {
 
                 <button type="submit" className="btn btn-white">Login</button>
             </form>
-            <p className="text-center">Forgot Password? <a href="#">Click here</a></p>
+            <p className="text-center">Forgot Password? <Link href="/forgot-password"><a>Click here</a></Link></p>
         </div>
 
         <style jsx>{`

@@ -9,7 +9,6 @@ import {showImageViewer, showVideoViewer} from "../../store/actions/imageViewer"
 
 const StartupProfile = ({company, services: product_services, finance, market, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}}) => {
     const dispatch = useDispatch();
-    console.log(product_services)
 
     useEffect(() => {
         const overviewBtn = $('#overview-btn');
@@ -17,28 +16,42 @@ const StartupProfile = ({company, services: product_services, finance, market, p
         const financeBtn = $('#finance-btn');
         const marketingSummaryBtn = $('#marketing-summary-btn');
 
+        if ($(window).width() > 768) {
+            $(window).scroll(function (e) {
+                const $el = $('#sidebar-scroller');
+                const isPositionFixed = ($el.css('position') === 'fixed');
+                if ($(this).scrollTop() > 140 && !isPositionFixed) {
+                    $el.css({'position': 'fixed', 'top': '0px'});
+                }
+                if ($(this).scrollTop() < 140 && isPositionFixed) {
+                    $el.css({'position': 'static', 'top': '0px'});
+                }
+            })
+        }
+
+
         overviewBtn.click(function () {
             $('html, body').animate({
-                scrollTop: $('#overview').offset().top
-            }, 2000);
+                scrollTop: $('#overview').offset().top - 20
+            }, 1000);
         });
 
         productServiceBtn.click(function () {
             $('html, body').animate({
-                scrollTop: $('#productServices').offset().top
-            }, 2000);
+                scrollTop: $('#productServices').offset().top - 20
+            }, 1000);
         });
 
         financeBtn.click(function () {
             $('html, body').animate({
-                scrollTop: $('#finance').offset().top
-            }, 2000);
+                scrollTop: $('#finance').offset().top - 20
+            }, 1000);
         });
 
         marketingSummaryBtn.click(function () {
             $('html, body').animate({
-                scrollTop: $('#marketingSummary').offset().top
-            }, 2000);
+                scrollTop: $('#marketingSummary').offset().top - 20
+            }, 1000);
         });
 
     }, []);
@@ -222,7 +235,7 @@ const StartupProfile = ({company, services: product_services, finance, market, p
         <div className="container">
             <div className="row">
                 <div className="col-md-4">
-                    <div className="startup-sidebar">
+                    <div className="startup-sidebar" id="sidebar-scroller">
                         <div className="profile-content">
                             <img id="viewer-image"
                                  onClick={() => dispatch(showImageViewer(startupProf.company.logo_url))}

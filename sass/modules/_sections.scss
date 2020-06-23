@@ -852,7 +852,7 @@ section {
     }
 
     .startup-sidebar {
-      position: fixed;
+      //position: fixed;
       width: 350px;
       z-index: 100;
 
@@ -1151,16 +1151,55 @@ section {
 
   }
 
+  &.forgot-password {
+    @extend .bg;
+
+    @media only screen and (max-width: $mobile_width) {
+      padding: 60px 0 60px;
+    }
+
+    form {
+      width: 50%
+    }
+
+    form, .reset-password-message {
+      margin-top: 90px;
+      margin-bottom: 90px;
+
+      @media only screen and (max-width: $mobile_width) {
+        width: 100%;
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  &.reset-password {
+    @extend .bg;
+
+    @media only screen and (max-width: $mobile_width) {
+      padding: 60px 0 60px;
+    }
+
+    form {
+      width: 50%
+    }
+
+    form, .reset-password-message {
+      margin-top: 50px;
+      margin-bottom: 50px;
+
+      @media only screen and (max-width: $mobile_width) {
+        width: 100%;
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
+    }
+  }
+
   &.investors-bg {
     background: #ECEFF1;
   }
-
-
-  //.summary {
-  //      padding-top: 4rem;
-  //    }
-  //  }
-  //}
 
   &.faqs {
     //padding: 6rem 0;

@@ -16,7 +16,7 @@
   font-weight: bold;
   font-style: normal;
 }
-.bg, section.startup-content, section.single-post {
+.bg, section.reset-password, section.forgot-password, section.startup-content, section.single-post {
   background: #ECEFF1;
   color: #6B6B6B;
   padding: 80px 0 60px;
@@ -1555,7 +1555,6 @@ section.startup-content .profile-name {
   font-size: 20px;
 }
 section.startup-content .startup-sidebar {
-  position: fixed;
   width: 350px;
   z-index: 100;
 }
@@ -1779,6 +1778,44 @@ section.startup-content .investors-description .investors-profile .edit-investor
 section.startup-content .investors-description .investors-profile .edit-investors-profile:hover {
   background: #D32907;
   color: #fff;
+}
+@media only screen and (max-width: 576px) {
+  section.forgot-password {
+    padding: 60px 0 60px;
+  }
+}
+section.forgot-password form {
+  width: 50%;
+}
+section.forgot-password form, section.forgot-password .reset-password-message {
+  margin-top: 90px;
+  margin-bottom: 90px;
+}
+@media only screen and (max-width: 576px) {
+  section.forgot-password form, section.forgot-password .reset-password-message {
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  section.reset-password {
+    padding: 60px 0 60px;
+  }
+}
+section.reset-password form {
+  width: 50%;
+}
+section.reset-password form, section.reset-password .reset-password-message {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+@media only screen and (max-width: 576px) {
+  section.reset-password form, section.reset-password .reset-password-message {
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
 }
 section.investors-bg {
   background: #ECEFF1;

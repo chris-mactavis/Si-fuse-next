@@ -27,7 +27,7 @@ export default function SignupForm({countries, userTypes}) {
         }
     }
 
-    const vefiryEmailHandler = async email => {
+    const verifyEmailHandler = async email => {
         try {
             const {data: {email_exists}} = await axiosInstance.post('verify-email', {email});
             return !email_exists || 'Email already exists. Do you want to login instead?';
@@ -85,7 +85,7 @@ export default function SignupForm({countries, userTypes}) {
 
                         <input ref={register({
                             required: 'Email is required.',
-                            validate: async value => vefiryEmailHandler(value)
+                            validate: async value => verifyEmailHandler(value)
                         })} className="w-100" type="email" name="email" id="email"
                                placeholder="Email"/>
                         {errors.email && <Error>{errors.email.message}</Error>}
