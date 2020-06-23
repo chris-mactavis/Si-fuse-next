@@ -20,7 +20,7 @@ export default function SignupForm({countries, userTypes}) {
             const {data} = await axiosInstance.post('signup', {...formData, user_type_id: accountType});
             dispatch(storeAuth(data))
             dispatch(loader());
-            Router.push('/profile');
+            Router.push('/profile/edit');
         } catch (e) {
             dispatch(loader());
             throw new Error(e.message);
