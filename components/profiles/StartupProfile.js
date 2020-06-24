@@ -10,6 +10,8 @@ import {showImageViewer, showVideoViewer} from "../../store/actions/imageViewer"
 const StartupProfile = ({company, services: product_services, finance, market, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}}) => {
     const dispatch = useDispatch();
 
+    console.log(product_services);
+
     useEffect(() => {
         const overviewBtn = $('#overview-btn');
         const productServiceBtn = $('#product-services-btn');
@@ -447,9 +449,9 @@ const StartupProfile = ({company, services: product_services, finance, market, p
 
                                     {
                                         !toggleProductImages && <div className="product-img-list">
-                                            {startupProf.product_services.product_image_array.map((image, index) => <img
+                                            {startupProf.product_services.hasOwnProperty('product_image_array') ? startupProf.product_services.product_image_array.map((image, index) => <img
                                                 className="pointer" key={index}
-                                                onClick={() => dispatch(showImageViewer(image))} src={image} alt=""/>)}
+                                                onClick={() => dispatch(showImageViewer(image))} src={image} alt=""/>) : null}
                                         </div>
                                     }
                                     {
@@ -457,7 +459,7 @@ const StartupProfile = ({company, services: product_services, finance, market, p
                                                                    className="profile-details overview-form w-100">
                                             <input name="product_images" ref={register} className="full-width edit-input"
                                                    type="text"
-                                                   defaultValue={startupProf.product_services.product_image_string}/>
+                                                   defaultValue={startupProf.product_services.hasOwnProperty('product_image_array') ? startupProf.product_services.product_image_string : null}/>
                                             <button className="btn btn-sm" type={"submit"}>Update</button>
                                         </form>
                                     }
