@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 
 import DropNCrop from '@synapsestudios/react-drop-n-crop';
 
-export default function ProfileOne({startup}) {
+export default function ProfileOne({startup, locations}) {
     const dispatch = useDispatch();
     const token = Cookies.get('token');
 
@@ -34,7 +34,7 @@ export default function ProfileOne({startup}) {
         });
 
         try {
-            const {data: response} = await axiosInstance.post('startups', formData, {
+            await axiosInstance.post('startups', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -48,6 +48,7 @@ export default function ProfileOne({startup}) {
     }
 
     const {register, handleSubmit, errors} = useForm();
+
     const [profilePicture, setProfilePicture] = useState({
         result: null,
         filename: null,
@@ -55,6 +56,8 @@ export default function ProfileOne({startup}) {
         src: null,
         error: null,
     });
+
+    const [flag, setFlag] = useState('');
 
     const onChangePicture = value => {
         setProfilePicture(value);
@@ -115,12 +118,25 @@ export default function ProfileOne({startup}) {
                             <Error>Please upload a profile picture!</Error>}</span>
 
                             <div className="d-flex">
-                                <div className="input-group-container w-25">
-                                    <input ref={register({required: "This field is required"})}
-                                           className="country-code small-width"
-                                           type="number" name="country_code" id=""
-                                           defaultValue={hasProfile() ? startup.profile.country_code : ''}
-                                           placeholder="Country code"/>
+                                <div className="input-group-container w-25 country-div">
+                                        <select name="country_code"
+                                                onChange={(e) => {
+                                                    setFlag(locations.find(location => location.id === +e.target.value).flag);
+                                                }}
+                                                ref={register({required: "This field is required"})}
+                                                className="country-code small-width"
+                                                defaultValue={hasProfile() ? startup.profile.country_code : ''}>
+                                            {
+                                                locations.map(({id, flag: flagUrl, country_area_code}) => <option key={id}
+                                                                                                         value={id}>{country_area_code}</option>)
+                                            }
+                                        </select>
+                                        <div className="flag" />
+                                    {/*<input ref={register({required: "This field is required"})}*/}
+                                    {/*       className="country-code small-width"*/}
+                                    {/*       type="number" name="country_code" id=""*/}
+                                    {/*       defaultValue={hasProfile() ? startup.profile.country_code : ''}*/}
+                                    {/*       placeholder="Country code"/>*/}
                                     {errors.country_code && <Error>{errors.country_code.message}</Error>}
                                 </div>
 
@@ -164,8 +180,24 @@ export default function ProfileOne({startup}) {
             .btn {
                 margin-top: 4rem;
             }
-            input.country-code {
+            .country-div {
+                position: relative;
+            }
+            select.country-code {
                 width: 90%;
+                padding: 0.28rem 0;
+                padding-left: 40px;
+                background-position: 100%;
+            }
+            .flag {
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 35px;
+                height: 35px;
+                background-image: url(${flag ? flag : locations[0].flag});
+                background-size: contain;
+                background-repeat: no-repeat;
             }
             .about-label {
                 margin-top: 4rem;
