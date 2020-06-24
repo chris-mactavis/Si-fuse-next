@@ -119,19 +119,19 @@ export default function ProfileOne({startup, locations}) {
 
                             <div className="d-flex">
                                 <div className="input-group-container w-25 country-div">
-                                        <select name="country_code"
-                                                onChange={(e) => {
-                                                    setFlag(locations.find(location => location.id === +e.target.value).flag);
-                                                }}
-                                                ref={register({required: "This field is required"})}
-                                                className="country-code small-width"
-                                                defaultValue={hasProfile() ? startup.profile.country_code : ''}>
-                                            {
-                                                locations.map(({id, flag: flagUrl, country_area_code}) => <option key={id}
-                                                                                                         value={id}>{country_area_code}</option>)
-                                            }
-                                        </select>
-                                        <div className="flag" />
+                                    <select name="country_code"
+                                            onChange={(e) => {
+                                                setFlag(locations.find(location => location.id === +e.target.value).flag);
+                                            }}
+                                            ref={register({required: "This field is required"})}
+                                            className="country-code small-width"
+                                            defaultValue={hasProfile() ? startup.profile.country_code : ''}>
+                                        {
+                                            locations.map(({id, country_area_code}) => <option key={id}
+                                                                                               value={id}>{country_area_code}</option>)
+                                        }
+                                    </select>
+                                    <div className="flag"/>
                                     {/*<input ref={register({required: "This field is required"})}*/}
                                     {/*       className="country-code small-width"*/}
                                     {/*       type="number" name="country_code" id=""*/}
@@ -150,9 +150,14 @@ export default function ProfileOne({startup, locations}) {
                                 </div>
                             </div>
 
-                            <input ref={register({required: "This field is required"})} className="full-width"
-                                   type="text" name="gender" id="" placeholder="Sex"
-                                   defaultValue={hasProfile() ? startup.profile.gender.toUpperCase() : ''}/>
+                            <select name="gender"
+                                    ref={register({required: "This field is required"})}
+                                    className="w-100 small-width"
+                                    defaultValue={hasProfile() ? startup.profile.gender.toLowerCase() : ''}>
+                                <option value="">Sex</option>
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
                             {errors.gender && <Error>{errors.gender.message}</Error>}
 
                             <label htmlFor="About" className="about-label">About yourself</label>
