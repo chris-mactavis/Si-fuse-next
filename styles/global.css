@@ -1757,6 +1757,17 @@ section.startup-content .investors-description .profile-details ul li:nth-child(
   font-weight: normal;
   font-size: 1.3rem;
   color: #fff;
+  margin-right: 20px;
+}
+section.startup-content .investors-description .profile-details ul li:nth-child(3) {
+  background: #51B8D9;
+  border-radius: 10px;
+  padding: 6px 5px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 1.3rem;
+  color: #fff;
 }
 section.startup-content .investors-description .investors-profile {
   text-align: center;

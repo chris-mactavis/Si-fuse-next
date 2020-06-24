@@ -47,7 +47,7 @@ const ForgotPassword = () => {
 
     return <Layout page="forgotPassword" headerContent={null} headerClass="page-header no-bg" redBar>
         <Head>
-            <title>Forgot Password</title>
+            <title>Forgot Password{process.env.environment}</title>
         </Head>
 
         <section className="forgot-password">

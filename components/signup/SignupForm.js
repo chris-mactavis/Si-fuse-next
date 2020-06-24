@@ -90,12 +90,12 @@ export default function SignupForm({countries, userTypes}) {
                                placeholder="Email"/>
                         {errors.email && <Error>{errors.email.message}</Error>}
 
-                        <select ref={register({required: true})} className="w-100" name="country_id" id="country">
-                            <option value="">Country</option>
-                            {countries.map(country => <option key={country.id}
-                                                              value={country.id}>{country.country}</option>)}
-                        </select>
-                        {errors.country_id && <Error>Please select a country</Error>}
+                        {/*<select ref={register({required: true})} className="w-100" name="country_id" id="country">*/}
+                        {/*    <option value="">Country</option>*/}
+                        {/*    {countries.map(country => <option key={country.id}*/}
+                        {/*                                      value={country.id}>{country.country}</option>)}*/}
+                        {/*</select>*/}
+                        {/*{errors.country_id && <Error>Please select a country</Error>}*/}
 
                         <input ref={register({required: 'You must specify a password'})} className="w-100" type="password"
                                name="password" id="pwd"
@@ -110,18 +110,15 @@ export default function SignupForm({countries, userTypes}) {
                         {errors.confirm_password && <Error>{errors.confirm_password.message}</Error>}
 
                         {
-                            accountType === 2
-                                ? <div className="d-block">
-                                    <label htmlFor="female_owned">
-                                        <input type="radio" ref={register} id="female_owned" name="startup_type_id" value={1}
-                                               defaultChecked/> &nbsp; Female Owned &nbsp;
-                                    </label>
-                                    <label htmlFor="female_led">
-                                        <input type="radio" ref={register} id="female_led" name="startup_type_id"
-                                               value={2}/> &nbsp; Female Led
-                                    </label>
-                                </div>
-                                : null
+                            accountType === 2 && <>
+                                <select ref={register({required: 'This field is required'})} className="w-100" name="startup_type_id">
+                                    <option value="">Startup Lead</option>
+                                    <option value="1">Female Owned</option>
+                                    <option value="2">Female Led</option>
+                                    <option value="3">Gender Bias</option>
+                                </select>
+                                {errors.startup_type_id && <Error>{errors.startup_type_id.message}</Error>}
+                            </>
                         }
 
                         <button type="submit" className="btn btn-white">Sign

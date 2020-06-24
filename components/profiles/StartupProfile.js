@@ -10,8 +10,6 @@ import {showImageViewer, showVideoViewer} from "../../store/actions/imageViewer"
 const StartupProfile = ({company, services: product_services, finance, market, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}}) => {
     const dispatch = useDispatch();
 
-    console.log(product_services);
-
     useEffect(() => {
         const overviewBtn = $('#overview-btn');
         const productServiceBtn = $('#product-services-btn');
@@ -233,6 +231,24 @@ const StartupProfile = ({company, services: product_services, finance, market, p
         }
     }
 
+    const connectHandler = async data => {
+        dispatch(loader());
+        try {
+            const {data: response} = await axiosInstance.post(`connect`, null, {
+                headers: {
+                    Authorization: `Bearer ${Token()}`
+                }
+            });
+            console.log(response);
+            dispatch(showNotifier('Connected Successfully'));
+            dispatch(loader());
+        } catch (e) {
+            dispatch(showNotifier(e.response.data.message, 'danger'));
+            dispatch(loader());
+            console.log(e);
+        }
+    }
+
     return <section className="startup-content">
         <div className="container">
             <div className="row">
@@ -267,6 +283,7 @@ const StartupProfile = ({company, services: product_services, finance, market, p
                             </p>
                             <p><img className="location-img" src="/images/icon/location.svg" alt=""/> Lagos, Nigeria</p>
                             <p>{startupProf.company.website}</p>
+                            { !hasEdit && <button onSubmit={connectHandler} className="btn">Connect</button>}
                         </div>
                         <button className="startup-link-view" id="overview-btn">
                             Overview <img src="/images/icon/pie-chart.svg" alt=""/>
