@@ -18,7 +18,7 @@ export default function ProfileTwo({industries, startup, locations}) {
         src: null,
         error: null,
     });
-
+    console.log(startup);
     const hasCompany = () => startup.hasOwnProperty('company') && startup.company;
 
     useEffect(() => {
@@ -57,8 +57,6 @@ export default function ProfileTwo({industries, startup, locations}) {
     }
 
     const submitHandler = async data => {
-        data['industry_ids'] = data.industries.filter(industry => !!industry);
-
         if (profilePicture.filename) {
             data['logo'] = profilePicture.result;
         } else {
@@ -137,23 +135,31 @@ export default function ProfileTwo({industries, startup, locations}) {
                             <span className="d-block">{errors.logo &&
                             <Error>Please upload a profile picture!</Error>}</span>
 
-                            <label htmlFor="industry">Your industry</label>
-                            <div className="d-flex flex-wrap mb-4">
+                            <label htmlFor="industry" className="mt-4">Your industry</label>
+                            <select ref={register({required: 'This field is required'})} className="w-100 full-width mt-0" name="industry_id" defaultValue={hasCompany() ? startup.company.industry_id : ''}>
+                                <option value="">Your Industry</option>
                                 {
-                                    industries.map(
-                                        ({industry, id}, i) => <label className="checkout-label" key={id}>
-                                            <input type="checkbox" name={`industries[${id}]`} id={id} value={id} defaultChecked={true}
-                                                   onChange={handleChange} ref={register}/>
-                                            <span className="checkout-custom"/>
-                                            {industry}
-                                        </label>
-                                    )
+                                    industries.map(({industry, id}) => <option key={id} value={id}>{industry}</option>)
                                 }
-                                <span className="d-block">{hasError("industries[0]") &&
-                                <Error>{getError("industries[0]")}</Error>}</span>
-                            </div>
+                            </select>
+                            <span className="d-block">{errors.industry_id &&
+                            <Error>{errors.industry_id.message}</Error>}</span>
+                            {/*<div className="d-flex flex-wrap mb-4">*/}
+                            {/*    {*/}
+                            {/*        industries.map(*/}
+                            {/*            ({industry, id}, i) => <label className="checkout-label" key={id}>*/}
+                            {/*                <input type="checkbox" name={`industries[${id}]`} id={id} value={id} defaultChecked={true}*/}
+                            {/*                       onChange={handleChange} ref={register}/>*/}
+                            {/*                <span className="checkout-custom"/>*/}
+                            {/*                {industry}*/}
+                            {/*            </label>*/}
+                            {/*        )*/}
+                            {/*    }*/}
+                            {/*    <span className="d-block">{hasError("industries[0]") &&*/}
+                            {/*    <Error>{getError("industries[0]")}</Error>}</span>*/}
+                            {/*</div>*/}
 
-                            <input className="full-width mt-0" type="text"
+                            <input className="full-width" type="text"
                                    ref={register({required: 'Please enter a company name'})} name="name" id="" defaultValue={hasCompany() ? startup.company.name : ''}
                                    placeholder="Company name"/>
                             <span className="d-block">{errors.name &&
