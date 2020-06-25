@@ -21,7 +21,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
     const ProfileComponent = () => {
         switch (currentProfile) {
             case 1:
-                return userType === 'Investor' ? <InvestorBasicInfo investor={investor} /> : <ProfileOne startup={startup} />;
+                return userType === 'Investor' ? <InvestorBasicInfo investor={investor} /> : <ProfileOne startup={startup} locations={locations}/>;
             case 2:
                 return userType === 'Investor' ? <InvestorPreference industries={industries} stages={stages} investor={investor} /> : <ProfileTwo startup={startup} locations={locations} industries={industries}/>;
             case 3:

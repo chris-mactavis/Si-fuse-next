@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 
 import DropNCrop from '@synapsestudios/react-drop-n-crop';
 
-export default function ProfileOne({startup}) {
+export default function ProfileOne({startup, locations}) {
     const dispatch = useDispatch();
     const token = Cookies.get('token');
 
@@ -25,16 +25,35 @@ export default function ProfileOne({startup}) {
 
     const hasProfile = () => startup.hasOwnProperty('profile') && startup.profile;
 
+    const {register, handleSubmit, errors} = useForm();
+
+    const [profilePicture, setProfilePicture] = useState({
+        result: null,
+        filename: null,
+        filetype: null,
+        src: null,
+        error: null,
+    });
+
+    const [flag, setFlag] = useState('');
+
     const nextPageHandler = async data => {
+        console.log(data);
         dispatch(loader());
 
         let formData = new FormData();
         Object.keys(data).forEach(key => {
             formData.append(key, data[key]);
         });
+        if (profilePicture.filename) {
+            console.log(profilePicture);
+            formData.append('profile_pic', profilePicture.result);
+        } else {
+            formData.append('is_editing', 'true');
+        }
 
         try {
-            const {data: response} = await axiosInstance.post('startups', formData, {
+            await axiosInstance.post('startups', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -47,18 +66,8 @@ export default function ProfileOne({startup}) {
         }
     }
 
-    const {register, handleSubmit, errors} = useForm();
-    const [profilePicture, setProfilePicture] = useState({
-        result: null,
-        filename: null,
-        filetype: null,
-        src: null,
-        error: null,
-    });
-
     const onChangePicture = value => {
         setProfilePicture(value);
-        console.log(value);
     }
 
     return <>
@@ -103,7 +112,7 @@ export default function ProfileOne({startup}) {
                                        value={profilePicture}/>
 
                             <input ref={register({required: 'This field is required'})} type="hidden"
-                                   defaultValue={profilePicture.result} name="profile_pic"/>
+                                   defaultValue={profilePicture.result}/>
                             {
                                 profilePicture.result ? (
                                     <>
@@ -115,12 +124,25 @@ export default function ProfileOne({startup}) {
                             <Error>Please upload a profile picture!</Error>}</span>
 
                             <div className="d-flex">
-                                <div className="input-group-container w-25">
-                                    <input ref={register({required: "This field is required"})}
-                                           className="country-code small-width"
-                                           type="number" name="country_code" id=""
-                                           defaultValue={hasProfile() ? startup.profile.country_code : ''}
-                                           placeholder="Country code"/>
+                                <div className="input-group-container w-25 country-div">
+                                    <select name="country_code"
+                                            onChange={(e) => {
+                                                setFlag(locations.find(location => location.id === +e.target.value).flag);
+                                            }}
+                                            ref={register({required: "This field is required"})}
+                                            className="country-code small-width"
+                                            defaultValue={hasProfile() ? startup.profile.country_code : ''}>
+                                        {
+                                            locations.map(({id, country_area_code}) => <option key={id}
+                                                                                               value={id}>{country_area_code}</option>)
+                                        }
+                                    </select>
+                                    <div className="flag"/>
+                                    {/*<input ref={register({required: "This field is required"})}*/}
+                                    {/*       className="country-code small-width"*/}
+                                    {/*       type="number" name="country_code" id=""*/}
+                                    {/*       defaultValue={hasProfile() ? startup.profile.country_code : ''}*/}
+                                    {/*       placeholder="Country code"/>*/}
                                     {errors.country_code && <Error>{errors.country_code.message}</Error>}
                                 </div>
 
@@ -134,9 +156,14 @@ export default function ProfileOne({startup}) {
                                 </div>
                             </div>
 
-                            <input ref={register({required: "This field is required"})} className="full-width"
-                                   type="text" name="gender" id="" placeholder="Sex"
-                                   defaultValue={hasProfile() ? startup.profile.gender.toUpperCase() : ''}/>
+                            <select name="gender"
+                                    ref={register({required: "This field is required"})}
+                                    className="w-100 small-width"
+                                    defaultValue={hasProfile() ? startup.profile.gender.toLowerCase() : ''}>
+                                <option value="">Sex</option>
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
                             {errors.gender && <Error>{errors.gender.message}</Error>}
 
                             <label htmlFor="About" className="about-label">About yourself</label>
@@ -164,8 +191,24 @@ export default function ProfileOne({startup}) {
             .btn {
                 margin-top: 4rem;
             }
-            input.country-code {
+            .country-div {
+                position: relative;
+            }
+            select.country-code {
                 width: 90%;
+                padding: 0.28rem 0;
+                padding-left: 40px;
+                background-position: 100%;
+            }
+            .flag {
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 35px;
+                height: 35px;
+                background-image: url(${flag ? flag : locations[0].flag});
+                background-size: contain;
+                background-repeat: no-repeat;
             }
             .about-label {
                 margin-top: 4rem;
