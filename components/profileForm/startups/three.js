@@ -20,7 +20,7 @@ export default function ProfileThree({startup}) {
         dispatch(loader());
 
         try {
-            const {data: response} = await axiosInstance.post('startups/product-service', data, {
+            await axiosInstance.post('startups/product-service', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -70,30 +70,14 @@ export default function ProfileThree({startup}) {
                             <p>Product and Services</p>
                         </div>
 
-                        <label htmlFor="industry">Company Stage</label>
-
-                        <div className="d-flex flex-wrap mb-4">
-                            <label className="checkout-label">
-                                <input ref={register} type="radio" value="concept" name="company_stage" id=""/>
-                                <span className="checkout-custom"/>
-                                Concept
-                            </label>
-                            <label className="checkout-label">
-                                <input ref={register} type="radio" value="early stage" name="company_stage" id=""/>
-                                <span className="checkout-custom"/>
-                                Early stage
-                            </label>
-                            <label className="checkout-label">
-                                <input ref={register} type="radio" value="scaling" name="company_stage" id=""/>
-                                <span className="checkout-custom"/>
-                                Scaling
-                            </label>
-                            <label className="checkout-label">
-                                <input ref={register} type="radio" value="established" name="company_stage" id=""/>
-                                <span className="checkout-custom"/>
-                                Established
-                            </label>
-                        </div>
+                        {/*<label htmlFor="industry">Company Stage</label>*/}
+                        <select name="company_stage" ref={register} defaultValue={hasProduct() ? startup.product_services.company_stage : ''}>
+                            <option value="">Company Stage</option>
+                            <option value="concept">Concept</option>
+                            <option value="early stage">Early stage</option>
+                            <option value="scaling">Scaling</option>
+                            <option value="established">Established</option>
+                        </select>
 
                         <input ref={register} className="full-width" type="text" name="product_name"
                                placeholder="Product Name" defaultValue={hasProduct() ? startup.product_services.product_name : ''}/>
@@ -121,10 +105,6 @@ export default function ProfileThree({startup}) {
                         <label>Pitch Video</label>
                         <input ref={register} type="url" className="full-width" name="pitch_video_url" placeholder="Pitch Video Url"
                                defaultValue={hasProduct() ? startup.product_services.pitch_video_url : ''}/>
-
-                        <label>Product Documentation</label>
-                        <input ref={register} type="url" className="full-width" name="product_documentation" placeholder="Product Documentation Url"
-                               defaultValue={hasProduct() ? startup.product_services.product_documentation : ''}/>
 
                         <button className="btn btn-profile" type="submit">Save & Next</button>
                     </form>
