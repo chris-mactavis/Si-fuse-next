@@ -6,7 +6,9 @@ import StartupComponent from "../discover/StartupComponent";
 
 const InvestorProfile = ({profile, interests, connections}) => {
     const dispatch = useDispatch();
-    console.log(connections);
+
+    const goTo = url => window.open(url.includes('http') ? url : `http://${url}`, '_blank');
+
     return <>
         <section className="startup-content">
             <div className="container">
@@ -21,7 +23,7 @@ const InvestorProfile = ({profile, interests, connections}) => {
                                 <p>
                                     <img className="location-img" src="/images/icon/location.svg" alt=""/> {profile.user.country.country}
                                 </p>
-                                {/*<p>www.ianbecker.com</p>*/}
+                                <p className="pointer" onClick={() => goTo(profile.website)}>{profile.website}</p>
                                 <button className="edit-investors-profile" onClick={() => Router.push('/profile/edit')}>Edit Profile</button>
                             </div>
                         </div>
@@ -34,9 +36,7 @@ const InvestorProfile = ({profile, interests, connections}) => {
                                 <p>{profile.about}</p>
                                 <p className="p-head">Industry</p>
                                 <ul>
-                                    {
-                                        interests.industries.map((interest, index) => <li key={index}>{interest}</li>)
-                                    }
+                                    <li>{interests.industry}</li>
                                 </ul>
                             </div>
                         </div>
