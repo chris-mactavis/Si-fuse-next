@@ -144,20 +144,6 @@ export default function ProfileTwo({industries, startup, locations}) {
                             </select>
                             <span className="d-block">{errors.industry_id &&
                             <Error>{errors.industry_id.message}</Error>}</span>
-                            {/*<div className="d-flex flex-wrap mb-4">*/}
-                            {/*    {*/}
-                            {/*        industries.map(*/}
-                            {/*            ({industry, id}, i) => <label className="checkout-label" key={id}>*/}
-                            {/*                <input type="checkbox" name={`industries[${id}]`} id={id} value={id} defaultChecked={true}*/}
-                            {/*                       onChange={handleChange} ref={register}/>*/}
-                            {/*                <span className="checkout-custom"/>*/}
-                            {/*                {industry}*/}
-                            {/*            </label>*/}
-                            {/*        )*/}
-                            {/*    }*/}
-                            {/*    <span className="d-block">{hasError("industries[0]") &&*/}
-                            {/*    <Error>{getError("industries[0]")}</Error>}</span>*/}
-                            {/*</div>*/}
 
                             <input className="full-width" type="text"
                                    ref={register({required: 'Please enter a company name'})} name="name" id="" defaultValue={hasCompany() ? startup.company.name : ''}
@@ -166,8 +152,12 @@ export default function ProfileTwo({industries, startup, locations}) {
                             <Error>{errors.name.message}</Error>}</span>
 
                             <input ref={register({
-                                required: 'Please enter a website url'
-                            })} className="full-width" type="url" id="" name="website" defaultValue={hasCompany() ? startup.company.website : ''}
+                                required: 'Please enter a website url',
+                                pattern: {
+                                    value: /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+                                    message: 'Please enter a valid URL'
+                                }
+                            })} className="full-width" type="text" id="" name="website" defaultValue={hasCompany() ? startup.company.website : ''}
                                    placeholder="Company website"/>
                             <span className="d-block">{errors.website &&
                             <Error>{errors.website.message}</Error>}</span>
