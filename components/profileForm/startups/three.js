@@ -20,7 +20,7 @@ export default function ProfileThree({startup}) {
         dispatch(loader());
 
         try {
-            const {data: response} = await axiosInstance.post('startups/product-service', data, {
+            await axiosInstance.post('startups/product-service', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -121,10 +121,6 @@ export default function ProfileThree({startup}) {
                         <label>Pitch Video</label>
                         <input ref={register} type="url" className="full-width" name="pitch_video_url" placeholder="Pitch Video Url"
                                defaultValue={hasProduct() ? startup.product_services.pitch_video_url : ''}/>
-
-                        <label>Product Documentation</label>
-                        <input ref={register} type="url" className="full-width" name="product_documentation" placeholder="Product Documentation Url"
-                               defaultValue={hasProduct() ? startup.product_services.product_documentation : ''}/>
 
                         <button className="btn btn-profile" type="submit">Save & Next</button>
                     </form>
