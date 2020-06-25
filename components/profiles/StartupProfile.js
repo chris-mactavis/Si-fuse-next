@@ -73,10 +73,10 @@ const StartupProfile = ({company, services: product_services, finance, market, p
     const [togglePitchVideo, setPitchVideo] = useState(false);
 
     const [startupProf, setStartupProfile] = useState({company, product_services, finance, market, profile});
-    let startupIndustries = [];
-    if (startupProf.company.industries.length > 0) {
-        startupIndustries = startupProf.company.industries.map(industry => industry.industry.industry);
-    }
+    // let startupIndustries = [];
+    // if (startupProf.company.industries.length > 0) {
+    //     startupIndustries = startupProf.company.industries.map(industry => industry.industry.industry);
+    // }
 
     const {register, handleSubmit} = useForm();
 
@@ -368,29 +368,28 @@ const StartupProfile = ({company, services: product_services, finance, market, p
                                                      title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
                                     <img src="/images/icon/industry.svg" alt=""/>
                                     <p className="profile-name">
-                                        Industries
+                                        Industry
                                     </p>
 
                                     {
                                         !toggleIndustry && <p className="p-move-down industry-paragraph">
-                                            {startupIndustries.length > 0 ? startupIndustries.map((industry, index) =>
-                                                <span key={index}
-                                                      className="industry-span">{industry}</span>) : 'N/A'}
+                                            <span className="industry-span">{startupProf.company.industry}</span>
                                         </p>
                                     }
 
                                     {
                                         toggleIndustry && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
                                                                 className="profile-details overview-form w-100">
-                                            <select multiple name="industry_ids" ref={register}>
+                                            <select name="industry_id" ref={register} defaultValue={startupProf.company.industry_id}>
                                                 <option value="">Select Industry</option>
                                                 {industries.map(industry => <option key={industry.id}
                                                                                     value={industry.id}
-                                                                                    selected={startupIndustries.includes(industry.industry)}>{industry.industry}</option>)}
+                                                                                    >{industry.industry}</option>)}
                                             </select>
                                             <button className="btn btn-sm" type={"submit"}>Update</button>
                                         </form>
                                     }
+
                                 </div>
                             </div>
                             <div className="col-md-4">

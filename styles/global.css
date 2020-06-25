@@ -1708,10 +1708,7 @@ section.startup-content .startup-description .industry-paragraph {
 section.startup-content .startup-description .industry-paragraph .industry-span {
   margin-right: 2px;
   margin-bottom: 0;
-  line-height: 1;
-}
-section.startup-content .startup-description .industry-paragraph .industry-span::after {
-  content: ",";
+  line-height: 2;
 }
 section.startup-content .startup-description .edit-icon {
   position: absolute;

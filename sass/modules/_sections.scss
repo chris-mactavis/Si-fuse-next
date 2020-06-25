@@ -1036,11 +1036,7 @@ section {
         .industry-span {
           margin-right: 2px;
           margin-bottom: 0;
-          line-height: 1;
-
-          &::after {
-            content: ',';
-          }
+          line-height: 2;
         }
       }
 
