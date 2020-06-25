@@ -124,7 +124,7 @@ export default function ProfileTwo({industries, startup, locations}) {
                                        value={profilePicture}/>
 
                             <input ref={register({required: 'This field is required'})} type="hidden"
-                                   defaultValue={profilePicture.result} />
+                                   defaultValue={profilePicture.result}/>
                             {
                                 profilePicture.result ? (
                                     <>
@@ -136,7 +136,9 @@ export default function ProfileTwo({industries, startup, locations}) {
                             <Error>Please upload a profile picture!</Error>}</span>
 
                             <label htmlFor="industry" className="mt-4">Your industry</label>
-                            <select ref={register({required: 'This field is required'})} className="w-100 full-width mt-0" name="industry_id" defaultValue={hasCompany() ? startup.company.industry_id : ''}>
+                            <select ref={register({required: 'This field is required'})}
+                                    className="w-100 full-width mt-0" name="industry_id"
+                                    defaultValue={hasCompany() ? startup.company.industry_id : ''}>
                                 <option value="">Your Industry</option>
                                 {
                                     industries.map(({industry, id}) => <option key={id} value={id}>{industry}</option>)
@@ -145,8 +147,14 @@ export default function ProfileTwo({industries, startup, locations}) {
                             <span className="d-block">{errors.industry_id &&
                             <Error>{errors.industry_id.message}</Error>}</span>
 
+                            <input ref={register} className="w-100 full-width" name="tagline" placeholder="Enter your Tagline" defaultValue={hasCompany() ? startup.company.tagline : ''} />
+
+                            <label htmlFor="" className="mt-5">Date of Creation</label>
+                            <input ref={register} className="w-100 full-width mt-0" name="doc" type="date" placeholder="Date of Creation" defaultValue={hasCompany() ? startup.company.doc : ''} />
+
                             <input className="full-width" type="text"
-                                   ref={register({required: 'Please enter a company name'})} name="name" id="" defaultValue={hasCompany() ? startup.company.name : ''}
+                                   ref={register({required: 'Please enter a company name'})} name="name" id=""
+                                   defaultValue={hasCompany() ? startup.company.name : ''}
                                    placeholder="Company name"/>
                             <span className="d-block">{errors.name &&
                             <Error>{errors.name.message}</Error>}</span>
@@ -157,35 +165,99 @@ export default function ProfileTwo({industries, startup, locations}) {
                                     value: /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
                                     message: 'Please enter a valid URL'
                                 }
-                            })} className="full-width" type="text" id="" name="website" defaultValue={hasCompany() ? startup.company.website : ''}
+                            })} className="full-width" type="text" id="" name="website"
+                                   defaultValue={hasCompany() ? startup.company.website : ''}
                                    placeholder="Company website"/>
                             <span className="d-block">{errors.website &&
                             <Error>{errors.website.message}</Error>}</span>
 
-                            <select ref={register({required: 'Please select a Location'})} name="location_id" id="" defaultValue={hasCompany() ? startup.company.location_id : ''}>
+                            <select ref={register({required: 'Please select a Location'})} name="location_id" id=""
+                                    defaultValue={hasCompany() ? startup.company.location_id : ''}>
                                 <option value="">Select Location</option>
-                                {locations.map(({country, id}) => <option value={id} key={id}>{country}</option> )}
+                                {locations.map(({country, id}) => <option value={id} key={id}>{country}</option>)}
                             </select>
 
+                            <input ref={register} className="w-100 full-width" type="email" name="email" placeholder="Company Email Address" defaultValue={hasCompany() ? startup.company.email : ''} />
+
+                            <input ref={register} className="w-100 full-width" type="text" name="phone" placeholder="Company Phone Number" defaultValue={hasCompany() ? startup.company.phone : ''} />
+
+                            <label htmlFor="" className="business_summary">Company Address</label>
+                            <textarea ref={register} className="w-100 full-width" name="address" rows="5" placeholder="Company Address" defaultValue={hasCompany() ? startup.company.address : ''} />
+
+                            <select ref={register} className="w-100 full-width mt-0" name="no_of_team" defaultValue={hasCompany() ? startup.company.no_of_team : ''}>
+                                <option>Number of Team</option>
+                                <option value="1-10">1 - 10</option>
+                                <option value="11-50">11 - 50</option>
+                                <option value="50 and above">50 and above</option>
+                            </select>
+
+                            <label htmlFor="" className="business_summary">Team Members and Roles</label>
+                            <textarea ref={register} className="w-100 full-width" name="team_members_roles" rows="5" placeholder="Team Members and Roles" defaultValue={hasCompany() ? startup.company.team_members_roles : ''} />
+
                             <label htmlFor="Social links" className="social-links">Social links</label>
-                            <div className="d-flex flex-wrap">
-                                <input ref={register} name="facebook" type="text" className="small-width small-width-sm mt-0" defaultValue={hasCompany() ? startup.company.facebook : ''}
-                                       placeholder="Facebook"/>
-                                <input ref={register} name="instagram" type="text" className="small-width small-width-sm mt-0" defaultValue={hasCompany() ? startup.company.instagram : ''}
-                                       placeholder="Instagram"/>
-                                <input ref={register} name="twitter" type="text" className="small-width small-width-sm mt-0" defaultValue={hasCompany() ? startup.company.twitter : ''}
-                                       placeholder="Twitter"/>
-                                <input ref={register} name="linkedin" type="text" className="small-width small-width-sm" defaultValue={hasCompany() ? startup.company.linkedin : ''}
-                                       placeholder="LinkedIn"/>
+                            <div className="d-flex flex-column social-links-input">
+                                <div className="d-flex justify-content-between">
+                                    <div className="link-container facebook">
+                                        <input ref={register} name="facebook" type="text"
+                                               className="small-width-sm mt-0 mr-3"
+                                               defaultValue={hasCompany() ? startup.company.facebook : ''}
+                                               placeholder="Facebook"/>
+                                    </div>
+
+                                    <div className="link-container second instagram">
+                                        <input ref={register} name="instagram" type="text"
+                                               className="small-width-sm mt-0 ml-3"
+                                               defaultValue={hasCompany() ? startup.company.instagram : ''}
+                                               placeholder="Instagram"/>
+                                    </div>
+                                </div>
+
+                                <div className="d-flex justify-content-between">
+                                    <div className="link-container twitter">
+                                        <input ref={register} name="twitter" type="text"
+                                               className="small-width-sm mt-2 mr-3"
+                                               defaultValue={hasCompany() ? startup.company.twitter : ''}
+                                               placeholder="Twitter"/>
+                                    </div>
+
+                                    <div className="link-container second linked-in">
+                                        <input ref={register} name="linkedin" type="text"
+                                               className="small-width-sm mt-2 ml-3"
+                                               defaultValue={hasCompany() ? startup.company.linkedin : ''}
+                                               placeholder="LinkedIn"/>
+                                    </div>
+                                </div>
                             </div>
 
                             <label htmlFor="About" className="business_summary">Business Summary</label>
-                            <textarea ref={register} className="full-width mt-0" name="summary" id="" cols="30" defaultValue={hasCompany() ? startup.company.summary : ''}
+                            <textarea ref={register} className="full-width mt-0" name="summary" id="" cols="30"
+                                      defaultValue={hasCompany() ? startup.company.summary : ''}
                                       rows="5"/>
 
-                            <label htmlFor="value-proposition">Value Proposition</label>
-                            <textarea ref={register} className="full-width mt-0" name="value_proposition" defaultValue={hasCompany() ? startup.company.value_proposition : ''}
+                            <label htmlFor="business_summary">Value Proposition</label>
+                            <textarea ref={register} className="full-width mt-0" name="value_proposition"
+                                      defaultValue={hasCompany() ? startup.company.value_proposition : ''}
                                       id="value-proposition" cols="30" rows="5"/>
+
+                            <select ref={register} multiple className="w-100 full-width mt-0" name="clients_serviced" defaultValue={hasCompany() ? startup.company.clients_serviced : ''}>
+                                <option>Clients Serviced (Multiple Option choice)</option>
+                                <option value="B2B">B2B</option>
+                                <option value="B2B2B">B2B2B</option>
+                                <option value="B2B2C">B2B2C</option>
+                                <option value="B2B2G">B2B2G</option>
+                                <option value="B2C">B2C</option>
+                                <option value="C2C">C2C</option>
+                                <option value="Govt. (B2G)">Govt. (B2G)</option>
+                                <option value="Non Profit">Non Profit</option>
+                            </select>
+
+                            <select name="company_stage" ref={register} defaultValue={hasCompany() ? startup.company.company_stage : ''}>
+                                <option value="">Company Stage</option>
+                                <option value="concept">Concept</option>
+                                <option value="early stage">Early stage</option>
+                                <option value="scaling">Scaling</option>
+                                <option value="established">Established</option>
+                            </select>
 
                             <button className="btn btn-profile" type="submit">Save & Next</button>
                         </form>
@@ -201,7 +273,7 @@ export default function ProfileTwo({industries, startup, locations}) {
             .btn {
                 margin-top: 4rem;
             }
-            .social-links, .business_summary {
+            .business_summary {
                 margin-top: 4rem;
             }
             .profile-pic {

@@ -1474,6 +1474,38 @@ section.profile .fade {
   opacity: 0.5;
   font-weight: 100 !important;
 }
+section.profile .social-links-input .link-container {
+  position: relative;
+}
+section.profile .social-links-input .link-container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+section.profile .social-links-input .link-container.second::before {
+  left: 10px;
+}
+section.profile .social-links-input input {
+  padding-left: 20px;
+}
+section.profile .social-links-input .facebook::before {
+  background-image: url("/images/icon/fb-red.svg");
+}
+section.profile .social-links-input .twitter::before {
+  background-image: url("/images/icon/twit-red.svg");
+}
+section.profile .social-links-input .instagram::before {
+  background-image: url("/images/icon/insta-red.svg");
+}
+section.profile .social-links-input .linked-in::before {
+  background-image: url("/images/icon/linked-red.svg");
+}
 section.profile-2 .only::before {
   opacity: 1;
 }
