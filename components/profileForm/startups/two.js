@@ -29,8 +29,7 @@ export default function ProfileTwo({industries, startup, locations}) {
             src: null,
             error: null,
         })
-    }, [])
-
+    }, []);
 
     const handleChange = useCallback(
         evt => {
@@ -59,19 +58,25 @@ export default function ProfileTwo({industries, startup, locations}) {
 
     const submitHandler = async data => {
         data['industry_ids'] = data.industries.filter(industry => !!industry);
+
+        if (profilePicture.filename) {
+            data['logo'] = profilePicture.result;
+        } else {
+            data['is_editing'] = true;
+        }
         dispatch(loader());
         try {
-            const {data: response} = await axiosInstance.post('startups/company', data, {
+            await axiosInstance.post('startups/company', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
-            console.log(response);
+            dispatch(loader());
+            dispatch(incrementCurrentState());
         } catch (e) {
             console.log(e)
+            dispatch(loader());
         }
-        dispatch(loader());
-        dispatch(incrementCurrentState());
     }
 
     useEffect(() => {
@@ -116,12 +121,12 @@ export default function ProfileTwo({industries, startup, locations}) {
                                 <div className="number">2</div>
                                 <p>Your company</p>
                             </div>
-                            <label htmlFor="profile-pic">Profile Picture</label>
+                            <label htmlFor="profile-pic">Company Logo</label>
                             <DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}}
                                        value={profilePicture}/>
 
                             <input ref={register({required: 'This field is required'})} type="hidden"
-                                   defaultValue={profilePicture.result} name="logo"/>
+                                   defaultValue={profilePicture.result} />
                             {
                                 profilePicture.result ? (
                                     <>
