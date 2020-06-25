@@ -38,7 +38,6 @@ export default function ProfileOne({startup, locations}) {
     const [flag, setFlag] = useState('');
 
     const nextPageHandler = async data => {
-        console.log(data);
         dispatch(loader());
 
         let formData = new FormData();
@@ -46,7 +45,6 @@ export default function ProfileOne({startup, locations}) {
             formData.append(key, data[key]);
         });
         if (profilePicture.filename) {
-            console.log(profilePicture);
             formData.append('profile_pic', profilePicture.result);
         } else {
             formData.append('is_editing', 'true');
