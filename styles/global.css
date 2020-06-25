@@ -1506,6 +1506,58 @@ section.profile .social-links-input .instagram::before {
 section.profile .social-links-input .linked-in::before {
   background-image: url("/images/icon/linked-red.svg");
 }
+section.profile .investor-levels [type=radio]:checked,
+section.profile .investor-levels [type=radio]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+section.profile .investor-levels [type=radio]:checked + label,
+section.profile .investor-levels [type=radio]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: #666;
+}
+section.profile .investor-levels [type=radio]:checked + label:before,
+section.profile .investor-levels [type=radio]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #D32907;
+  border-radius: 100%;
+  background: #fff;
+}
+section.profile .investor-levels [type=radio]:checked + label:after,
+section.profile .investor-levels [type=radio]:not(:checked) + label:after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: #D32907;
+  position: absolute;
+  top: 5px;
+  left: 3px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+section.profile .investor-levels [type=radio]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+section.profile .investor-levels [type=radio]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+section.profile .investor-levels p {
+  margin-top: 10px;
+}
 section.profile-2 .only::before {
   opacity: 1;
 }
