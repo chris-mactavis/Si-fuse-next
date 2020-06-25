@@ -70,30 +70,14 @@ export default function ProfileThree({startup}) {
                             <p>Product and Services</p>
                         </div>
 
-                        <label htmlFor="industry">Company Stage</label>
-
-                        <div className="d-flex flex-wrap mb-4">
-                            <label className="checkout-label">
-                                <input ref={register} type="radio" value="concept" name="company_stage" id=""/>
-                                <span className="checkout-custom"/>
-                                Concept
-                            </label>
-                            <label className="checkout-label">
-                                <input ref={register} type="radio" value="early stage" name="company_stage" id=""/>
-                                <span className="checkout-custom"/>
-                                Early stage
-                            </label>
-                            <label className="checkout-label">
-                                <input ref={register} type="radio" value="scaling" name="company_stage" id=""/>
-                                <span className="checkout-custom"/>
-                                Scaling
-                            </label>
-                            <label className="checkout-label">
-                                <input ref={register} type="radio" value="established" name="company_stage" id=""/>
-                                <span className="checkout-custom"/>
-                                Established
-                            </label>
-                        </div>
+                        {/*<label htmlFor="industry">Company Stage</label>*/}
+                        <select name="company_stage" ref={register} defaultValue={hasProduct() ? startup.product_services.company_stage : ''}>
+                            <option value="">Company Stage</option>
+                            <option value="concept">Concept</option>
+                            <option value="early stage">Early stage</option>
+                            <option value="scaling">Scaling</option>
+                            <option value="established">Established</option>
+                        </select>
 
                         <input ref={register} className="full-width" type="text" name="product_name"
                                placeholder="Product Name" defaultValue={hasProduct() ? startup.product_services.product_name : ''}/>
