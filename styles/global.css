@@ -16,7 +16,7 @@
   font-weight: bold;
   font-style: normal;
 }
-.bg, section.reset-password, section.forgot-password, section.startup-content, section.single-post {
+.bg, section.reset-password, section.forgot-password, section.startup-content, section.startup-levels, section.single-post {
   background: #ECEFF1;
   color: #6B6B6B;
   padding: 80px 0 60px;
@@ -1626,6 +1626,52 @@ section.message-read .open-message .bold {
 }
 section.message-read .open-message .reply-details {
   display: none;
+}
+section.startup-levels .startup-levels-row {
+  padding: 60px;
+}
+@media only screen and (max-width: 576px) {
+  section.startup-levels {
+    padding: 60px 0 60px;
+  }
+}
+section.startup-levels form {
+  width: 100%;
+}
+section.startup-levels form .btn {
+  position: relative;
+}
+section.startup-levels form .btn span {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+section.startup-levels form .btn.prev span {
+  left: 10px;
+  background-image: url("/images/icon/arrow-left-red.svg");
+}
+section.startup-levels form .btn.next span {
+  right: 10px;
+  background-image: url("/images/icon/arrow-right-red.svg");
+}
+section.startup-levels form .btn:hover.prev span {
+  background-image: url("/images/icon/arrow-left.svg");
+}
+section.startup-levels form .btn:hover.next span {
+  background-image: url("/images/icon/arrow-right.svg");
+}
+section.startup-levels .info-box-container .info-box {
+  border: 1px solid #B8B8B8;
+  padding: 30px 20px;
+}
+section.startup-levels .info-box-container .info-box p {
+  margin-bottom: 10px;
+}
+section.startup-levels .info-box-container .info-box span {
+  font-size: 13px;
 }
 @media only screen and (max-width: 576px) {
   section.startup-content {

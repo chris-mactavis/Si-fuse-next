@@ -1,4 +1,4 @@
-import {INCREMENT_CURRENT_STATE, RESET_CURRENT_STATE} from "../actions/profile";
+import {DECREMENT_CURRENT_STATE, INCREMENT_CURRENT_STATE, RESET_CURRENT_STATE} from "../actions/profile";
 
 const initialState = {
     currentState: 1
@@ -11,6 +11,11 @@ const profile = (state = initialState, action) => {
             return {
                 ...state,
                 currentState
+            }
+        case DECREMENT_CURRENT_STATE:
+            return {
+                ...state,
+                currentState: state.currentState - 1
             }
         case RESET_CURRENT_STATE:
             return {
