@@ -3,7 +3,6 @@ import Layout from "../components/layout";
 import React, {useEffect} from "react";
 import HeaderContent from "../components/header/HeaderContent";
 import Link from "next/link";
-import {profileMiddleWare} from "../components/hoc/auth";
 import axiosInstance from "../config/axios";
 
 const Home = ({events, blogs}) => {
@@ -234,4 +233,4 @@ Home.getInitialProps = async ctx => {
     }
 }
 
-export default profileMiddleWare(Home);
+export default Home;
