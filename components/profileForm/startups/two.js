@@ -18,7 +18,7 @@ export default function ProfileTwo({industries, startup, locations}) {
         src: null,
         error: null,
     });
-
+    console.log(startup);
     const hasCompany = () => startup.hasOwnProperty('company') && startup.company;
 
     useEffect(() => {
@@ -29,8 +29,7 @@ export default function ProfileTwo({industries, startup, locations}) {
             src: null,
             error: null,
         })
-    }, [])
-
+    }, []);
 
     const handleChange = useCallback(
         evt => {
@@ -58,20 +57,24 @@ export default function ProfileTwo({industries, startup, locations}) {
     }
 
     const submitHandler = async data => {
-        data['industry_ids'] = data.industries.filter(industry => !!industry);
+        if (profilePicture.filename) {
+            data['logo'] = profilePicture.result;
+        } else {
+            data['is_editing'] = true;
+        }
         dispatch(loader());
         try {
-            const {data: response} = await axiosInstance.post('startups/company', data, {
+            await axiosInstance.post('startups/company', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
-            console.log(response);
+            dispatch(loader());
+            dispatch(incrementCurrentState());
         } catch (e) {
             console.log(e)
+            dispatch(loader());
         }
-        dispatch(loader());
-        dispatch(incrementCurrentState());
     }
 
     useEffect(() => {
@@ -116,12 +119,12 @@ export default function ProfileTwo({industries, startup, locations}) {
                                 <div className="number">2</div>
                                 <p>Your company</p>
                             </div>
-                            <label htmlFor="profile-pic">Profile Picture</label>
+                            <label htmlFor="profile-pic">Company Logo</label>
                             <DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}}
                                        value={profilePicture}/>
 
                             <input ref={register({required: 'This field is required'})} type="hidden"
-                                   defaultValue={profilePicture.result} name="logo"/>
+                                   defaultValue={profilePicture.result} />
                             {
                                 profilePicture.result ? (
                                     <>
@@ -132,31 +135,29 @@ export default function ProfileTwo({industries, startup, locations}) {
                             <span className="d-block">{errors.logo &&
                             <Error>Please upload a profile picture!</Error>}</span>
 
-                            <label htmlFor="industry">Your industry</label>
-                            <div className="d-flex flex-wrap mb-4">
+                            <label htmlFor="industry" className="mt-4">Your industry</label>
+                            <select ref={register({required: 'This field is required'})} className="w-100 full-width mt-0" name="industry_id" defaultValue={hasCompany() ? startup.company.industry_id : ''}>
+                                <option value="">Your Industry</option>
                                 {
-                                    industries.map(
-                                        ({industry, id}, i) => <label className="checkout-label" key={id}>
-                                            <input type="checkbox" name={`industries[${id}]`} id={id} value={id} defaultChecked={true}
-                                                   onChange={handleChange} ref={register}/>
-                                            <span className="checkout-custom"/>
-                                            {industry}
-                                        </label>
-                                    )
+                                    industries.map(({industry, id}) => <option key={id} value={id}>{industry}</option>)
                                 }
-                                <span className="d-block">{hasError("industries[0]") &&
-                                <Error>{getError("industries[0]")}</Error>}</span>
-                            </div>
+                            </select>
+                            <span className="d-block">{errors.industry_id &&
+                            <Error>{errors.industry_id.message}</Error>}</span>
 
-                            <input className="full-width mt-0" type="text"
+                            <input className="full-width" type="text"
                                    ref={register({required: 'Please enter a company name'})} name="name" id="" defaultValue={hasCompany() ? startup.company.name : ''}
                                    placeholder="Company name"/>
                             <span className="d-block">{errors.name &&
                             <Error>{errors.name.message}</Error>}</span>
 
                             <input ref={register({
-                                required: 'Please enter a website url'
-                            })} className="full-width" type="url" id="" name="website" defaultValue={hasCompany() ? startup.company.website : ''}
+                                required: 'Please enter a website url',
+                                pattern: {
+                                    value: /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+                                    message: 'Please enter a valid URL'
+                                }
+                            })} className="full-width" type="text" id="" name="website" defaultValue={hasCompany() ? startup.company.website : ''}
                                    placeholder="Company website"/>
                             <span className="d-block">{errors.website &&
                             <Error>{errors.website.message}</Error>}</span>
