@@ -1,12 +1,19 @@
 import Layout from "../../components/layout";
 import React from "react";
 import Head from "next/head";
+import Router from "next/router";
 import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
 import Profile from "../../components/Profile";
 import {User} from "../../utils/User";
+import {profileMiddleWare} from "../../components/hoc/auth";
 
-export default function ProfilePage({data: {company, product_services: services, finance, market, profile, interests, connections}, userType, profileContent}) {
+const ProfilePage = ({canView, data: {company, product_services: services, finance, market, profile, interests, connections}, userType, profileContent}) => {
+    if (!canView) {
+        Router.push('/profile/edit');
+        return null;
+    }
+
     return <>
         <Layout headerContent={null} headerClass="page-header no-bg" redBar>
             <Head>
@@ -26,6 +33,10 @@ export default function ProfilePage({data: {company, product_services: services,
 
 ProfilePage.getInitialProps = async (ctx) => {
     const user = User(ctx);
+    const isLoggedIn = Token(ctx);
+    const hasProfile = user ? user.has_profile : false;
+    console.log(user.has_profile);
+
     const headers = {
         headers: {
             Authorization: `Bearer ${Token(ctx)}`
@@ -38,6 +49,9 @@ ProfilePage.getInitialProps = async (ctx) => {
     return {
         data: response.data,
         userType: user.user_type.user_type,
-        profileContent
+        profileContent,
+        canView: isLoggedIn && hasProfile
     }
 }
+
+export default profileMiddleWare(ProfilePage);
