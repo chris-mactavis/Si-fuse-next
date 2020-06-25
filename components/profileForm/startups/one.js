@@ -25,13 +25,32 @@ export default function ProfileOne({startup, locations}) {
 
     const hasProfile = () => startup.hasOwnProperty('profile') && startup.profile;
 
+    const {register, handleSubmit, errors} = useForm();
+
+    const [profilePicture, setProfilePicture] = useState({
+        result: null,
+        filename: null,
+        filetype: null,
+        src: null,
+        error: null,
+    });
+
+    const [flag, setFlag] = useState('');
+
     const nextPageHandler = async data => {
+        console.log(data);
         dispatch(loader());
 
         let formData = new FormData();
         Object.keys(data).forEach(key => {
             formData.append(key, data[key]);
         });
+        if (profilePicture.filename) {
+            console.log(profilePicture);
+            formData.append('profile_pic', profilePicture.result);
+        } else {
+            formData.append('is_editing', 'true');
+        }
 
         try {
             await axiosInstance.post('startups', formData, {
@@ -47,21 +66,8 @@ export default function ProfileOne({startup, locations}) {
         }
     }
 
-    const {register, handleSubmit, errors} = useForm();
-
-    const [profilePicture, setProfilePicture] = useState({
-        result: null,
-        filename: null,
-        filetype: null,
-        src: null,
-        error: null,
-    });
-
-    const [flag, setFlag] = useState('');
-
     const onChangePicture = value => {
         setProfilePicture(value);
-        console.log(value);
     }
 
     return <>
@@ -106,7 +112,7 @@ export default function ProfileOne({startup, locations}) {
                                        value={profilePicture}/>
 
                             <input ref={register({required: 'This field is required'})} type="hidden"
-                                   defaultValue={profilePicture.result} name="profile_pic"/>
+                                   defaultValue={profilePicture.result}/>
                             {
                                 profilePicture.result ? (
                                     <>
