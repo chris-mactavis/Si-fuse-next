@@ -79,7 +79,7 @@ export default function ProfileFive({startup}) {
                         <textarea ref={register} defaultValue={hasMarketing() ? startup.market.addressable_market : ''} className="full-width" name="addressable_market" id="" cols="30" rows="5"/>
 
                         <label>What percentage of Market do you intend to get over time?</label>
-                        <textarea ref={register} defaultValue={hasMarketing() ? startup.market.percentage_of_market : ''} className="full-width" name="percentage_of_market" id="" cols="30" rows="5"/>
+                        <input type="number" ref={register} defaultValue={hasMarketing() ? startup.market.percentage_of_market : ''} className="full-width" name="percentage_of_market"/>
 
                         <label>Marketing Strategy</label>
                         <textarea ref={register} defaultValue={hasMarketing() ? startup.market.marketing_strategy : ''} className="full-width" name="marketing_strategy" id="" cols="30" rows="5"/>
