@@ -953,6 +953,7 @@ section {
 
     .level-header {
       margin-bottom: 60px;
+
       .category-wizard {
         position: relative;
 
@@ -1267,6 +1268,11 @@ section {
           padding: 15px 10px;
           font-size: 12px;
         }
+
+        &.fade-out {
+          opacity: .4;
+          cursor: not-allowed;
+        }
       }
 
     }
@@ -1485,6 +1491,85 @@ section {
       }
     }
 
+    .startup-level {
+      .startup-description {
+        padding: 30px;
+      }
+      .side-content {
+        img {
+          margin-bottom: 10px;
+        }
+
+        p {
+          text-transform: capitalize;
+          font-weight: 600;
+          margin-bottom: 10px;
+        }
+
+        .grade {
+          align-self: center;
+          width: 100px;
+          background-color: #B44C00;
+          color: white;
+
+          @media only screen and (max-width: $mobile_width) {
+            margin-bottom: 40px;
+          }
+        }
+      }
+
+      &-content {
+        ul {
+          padding: 0;
+        }
+        li {
+          font-size: 14px;
+          margin-bottom: 9px;
+          position: relative;
+          padding-left: 22px;
+
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background-image: url("/images/icon/good.svg");
+            background-repeat: no-repeat;
+            background-size: contain;
+          }
+        }
+      }
+    }
+
+    .product-services {
+      position: relative;
+
+      &.fade-out {
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 30px;
+          bottom: 0;
+          background-image: linear-gradient(to bottom, transparent, white, white, white);
+        }
+      }
+    }
+
+    .request-access {
+      img {
+        z-index: 1;
+        margin-bottom: 10px;
+      }
+      .btn {
+        align-self: center;
+        justify-self: center;
+      }
+      margin-top: -122px;
+    }
   }
 
   &.forgot-password {
