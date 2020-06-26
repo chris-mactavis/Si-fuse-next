@@ -6,14 +6,14 @@ import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
 import Profile from "../../components/Profile";
 
-export default function SingleStartup({startup: {profile, company, product_services: services, finance, market}, id, isConnected, profileContent}) {
+export default function SingleStartup({startup: {profile, company, level, product_services: services, finance, market}, id, isConnected, profileContent}) {
     return <>
         <Layout headerContent={null} headerClass="page-header no-bg" redBar>
             <Head>
                 <title>{company.name}</title>
             </Head>
 
-            <Profile profile={profile} company={company} services={services} finance={finance} market={market} userType="startup" id={id} isConnected={isConnected} profileContent={profileContent} />
+            <Profile profile={profile} company={company} services={services} finance={finance} level={level} market={market} userType="startup" id={id} isConnected={isConnected} profileContent={profileContent} />
         </Layout>
         <style jsx>{`
             .services-stage {
