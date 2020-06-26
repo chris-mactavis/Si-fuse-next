@@ -1872,6 +1872,10 @@ section.startup-content .startup-sidebar .startup-link-view {
     font-size: 12px;
   }
 }
+section.startup-content .startup-sidebar .startup-link-view.fade-out {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 section.startup-content h5 {
   font-family: "Fira Sans", sans-serif;
   color: #D32907;
@@ -2030,6 +2034,71 @@ section.startup-content .investors-description .investors-profile .edit-investor
 section.startup-content .investors-description .investors-profile .edit-investors-profile:hover {
   background: #D32907;
   color: #fff;
+}
+section.startup-content .startup-level .startup-description {
+  padding: 30px;
+}
+section.startup-content .startup-level .side-content img {
+  margin-bottom: 10px;
+}
+section.startup-content .startup-level .side-content p {
+  text-transform: capitalize;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+section.startup-content .startup-level .side-content .grade {
+  align-self: center;
+  width: 100px;
+  background-color: #B44C00;
+  color: white;
+}
+@media only screen and (max-width: 576px) {
+  section.startup-content .startup-level .side-content .grade {
+    margin-bottom: 40px;
+  }
+}
+section.startup-content .startup-level-content ul {
+  padding: 0;
+}
+section.startup-content .startup-level-content li {
+  font-size: 14px;
+  margin-bottom: 9px;
+  position: relative;
+  padding-left: 22px;
+}
+section.startup-content .startup-level-content li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  background-image: url("/images/icon/good.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+section.startup-content .product-services {
+  position: relative;
+}
+section.startup-content .product-services.fade-out::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30px;
+  bottom: 0;
+  background-image: linear-gradient(to bottom, transparent, white, white, white);
+}
+section.startup-content .request-access {
+  margin-top: -122px;
+}
+section.startup-content .request-access img {
+  z-index: 1;
+  margin-bottom: 10px;
+}
+section.startup-content .request-access .btn {
+  align-self: center;
+  justify-self: center;
 }
 @media only screen and (max-width: 576px) {
   section.forgot-password {

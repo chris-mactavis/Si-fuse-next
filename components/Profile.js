@@ -7,7 +7,7 @@ import {loader} from "../store/actions/loader";
 import StartupProfile from "./profiles/StartupProfile";
 import InvestorProfile from "./profiles/InvestorProfile";
 
-const Profile = ({company, services, finance, market, userType, profile, interests, hasEdit = false, id = null, isConnected = null, profileContent = null, connections = []}) => {
+const Profile = ({company, services, finance, market, userType, profile, interests, level = null, hasEdit = false, id = null, isConnected = null, profileContent = null, connections = []}) => {
 
     const [connected, setConnected] = useState(isConnected);
 
@@ -52,7 +52,7 @@ const Profile = ({company, services, finance, market, userType, profile, interes
     return <>
         {
             userType.toLowerCase() === 'startup'
-                ? <StartupProfile company={company} services={services} finance={finance} market={market} profile={profile} profileContent={profileContent} hasEdit={hasEdit}/>
+                ? <StartupProfile company={company} services={services} finance={finance} level={level} market={market} profile={profile} profileContent={profileContent} hasEdit={hasEdit}/>
                 : <InvestorProfile profile={profile} interests={interests} connections={connections}/>
         }
         <style jsx>{`

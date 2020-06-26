@@ -6,12 +6,36 @@ import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
 import {showNotifier} from "../../store/actions/notifier";
 import {showImageViewer, showVideoViewer} from "../../store/actions/imageViewer";
+import StartupProfileLevels from "./StartupLevels";
 
-const StartupProfile = ({company, services: product_services, finance, market, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}}) => {
+const StartupProfile = ({company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}}) => {
     const dispatch = useDispatch();
+
+    let levelKeys = [];
+    if (level) {
+        levelKeys = Object.keys(level);
+        level = levelKeys.map(key => {
+            if (level[key]) {
+                return JSON.parse(level[key]).map(item => item.split('::')[1]);
+            }
+            return '';
+        })
+    }
+
+    const [hasAccessToProfile, setAccessToProfile] = useState(false);
+
+    const requestPermissionHandler = () => {
+        dispatch(loader());
+        setTimeout(() => {
+            dispatch(loader());
+            dispatch(showNotifier('Profile request sent!'))
+        }, 1000);
+        // setAccessToProfile(true);
+    }
 
     useEffect(() => {
         const overviewBtn = $('#overview-btn');
+        const startupLevelBtn = $('#startup-level-btn');
         const productServiceBtn = $('#product-services-btn');
         const financeBtn = $('#finance-btn');
         const marketingSummaryBtn = $('#marketing-summary-btn');
@@ -29,10 +53,15 @@ const StartupProfile = ({company, services: product_services, finance, market, p
             })
         }
 
-
         overviewBtn.click(function () {
             $('html, body').animate({
                 scrollTop: $('#overview').offset().top - 20
+            }, 1000);
+        });
+
+        startupLevelBtn.click(function () {
+            $('html, body').animate({
+                scrollTop: $('#startupLevel').offset().top - 20
             }, 1000);
         });
 
@@ -43,18 +72,20 @@ const StartupProfile = ({company, services: product_services, finance, market, p
         });
 
         financeBtn.click(function () {
+            if (!hasAccessToProfile) return;
             $('html, body').animate({
                 scrollTop: $('#finance').offset().top - 20
             }, 1000);
         });
 
         marketingSummaryBtn.click(function () {
+            if (!hasAccessToProfile) return;
             $('html, body').animate({
                 scrollTop: $('#marketingSummary').offset().top - 20
             }, 1000);
         });
 
-    }, []);
+    }, [hasAccessToProfile]);
 
     const [toggleAbout, setAbout] = useState(false);
     const [toggleFund, setFund] = useState(false);
@@ -72,11 +103,7 @@ const StartupProfile = ({company, services: product_services, finance, market, p
     const [toggleProductVideo, setProductVideo] = useState(false);
     const [togglePitchVideo, setPitchVideo] = useState(false);
 
-    const [startupProf, setStartupProfile] = useState({company, product_services, finance, market, profile});
-    // let startupIndustries = [];
-    // if (startupProf.company.industries.length > 0) {
-    //     startupIndustries = startupProf.company.industries.map(industry => industry.industry.industry);
-    // }
+    const [startupProf, setStartupProfile] = useState({company, product_services, finance, market, profile, level});
 
     const {register, handleSubmit} = useForm();
 
@@ -283,18 +310,23 @@ const StartupProfile = ({company, services: product_services, finance, market, p
                             </p>
                             <p><img className="location-img" src="/images/icon/location.svg" alt=""/> Lagos, Nigeria</p>
                             <p>{startupProf.company.website}</p>
-                            { !hasEdit && <button onSubmit={connectHandler} className="btn">Connect</button>}
+                            {!hasEdit && <button onSubmit={connectHandler} className="btn">Connect</button>}
                         </div>
                         <button className="startup-link-view" id="overview-btn">
                             Overview <img src="/images/icon/pie-chart.svg" alt=""/>
                         </button>
+                        <button className="startup-link-view" id="startup-level-btn">
+                            Startup Level <img src="/images/icon/startup-level-icon.svg" alt=""/>
+                        </button>
                         <button className="startup-link-view" id="product-services-btn">
                             Product and Services <img src="/images/icon/product-service-icon.svg" alt=""/>
                         </button>
-                        <button className="startup-link-view" id="finance-btn">
+                        <button className={`startup-link-view ${!hasAccessToProfile ? 'fade-out' : ''}`}
+                                id="finance-btn">
                             Finance <img src="/images/icon/finance-white-icon.svg" alt=""/>
                         </button>
-                        <button className="startup-link-view" id="marketing-summary-btn">
+                        <button className={`startup-link-view ${!hasAccessToProfile ? 'fade-out' : ''}`}
+                                id="marketing-summary-btn">
                             Marketing Summary <img src="/images/icon/market-summary-white.svg" alt=""/>
                         </button>
                     </div>
@@ -380,11 +412,12 @@ const StartupProfile = ({company, services: product_services, finance, market, p
                                     {
                                         toggleIndustry && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
                                                                 className="profile-details overview-form w-100">
-                                            <select name="industry_id" ref={register} defaultValue={startupProf.company.industry_id}>
+                                            <select name="industry_id" ref={register}
+                                                    defaultValue={startupProf.company.industry_id}>
                                                 <option value="">Select Industry</option>
                                                 {industries.map(industry => <option key={industry.id}
                                                                                     value={industry.id}
-                                                                                    >{industry.industry}</option>)}
+                                                >{industry.industry}</option>)}
                                             </select>
                                             <button className="btn btn-sm" type={"submit"}>Update</button>
                                         </form>
@@ -427,7 +460,17 @@ const StartupProfile = ({company, services: product_services, finance, market, p
                         </div>
                     </div>
 
-                    <div className="startup-heading" id="productServices">
+                    <div className="startup-heading startup-level" id="startupLevel">
+                        <h5>Startup Level</h5>
+                        {
+                            level.map((startupLevel, index) => <StartupProfileLevels startupLevel={startupLevel}
+                                                                                     key={index} index={index}
+                                                                                     levelKeys={levelKeys}/>)
+                        }
+                    </div>
+
+                    <div className={`startup-heading product-services ${!hasAccessToProfile ? 'fade-out' : ''}`}
+                         id="productServices">
                         <h5>Products and Services</h5>
                         <div className="row">
                             <div className="col-md-4">
@@ -458,22 +501,26 @@ const StartupProfile = ({company, services: product_services, finance, market, p
 
                             <div className="col-md-8">
                                 <div className="startup-description">
-                                    <img className="edit-icon" onClick={() => toggleFormHandler('productImages')} title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
+                                    <img className="edit-icon" onClick={() => toggleFormHandler('productImages')}
+                                         title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
                                     <p className="profile-name">
                                         Product Images
                                     </p>
 
                                     {
                                         !toggleProductImages && <div className="product-img-list">
-                                            {startupProf.product_services.hasOwnProperty('product_image_array') ? startupProf.product_services.product_image_array.map((image, index) => <img
-                                                className="pointer" key={index}
-                                                onClick={() => dispatch(showImageViewer(image))} src={image} alt=""/>) : null}
+                                            {startupProf.product_services.hasOwnProperty('product_image_array') ? startupProf.product_services.product_image_array.map((image, index) =>
+                                                <img
+                                                    className="pointer" key={index}
+                                                    onClick={() => dispatch(showImageViewer(image))} src={image}
+                                                    alt=""/>) : null}
                                         </div>
                                     }
                                     {
                                         toggleProductImages && <form onSubmit={handleSubmit(onSubmitServiceHandler)}
-                                                                   className="profile-details overview-form w-100">
-                                            <input name="product_images" ref={register} className="full-width edit-input"
+                                                                     className="profile-details overview-form w-100">
+                                            <input name="product_images" ref={register}
+                                                   className="full-width edit-input"
                                                    type="text"
                                                    defaultValue={startupProf.product_services.hasOwnProperty('product_image_array') ? startupProf.product_services.product_image_string : null}/>
                                             <button className="btn btn-sm" type={"submit"}>Update</button>
@@ -482,263 +529,294 @@ const StartupProfile = ({company, services: product_services, finance, market, p
                                 </div>
                             </div>
                         </div>
+                        {
+                            hasAccessToProfile &&
+                            <>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="startup-description">
+                                            <img className="edit-icon" onClick={() => toggleFormHandler('productVideo')}
+                                                 title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
+                                            <img src="/images/icon/play.svg" alt=""/>
+                                            <p className="profile-name">
+                                                Product Video
+                                            </p>
 
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="startup-description">
-                                    <img className="edit-icon" onClick={() => toggleFormHandler('productVideo')} title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
-                                    <img src="/images/icon/play.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Product Video
-                                    </p>
-
-                                    {
-                                        !toggleProductVideo &&<div className="player-thumbnail" onClick={() => dispatch(showVideoViewer(startupProf.product_services.product_video_url))}>
-                                            <video src={startupProf.product_services.product_video_url}/>
+                                            {
+                                                !toggleProductVideo && <div className="player-thumbnail"
+                                                                            onClick={() => dispatch(showVideoViewer(startupProf.product_services.product_video_url))}>
+                                                    <video src={startupProf.product_services.product_video_url}/>
+                                                </div>
+                                            }
+                                            {
+                                                toggleProductVideo &&
+                                                <form onSubmit={handleSubmit(onSubmitServiceHandler)}
+                                                      className="profile-details overview-form w-100">
+                                                    <input name="product_video_url" ref={register}
+                                                           className="full-width edit-input"
+                                                           type="text"
+                                                           defaultValue={startupProf.product_services.product_video_url}/>
+                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                </form>
+                                            }
                                         </div>
-                                    }
-                                    {
-                                        toggleProductVideo && <form onSubmit={handleSubmit(onSubmitServiceHandler)}
-                                                                     className="profile-details overview-form w-100">
-                                            <input name="product_video_url" ref={register} className="full-width edit-input"
-                                                   type="text"
-                                                   defaultValue={startupProf.product_services.product_video_url}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                </div>
-                            </div>
+                                    </div>
 
-                            <div className="col-md-6">
-                                <div className="startup-description">
-                                    <img onClick={() => toggleFormHandler('pitchVideo')} className="edit-icon" title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
-                                    <img src="/images/icon/play.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Pitch Video
-                                    </p>
+                                    <div className="col-md-6">
+                                        <div className="startup-description">
+                                            <img onClick={() => toggleFormHandler('pitchVideo')} className="edit-icon"
+                                                 title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
+                                            <img src="/images/icon/play.svg" alt=""/>
+                                            <p className="profile-name">
+                                                Pitch Video
+                                            </p>
 
-                                    {
-                                        !togglePitchVideo && <div className="player-thumbnail" onClick={() => dispatch(showVideoViewer(startupProf.product_services.pitch_video_url))}>
-                                            <video src={startupProf.product_services.pitch_video_url}/>
+                                            {
+                                                !togglePitchVideo && <div className="player-thumbnail"
+                                                                          onClick={() => dispatch(showVideoViewer(startupProf.product_services.pitch_video_url))}>
+                                                    <video src={startupProf.product_services.pitch_video_url}/>
+                                                </div>
+                                            }
+                                            {
+                                                togglePitchVideo &&
+                                                <form onSubmit={handleSubmit(onSubmitServiceHandler)}
+                                                      className="profile-details overview-form w-100">
+                                                    <input name="pitch_video_url" ref={register}
+                                                           className="full-width edit-input"
+                                                           type="text"
+                                                           defaultValue={startupProf.product_services.pitch_video_url}/>
+                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                </form>
+                                            }
                                         </div>
-                                    }
-                                    {
-                                        togglePitchVideo && <form onSubmit={handleSubmit(onSubmitServiceHandler)}
-                                                                    className="profile-details overview-form w-100">
-                                            <input name="pitch_video_url" ref={register} className="full-width edit-input"
-                                                   type="text"
-                                                   defaultValue={startupProf.product_services.pitch_video_url}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="startup-description">
-                                    {hasEdit &&
-                                    <img onClick={() => toggleFormHandler('valueProposition')} className="edit-icon"
-                                         title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/book.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Value Proposition
-                                    </p>
-                                    {!toggleValueProposition &&
-                                    <p className="text-description">{startupProf.company.value_proposition}</p>}
-
-                                    {
-                                        toggleValueProposition && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
-                                                                        className="profile-details overview-form w-100">
-                                            <textarea name="value_proposition" ref={register} rows="5"
-                                                      className="full-width edit-input"
-                                                      defaultValue={startupProf.company.value_proposition}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                    <div className="text-right">
-                                        <a href="#">Read more</a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="startup-description">
+                                            {hasEdit &&
+                                            <img onClick={() => toggleFormHandler('valueProposition')}
+                                                 className="edit-icon"
+                                                 title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
+                                            <img src="/images/icon/book.svg" alt=""/>
+                                            <p className="profile-name">
+                                                Value Proposition
+                                            </p>
+                                            {!toggleValueProposition &&
+                                            <p className="text-description">{startupProf.company.value_proposition}</p>}
+
+                                            {
+                                                toggleValueProposition &&
+                                                <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                      className="profile-details overview-form w-100">
+                                                        <textarea name="value_proposition" ref={register} rows="5"
+                                                                  className="full-width edit-input"
+                                                                  defaultValue={startupProf.company.value_proposition}/>
+                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                </form>
+                                            }
+                                            <div className="text-right">
+                                                <a href="#">Read more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        }
                     </div>
 
-                    <div className="startup-heading" id="finance">
-                        <h5>Finance</h5>
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="startup-description">
-                                    {hasEdit &&
-                                    <img onClick={() => toggleFormHandler('capitalFor')} className="edit-icon"
-                                         title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/finance.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Capital Needed For
-                                    </p>
-                                    {!toggleCapitalFor &&
-                                    <p className="text-description">{startupProf.finance.capital_needed_for}</p>}
-                                    {
-                                        toggleCapitalFor && <form onSubmit={handleSubmit(onSubmitFinanceHandler)}
-                                                                  className="profile-details overview-form w-100">
-                                            <select name="capital_needed_for" ref={register}
-                                                    defaultValue={startupProf.finance.capital_needed_for}>
-                                                <option value="">Capital Needed for</option>
-                                                <option value="Proof of concept">Proof of concept</option>
-                                                <option value="Working capital">Working capital</option>
-                                                <option value="Growth capital">Growth capital</option>
-                                                <option value="Bridging Capital">Bridging capital</option>
-                                            </select>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                    <div className="text-right">
-                                        <a href="#">Read more</a>
+                    {!hasAccessToProfile &&
+                    <div className="request-access d-flex flex-column align-items-center justify-content-center w-100">
+                        <img src="/images/icon/lock.svg" alt=""/>
+                        <button className="btn" onClick={requestPermissionHandler}>Request Permission</button>
+                    </div>}
+
+
+                    {
+                        hasAccessToProfile && <>
+                            <div className="startup-heading" id="finance">
+                                <h5>Finance</h5>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="startup-description">
+                                            {hasEdit &&
+                                            <img onClick={() => toggleFormHandler('capitalFor')} className="edit-icon"
+                                                 title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
+                                            <img src="/images/icon/finance.svg" alt=""/>
+                                            <p className="profile-name">
+                                                Capital Needed For
+                                            </p>
+                                            {!toggleCapitalFor &&
+                                            <p className="text-description">{startupProf.finance.capital_needed_for}</p>}
+                                            {
+                                                toggleCapitalFor &&
+                                                <form onSubmit={handleSubmit(onSubmitFinanceHandler)}
+                                                      className="profile-details overview-form w-100">
+                                                    <select name="capital_needed_for" ref={register}
+                                                            defaultValue={startupProf.finance.capital_needed_for}>
+                                                        <option value="">Capital Needed for</option>
+                                                        <option value="Proof of concept">Proof of concept</option>
+                                                        <option value="Working capital">Working capital</option>
+                                                        <option value="Growth capital">Growth capital</option>
+                                                        <option value="Bridging Capital">Bridging capital</option>
+                                                    </select>
+                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                </form>
+                                            }
+                                            <div className="text-right">
+                                                <a href="#">Read more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-12">
+                                        <div className="startup-description">
+                                            {hasEdit &&
+                                            <img onClick={() => toggleFormHandler('businessSummary')}
+                                                 className="edit-icon"
+                                                 title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
+                                            <img src="/images/icon/book.svg" alt=""/>
+                                            <p className="profile-name">
+                                                Business Summary
+                                            </p>
+                                            {!toggleBusinessSummary &&
+                                            <p className="text-description">{startupProf.company.summary}</p>}
+                                            {
+                                                toggleBusinessSummary &&
+                                                <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                      className="profile-details overview-form w-100">
+                                                        <textarea ref={register} name="summary" rows="5"
+                                                                  className="full-width edit-input"
+                                                                  defaultValue={startupProf.company.summary}/>
+                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                </form>
+                                            }
+                                            <div className="text-right">
+                                                <a href="#">Read more</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="col-12">
-                                <div className="startup-description">
-                                    {hasEdit &&
-                                    <img onClick={() => toggleFormHandler('businessSummary')} className="edit-icon"
-                                         title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/book.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Business Summary
-                                    </p>
-                                    {!toggleBusinessSummary &&
-                                    <p className="text-description">{startupProf.company.summary}</p>}
-                                    {
-                                        toggleBusinessSummary && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
-                                                                       className="profile-details overview-form w-100">
-                                            <textarea ref={register} name="summary" rows="5"
-                                                      className="full-width edit-input"
-                                                      defaultValue={startupProf.company.summary}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                    <div className="text-right">
-                                        <a href="#">Read more</a>
+                            <div className="startup-heading" id="marketingSummary">
+                                <h5>Marketing Summary</h5>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="startup-description">
+                                            {hasEdit &&
+                                            <img onClick={() => toggleFormHandler('addressableMarket')}
+                                                 className="edit-icon"
+                                                 title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
+                                            <img src="/images/icon/address-market.svg" alt=""/>
+                                            <p className="profile-name">
+                                                Adressable Market
+                                            </p>
+                                            {!toggleAddressableMarket &&
+                                            <p className="text-description text-capitalize">{startupProf.market.addressable_market}</p>}
+                                            {
+                                                toggleAddressableMarket &&
+                                                <form onSubmit={handleSubmit(onSubmitMarketHandler)}
+                                                      className="profile-details overview-form w-100">
+                                                        <textarea ref={register} name="addressable_market" rows="5"
+                                                                  className="full-width edit-input"
+                                                                  defaultValue={startupProf.market.addressable_market}/>
+                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                </form>
+                                            }
+                                            <div className="text-right">
+                                                <a href="#">Read more</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className="startup-heading" id="marketingSummary">
-                        <h5>Marketing Summary</h5>
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="startup-description">
-                                    {hasEdit &&
-                                    <img onClick={() => toggleFormHandler('addressableMarket')} className="edit-icon"
-                                         title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/address-market.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Adressable Market
-                                    </p>
-                                    {!toggleAddressableMarket &&
-                                    <p className="text-description text-capitalize">{startupProf.market.addressable_market}</p>}
-                                    {
-                                        toggleAddressableMarket &&
-                                        <form onSubmit={handleSubmit(onSubmitMarketHandler)}
-                                              className="profile-details overview-form w-100">
-                                            <textarea ref={register} name="addressable_market" rows="5"
-                                                      className="full-width edit-input"
-                                                      defaultValue={startupProf.market.addressable_market}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                    <div className="text-right">
-                                        <a href="#">Read more</a>
+                                    <div className="col-12">
+                                        <div className="startup-description">
+                                            {hasEdit &&
+                                            <img onClick={() => toggleFormHandler('marketingStrategy')}
+                                                 className="edit-icon"
+                                                 title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
+                                            <img src="/images/icon/marketing-summary.svg" alt=""/>
+                                            <p className="profile-name">
+                                                Marketing Strategy
+                                            </p>
+                                            {!toggleMarketingStrategy &&
+                                            <p className="text-description text-capitalize">{startupProf.market.marketing_strategy}</p>}
+                                            {
+                                                toggleMarketingStrategy &&
+                                                <form onSubmit={handleSubmit(onSubmitMarketHandler)}
+                                                      className="profile-details overview-form w-100">
+                                                        <textarea ref={register} name="marketing_strategy" rows="5"
+                                                                  className="full-width edit-input"
+                                                                  defaultValue={startupProf.market.marketing_strategy}/>
+                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                </form>
+                                            }
+                                            <div className="text-right">
+                                                <a href="#">Read more</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div className="col-12">
-                                <div className="startup-description">
-                                    {hasEdit &&
-                                    <img onClick={() => toggleFormHandler('marketingStrategy')} className="edit-icon"
-                                         title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/marketing-summary.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Marketing Strategy
-                                    </p>
-                                    {!toggleMarketingStrategy &&
-                                    <p className="text-description text-capitalize">{startupProf.market.marketing_strategy}</p>}
-                                    {
-                                        toggleMarketingStrategy &&
-                                        <form onSubmit={handleSubmit(onSubmitMarketHandler)}
-                                              className="profile-details overview-form w-100">
-                                            <textarea ref={register} name="marketing_strategy" rows="5"
-                                                      className="full-width edit-input"
-                                                      defaultValue={startupProf.market.marketing_strategy}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                    <div className="text-right">
-                                        <a href="#">Read more</a>
+                                    <div className="col-12">
+                                        <div className="startup-description">
+                                            {hasEdit &&
+                                            <img onClick={() => toggleFormHandler('companyCompetitors')}
+                                                 className="edit-icon"
+                                                 title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
+                                            <img src="/images/icon/marketing-summary.svg" alt=""/>
+                                            <p className="profile-name">
+                                                Company Competitors
+                                            </p>
+                                            {!toggleCompanyCompetitors &&
+                                            <p className="text-description text-capitalize">{startupProf.market.company_competitors}</p>}
+                                            {
+                                                toggleCompanyCompetitors &&
+                                                <form onSubmit={handleSubmit(onSubmitMarketHandler)}
+                                                      className="profile-details overview-form w-100">
+                                                        <textarea ref={register} name="company_competitors" rows="5"
+                                                                  className="full-width edit-input"
+                                                                  defaultValue={startupProf.market.company_competitors}/>
+                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                </form>
+                                            }
+                                            <div className="text-right">
+                                                <a href="#">Read more</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div className="col-12">
-                                <div className="startup-description">
-                                    {hasEdit &&
-                                    <img onClick={() => toggleFormHandler('companyCompetitors')} className="edit-icon"
-                                         title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/marketing-summary.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Company Competitors
-                                    </p>
-                                    {!toggleCompanyCompetitors &&
-                                    <p className="text-description text-capitalize">{startupProf.market.company_competitors}</p>}
-                                    {
-                                        toggleCompanyCompetitors &&
-                                        <form onSubmit={handleSubmit(onSubmitMarketHandler)}
-                                              className="profile-details overview-form w-100">
-                                            <textarea ref={register} name="company_competitors" rows="5"
-                                                      className="full-width edit-input"
-                                                      defaultValue={startupProf.market.company_competitors}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                    <div className="text-right">
-                                        <a href="#">Read more</a>
+                                    <div className="col-12">
+                                        <div className="startup-description">
+                                            {hasEdit && <img onClick={() => toggleFormHandler('competitiveAdvantage')}
+                                                             className="edit-icon"
+                                                             title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
+                                            <img src="/images/icon/marketing-summary.svg" alt=""/>
+                                            <p className="profile-name">
+                                                Competitive Advantage
+                                            </p>
+                                            {!toggleCompetitiveAdvantage &&
+                                            <p className="text-description text-capitalize">{startupProf.market.competitive_advantage}</p>}
+                                            {
+                                                toggleCompetitiveAdvantage &&
+                                                <form onSubmit={handleSubmit(onSubmitMarketHandler)}
+                                                      className="profile-details overview-form w-100">
+                                                        <textarea ref={register} name="competitive_advantage" rows="5"
+                                                                  className="full-width edit-input"
+                                                                  defaultValue={startupProf.market.competitive_advantage}/>
+                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                </form>
+                                            }
+                                            <div className="text-right">
+                                                <a href="#">Read more</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="col-12">
-                                <div className="startup-description">
-                                    {hasEdit && <img onClick={() => toggleFormHandler('competitiveAdvantage')}
-                                                     className="edit-icon"
-                                                     title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/marketing-summary.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Competitive Advantage
-                                    </p>
-                                    {!toggleCompetitiveAdvantage &&
-                                    <p className="text-description text-capitalize">{startupProf.market.competitive_advantage}</p>}
-                                    {
-                                        toggleCompetitiveAdvantage &&
-                                        <form onSubmit={handleSubmit(onSubmitMarketHandler)}
-                                              className="profile-details overview-form w-100">
-                                            <textarea ref={register} name="competitive_advantage" rows="5"
-                                                      className="full-width edit-input"
-                                                      defaultValue={startupProf.market.competitive_advantage}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                    <div className="text-right">
-                                        <a href="#">Read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        </>
+                    }
                 </div>
             </div>
         </div>
