@@ -12,6 +12,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
     const dispatch = useDispatch();
 
     let levelKeys = [];
+    console.log(level);
     if (level) {
         levelKeys = Object.keys(level);
         level = levelKeys.map(key => {
