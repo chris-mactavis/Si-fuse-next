@@ -3,87 +3,114 @@ import InfoBox from "./InfoBox";
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
+import LevelButtonsComponent from "./LevelButtons";
+import LevelHeader from "./LevelHeader";
+import {loader} from "../../../store/actions/loader";
+import axiosInstance from "../../../config/axios";
+import Token from "../../../utils/Token";
 
-const Level3 = () => {
+const Level3 = ({startup}) => {
     const {register, handleSubmit} = useForm();
 
     const dispatch = useDispatch();
 
+    const vision = () => {
+        if (startup.level && startup.level.hasOwnProperty('vision')) {
+            let prob = JSON.parse(startup.level.vision);
+            if (prob && prob.length > 0) {
+                return prob.map(p => p.split('::')[0])
+            }
+            return []
+        }
+        return [];
+    }
+
     const nextPageHandler = async data => {
-        dispatch(incrementCurrentState());
+        dispatch(loader());
+        try {
+            await axiosInstance.post('startups/level', {vision: JSON.stringify(data.vision)}, {
+                headers: {
+                    Authorization: `Bearer ${Token()}`
+                }
+            })
+            dispatch(loader());
+            dispatch(incrementCurrentState());
+        } catch (e) {
+            console.log(e);
+            dispatch(loader());
+        }
     }
 
     return <section className="startup-levels">
         <div className="container">
             <div className="row bg-white startup-levels-row">
                 <div className="col-md-12 mx-auto">
-                    <div className="level-header">
-                        Vision & Value Proposition
-                    </div>
+
+                    <LevelHeader/>
 
                     <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
                         <div className="row">
                             <div className="col-md-8">
 
                                 <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="level_vision"
-                                           value="We have a hypothesis for how we will solve this problem."/>
+                                    <input ref={register} type="checkbox" name="vision" defaultChecked={vision().includes('V1')}
+                                           value="V1::We have a hypothesis for how we will solve this problem."/>
                                     <span className="checkout-custom"/>
                                     We have a hypothesis for how we will solve this problem.
                                 </label>
 
                                 <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="level_vision"
-                                           value="Potential customers validate that our solution will solve a key point."/>
+                                    <input ref={register} type="checkbox" name="vision" defaultChecked={vision().includes('V2')}
+                                           value="V2::Potential customers validate that our solution will solve a key point."/>
                                     <span className="checkout-custom"/>
                                     Potential customers validate that our solution will solve a key point.
                                 </label>
 
                                 <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="level_vision"
-                                           value="We have evidence that customers will pay our target price."/>
+                                    <input ref={register} type="checkbox" name="vision" defaultChecked={vision().includes('V3')}
+                                           value="V3::We have evidence that customers will pay our target price."/>
                                     <span className="checkout-custom"/>
                                     We have evidence that customers will pay our target price.
                                 </label>
 
                                 <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="level_vision"
-                                           value="Customer feedback shows that our solution is better than others."/>
+                                    <input ref={register} type="checkbox" name="vision" defaultChecked={vision().includes('V4')}
+                                           value="V4::Customer feedback shows that our solution is better than others."/>
                                     <span className="checkout-custom"/>
                                     Customer feedback shows that our solution is better than others.
                                 </label>
 
                                 <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="level_vision"
-                                           value="Our initial target customers love the product and keep using it."/>
+                                    <input ref={register} type="checkbox" name="vision" defaultChecked={vision().includes('V5')}
+                                           value="V5::Our initial target customers love the product and keep using it."/>
                                     <span className="checkout-custom"/>
                                     Our initial target customers love the product and keep using it.
                                 </label>
 
                                 <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="level_vision"
-                                           value="We’re selling beyond our initial target customers."/>
+                                    <input ref={register} type="checkbox" name="vision" defaultChecked={vision().includes('V6')}
+                                           value="V6::We’re selling beyond our initial target customers."/>
                                     <span className="checkout-custom"/>
                                     We’re selling beyond our initial target customers.
                                 </label>
 
                                 <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="level_vision"
-                                           value="The majority of our sales in our initial market are inbound."/>
+                                    <input ref={register} type="checkbox" name="vision" defaultChecked={vision().includes('V7')}
+                                           value="V7::The majority of our sales in our initial market are inbound."/>
                                     <span className="checkout-custom"/>
                                     The majority of our sales in our initial market are inbound.
                                 </label>
 
                                 <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="level_vision"
-                                           value="Customers are renewing or repurchasing without much sales effort."/>
+                                    <input ref={register} type="checkbox" name="vision" defaultChecked={vision().includes('V8')}
+                                           value="V8::Customers are renewing or repurchasing without much sales effort."/>
                                     <span className="checkout-custom"/>
                                     Customers are renewing or repurchasing without much sales effort.
                                 </label>
 
                                 <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="level_vision"
-                                           value="We’re recognized as the top solution to this problem."/>
+                                    <input ref={register} type="checkbox" name="vision" defaultChecked={vision().includes('V9')}
+                                           value="V9::We’re recognized as the top solution to this problem."/>
                                     <span className="checkout-custom"/>
                                     We’re recognized as the top solution to this problem.
                                 </label>
@@ -94,14 +121,7 @@ const Level3 = () => {
                             </div>
                         </div>
 
-                        <div className="row">
-                            <div className="col-md-8">
-                                <div className="d-flex justify-content-center mt-5">
-                                    <button className="btn mr-2 prev" type="button" onClick={() => dispatch(decrementCurrentState())}><span/> Previous</button>
-                                    <button className="btn ml-2 next" type="submit">Next <span/></button>
-                                </div>
-                            </div>
-                        </div>
+                        <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)} />
                     </form>
                 </div>
             </div>
