@@ -3,11 +3,15 @@ import Layout from "../components/layout";
 import React, {useEffect} from "react";
 import HeaderContent from "../components/header/HeaderContent";
 import Link from "next/link";
-import {profileMiddleWare} from "../components/hoc/auth";
 import axiosInstance from "../config/axios";
+import {resetCurrentState} from "../store/actions/profile";
+import {useDispatch} from "react-redux";
 
 const Home = ({events, blogs}) => {
+    const dispatch = useDispatch();
     useEffect(() => {
+
+        dispatch(resetCurrentState());
         $('.event-slider').slick({
             slidesToShow: 3,
             slidesToScroll: 1,
@@ -234,4 +238,4 @@ Home.getInitialProps = async ctx => {
     }
 }
 
-export default profileMiddleWare(Home);
+export default Home;

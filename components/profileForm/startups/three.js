@@ -70,15 +70,6 @@ export default function ProfileThree({startup}) {
                             <p>Product and Services</p>
                         </div>
 
-                        {/*<label htmlFor="industry">Company Stage</label>*/}
-                        <select name="company_stage" ref={register} defaultValue={hasProduct() ? startup.product_services.company_stage : ''}>
-                            <option value="">Company Stage</option>
-                            <option value="concept">Concept</option>
-                            <option value="early stage">Early stage</option>
-                            <option value="scaling">Scaling</option>
-                            <option value="established">Established</option>
-                        </select>
-
                         <input ref={register} className="full-width" type="text" name="product_name"
                                placeholder="Product Name" defaultValue={hasProduct() ? startup.product_services.product_name : ''}/>
 

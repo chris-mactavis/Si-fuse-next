@@ -136,11 +136,6 @@ export default function ProfileOne({startup, locations}) {
                                         }
                                     </select>
                                     <div className="flag"/>
-                                    {/*<input ref={register({required: "This field is required"})}*/}
-                                    {/*       className="country-code small-width"*/}
-                                    {/*       type="number" name="country_code" id=""*/}
-                                    {/*       defaultValue={hasProfile() ? startup.profile.country_code : ''}*/}
-                                    {/*       placeholder="Country code"/>*/}
                                     {errors.country_code && <Error>{errors.country_code.message}</Error>}
                                 </div>
 

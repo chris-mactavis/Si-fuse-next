@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import Layout from "../../components/layout";
 import Head from "next/head";
 import Link from "next/link";
-import {profileMiddleWare} from "../../components/hoc/auth";
 import axiosInstance from "../../config/axios";
 import Axios from "axios";
 import {useDispatch} from "react-redux";
@@ -109,4 +108,4 @@ Blog.getInitialProps = async ctx => {
     }
 }
 
-export default profileMiddleWare(Blog);
+export default Blog;
