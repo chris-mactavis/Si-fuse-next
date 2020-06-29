@@ -11,6 +11,8 @@ const Profile = ({company, services, finance, market, userType, profile, interes
 
     const [connected, setConnected] = useState(isConnected);
 
+    console.log(services);
+
     const dispatch = useDispatch();
     const connectHandler = async () => {
         dispatch(loader());

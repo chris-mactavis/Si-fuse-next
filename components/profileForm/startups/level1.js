@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import InfoBox from "./InfoBox";
 import {useForm} from "react-hook-form";
 import {incrementCurrentState} from "../../../store/actions/profile";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import LevelHeader from "./LevelHeader";
 import LevelButtonsComponent from "./LevelButtons";
 import {loader} from "../../../store/actions/loader";
@@ -10,10 +10,9 @@ import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 
 const Level1 = ({startup}) => {
+    const dispatch = useDispatch();
 
     const {register, handleSubmit} = useForm();
-
-    const dispatch = useDispatch();
 
     const problem = () => {
         if (startup.level && startup.level.hasOwnProperty('problem')) {
@@ -29,11 +28,12 @@ const Level1 = ({startup}) => {
     const nextPageHandler = async data => {
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/level', {problem: JSON.stringify(data.problem)}, {
+            const {data: response} = await axiosInstance.post('startups/level', {problem: JSON.stringify(data.problem)}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             })
+            // dispatch(setStartupData(response.data));
             dispatch(loader());
             dispatch(incrementCurrentState());
         } catch (e) {
