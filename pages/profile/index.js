@@ -35,7 +35,6 @@ ProfilePage.getInitialProps = async (ctx) => {
     const user = User(ctx);
     const isLoggedIn = Token(ctx);
     const hasProfile = user ? user.has_profile : false;
-    console.log(user.has_profile);
 
     const headers = {
         headers: {

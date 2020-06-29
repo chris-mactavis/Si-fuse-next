@@ -6,9 +6,14 @@ import Link from "next/link";
 import axiosInstance from "../config/axios";
 import {resetCurrentState} from "../store/actions/profile";
 import {useDispatch} from "react-redux";
+import Token from "../utils/Token";
 
 const Home = ({events, blogs}) => {
     const dispatch = useDispatch();
+
+    const isLoggedIn = !!Token();
+    console.log(isLoggedIn);
+
     useEffect(() => {
 
         dispatch(resetCurrentState());
@@ -114,8 +119,10 @@ const Home = ({events, blogs}) => {
                                     <p>Are you seeking investment <br/> opportunities? Find the perfect <br/>
                                         businesses that match your interests <br/> within minutes.
                                     </p>
-                                    <a className="link" href="#">Get started <img src="images/icon/arrow-right.png"
-                                                                                  alt=""/></a>
+                                    <Link href={isLoggedIn ? '/profile' : '/signup?for=investors'}>
+                                        <a className="link">Get started <img src="images/icon/arrow-right.png"
+                                                                                      alt=""/></a>
+                                    </Link>
                                 </div>
                             </div>
 
@@ -138,7 +145,10 @@ const Home = ({events, blogs}) => {
                             <p>Are you seeking investment <br/> opportunities? Find the perfect <br/>
                                 businesses that match your interests <br/> within minutes.
                             </p>
-                            <a className="link" href="#">Get started <img src="images/icon/arrow-right.png" alt=""/></a>
+                            <Link href={isLoggedIn ? '/profile' : '/signup?for=startups'}>
+                                <a className="link">Get started <img src="images/icon/arrow-right.png"
+                                                                     alt=""/></a>
+                            </Link>
                         </div>
                     </div>
 

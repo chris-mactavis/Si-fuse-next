@@ -7,6 +7,7 @@ import Router from "next/router";
 import Cookies from 'js-cookie';
 import {showNotifier, toggleNotifier} from "../../store/actions/notifier";
 import React from "react";
+import {User} from "../../utils/User";
 
 export default function LoginForm() {
     const dispatch = useDispatch();
@@ -19,7 +20,13 @@ export default function LoginForm() {
         try {
             await dispatch(loginAsync(data));
             dispatch(showNotifier('Logged In'));
-            Router.push(Cookies.get('redirectIntended') || '/');
+            if (User() && User().user_type.user_type === 'Investor') {
+                Router.push('/');
+                // Router.push('/timeline');
+            } else {
+                Router.push('/profile');
+            }
+            // Router.push(Cookies.get('redirectIntended') || '/');
             Cookies.remove('redirectIntended');
         } catch (e) {
             console.log(e, 'the error');
