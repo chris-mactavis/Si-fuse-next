@@ -9,10 +9,10 @@ import React, {useState} from "react";
 import {storeAuth} from "../../store/actions/auth";
 import Router from "next/router";
 
-export default function SignupForm({countries, userTypes}) {
+export default function SignupForm({countries, userTypes, query}) {
     const {register, handleSubmit, errors, watch} = useForm();
     const dispatch = useDispatch();
-    const [accountType, setAccountType] = useState();
+    const [accountType, setAccountType] = useState(query && query.hasOwnProperty('for') ? (query.for === 'investors' ? 1 : 2) : null);
 
     const signupHandler = async formData => {
         dispatch(loader());

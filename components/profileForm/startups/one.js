@@ -13,6 +13,8 @@ export default function ProfileOne({startup, locations}) {
     const dispatch = useDispatch();
     const token = Cookies.get('token');
 
+    console.log(locations);
+
     useEffect(() => {
         setProfilePicture({
             result: startup.profile && startup.profile.profile_pic_url ? startup.profile.profile_pic_url : [],

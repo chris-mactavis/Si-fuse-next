@@ -464,9 +464,11 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                     <div className="startup-heading startup-level" id="startupLevel">
                         <h5>Startup Level</h5>
                         {
-                            level.map((startupLevel, index) => <StartupProfileLevels startupLevel={startupLevel}
-                                                                                     key={index} index={index}
-                                                                                     levelKeys={levelKeys}/>)
+                            level
+                                ? level.map((startupLevel, index) => <StartupProfileLevels startupLevel={startupLevel}
+                                                                                           key={index} index={index}
+                                                                                           levelKeys={levelKeys}/>)
+                                : null
                         }
                     </div>
 
