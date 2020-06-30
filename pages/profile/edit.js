@@ -24,7 +24,7 @@ import Level7 from "../../components/profileForm/startups/level7";
 import Level8 from "../../components/profileForm/startups/level8";
 
 const Profile = ({startup, industries, locations, stages, loggedInUser, investor}) => {
-    const currentProfile = 9 || useSelector(state => state.profile.currentState);
+    const currentProfile = useSelector(state => state.profile.currentState);
     const userType = loggedInUser.user_type.user_type;
 
     const ProfileComponent = () => {
