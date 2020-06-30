@@ -107,7 +107,7 @@ form {
     @media only screen and (max-width: $mobile_width) {
       width: 100%;
       right: 0px;
-      top:  347px;
+      top: 347px;
     }
 
     textarea {
@@ -343,7 +343,7 @@ form {
       display: none;
     }
 
-    select:not(multiple) {
+    select:not(multiple), .select2 {
       -webkit-appearance: none;
       -moz-appearance: none;
       cursor: pointer;
@@ -358,6 +358,31 @@ form {
       width: 100%;
       border-radius: 0;
       color: $color-black-2;
+
+      .select2-selection {
+        border: none;
+
+        &__arrow {
+          display: none;
+        }
+
+        &__rendered {
+          img {
+            width: 35px;
+            height: 28px;
+
+            & + span {
+              padding-left: 10px;
+            }
+          }
+        }
+      }
+    }
+
+
+    .select2 {
+      margin-top: 31px;
+      margin-left: 5px
     }
   }
 
@@ -491,4 +516,10 @@ form {
     }
   }
 
+}
+
+.select2-results {
+  li {
+    font-size: 10px;
+  }
 }
