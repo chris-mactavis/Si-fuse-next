@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
-import {incrementCurrentState} from "../../../store/actions/profile";
+import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 import {useForm} from "react-hook-form";
 import Error from "../../UI/ErrorSpan";
 import axiosInstance from "../../../config/axios";
 import {loader} from "../../../store/actions/loader";
 import Cookies from "js-cookie";
-
 import DropNCrop from '@synapsestudios/react-drop-n-crop';
 
 export default function ProfileOne({startup, locations}) {
@@ -17,7 +16,7 @@ export default function ProfileOne({startup, locations}) {
 
     useEffect(() => {
         setProfilePicture({
-            result: startup.profile && startup.profile.profile_pic_url ? startup.profile.profile_pic_url : [],
+            result: startup.profile && startup.profile.profile_pic_url ? startup.profile.profile_pic_url : '',
             filename: null,
             filetype: null,
             src: null,
@@ -167,7 +166,12 @@ export default function ProfileOne({startup, locations}) {
                                       defaultValue={hasProfile() ? startup.profile.about : ''}/>
                             {errors.about && <Error>{errors.about.message}</Error>}
 
-                            <button className="btn btn-profile" type="submit">Save & Next</button>
+                            <div className="d-flex">
+                                <button className="btn btn-sm btn-profile mr-2"
+                                        onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                                </button>
+                                <button className="btn btn-sm btn-profile ml-2" type="submit">Save & Next</button>
+                            </div>
                         </form>
                     </div>
                 </div>

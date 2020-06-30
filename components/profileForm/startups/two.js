@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {incrementCurrentState} from "../../../store/actions/profile";
+import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 import React, {useCallback, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import Error from "../../UI/ErrorSpan";
@@ -23,7 +23,7 @@ export default function ProfileTwo({industries, startup, locations}) {
 
     useEffect(() => {
         setProfilePicture({
-            result: startup.company && startup.company.logo_url ? startup.company.logo_url : [],
+            result: startup.company && startup.company.logo_url ? startup.company.logo_url : '',
             filename: null,
             filetype: null,
             src: null,
@@ -259,7 +259,12 @@ export default function ProfileTwo({industries, startup, locations}) {
                                 <option value="established">Established</option>
                             </select>
 
-                            <button className="btn btn-profile" type="submit">Save & Next</button>
+                            <div className="d-flex">
+                                <button className="btn btn-sm btn-profile mr-2"
+                                        onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                                </button>
+                                <button className="btn btn-sm btn-profile ml-2" type="submit">Save & Next</button>
+                            </div>
                         </form>
                     </div>
                 </div>

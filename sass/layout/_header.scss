@@ -5,6 +5,10 @@ header {
     background-size: cover;
     position: relative;
 
+    .navbar-brand {
+      left: calc(50% + 6px)!important;
+    }
+
     .header-wrapper {
       display: flex;
       margin: 0 60px;
