@@ -624,7 +624,7 @@ form.profile-details #video-upload::after {
 form.profile-details .input-file[type=file] {
   display: none;
 }
-form.profile-details select:not(multiple) {
+form.profile-details select:not(multiple), form.profile-details .select2 {
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
@@ -639,6 +639,23 @@ form.profile-details select:not(multiple) {
   width: 100%;
   border-radius: 0;
   color: #6B6B6B;
+}
+form.profile-details select:not(multiple) .select2-selection, form.profile-details .select2 .select2-selection {
+  border: none;
+}
+form.profile-details select:not(multiple) .select2-selection__arrow, form.profile-details .select2 .select2-selection__arrow {
+  display: none;
+}
+form.profile-details select:not(multiple) .select2-selection__rendered img, form.profile-details .select2 .select2-selection__rendered img {
+  width: 35px;
+  height: 28px;
+}
+form.profile-details select:not(multiple) .select2-selection__rendered img + span, form.profile-details .select2 .select2-selection__rendered img + span {
+  padding-left: 10px;
+}
+form.profile-details .select2 {
+  margin-top: 31px;
+  margin-left: 5px;
 }
 form.recovery-pwd {
   background: #fff;
@@ -751,6 +768,10 @@ form.event-register select:not(multiple) {
 }
 form.overview-form textarea, form.overview-form input, form.overview-form select {
   margin-bottom: 1rem !important;
+}
+
+.select2-results li {
+  font-size: 10px;
 }
 
 .btn {
