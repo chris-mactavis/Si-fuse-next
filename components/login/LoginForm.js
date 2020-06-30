@@ -21,8 +21,7 @@ export default function LoginForm() {
             await dispatch(loginAsync(data));
             dispatch(showNotifier('Logged In'));
             if (User() && User().user_type.user_type === 'Investor') {
-                Router.push('/');
-                // Router.push('/timeline');
+                Router.push('/timeline');
             } else {
                 Router.push('/profile');
             }
