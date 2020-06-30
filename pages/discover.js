@@ -109,8 +109,6 @@ Discover.getInitialProps = async (ctx) => {
         console.log(e.response.data.message);
         return {user};
     }
-
-
 }
 
 export default compose(profileMiddleWare, auth)(Discover);
