@@ -2390,7 +2390,7 @@ input:focus, textarea:focus, select:focus, option:focus button {
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
   padding: 10px 30px 10px 60px;
   transition: 0.3s all;
-  background-color: white;
+  color: white;
 }
 .notification::before {
   content: "";
@@ -2403,16 +2403,16 @@ input:focus, textarea:focus, select:focus, option:focus button {
   transform: translateY(-50%);
 }
 .notification.success {
-  color: green;
+  background-color: green;
 }
 .notification.success::before {
-  background-image: url("/images/icon/tick.png");
+  background-image: url("/images/icon/tick.svg");
 }
 .notification.danger {
-  color: #D12B19;
+  background-color: #D12B19;
 }
 .notification.danger::before {
-  background-image: url("/images/icon/alert.png");
+  background-image: url("/images/icon/alert-white.svg");
 }
 .notification.show {
   display: block;
