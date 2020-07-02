@@ -6,6 +6,7 @@ import Router from "next/router";
 import Cookies from "js-cookie";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
+import {decrementCurrentState} from "../../../store/actions/profile";
 
 const InvestorMoreInfo = ({investor, stages}) => {
     const dispatch = useDispatch();
@@ -276,7 +277,12 @@ const InvestorMoreInfo = ({investor, stages}) => {
                                 </label>
                             </div>
 
-                            <button className="btn btn-profile" type="submit">Save & Next</button>
+                            <div className="d-flex">
+                                <button className="btn btn-sm btn-profile mr-2"
+                                        onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                                </button>
+                                <button className="btn btn-sm btn-profile ml-2" type="submit">Save & Next</button>
+                            </div>
                         </form>
                     </div>
                 </div>

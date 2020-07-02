@@ -205,6 +205,18 @@ form {
       -moz-appearance: textfield;
     }
 
+    .currency-input {
+      position: relative;
+      input {
+        padding-left: 15px;
+      }
+      &::before {
+        content: '$';
+        position: absolute;
+        top: 2px;
+      }
+    }
+
     .small-width {
       width: 25%;
       margin-right: 2rem;

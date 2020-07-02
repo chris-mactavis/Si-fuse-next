@@ -503,6 +503,17 @@ form.profile-details input[type=number]::-webkit-inner-spin-button {
 form.profile-details input[type=number] {
   -moz-appearance: textfield;
 }
+form.profile-details .currency-input {
+  position: relative;
+}
+form.profile-details .currency-input input {
+  padding-left: 15px;
+}
+form.profile-details .currency-input::before {
+  content: "$";
+  position: absolute;
+  top: 2px;
+}
 form.profile-details .small-width {
   width: 25%;
   margin-right: 2rem;
@@ -866,6 +877,29 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
     font-size: 1.5rem;
     padding: 17px 20px;
   }
+}
+
+.team-button {
+  width: 20px;
+  height: 20px;
+  border-radius: 40px;
+  color: white;
+  background: #D32907;
+  cursor: pointer;
+  position: relative;
+}
+.team-button::after {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.team-button.plus::after {
+  content: "+";
+}
+.team-button.minus::after {
+  content: "-";
 }
 
 section.image-text {
@@ -1514,6 +1548,7 @@ section.profile .social-links-input .link-container.second::before {
 }
 section.profile .social-links-input input {
   padding-left: 20px;
+  width: 100%;
 }
 section.profile .social-links-input .facebook::before {
   background-image: url("/images/icon/fb-red.svg");
@@ -2598,6 +2633,9 @@ header.homepage {
   height: 100vh;
   background-size: cover;
   position: relative;
+}
+header.homepage .navbar-brand {
+  left: calc(50% + 6px) !important;
 }
 header.homepage .header-wrapper {
   display: flex;

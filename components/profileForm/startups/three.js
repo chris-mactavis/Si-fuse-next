@@ -4,7 +4,7 @@ import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {useDispatch} from "react-redux";
 import {loader} from "../../../store/actions/loader";
-import {incrementCurrentState} from "../../../store/actions/profile";
+import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 
 export default function ProfileThree({startup}) {
     useEffect(() => {
@@ -97,7 +97,12 @@ export default function ProfileThree({startup}) {
                         <input ref={register} type="url" className="full-width" name="pitch_video_url" placeholder="Pitch Video Url"
                                defaultValue={hasProduct() ? startup.product_services.pitch_video_url : ''}/>
 
-                        <button className="btn btn-profile" type="submit">Save & Next</button>
+                        <div className="d-flex">
+                            <button className="btn btn-sm btn-profile mr-2"
+                                    onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                            </button>
+                            <button className="btn btn-sm btn-profile ml-2" type="submit">Save & Next</button>
+                        </div>
                     </form>
                 </div>
             </div>
