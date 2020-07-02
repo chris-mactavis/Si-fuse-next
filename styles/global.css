@@ -668,6 +668,12 @@ form.profile-details .select2 {
   margin-top: 31px;
   margin-left: 5px;
 }
+form.profile-details .select2.investor-country-code {
+  margin-top: 0;
+}
+form.profile-details .select2.investor-country-code + .select2 {
+  margin: -9px 0 0;
+}
 form.recovery-pwd {
   background: #fff;
   padding: 3rem 7rem;
