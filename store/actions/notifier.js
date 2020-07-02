@@ -9,7 +9,7 @@ export const toggleNotifier = () => {
 
 export const showNotifier = (message, type = 'success') => {
     return async dispatch => {
-        setTimeout(() => dispatch(toggleNotifier()), 3000);
+        setTimeout(() => dispatch(toggleNotifier()), 6000);
         dispatch(dispatchNotifier(message, type));
     }
 }

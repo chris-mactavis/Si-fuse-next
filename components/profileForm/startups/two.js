@@ -23,7 +23,7 @@ export default function ProfileTwo({industries, startup, locations}) {
         src: null,
         error: null,
     });
-    console.log(startup);
+    console.log(locations);
     const hasCompany = () => startup.hasOwnProperty('company') && startup.company;
 
     useEffect(() => {
@@ -182,8 +182,8 @@ export default function ProfileTwo({industries, startup, locations}) {
 
                             <select ref={register({required: 'Please select a Location'})} name="location_id" id=""
                                     defaultValue={hasCompany() ? startup.company.location_id : ''}>
-                                <option value="">Select Location</option>
-                                {locations.map(({country, id}) => <option value={id} key={id}>{country}</option>)}
+                                <option value="">Select Country</option>
+                                {locations.filter(country => country.continent_code === 'AF').map(({country, id}) => <option value={id} key={id}>{country}</option>)}
                             </select>
 
                             <input ref={register} className="w-100 full-width" type="email" name="email"
