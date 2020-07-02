@@ -7,10 +7,11 @@ import Cookies from "js-cookie";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {decrementCurrentState} from "../../../store/actions/profile";
+import ErrorSpan from "../../UI/ErrorSpan";
 
 const InvestorMoreInfo = ({investor, stages}) => {
     const dispatch = useDispatch();
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, errors} = useForm();
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
@@ -74,14 +75,16 @@ const InvestorMoreInfo = ({investor, stages}) => {
                             </select>
 
                             <select name="investment_stage_id"
+                                    className="mb-0"
                                     defaultValue={hasInterests() ? investor.interests.investment_stage_id : ''}
-                                    ref={register}>
+                                    ref={register({required: 'This field is required'})}>
                                 <option value="">What stage of company do you invest in?</option>
                                 {stages.map(({stage, id}) => <option key={id} value={id}>{stage}</option>)}
-
                             </select>
+                            {errors.investment_stage_id && <ErrorSpan>{errors.investment_stage_id.message}</ErrorSpan>}
 
                             <select name="covid_impact"
+                                    className="covid-impact"
                                     defaultValue={hasInterests() ? investor.interests.covid_impact : ''} ref={register}>
                                 <option value="">How do you see COVID-19 pandemic impacting your investment decision
                                     making?
@@ -288,6 +291,11 @@ const InvestorMoreInfo = ({investor, stages}) => {
                 </div>
             </div>
         </section>
+        <style jsx>{`
+            .covid-impact {
+                margin-top: 4rem;
+             }
+        `}</style>
     </>
 }
 

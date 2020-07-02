@@ -7,12 +7,16 @@ import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {incrementCurrentState} from "../../../store/actions/profile";
+import {showNotifier} from "../../../store/actions/notifier";
 
 const InvestorBasicInfo = ({investor, locations}) => {
     const dispatch = useDispatch();
 
     const {register, handleSubmit, errors} = useForm();
-    const [flag, setFlag] = useState('');
+
+    const [adminError, setAdminError] = useState();
+
+    const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
 
     const [profilePicture, setProfilePicture] = useState({
         result: null,
@@ -32,7 +36,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
         }
         dispatch(loader());
         try {
-            const {data: response} = await axiosInstance.post('investors', data, {
+            await axiosInstance.post('investors', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -41,6 +45,8 @@ const InvestorBasicInfo = ({investor, locations}) => {
             dispatch(incrementCurrentState());
         } catch (e) {
             console.log(e);
+            dispatch(showNotifier(e.response.data.message, 'danger'));
+            setAdminError(e.response.data.errors);
             dispatch(loader());
         }
     }
@@ -55,6 +61,28 @@ const InvestorBasicInfo = ({investor, locations}) => {
             src: null,
             error: null,
         })
+
+        function formatState(state) {
+            if (!state.id) {
+                return state.text;
+            }
+
+            const baseUrl = locations.find(location => location.id === +state.id).flag
+
+            const $state = $(
+                '<span><img class="img-flag" /> <span></span></span>'
+            );
+
+            // Use .text() instead of HTML string concatenation to avoid script injection issues
+            $state.find("span").text(state.text.split('-')[0]);
+            $state.find("img").attr("src", baseUrl);
+
+            return $state;
+        };
+
+        $(".select2").select2({
+            templateSelection: formatState
+        });
     }, []);
 
     useEffect(() => {
@@ -114,24 +142,9 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                         message: 'Please enter a valid URL'
                                     }
                                 })
-                            } placeholder="Company Website" defaultValue={hasProfile() ? investor.profile.website : ''} className="full-width w-100" />
-                                {errors.website && <Error>{errors.website.message}</Error>}
-
-                            {/*<div className="d-flex">*/}
-                            {/*    <div className="input-group-container w-50 pr-3">*/}
-                            {/*        <input ref={register({required: "This field is required"})} className="full-width"*/}
-                            {/*               type="text" name="first_name" id="" placeholder="First Name"*/}
-                            {/*        />*/}
-                            {/*        {errors.first_name && <Error>{errors.first_name.message}</Error>}*/}
-                            {/*    </div>*/}
-
-                            {/*    <div className="input-group-container w-50 pl-3">*/}
-                            {/*        <input ref={register({required: "This field is required"})} className="full-width"*/}
-                            {/*               type="text" name="last_name" id="" placeholder="Last Name"*/}
-                            {/*        />*/}
-                            {/*        {errors.last_name && <Error>{errors.last_name.message}</Error>}*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
+                            } placeholder="Company Website" defaultValue={hasProfile() ? investor.profile.website : ''}
+                                   className="full-width w-100"/>
+                            {errors.website && <Error>{errors.website.message}</Error>}
 
                             <label htmlFor="Social links" className="social-links mt-4">Social links</label>
                             <div className="d-flex flex-column social-links-input">
@@ -170,19 +183,14 @@ const InvestorBasicInfo = ({investor, locations}) => {
 
                             <div className="d-flex mt-5">
                                 <div className="input-group-container w-25 country-div">
-                                    <select name="country_code"
-                                            onChange={(e) => {
-                                                setFlag(locations.find(location => location.id === +e.target.value).flag);
-                                            }}
+                                    <select name="country_code" className="select2 investor-country-code"
                                             ref={register({required: "This field is required"})}
-                                            className="country-code small-width mt-0"
                                             defaultValue={hasProfile() ? investor.profile.country_code : ''}>
                                         {
-                                            locations.map(({id, country_area_code}) => <option key={id}
-                                                                                               value={id}>{country_area_code}</option>)
+                                            locations.map(({id, country_area_code, country}) => <option key={id}
+                                                                                                        value={id}>{country_area_code} - {country}</option>)
                                         }
                                     </select>
-                                    <div className="flag"/>
                                     {errors.country_code && <Error>{errors.country_code.message}</Error>}
                                 </div>
 
@@ -190,26 +198,32 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                     <input ref={register({required: "This field is required"})}
                                            className="medium-width w-100 mt-0"
                                            type="number" name="phone" id=""
-                                           placeholder="Phone number" defaultValue={hasProfile() ? investor.profile.phone : ''}/>
+                                           placeholder="Phone number"
+                                           defaultValue={hasProfile() ? investor.profile.phone : ''}/>
                                     {errors.phone && <Error>{errors.phone.message}</Error>}
+                                    {getAdminError('phone') && <Error>{getAdminError('phone')}</Error>}
                                 </div>
                             </div>
 
-                            <select name="gender" ref={register({required: 'This field is required'})} defaultValue={hasProfile() ? investor.profile.gender : ''} >
+                            <select name="gender" ref={register({required: 'This field is required'})}
+                                    defaultValue={hasProfile() ? investor.profile.gender : ''}>
                                 <option value="">Sex</option>
                                 <option value="female">Female</option>
                                 <option value="male">Male</option>
                             </select>
                             {errors.gender && <Error>{errors.gender.message}</Error>}
 
-                            <select ref={register({required: 'Please select a Location'})} name="location_id" defaultValue={hasProfile() ? investor.profile.location_id : ''}>
+                            <select ref={register({required: 'Please select a Location'})} name="location_id"
+                                    defaultValue={hasProfile() ? investor.profile.location_id : ''}>
                                 <option value="">Select Location</option>
-                                {locations.map(({country, id}) => <option value={id} key={id}>{country}</option> )}
+                                {locations.map(({country, id}) => <option value={id} key={id}>{country}</option>)}
                             </select>
                             {/*{errors.gender && <Error>{errors.gender.message}</Error>}*/}
 
                             <label className="industry-label">About yourself (200 words)</label>
-                            <textarea ref={register({required: 'This field is required'})} className="full-width mt-0" name="about" id="" cols="30" defaultValue={hasProfile() ? investor.profile.about : ''}
+                            <textarea ref={register({required: 'This field is required'})} className="full-width mt-0"
+                                      name="about" id="" cols="30"
+                                      defaultValue={hasProfile() ? investor.profile.about : ''}
                                       rows="5"/>
                             {errors.about && <Error>{errors.about.message}</Error>}
 
@@ -237,22 +251,6 @@ const InvestorBasicInfo = ({investor, locations}) => {
             }
             .country-div {
                 position: relative;
-            }
-            select.country-code {
-                width: 90%;
-                padding: 0.28rem 0;
-                padding-left: 40px;
-                background-position: 100%;
-            }
-            .flag {
-                position: absolute;
-                bottom: -5px;
-                left: 0;
-                width: 35px;
-                height: 35px;
-                background-image: url(${flag ? flag : locations[0].flag});
-                background-size: contain;
-                background-repeat: no-repeat;
             }
             .industry-label, about-label {
                 margin-top: 4rem;

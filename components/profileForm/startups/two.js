@@ -7,10 +7,12 @@ import DropNCrop from "@synapsestudios/react-drop-n-crop";
 import axiosInstance from "../../../config/axios";
 import {loader} from "../../../store/actions/loader";
 import Token from "../../../utils/Token";
+import {showNotifier} from "../../../store/actions/notifier";
 
 export default function ProfileTwo({industries, startup, locations}) {
     const dispatch = useDispatch();
-    const [size, setSize] = useState(startup.company.teams.length);
+    const [size, setSize] = useState(startup.company && startup.company.hasOwnProperty('teams') ? startup.company.teams.length : 1);
+    const [adminError, setAdminError] = useState();
 
     const createArrayWithNumbers = length => {
         return Array.from({length}, (_, k) => k + 0);
@@ -23,8 +25,8 @@ export default function ProfileTwo({industries, startup, locations}) {
         src: null,
         error: null,
     });
-    console.log(locations);
     const hasCompany = () => startup.hasOwnProperty('company') && startup.company;
+
 
     useEffect(() => {
         setProfilePicture({
@@ -47,7 +49,7 @@ export default function ProfileTwo({industries, startup, locations}) {
     );
 
     const hasError = field => errors[field] !== undefined;
-    const getError = field => hasError(field) && errors[field].message;
+    const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
 
     const validateIndustries = () => {
         const values = getValues({nest: true});
@@ -78,6 +80,8 @@ export default function ProfileTwo({industries, startup, locations}) {
             dispatch(incrementCurrentState());
         } catch (e) {
             console.log(e)
+            dispatch(showNotifier(e.response.data.message, 'danger'));
+            setAdminError(e.response.data.errors);
             dispatch(loader());
         }
     }
@@ -165,8 +169,10 @@ export default function ProfileTwo({industries, startup, locations}) {
                                    ref={register({required: 'Please enter a company name'})} name="name" id=""
                                    defaultValue={hasCompany() ? startup.company.name : ''}
                                    placeholder="Company name"/>
-                            <span className="d-block">{errors.name &&
-                            <Error>{errors.name.message}</Error>}</span>
+                            <span className="d-block">
+                                {errors.name && <Error>{errors.name.message}</Error>}
+                                {getAdminError('name') && <Error>{getAdminError('name')}</Error>}
+                            </span>
 
                             <input ref={register({
                                 required: 'Please enter a website url',
@@ -185,6 +191,8 @@ export default function ProfileTwo({industries, startup, locations}) {
                                 <option value="">Select Country</option>
                                 {locations.filter(country => country.continent_code === 'AF').map(({country, id}) => <option value={id} key={id}>{country}</option>)}
                             </select>
+                            {errors.location_id && <Error>{errors.location_id.message}</Error>}
+                            {getAdminError('location_id') && <Error>{getAdminError('location_id')}</Error>}
 
                             <input ref={register} className="w-100 full-width" type="email" name="email"
                                    placeholder="Company Email Address"
@@ -195,11 +203,11 @@ export default function ProfileTwo({industries, startup, locations}) {
                                    defaultValue={hasCompany() ? startup.company.phone : ''}/>
 
                             <label htmlFor="" className="business_summary">Company Address</label>
-                            <textarea ref={register} className="w-100 full-width" name="address" rows="5"
+                            <input ref={register} className="w-100 full-width mt-0" name="address"
                                       placeholder="Company Address"
                                       defaultValue={hasCompany() ? startup.company.address : ''}/>
 
-                            <select ref={register} className="w-100 full-width mt-0" name="no_of_team"
+                            <select ref={register} className="w-100 full-width" name="no_of_team"
                                     defaultValue={hasCompany() ? startup.company.no_of_team : ''}>
                                 <option>Number of Team</option>
                                 <option value="1-10">1 - 10</option>
