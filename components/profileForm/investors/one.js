@@ -32,7 +32,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('investors', data, {
+            const {data: response} = await axiosInstance.post('investors', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -58,6 +58,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
     }, []);
 
     useEffect(() => {
+        console.log('in here')
         window.scrollTo(0, 0);
     }, []);
 

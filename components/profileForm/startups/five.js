@@ -6,7 +6,7 @@ import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import Router from "next/router";
 import Cookies from 'js-cookie';
-import {resetCurrentState} from "../../../store/actions/profile";
+import {decrementCurrentState, resetCurrentState} from "../../../store/actions/profile";
 
 export default function ProfileFive({startup}) {
     useEffect(() => {
@@ -90,7 +90,12 @@ export default function ProfileFive({startup}) {
                         <label>What gives you competitive advantage?</label>
                         <textarea ref={register} defaultValue={hasMarketing() ? startup.market.competitive_advantage : ''} className="full-width" name="competitive_advantage" id="" cols="30" rows="5"/>
 
-                        <button className="btn btn-profile" type="submit">Save & Next</button>
+                        <div className="d-flex flex-column flex-md-row">
+                            <button className="btn btn-sm btn-profile mr-md-2 mb-3 mb-md-0"
+                                    onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                            </button>
+                            <button className="btn btn-sm btn-profile ml-md-2" type="submit">Save & Next</button>
+                        </div>
                     </form>
                 </div>
             </div>

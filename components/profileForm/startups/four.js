@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
-import {incrementCurrentState} from "../../../store/actions/profile";
+import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 
 export const ProfileFour = ({startup}) => {
     const dispatch = useDispatch();
@@ -69,13 +69,15 @@ export const ProfileFour = ({startup}) => {
                             <p>Finance</p>
                         </div>
 
-                        <select name="revenue_type" ref={register} defaultValue={hasFinance() ? startup.finance.revenue_type: ''}>
+                        <select name="revenue_type" ref={register}
+                                defaultValue={hasFinance() ? startup.finance.revenue_type : ''}>
                             <option value="">Company is currently</option>
                             <option value="Post revenue">Post Revenue</option>
                             <option value="Pre revenue">Pre Revenue</option>
                         </select>
 
-                        <select name="capital_needed_for" ref={register} defaultValue={hasFinance() ? startup.finance.capital_needed_for: ''}>
+                        <select name="capital_needed_for" ref={register}
+                                defaultValue={hasFinance() ? startup.finance.capital_needed_for : ''}>
                             <option value="">Capital Needed for</option>
                             <option value="Proof of concept">Proof of concept</option>
                             <option value="Working capital">Working capital</option>
@@ -83,14 +85,17 @@ export const ProfileFour = ({startup}) => {
                             <option value="Bridging Capital">Bridging capital</option>
                         </select>
 
-                        <select name="business_size" ref={register} defaultValue={hasFinance() ? startup.finance.business_size: ''}>
+                        <select name="business_size" ref={register}
+                                defaultValue={hasFinance() ? startup.finance.business_size : ''}>
                             <option value="">Current size of business relative to amount of capital needed.</option>
-                            <option value="less than capital needed">Current business worth less than capital needed</option>
+                            <option value="less than capital needed">Current business worth less than capital needed
+                            </option>
                             <option value="more">Current business worth more than capital needed</option>
                             <option value="cannot value">No way to value current business worth</option>
                         </select>
 
-                        <select name="growth_projection" ref={register} defaultValue={hasFinance() ? startup.finance.growth_projection: ''}>
+                        <select name="growth_projection" ref={register}
+                                defaultValue={hasFinance() ? startup.finance.growth_projection : ''}>
                             <option value="">Growth Projection</option>
                             <option value="Exponential (J-Growth)">Exponential (J-Growth)</option>
                             <option value="High Growth">High Growth</option>
@@ -98,11 +103,20 @@ export const ProfileFour = ({startup}) => {
                             <option value="No Growth Expected">No Growth Expected</option>
                         </select>
 
-                        <input ref={register} defaultValue={hasFinance() ? startup.finance.invested_funding: ''} className="full-width" type="text" name="invested_funding" id="" placeholder="How Much has been invested till date? "/>
+                        <div className="currency-input">
+                            <input ref={register} defaultValue={hasFinance() ? startup.finance.invested_funding : ''}
+                                   className="full-width" type="text" name="invested_funding" id=""
+                                   placeholder="How Much has been invested till date? "/>
+                        </div>
 
-                        <input ref={register} className="full-width" type="text" name="funding_needed" id="" defaultValue={hasFinance() ? startup.finance.funding_needed : ''} placeholder="What is your ask?"/>
+                        <div className="currency-input">
+                            <input ref={register} className="full-width" type="text" name="funding_needed" id=""
+                                   defaultValue={hasFinance() ? startup.finance.funding_needed : ''}
+                                   placeholder="What is your ask?"/>
+                        </div>
 
-                        <select name="funding_stage" ref={register} defaultValue={hasFinance() ? startup.finance.funding_stage: ''}>
+                        <select name="funding_stage" ref={register}
+                                defaultValue={hasFinance() ? startup.finance.funding_stage : ''}>
                             <option value="">What funding are you around currently?</option>
                             <option value="Ideation">Ideation</option>
                             <option value="Seed stage">Seed stage</option>
@@ -110,7 +124,8 @@ export const ProfileFour = ({startup}) => {
                             <option value="Late stage">Late stage</option>
                         </select>
 
-                        <select name="investment_ask" ref={register} defaultValue={hasFinance() ? startup.finance.investment_ask: ''}>
+                        <select name="investment_ask" ref={register}
+                                defaultValue={hasFinance() ? startup.finance.investment_ask : ''}>
                             <option value="">What is your company’s desired investment ask?</option>
                             <option value="$5,000 - $10,000">$5,000 - $10,000</option>
                             <option value="$10,000 - $50,000">$10,000 - $50,000</option>
@@ -121,7 +136,8 @@ export const ProfileFour = ({startup}) => {
                             <option value="$2,000,000 and above">$2,000,000 and above</option>
                         </select>
 
-                        <select name="geographical_focus" id="" ref={register} defaultValue={hasFinance() ? startup.finance.geographical_focus: ''}>
+                        <select name="geographical_focus" id="" ref={register}
+                                defaultValue={hasFinance() ? startup.finance.geographical_focus : ''}>
                             <option value="">Geographical focus</option>
                             <option value="North Africa">North Africa</option>
                             <option value="East Africa">East Africa</option>
@@ -130,7 +146,8 @@ export const ProfileFour = ({startup}) => {
                             <option value="Central Africa">Central Africa</option>
                         </select>
 
-                        <select name="investor_type" id="" ref={register} defaultValue={hasFinance() ? startup.finance.investor_type: ''}>
+                        <select name="investor_type" id="" ref={register}
+                                defaultValue={hasFinance() ? startup.finance.investor_type : ''}>
                             <option value="">What type of Investor are you looking for?</option>
                             <option value="Any">Any</option>
                             <option value="Venture Capital">Venture Capital</option>
@@ -140,13 +157,19 @@ export const ProfileFour = ({startup}) => {
                             <option value="Crowd Funding">Crowd Funding</option>
                         </select>
 
-                        <select name="interested_in_mentor" id="" ref={register} defaultValue={hasFinance() ? startup.finance.interested_in_mentor: ''}>
+                        <select name="interested_in_mentor" id="" ref={register}
+                                defaultValue={hasFinance() ? startup.finance.interested_in_mentor : ''}>
                             <option value="">Are you interested in a mentor?</option>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
 
-                        <button className="btn btn-profile" type="submit">Save & Next</button>
+                        <div className="d-flex">
+                            <button className="btn btn-sm btn-profile mr-2"
+                                    onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                            </button>
+                            <button className="btn btn-sm btn-profile ml-2" type="submit">Save & Next</button>
+                        </div>
                     </form>
                 </div>
             </div>
