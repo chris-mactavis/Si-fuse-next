@@ -543,7 +543,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                             </div>
                         </div>
                         {
-                            hasPermission &&
+                            (userType === 'Startup' || hasPermission) &&
                             <>
                                 <div className="row">
                                     <div className="col-md-6">
