@@ -59,7 +59,7 @@ export default function Footer() {
                         </li>
 
                         {
-                            User() && User().user_type.user_type === 'Investor'
+                            User() && User().user_type === 'Investor'
                                 ? <li>
                                     <Link href="/discover">
                                         <a> Discover</a>

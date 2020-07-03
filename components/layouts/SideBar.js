@@ -34,7 +34,7 @@ export default function SideBar({isLoggedIn = false}) {
                     </Link>
                 </li>
                 {
-                    loggedInUser && loggedInUser.user_type.user_type === 'Investor'
+                    loggedInUser && loggedInUser.user_type === 'Investor'
                         ? <li>
                             <Link href="/discover">
                                 <a>Discover</a>
@@ -77,7 +77,7 @@ export default function SideBar({isLoggedIn = false}) {
                         {/*    </Link>*/}
                         {/*</li>*/}
                         {
-                            loggedInUser && loggedInUser.user_type.user_type === 'Investor'
+                            loggedInUser && loggedInUser.user_type === 'Investor'
                                 ? <li>
                                     <Link href="/connections">
                                         <a><img src="/images/icon/connection-icon.svg" alt=""
