@@ -70,7 +70,7 @@ export default function Footer() {
                     </ul>
                 </div>
 
-                <div className="col-md-3 d-flex align-items-start justify-content-between">
+                <div className="col-md-3 d-flex align-items-start justify-content-end">
                     <Link href="/">
                         <a className="logo">
                             <img className="logo img-fluid" src="/images/logo.png" alt=""/>

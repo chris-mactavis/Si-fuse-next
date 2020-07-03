@@ -2594,8 +2594,8 @@ nav.navbar .logo-small-screen {
 }
 
 footer {
-  padding: 7rem 0;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(/images/footer-bg.png);
+  padding: 6rem 0 5rem;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), black), url(/images/footer-bg.png);
   background-size: cover;
 }
 footer h5 {
@@ -2619,7 +2619,7 @@ footer .social-icons {
   flex-direction: column;
 }
 footer .social-icons a {
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 @media only screen and (max-width: 992px) {
   footer .social-icons a {
@@ -2630,8 +2630,9 @@ footer a {
   font-weight: normal;
 }
 footer .logo {
-  height: 170px;
+  height: 120px;
   width: auto;
+  margin-right: 20px;
 }
 
 header.homepage {
