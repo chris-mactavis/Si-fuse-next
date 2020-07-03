@@ -116,8 +116,10 @@ const Home = ({events, blogs}) => {
                                     <img className="img-01" src="images/icon/01.png" alt=""/>
 
                                     <h3>For investors</h3>
-                                    <p>Are you seeking investment <br/> opportunities? Find the perfect <br/>
-                                        businesses that match your interests <br/> within minutes.
+                                    <p>
+                                        Seeking investment opportunities? <br class="d-none d-md-block"/>
+                                        Find the right startups that match your <br className="d-none d-md-block"/>
+                                        investment criteria within minutes.
                                     </p>
                                     <Link href={isLoggedIn ? '/profile' : '/signup?for=investors'}>
                                         <a className="link">Get started <img src="images/icon/arrow-right.png"
@@ -142,8 +144,9 @@ const Home = ({events, blogs}) => {
                         <div className="investors startups">
                             <img className="img-01 img-02" src="images/icon/02.png" alt=""/>
                             <h3>For startups</h3>
-                            <p>Are you seeking investment <br/> opportunities? Find the perfect <br/>
-                                businesses that match your interests <br/> within minutes.
+                            <p>
+                                Do you need funding for your startup? <br className="d-none d-md-block"/>
+                                Get discovered by interested investors <br className="d-none d-md-block"/> within minutes.
                             </p>
                             <Link href={isLoggedIn ? '/profile' : '/signup?for=startups'}>
                                 <a className="link">Get started <img src="images/icon/arrow-right.png"

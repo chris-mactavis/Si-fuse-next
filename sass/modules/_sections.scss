@@ -26,15 +26,15 @@ section {
         text-align: right;
         position: relative;
 
-        @media only screen and (max-width: $desktop_width) {
+        @include media("tablet"){
           text-align: left;
         }
 
-        @media only screen and (max-width: $wide_width) {
+        @include media("desktop"){
           font-size: 3.5rem;
         }
 
-        @media only screen and (max-width: $mobile_width) {
+        @include media("mobile"){
           font-size: 3rem;
         }
 
@@ -42,18 +42,18 @@ section {
           content: '';
           position: absolute;
           bottom: 11px;
-          right: -3px;
-          width: 32rem;
+          right: 0;
+          width: 33rem;
           z-index: -1;
           height: .7rem;
           background: $orange-red;
 
-          @media only screen and (max-width: $desktop_width) {
+          @include media("tablet"){
             left: -3px;
             right: 0;
           }
 
-          @media only screen and (max-width: $mobile_width) {
+          @include media("mobile"){
             z-index: 0;
             bottom: 2px;
             width: 25rem;
@@ -108,7 +108,12 @@ section {
         text-align: left;
 
         &::before {
-          left: -2px;
+          left: 0;
+          width: 31rem;
+
+          @include media("mobile"){
+            width: 23rem;
+          }
         }
       }
 
