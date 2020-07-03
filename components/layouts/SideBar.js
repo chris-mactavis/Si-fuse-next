@@ -81,7 +81,7 @@ export default function SideBar({isLoggedIn = false}) {
                                 ? <>
                                     <li>
                                         <Link href="/timeline">
-                                            <a><img src="/images/icon/connection-icon.svg" alt=""
+                                            <a><img src="/images/icon/timeline.svg" alt=""
                                                     className="img-fluid"/> My Timeline</a>
                                         </Link>
                                     </li>

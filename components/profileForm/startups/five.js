@@ -7,6 +7,7 @@ import Token from "../../../utils/Token";
 import Router from "next/router";
 import Cookies from 'js-cookie';
 import {decrementCurrentState, resetCurrentState} from "../../../store/actions/profile";
+import {showNotifier} from "../../../store/actions/notifier";
 
 export default function ProfileFive({startup}) {
     useEffect(() => {
@@ -28,6 +29,7 @@ export default function ProfileFive({startup}) {
                 }
             });
             dispatch(loader());
+            dispatch(showNotifier('Signup Complete'));
             let user = JSON.parse(Cookies.get('user'));
             user.has_profile = 1;
             Cookies.set('user', JSON.stringify(user));
