@@ -24,7 +24,7 @@ const Timeline = ({data: {data: startups}}) => {
 
                 {
                     startups.map(
-                        ({company, finance, level, profile}, index) => <div className="row mb-5 pointer" onClick={() => Router.push('/startups/[id]', `/startups/${profile.user_id}`)} key={index}>
+                        ({company, finance, level, profile, slug}, index) => <div className="row mb-5 pointer" onClick={() => Router.push('/startups/[id]', `/startups/${slug}`)} key={index}>
                             <div className="col">
                                 <article>
                                     <div className="row">
