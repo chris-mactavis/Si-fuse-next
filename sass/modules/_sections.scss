@@ -1606,9 +1606,7 @@ section {
     }
   }
 
-
-
-  &.timeline{
+  &.timeline, &.connections{
     @extend .bg;
 
     article{
