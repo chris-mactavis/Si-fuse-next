@@ -8,6 +8,7 @@ import LevelButtonsComponent from "./LevelButtons";
 import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
+import {showNotifier} from "../../../store/actions/notifier";
 
 const Level1 = ({startup}) => {
     const dispatch = useDispatch();
@@ -26,6 +27,10 @@ const Level1 = ({startup}) => {
     }
 
     const nextPageHandler = async data => {
+        if (data.problem.length === 0) {
+            dispatch(showNotifier('Please choose at least one option', 'danger'));
+            return;
+        }
         dispatch(loader());
         try {
             const {data: response} = await axiosInstance.post('startups/level', {problem: JSON.stringify(data.problem)}, {

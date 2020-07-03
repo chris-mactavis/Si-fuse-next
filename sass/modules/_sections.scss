@@ -13,7 +13,7 @@ section {
         height: 100px;
         margin-bottom: -38px;
 
-        @media only screen and (max-width: $min_wide_width) {
+        @media only screen and (max-width: $wide_width) {
           margin-bottom: -32px;
         }
 
@@ -26,15 +26,15 @@ section {
         text-align: right;
         position: relative;
 
-        @media only screen and (max-width: $desktop_width) {
+        @include media("tablet"){
           text-align: left;
         }
 
-        @media only screen and (max-width: $min_wide_width) {
+        @include media("desktop"){
           font-size: 3.5rem;
         }
 
-        @media only screen and (max-width: $mobile_width) {
+        @include media("mobile"){
           font-size: 3rem;
         }
 
@@ -42,18 +42,18 @@ section {
           content: '';
           position: absolute;
           bottom: 11px;
-          right: -3px;
-          width: 32rem;
+          right: 0;
+          width: 33rem;
           z-index: -1;
           height: .7rem;
           background: $orange-red;
 
-          @media only screen and (max-width: $desktop_width) {
+          @include media("tablet"){
             left: -3px;
             right: 0;
           }
 
-          @media only screen and (max-width: $mobile_width) {
+          @include media("mobile"){
             z-index: 0;
             bottom: 2px;
             width: 25rem;
@@ -108,7 +108,12 @@ section {
         text-align: left;
 
         &::before {
-          left: -2px;
+          left: 0;
+          width: 31rem;
+
+          @include media("mobile"){
+            width: 23rem;
+          }
         }
       }
 
@@ -130,13 +135,13 @@ section {
       position: relative;
     }
 
-    h2 {
-      margin-bottom: 2rem;
-
-      @media only screen and (max-width: $mobile_width) {
-        font-size: 3.5rem;
-      }
-    }
+    //h2 {
+    //  margin-bottom: 2rem;
+    //
+    //  @media only screen and (max-width: $mobile_width) {
+    //    font-size: 3.5rem;
+    //  }
+    //}
 
     .card {
       border: none;
@@ -298,6 +303,7 @@ section {
   &.posts {
     //  background: $dark-light;
     background: #ECEFF1;
+    padding: 6rem 0;
 
     .post {
       background-repeat: no-repeat;
@@ -316,12 +322,38 @@ section {
         width: 100%;
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
       }
-    }
 
-    p {
-      @include abs-center;
-      color: #fff;
-      z-index: 100;
+      p {
+        @include abs-center;
+        color: #fff;
+        z-index: 100;
+
+        span.view{
+          display: block;
+          text-transform: uppercase;
+          margin-top: 20px;
+          position: relative;
+          top: 150px;
+          transition: top 0.3s;
+
+          img {
+            margin-left: 1rem;
+            height: 14px;
+            position: relative;
+            top: -1px;
+            display: inline;
+          }
+        }
+      }
+
+      &:hover{
+        p{
+          span.view{
+            top: 0;
+            transition: top 0.3s;
+          }
+        }
+      }
     }
 
     .slick-dots {
@@ -760,6 +792,7 @@ section {
 
       input {
         padding-left: 20px;
+        width: 100%;
       }
 
       .facebook::before {
@@ -1573,9 +1606,7 @@ section {
     }
   }
 
-
-
-  &.timeline{
+  &.timeline, &.connections{
     @extend .bg;
 
     article{

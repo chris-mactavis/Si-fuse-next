@@ -6,7 +6,7 @@ const Notifier = () => {
     const dispatch = useDispatch();
     const {showNotifier, type, message} = useSelector(state => state.notifier);
 
-    return <div className={`notification ${showNotifier ? 'show' : ''} ${type}`} onClick={() => dispatch(toggleNotifier())}>
+    return <div className={`notification ${showNotifier ? 'show' : ''} ${type}`}>
         <span>{message}</span>
     </div>
 }

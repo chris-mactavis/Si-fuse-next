@@ -16,7 +16,7 @@
   font-weight: bold;
   font-style: normal;
 }
-.bg, section.reset-password, section.forgot-password, section.timeline, section.startup-content, section.startup-levels, section.single-post {
+.bg, section.reset-password, section.forgot-password, section.timeline, section.connections, section.startup-content, section.startup-levels, section.single-post {
   background: #ECEFF1;
   color: #6B6B6B;
   padding: 80px 0 60px;
@@ -259,10 +259,15 @@ h1 {
 }
 
 h2 {
-  font-size: 5rem;
+  font-size: 4.8rem;
   font-family: "League Spartan", sans-serif;
   text-transform: uppercase;
   color: #3E3E3E;
+}
+@media only screen and (max-width: 576px) {
+  h2 {
+    font-size: 4rem;
+  }
 }
 
 h3 {
@@ -503,6 +508,17 @@ form.profile-details input[type=number]::-webkit-inner-spin-button {
 form.profile-details input[type=number] {
   -moz-appearance: textfield;
 }
+form.profile-details .currency-input {
+  position: relative;
+}
+form.profile-details .currency-input input {
+  padding-left: 15px;
+}
+form.profile-details .currency-input::before {
+  content: "$";
+  position: absolute;
+  top: 2px;
+}
 form.profile-details .small-width {
   width: 25%;
   margin-right: 2rem;
@@ -656,6 +672,12 @@ form.profile-details select:not(multiple) .select2-selection__rendered img + spa
 form.profile-details .select2 {
   margin-top: 31px;
   margin-left: 5px;
+}
+form.profile-details .select2.investor-country-code {
+  margin-top: 0;
+}
+form.profile-details .select2.investor-country-code + .select2 {
+  margin: -9px 0 0;
 }
 form.recovery-pwd {
   background: #fff;
@@ -868,6 +890,29 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
   }
 }
 
+.team-button {
+  width: 20px;
+  height: 20px;
+  border-radius: 40px;
+  color: white;
+  background: #D32907;
+  cursor: pointer;
+  position: relative;
+}
+.team-button::after {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.team-button.plus::after {
+  content: "+";
+}
+.team-button.minus::after {
+  content: "-";
+}
+
 section.image-text {
   padding: 7.5rem 0;
 }
@@ -916,8 +961,8 @@ section.image-text .investors h3::before {
   content: "";
   position: absolute;
   bottom: 11px;
-  right: -3px;
-  width: 32rem;
+  right: 0;
+  width: 33rem;
   z-index: -1;
   height: 0.7rem;
   background: #D32907;
@@ -979,7 +1024,13 @@ section.image-text .startups h3 {
   text-align: left;
 }
 section.image-text .startups h3::before {
-  left: -2px;
+  left: 0;
+  width: 31rem;
+}
+@media only screen and (max-width: 576px) {
+  section.image-text .startups h3::before {
+    width: 23rem;
+  }
 }
 section.image-text .startups p {
   text-align: left;
@@ -993,14 +1044,6 @@ section.events {
 }
 section.events .event-slider {
   position: relative;
-}
-section.events h2 {
-  margin-bottom: 2rem;
-}
-@media only screen and (max-width: 576px) {
-  section.events h2 {
-    font-size: 3.5rem;
-  }
 }
 section.events .card {
   border: none;
@@ -1135,6 +1178,7 @@ section.events .slick-next::before {
 }
 section.posts {
   background: #ECEFF1;
+  padding: 6rem 0;
 }
 section.posts .post {
   background-repeat: no-repeat;
@@ -1153,13 +1197,32 @@ section.posts .post::after {
   width: 100%;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
 }
-section.posts p {
+section.posts .post p {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
   z-index: 100;
+}
+section.posts .post p span.view {
+  display: block;
+  text-transform: uppercase;
+  margin-top: 20px;
+  position: relative;
+  top: 150px;
+  transition: top 0.3s;
+}
+section.posts .post p span.view img {
+  margin-left: 1rem;
+  height: 14px;
+  position: relative;
+  top: -1px;
+  display: inline;
+}
+section.posts .post:hover p span.view {
+  top: 0;
+  transition: top 0.3s;
 }
 section.posts .slick-dots {
   bottom: -36px;
@@ -1514,6 +1577,7 @@ section.profile .social-links-input .link-container.second::before {
 }
 section.profile .social-links-input input {
   padding-left: 20px;
+  width: 100%;
 }
 section.profile .social-links-input .facebook::before {
   background-image: url("/images/icon/fb-red.svg");
@@ -1823,7 +1887,7 @@ section.startup-content .startup-sidebar {
   width: 350px;
   z-index: 100;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
   section.startup-content .startup-sidebar {
     width: 300px;
   }
@@ -2121,10 +2185,10 @@ section.startup-content .request-access .btn {
   align-self: center;
   justify-self: center;
 }
-section.timeline article {
+section.timeline article, section.connections article {
   background: white;
 }
-section.timeline article h4 {
+section.timeline article h4, section.connections article h4 {
   text-transform: none;
   font-weight: 400;
   text-align: center;
@@ -2132,62 +2196,62 @@ section.timeline article h4 {
   padding: 15px 0 10px;
   margin-bottom: 0;
 }
-section.timeline article .startup-logo {
+section.timeline article .startup-logo, section.connections article .startup-logo {
   margin: 0 auto;
   display: block;
   padding: 28px;
 }
-section.timeline article .level {
+section.timeline article .level, section.connections article .level {
   text-align: center;
   margin: 10px 0;
 }
-section.timeline article .level .text {
+section.timeline article .level .text, section.connections article .level .text {
   padding: 5px 0;
 }
-section.timeline article .level.perfect {
+section.timeline article .level.perfect, section.connections article .level.perfect {
   background: rgba(23, 221, 23, 0.1);
 }
-section.timeline article .level.perfect p {
+section.timeline article .level.perfect p, section.connections article .level.perfect p {
   background: rgba(23, 221, 23, 0.5);
 }
-section.timeline article .level.good {
+section.timeline article .level.good, section.connections article .level.good {
   background: RGBA(255, 214, 0, 0.1);
 }
-section.timeline article .level.good p {
+section.timeline article .level.good p, section.connections article .level.good p {
   background: RGBA(255, 214, 0, 0.5);
 }
-section.timeline article .level.fair {
+section.timeline article .level.fair, section.connections article .level.fair {
   background: RGBA(255, 109, 0, 0.1);
 }
-section.timeline article .level.fair p {
+section.timeline article .level.fair p, section.connections article .level.fair p {
   background: RGBA(255, 109, 0, 0.5);
 }
-section.timeline article .level .icon {
+section.timeline article .level .icon, section.connections article .level .icon {
   height: 18px;
   display: inline;
   margin-right: 3px;
   opacity: 0.9;
 }
-section.timeline article .level .icon + span {
+section.timeline article .level .icon + span, section.connections article .level .icon + span {
   display: inline;
 }
-section.timeline article .level p {
+section.timeline article .level p, section.connections article .level p {
   margin-bottom: 0;
   font-size: 12px;
 }
-section.timeline article .tagging {
+section.timeline article .tagging, section.connections article .tagging {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
 }
-section.timeline article .tagging-container {
+section.timeline article .tagging-container, section.connections article .tagging-container {
   padding: 15px;
 }
-section.timeline article .tags {
+section.timeline article .tags, section.connections article .tags {
   text-align: center;
   height: 100%;
   padding: 10px;
 }
-section.timeline article .tags .tag {
+section.timeline article .tags .tag, section.connections article .tags .tag {
   background: #51B8D9;
   padding: 2px 10px;
   color: white;
@@ -2348,14 +2412,14 @@ input:focus, textarea:focus, select:focus, option:focus button {
 .notification {
   position: fixed;
   display: flex;
-  bottom: 20px;
+  top: 50px;
   right: -40px;
   z-index: 100;
   opacity: 0;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
   padding: 10px 30px 10px 60px;
   transition: 0.3s all;
-  background-color: white;
+  color: white;
 }
 .notification::before {
   content: "";
@@ -2368,16 +2432,16 @@ input:focus, textarea:focus, select:focus, option:focus button {
   transform: translateY(-50%);
 }
 .notification.success {
-  color: green;
+  background-color: green;
 }
 .notification.success::before {
-  background-image: url("/images/icon/tick.png");
+  background-image: url("/images/icon/tick.svg");
 }
 .notification.danger {
-  color: #D12B19;
+  background-color: #D12B19;
 }
 .notification.danger::before {
-  background-image: url("/images/icon/alert.png");
+  background-image: url("/images/icon/alert-white.svg");
 }
 .notification.show {
   display: block;
@@ -2517,7 +2581,7 @@ nav.navbar .logo-container .navbar-brand {
   display: block;
   top: 12px;
   transform: translateX(-50%);
-  left: calc(50% + 2px);
+  left: calc(50% + 5px);
 }
 nav.navbar .logo-container .navbar-brand #notification-btn {
   border: none;
@@ -2552,45 +2616,77 @@ nav.navbar .logo-small-screen {
   }
 }
 
-footer {
-  padding: 7rem 0;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(/images/footer-bg.png);
+footer .footer-content {
+  padding: 6rem 0 2rem;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), black), url(/images/footer-bg.png);
   background-size: cover;
 }
-footer h5 {
+footer .footer-content h5 {
   text-transform: uppercase;
   color: #fff;
   font-weight: bold;
   margin-bottom: 2rem;
   font-size: 20px;
 }
-footer ul {
+footer .footer-content ul {
   list-style: none;
   padding-left: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 }
-footer ul li {
+footer .footer-content ul li {
   color: #fff;
   margin-bottom: 2rem;
 }
-footer .social-icons {
+footer .footer-content a {
+  font-weight: normal;
+}
+footer .footer-content .logo-column {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column {
+    flex-direction: column;
+    justify-content: start;
+  }
+}
+footer .footer-content .logo-column .logo {
+  height: 120px;
+  width: auto;
+  margin-right: 20px;
+}
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column .logo {
+    height: 72px;
+  }
+}
+footer .footer-content .logo-column .social-icons {
   display: flex;
   flex-direction: column;
 }
-footer .social-icons a {
-  margin-bottom: 24px;
-}
-@media only screen and (max-width: 992px) {
-  footer .social-icons a {
-    margin-left: 10px;
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column .social-icons {
+    flex-direction: row;
   }
 }
-footer a {
-  font-weight: normal;
+footer .footer-content .logo-column .social-icons a {
+  margin-bottom: 8px;
+  margin-left: 10px;
 }
-footer .logo {
-  height: 170px;
-  width: auto;
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column .social-icons a {
+    margin: 10px 8px 0 0;
+  }
+}
+footer .copy-wrapper {
+  text-align: center;
+}
+footer .copy-wrapper p {
+  margin-bottom: 0;
+  padding: 10px 0;
+  background: #D32907;
+  color: white;
 }
 
 header.homepage {
@@ -2598,6 +2694,14 @@ header.homepage {
   height: 100vh;
   background-size: cover;
   position: relative;
+}
+@media only screen and (max-width: 576px) {
+  header.homepage {
+    height: 70vh;
+  }
+}
+header.homepage .navbar-brand {
+  left: calc(50% + 6px) !important;
 }
 header.homepage .header-wrapper {
   display: flex;
@@ -2637,7 +2741,7 @@ header.homepage .header-wrapper h1 {
   margin: 0;
   line-height: 1.6;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
   header.homepage .header-wrapper h1 {
     font-size: 5.5rem;
   }
@@ -2649,7 +2753,7 @@ header.homepage .header-wrapper h1 {
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper h1 {
-    font-size: 3rem;
+    font-size: 3.6rem;
     letter-spacing: 4px;
   }
 }
@@ -2662,7 +2766,8 @@ header.homepage .header-wrapper h1 span {
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper h1 span {
-    padding: 20px 12px 9px;
+    padding: 12px 8px 3px;
+    margin-bottom: 8px;
   }
 }
 header.homepage .scroll {
@@ -2902,7 +3007,7 @@ header .sidebar {
   width: 25%;
   transition: all 0.4s ease-in-out;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
   header .sidebar {
     width: 30%;
   }
@@ -2912,14 +3017,9 @@ header .sidebar {
     width: 40%;
   }
 }
-@media only screen and (max-width: 768px) {
-  header .sidebar {
-    width: 50%;
-  }
-}
 @media only screen and (max-width: 576px) {
   header .sidebar {
-    width: 90%;
+    width: 84%;
   }
 }
 header .sidebar.active {
@@ -2927,11 +3027,16 @@ header .sidebar.active {
 }
 header .sidebar button {
   position: absolute;
-  right: 47px;
+  right: 62px;
   margin-top: 2rem;
   margin-bottom: 2rem;
   border: none;
   background: transparent;
+}
+@media only screen and (max-width: 576px) {
+  header .sidebar button {
+    right: 26px;
+  }
 }
 header .sidebar button:focus {
   outline: none;
@@ -2942,9 +3047,14 @@ header .sidebar .active {
 header .sidebar ul {
   margin: 120px 0 0;
   position: absolute;
-  right: 54px;
+  right: 70px;
   text-align: right;
   list-style: none;
+}
+@media only screen and (max-width: 576px) {
+  header .sidebar ul {
+    right: 30px;
+  }
 }
 header .sidebar ul li {
   margin-bottom: 4rem;
@@ -2984,8 +3094,8 @@ header .account-container {
   }
 }
 header .account-container ul {
-  padding: 40px 50px 0 20px;
-  margin: 10px;
+  padding: 10px 20px;
+  margin: 0;
 }
 @media only screen and (max-width: 576px) {
   header .account-container ul {
@@ -2993,10 +3103,10 @@ header .account-container ul {
   }
 }
 header .account-container ul li {
-  margin-bottom: 40px;
+  margin: 10px 0;
 }
 header .account-container ul li a {
-  font-size: 2rem;
+  font-size: 16px;
   font-weight: normal;
   color: inherit;
   display: flex;

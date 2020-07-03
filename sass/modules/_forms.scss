@@ -205,6 +205,18 @@ form {
       -moz-appearance: textfield;
     }
 
+    .currency-input {
+      position: relative;
+      input {
+        padding-left: 15px;
+      }
+      &::before {
+        content: '$';
+        position: absolute;
+        top: 2px;
+      }
+    }
+
     .small-width {
       width: 25%;
       margin-right: 2rem;
@@ -382,7 +394,15 @@ form {
 
     .select2 {
       margin-top: 31px;
-      margin-left: 5px
+      margin-left: 5px;
+
+      &.investor-country-code {
+        margin-top: 0;
+
+        &+.select2 {
+          margin: -9px 0 0;
+        }
+      }
     }
   }
 

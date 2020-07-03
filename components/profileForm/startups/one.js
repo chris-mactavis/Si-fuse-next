@@ -1,30 +1,28 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
-import {incrementCurrentState} from "../../../store/actions/profile";
+import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 import {useForm} from "react-hook-form";
 import Error from "../../UI/ErrorSpan";
 import axiosInstance from "../../../config/axios";
 import {loader} from "../../../store/actions/loader";
 import Cookies from "js-cookie";
-
 import DropNCrop from '@synapsestudios/react-drop-n-crop';
+import {showNotifier} from "../../../store/actions/notifier";
 
 export default function ProfileOne({startup, locations}) {
     const dispatch = useDispatch();
     const token = Cookies.get('token');
 
-    console.log(locations);
-
     useEffect(() => {
         setProfilePicture({
-            result: startup.profile && startup.profile.profile_pic_url ? startup.profile.profile_pic_url : [],
+            result: startup.profile && startup.profile.profile_pic_url ? startup.profile.profile_pic_url : '',
             filename: null,
             filetype: null,
             src: null,
             error: null,
         })
 
-        function formatState (state) {
+        function formatState(state) {
             if (!state.id) {
                 return state.text;
             }
@@ -61,6 +59,10 @@ export default function ProfileOne({startup, locations}) {
 
     const [flag, setFlag] = useState('');
 
+    const [adminError, setAdminError] = useState();
+
+    const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
+
     const nextPageHandler = async data => {
         dispatch(loader());
 
@@ -84,6 +86,8 @@ export default function ProfileOne({startup, locations}) {
             dispatch(incrementCurrentState());
         } catch (e) {
             dispatch(loader());
+            dispatch(showNotifier(e.response.data.message, 'danger'));
+            setAdminError(e.response.data.errors);
             console.log(e);
         }
     }
@@ -142,12 +146,17 @@ export default function ProfileOne({startup, locations}) {
                                              src={profilePicture.result}/>
                                     </>) : null
                             }
-                            <span className="d-block">{errors.profile_pic &&
-                            <Error>Please upload a profile picture!</Error>}</span>
+                            <span className="d-block">
+                                {errors.profile_pic &&
+                                <Error>Please upload a profile picture!</Error>}
+                                {getAdminError('profile_pic') && <Error>{getAdminError('profile_pic')}</Error>}
+                            </span>
 
                             <div className="d-flex">
                                 <div className="input-group-container w-25 country-div">
-                                    <select name="country_code" className="select2" ref={register({required: "This field is required"})} defaultValue={hasProfile() ? startup.profile.country_code : ''}>
+                                    <select name="country_code" className="select2"
+                                            ref={register({required: "This field is required"})}
+                                            defaultValue={hasProfile() ? startup.profile.country_code : ''}>
                                         {
                                             locations.map(({id, country_area_code, country}) => <option key={id}
                                                                                                         value={id}>{country_area_code} - {country}</option>)
@@ -163,6 +172,7 @@ export default function ProfileOne({startup, locations}) {
                                            defaultValue={hasProfile() ? startup.profile.phone : ''}
                                            placeholder="Phone number"/>
                                     {errors.phone && <Error>{errors.phone.message}</Error>}
+                                    {getAdminError('phone') && <Error>{getAdminError('phone')}</Error>}
                                 </div>
                             </div>
 
@@ -182,7 +192,12 @@ export default function ProfileOne({startup, locations}) {
                                       defaultValue={hasProfile() ? startup.profile.about : ''}/>
                             {errors.about && <Error>{errors.about.message}</Error>}
 
-                            <button className="btn btn-profile" type="submit">Save & Next</button>
+                            <div className="d-flex">
+                                <button className="btn btn-sm btn-profile mr-2"
+                                        onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                                </button>
+                                <button className="btn btn-sm btn-profile ml-2" type="submit">Save & Next</button>
+                            </div>
                         </form>
                     </div>
                 </div>

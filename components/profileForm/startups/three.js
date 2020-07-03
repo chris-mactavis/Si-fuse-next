@@ -4,7 +4,8 @@ import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {useDispatch} from "react-redux";
 import {loader} from "../../../store/actions/loader";
-import {incrementCurrentState} from "../../../store/actions/profile";
+import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
+import ErrorSpan from "../../UI/ErrorSpan";
 
 export default function ProfileThree({startup}) {
     useEffect(() => {
@@ -13,7 +14,7 @@ export default function ProfileThree({startup}) {
 
     const dispatch = useDispatch();
 
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, errors} = useForm();
     const hasProduct = () => startup.hasOwnProperty('product_services') && startup.product_services;
 
     const onSubmitHandler = async data => {
@@ -33,74 +34,95 @@ export default function ProfileThree({startup}) {
         }
     }
 
-    return <section className="profile profile-2 single-post">
-        <div className="container-fluid">
-            <div className="row">
+    return <>
+        <section className="profile profile-2 single-post">
+            <div className="container-fluid">
+                <div className="row">
 
-                <div className="col-md-3">
-                    <div className="numbers">
-                        <div className="number">1</div>
-                        <p>Basic information</p>
-                    </div>
-
-                    <div className="numbers only">
-                        <div className="number">2</div>
-                        <p className="">Your company</p>
-                    </div>
-
-                    <div className="numbers">
-                        <div className="number">3</div>
-                        <p className="">Product and Services</p>
-                    </div>
-
-                    <div className="numbers only">
-                        <div className="number fade">4</div>
-                        <p className="fade">Finance</p>
-                    </div>
-
-                    <div className="numbers">
-                        <div className="number fade">5</div>
-                        <p className="fade">Marketing</p>
-                    </div>
-                </div>
-                <div className="col-lg-9 col-12">
-                    <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
-                        <div className="numbers d-md-none num-alone">
-                            <div className="number">3</div>
-                            <p>Product and Services</p>
+                    <div className="col-md-3">
+                        <div className="numbers">
+                            <div className="number">1</div>
+                            <p>Basic information</p>
                         </div>
 
-                        <input ref={register} className="full-width" type="text" name="product_name"
-                               placeholder="Product Name" defaultValue={hasProduct() ? startup.product_services.product_name : ''}/>
+                        <div className="numbers only">
+                            <div className="number">2</div>
+                            <p className="">Your company</p>
+                        </div>
 
-                        <label>Customer Problem</label>
-                        <textarea ref={register} className="full-width" name="customer_problem" id="" cols="30"
-                                  rows="5" defaultValue={hasProduct() ? startup.product_services.customer_problem : ''}/>
+                        <div className="numbers">
+                            <div className="number">3</div>
+                            <p className="">Product and Services</p>
+                        </div>
 
-                        <label>Proposed Solution</label>
-                        <textarea ref={register} className="full-width" name="proposed_solution" id="" cols="30"
-                                  rows="5" defaultValue={hasProduct() ? startup.product_services.proposed_solution : ''}/>
+                        <div className="numbers only">
+                            <div className="number fade">4</div>
+                            <p className="fade">Finance</p>
+                        </div>
 
-                        <label>Value Proposition</label>
-                        <textarea ref={register} className="full-width" name="value_proposition" id="" cols="30"
-                                  rows="5" defaultValue={hasProduct() ? startup.product_services.value_proposition : ''}/>
+                        <div className="numbers">
+                            <div className="number fade">5</div>
+                            <p className="fade">Marketing</p>
+                        </div>
+                    </div>
+                    <div className="col-lg-9 col-12">
+                        <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
+                            <div className="numbers d-md-none num-alone">
+                                <div className="number">3</div>
+                                <p>Product and Services</p>
+                            </div>
 
-                        <label>Product Images</label>
-                        <input ref={register} className="full-width" name="product_images" placeholder="e.g. https://image.com/one.jpg, https://image.com/two.jpg"
-                                  defaultValue={hasProduct() ? startup.product_services.product_image_string : ''}/>
+                            <input ref={register({required: 'Please enter a product name'})} className="full-width mb-0"
+                                   type="text" name="product_name"
+                                   placeholder="Product Name"
+                                   defaultValue={hasProduct() ? startup.product_services.product_name : ''}/>
+                            {errors.product_name && <ErrorSpan>{errors.product_name.message}</ErrorSpan>}
 
-                        <label>Product Video</label>
-                        <input ref={register} type="url" className="full-width" name="product_video_url" placeholder="Product Video Url"
-                                  defaultValue={hasProduct() ? startup.product_services.product_video_url : ''}/>
+                            <label className="customer-problem-label">Customer Problem</label>
+                            <textarea ref={register} className="full-width" name="customer_problem" id="" cols="30"
+                                      rows="5"
+                                      defaultValue={hasProduct() ? startup.product_services.customer_problem : ''}/>
 
-                        <label>Pitch Video</label>
-                        <input ref={register} type="url" className="full-width" name="pitch_video_url" placeholder="Pitch Video Url"
-                               defaultValue={hasProduct() ? startup.product_services.pitch_video_url : ''}/>
+                            <label>Proposed Solution</label>
+                            <textarea ref={register} className="full-width" name="proposed_solution" id="" cols="30"
+                                      rows="5"
+                                      defaultValue={hasProduct() ? startup.product_services.proposed_solution : ''}/>
 
-                        <button className="btn btn-profile" type="submit">Save & Next</button>
-                    </form>
+                            <label>Value Proposition</label>
+                            <textarea ref={register} className="full-width" name="value_proposition" id="" cols="30"
+                                      rows="5"
+                                      defaultValue={hasProduct() ? startup.product_services.value_proposition : ''}/>
+
+                            <label>Product Images</label>
+                            <input ref={register} className="full-width" name="product_images"
+                                   placeholder="e.g. https://image.com/one.jpg, https://image.com/two.jpg"
+                                   defaultValue={hasProduct() ? startup.product_services.product_image_string : ''}/>
+
+                            <label>Product Video</label>
+                            <input ref={register} type="url" className="full-width" name="product_video_url"
+                                   placeholder="Product Video Url"
+                                   defaultValue={hasProduct() ? startup.product_services.product_video_url : ''}/>
+
+                            <label>Pitch Video</label>
+                            <input ref={register} type="url" className="full-width" name="pitch_video_url"
+                                   placeholder="Pitch Video Url"
+                                   defaultValue={hasProduct() ? startup.product_services.pitch_video_url : ''}/>
+
+                            <div className="d-flex">
+                                <button className="btn btn-sm btn-profile mr-2"
+                                        onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                                </button>
+                                <button className="btn btn-sm btn-profile ml-2" type="submit">Save & Next</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <style jsx>{`
+            .customer-problem-label {
+                margin-top: 4rem;
+            }
+        `}</style>
+    </>
 }

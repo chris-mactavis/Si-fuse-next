@@ -6,10 +6,11 @@ import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import Router from "next/router";
 import Cookies from "js-cookie";
-import {incrementCurrentState} from "../../../store/actions/profile";
+import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
+import ErrorSpan from "../../UI/ErrorSpan";
 
 const InvestorPreference = ({investor, industries}) => {
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, errors} = useForm();
 
     const dispatch = useDispatch();
 
@@ -74,6 +75,7 @@ const InvestorPreference = ({investor, industries}) => {
                                     industries.map(({industry, id}) => <option key={id} value={id}>{industry}</option>)
                                 }
                             </select>
+                            {errors.industry_id && <ErrorSpan>{errors.industry_id.message}</ErrorSpan>}
 
                             <select name="geographical_focus" defaultValue={hasInterests() ? investor.interests.geographical_focus : ''} ref={register}>
                                 <option value="">Geographical Focus</option>
@@ -84,7 +86,12 @@ const InvestorPreference = ({investor, industries}) => {
                                 <option value="Central Africa">Central Africa</option>
                             </select>
 
-                            <button className="btn btn-profile" type="submit">Save & Next</button>
+                            <div className="d-flex">
+                                <button className="btn btn-sm btn-profile mr-2"
+                                        onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                                </button>
+                                <button className="btn btn-sm btn-profile ml-2" type="submit">Save & Next</button>
+                            </div>
                         </form>
                     </div>
                 </div>

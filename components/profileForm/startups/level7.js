@@ -8,6 +8,7 @@ import LevelHeader from "./LevelHeader";
 import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
+import {showNotifier} from "../../../store/actions/notifier";
 
 const Level7 = ({startup}) => {
     const {register, handleSubmit} = useForm();
@@ -26,6 +27,10 @@ const Level7 = ({startup}) => {
     }
 
     const nextPageHandler = async data => {
+        if (data.scale.length === 0) {
+            dispatch(showNotifier('Please choose at least one option', 'danger'));
+            return;
+        }
         dispatch(loader());
         try {
             await axiosInstance.post('startups/level', {scale: JSON.stringify(data.scale)}, {

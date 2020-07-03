@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {incrementCurrentState} from "../../../store/actions/profile";
+import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 import React, {useCallback, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import Error from "../../UI/ErrorSpan";
@@ -7,9 +7,16 @@ import DropNCrop from "@synapsestudios/react-drop-n-crop";
 import axiosInstance from "../../../config/axios";
 import {loader} from "../../../store/actions/loader";
 import Token from "../../../utils/Token";
+import {showNotifier} from "../../../store/actions/notifier";
 
 export default function ProfileTwo({industries, startup, locations}) {
     const dispatch = useDispatch();
+    const [size, setSize] = useState(startup.company && startup.company.hasOwnProperty('teams') ? startup.company.teams.length : 1);
+    const [adminError, setAdminError] = useState();
+
+    const createArrayWithNumbers = length => {
+        return Array.from({length}, (_, k) => k + 0);
+    }
     const {register, handleSubmit, errors, getValues, formState, triggerValidation} = useForm();
     const [profilePicture, setProfilePicture] = useState({
         result: null,
@@ -18,12 +25,12 @@ export default function ProfileTwo({industries, startup, locations}) {
         src: null,
         error: null,
     });
-    console.log(startup);
     const hasCompany = () => startup.hasOwnProperty('company') && startup.company;
+
 
     useEffect(() => {
         setProfilePicture({
-            result: startup.company && startup.company.logo_url ? startup.company.logo_url : [],
+            result: startup.company && startup.company.logo_url ? startup.company.logo_url : '',
             filename: null,
             filetype: null,
             src: null,
@@ -42,7 +49,7 @@ export default function ProfileTwo({industries, startup, locations}) {
     );
 
     const hasError = field => errors[field] !== undefined;
-    const getError = field => hasError(field) && errors[field].message;
+    const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
 
     const validateIndustries = () => {
         const values = getValues({nest: true});
@@ -73,6 +80,8 @@ export default function ProfileTwo({industries, startup, locations}) {
             dispatch(incrementCurrentState());
         } catch (e) {
             console.log(e)
+            dispatch(showNotifier(e.response.data.message, 'danger'));
+            setAdminError(e.response.data.errors);
             dispatch(loader());
         }
     }
@@ -147,17 +156,23 @@ export default function ProfileTwo({industries, startup, locations}) {
                             <span className="d-block">{errors.industry_id &&
                             <Error>{errors.industry_id.message}</Error>}</span>
 
-                            <input ref={register} className="w-100 full-width" name="tagline" placeholder="Enter your Tagline" defaultValue={hasCompany() ? startup.company.tagline : ''} />
+                            <input ref={register} className="w-100 full-width" name="tagline"
+                                   placeholder="Enter your Tagline"
+                                   defaultValue={hasCompany() ? startup.company.tagline : ''}/>
 
                             <label htmlFor="" className="mt-5">Date of Creation</label>
-                            <input ref={register} className="w-100 full-width mt-0" name="doc" type="date" placeholder="Date of Creation" defaultValue={hasCompany() ? startup.company.doc : ''} />
+                            <input ref={register} className="w-100 full-width mt-0" name="doc" type="date"
+                                   placeholder="Date of Creation"
+                                   defaultValue={hasCompany() ? startup.company.doc : ''}/>
 
                             <input className="full-width" type="text"
                                    ref={register({required: 'Please enter a company name'})} name="name" id=""
                                    defaultValue={hasCompany() ? startup.company.name : ''}
                                    placeholder="Company name"/>
-                            <span className="d-block">{errors.name &&
-                            <Error>{errors.name.message}</Error>}</span>
+                            <span className="d-block">
+                                {errors.name && <Error>{errors.name.message}</Error>}
+                                {getAdminError('name') && <Error>{getAdminError('name')}</Error>}
+                            </span>
 
                             <input ref={register({
                                 required: 'Please enter a website url',
@@ -173,38 +188,70 @@ export default function ProfileTwo({industries, startup, locations}) {
 
                             <select ref={register({required: 'Please select a Location'})} name="location_id" id=""
                                     defaultValue={hasCompany() ? startup.company.location_id : ''}>
-                                <option value="">Select Location</option>
-                                {locations.map(({country, id}) => <option value={id} key={id}>{country}</option>)}
+                                <option value="">Select Country</option>
+                                {locations.filter(country => country.continent_code === 'AF').map(({country, id}) => <option value={id} key={id}>{country}</option>)}
                             </select>
+                            {errors.location_id && <Error>{errors.location_id.message}</Error>}
+                            {getAdminError('location_id') && <Error>{getAdminError('location_id')}</Error>}
 
-                            <input ref={register} className="w-100 full-width" type="email" name="email" placeholder="Company Email Address" defaultValue={hasCompany() ? startup.company.email : ''} />
+                            <input ref={register} className="w-100 full-width" type="email" name="email"
+                                   placeholder="Company Email Address"
+                                   defaultValue={hasCompany() ? startup.company.email : ''}/>
 
-                            <input ref={register} className="w-100 full-width" type="text" name="phone" placeholder="Company Phone Number" defaultValue={hasCompany() ? startup.company.phone : ''} />
+                            <input ref={register} className="w-100 full-width" type="text" name="phone"
+                                   placeholder="Company Phone Number"
+                                   defaultValue={hasCompany() ? startup.company.phone : ''}/>
 
                             <label htmlFor="" className="business_summary">Company Address</label>
-                            <textarea ref={register} className="w-100 full-width" name="address" rows="5" placeholder="Company Address" defaultValue={hasCompany() ? startup.company.address : ''} />
+                            <input ref={register} className="w-100 full-width mt-0" name="address"
+                                      placeholder="Company Address"
+                                      defaultValue={hasCompany() ? startup.company.address : ''}/>
 
-                            <select ref={register} className="w-100 full-width mt-0" name="no_of_team" defaultValue={hasCompany() ? startup.company.no_of_team : ''}>
+                            <select ref={register} className="w-100 full-width" name="no_of_team"
+                                    defaultValue={hasCompany() ? startup.company.no_of_team : ''}>
                                 <option>Number of Team</option>
                                 <option value="1-10">1 - 10</option>
                                 <option value="11-50">11 - 50</option>
                                 <option value="50 and above">50 and above</option>
                             </select>
 
-                            <label htmlFor="" className="business_summary">Team Members and Roles</label>
-                            <textarea ref={register} className="w-100 full-width" name="team_members_roles" rows="5" placeholder="Team Members and Roles" defaultValue={hasCompany() ? startup.company.team_members_roles : ''} />
+                            <label htmlFor="" className="business_summary mb-0">Team Members and Roles</label>
+                            {
+                                createArrayWithNumbers(size).map(index => <div
+                                        className='d-flex justify-content-between align-items-end' key={index}>
+                                        <input type="text" ref={register({required: 'This field is required'})}
+                                               name={`team[${index}]`} className="small-width-sm mr-3 mt-4 w-100"
+                                               placeholder="Team Members" defaultValue={hasCompany() && startup.company.members.length > 0 ? startup.company.members[index] : ''}/>
 
-                            <label htmlFor="Social links" className="social-links">Social links</label>
+                                        <input type="text" ref={register({required: 'This field is required'})}
+                                               name={`role[${index}]`} className="small-width-sm mx-3 mt-4 w-100"
+                                               placeholder="Roles" defaultValue={hasCompany() && startup.company.roles.length > 0 ? startup.company.roles[index] : ''}/>
+
+                                        <div>
+                                            {
+                                                index < size - 1 && <div className="team-button minus"
+                                                     onClick={() => setSize(size - 1)}></div>
+                                            }
+
+                                            {
+                                                index === size - 1 && <div className="team-button plus" onClick={() => setSize(size + 1)}></div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                )}
+
+                            <label htmlFor="Social links" className="business_summary">Social links</label>
                             <div className="d-flex flex-column social-links-input">
                                 <div className="d-flex justify-content-between">
-                                    <div className="link-container facebook">
+                                    <div className="link-container facebook w-100">
                                         <input ref={register} name="facebook" type="text"
                                                className="small-width-sm mt-0 mr-3"
                                                defaultValue={hasCompany() ? startup.company.facebook : ''}
                                                placeholder="Facebook"/>
                                     </div>
 
-                                    <div className="link-container second instagram">
+                                    <div className="link-container second instagram w-100">
                                         <input ref={register} name="instagram" type="text"
                                                className="small-width-sm mt-0 ml-3"
                                                defaultValue={hasCompany() ? startup.company.instagram : ''}
@@ -213,14 +260,14 @@ export default function ProfileTwo({industries, startup, locations}) {
                                 </div>
 
                                 <div className="d-flex justify-content-between">
-                                    <div className="link-container twitter">
+                                    <div className="link-container twitter w-100">
                                         <input ref={register} name="twitter" type="text"
                                                className="small-width-sm mt-2 mr-3"
                                                defaultValue={hasCompany() ? startup.company.twitter : ''}
                                                placeholder="Twitter"/>
                                     </div>
 
-                                    <div className="link-container second linked-in">
+                                    <div className="link-container second linked-in w-100">
                                         <input ref={register} name="linkedin" type="text"
                                                className="small-width-sm mt-2 ml-3"
                                                defaultValue={hasCompany() ? startup.company.linkedin : ''}
@@ -239,7 +286,8 @@ export default function ProfileTwo({industries, startup, locations}) {
                                       defaultValue={hasCompany() ? startup.company.value_proposition : ''}
                                       id="value-proposition" cols="30" rows="5"/>
 
-                            <select ref={register} multiple className="w-100 full-width mt-0" name="clients_serviced" defaultValue={hasCompany() ? startup.company.clients_serviced : ''}>
+                            <select ref={register} multiple className="w-100 full-width mt-0" name="clients_serviced"
+                                    defaultValue={hasCompany() ? startup.company.clients_serviced : ''}>
                                 <option>Clients Serviced (Multiple Option choice)</option>
                                 <option value="B2B">B2B</option>
                                 <option value="B2B2B">B2B2B</option>
@@ -251,7 +299,8 @@ export default function ProfileTwo({industries, startup, locations}) {
                                 <option value="Non Profit">Non Profit</option>
                             </select>
 
-                            <select name="company_stage" ref={register} defaultValue={hasCompany() ? startup.company.company_stage : ''}>
+                            <select name="company_stage" ref={register}
+                                    defaultValue={hasCompany() ? startup.company.company_stage : ''}>
                                 <option value="">Company Stage</option>
                                 <option value="concept">Concept</option>
                                 <option value="early stage">Early stage</option>
@@ -259,7 +308,12 @@ export default function ProfileTwo({industries, startup, locations}) {
                                 <option value="established">Established</option>
                             </select>
 
-                            <button className="btn btn-profile" type="submit">Save & Next</button>
+                            <div className="d-flex">
+                                <button className="btn btn-sm btn-profile mr-2"
+                                        onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                                </button>
+                                <button className="btn btn-sm btn-profile ml-2" type="submit">Save & Next</button>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 .notification {
   position: fixed;
   display: flex;
-  bottom: 20px;
+  top: 50px;
   right: -40px;
   z-index: 100;
   opacity: 0;
@@ -10,7 +10,7 @@
   padding: 10px 30px 10px 60px;
   transition: .3s all;
 
-  background-color: white;
+  color: white;
 
   &::before {
     content: '';
@@ -24,18 +24,18 @@
   }
 
   &.success {
-    color: green;
+    background-color: green;
 
     &::before {
-      background-image: url("/images/icon/tick.png");
+      background-image: url("/images/icon/tick.svg");
     }
   }
 
   &.danger {
-    color: #D12B19;
+    background-color: #D12B19;
 
     &::before {
-      background-image: url("/images/icon/alert.png");
+      background-image: url("/images/icon/alert-white.svg");
     }
   }
 
