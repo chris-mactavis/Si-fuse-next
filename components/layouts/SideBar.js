@@ -80,15 +80,15 @@ export default function SideBar({isLoggedIn = false}) {
                             loggedInUser && loggedInUser.user_type.user_type === 'Investor'
                                 ? <>
                                     <li>
-                                        <Link href="/connections">
-                                            <a><img src="/images/icon/connection-icon.svg" alt=""
-                                                    className="img-fluid"/> Connections</a>
-                                        </Link>
-                                    </li>
-                                    <li>
                                         <Link href="/timeline">
                                             <a><img src="/images/icon/connection-icon.svg" alt=""
                                                     className="img-fluid"/> My Timeline</a>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/connections">
+                                            <a><img src="/images/icon/connection-icon.svg" alt=""
+                                                    className="img-fluid"/> Connections</a>
                                         </Link>
                                     </li>
                                 </>

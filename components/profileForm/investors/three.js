@@ -12,6 +12,7 @@ import ErrorSpan from "../../UI/ErrorSpan";
 const InvestorMoreInfo = ({investor, stages}) => {
     const dispatch = useDispatch();
     const {register, handleSubmit, errors} = useForm();
+    
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
