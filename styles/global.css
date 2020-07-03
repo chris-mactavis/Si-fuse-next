@@ -2389,7 +2389,7 @@ input:focus, textarea:focus, select:focus, option:focus button {
 .notification {
   position: fixed;
   display: flex;
-  bottom: 20px;
+  top: 20px;
   right: -40px;
   z-index: 100;
   opacity: 0;
