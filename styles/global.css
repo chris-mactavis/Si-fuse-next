@@ -3017,14 +3017,9 @@ header .sidebar {
     width: 40%;
   }
 }
-@media only screen and (max-width: 768px) {
-  header .sidebar {
-    width: 50%;
-  }
-}
 @media only screen and (max-width: 576px) {
   header .sidebar {
-    width: 90%;
+    width: 84%;
   }
 }
 header .sidebar.active {
@@ -3038,6 +3033,11 @@ header .sidebar button {
   border: none;
   background: transparent;
 }
+@media only screen and (max-width: 576px) {
+  header .sidebar button {
+    right: 26px;
+  }
+}
 header .sidebar button:focus {
   outline: none;
 }
@@ -3050,6 +3050,11 @@ header .sidebar ul {
   right: 70px;
   text-align: right;
   list-style: none;
+}
+@media only screen and (max-width: 576px) {
+  header .sidebar ul {
+    right: 30px;
+  }
 }
 header .sidebar ul li {
   margin-bottom: 4rem;
