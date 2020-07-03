@@ -7,11 +7,9 @@ import {loader} from "../store/actions/loader";
 import StartupProfile from "./profiles/StartupProfile";
 import InvestorProfile from "./profiles/InvestorProfile";
 
-const Profile = ({company, services, finance, market, userType, profile, interests, level = null, hasEdit = false, id = null, isConnected = null, profileContent = null, connections = []}) => {
+const Profile = ({company, services, finance, market, userType, profile, interests, level = null, hasEdit = false, id = null, isConnected = null, profileContent = null, connections = [], loggedInUser, hasPermission}) => {
 
     const [connected, setConnected] = useState(isConnected);
-
-    console.log(services);
 
     const dispatch = useDispatch();
     const connectHandler = async () => {
@@ -54,8 +52,12 @@ const Profile = ({company, services, finance, market, userType, profile, interes
     return <>
         {
             userType.toLowerCase() === 'startup'
-                ? <StartupProfile company={company} services={services} finance={finance} level={level} market={market} profile={profile} profileContent={profileContent} hasEdit={hasEdit}/>
-                : <InvestorProfile profile={profile} interests={interests} connections={connections}/>
+                ?
+                <StartupProfile company={company} services={services} userType="startup" finance={finance} level={level}
+                                market={market} profile={profile} profileContent={profileContent} hasEdit={hasEdit}
+                                loggedInUser={loggedInUser} hasPermission={hasPermission}/>
+                :
+                <InvestorProfile profile={profile} interests={interests} userType="investor" connections={connections}/>
         }
         <style jsx>{`
             .person .has-edit {
