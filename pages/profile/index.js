@@ -8,7 +8,7 @@ import Profile from "../../components/Profile";
 import {User} from "../../utils/User";
 import {profileMiddleWare} from "../../components/hoc/auth";
 
-const ProfilePage = ({canView, data: {company, product_services: services, finance, market, profile, interests, level, connections}, userType, profileContent}) => {
+const ProfilePage = ({canView, data: {company, product_services: services, finance, market, profile, interests, level, connections}, userType, profileContent, loggedInUser}) => {
     if (!canView) {
         Router.push('/profile/edit');
         return null;
@@ -20,7 +20,9 @@ const ProfilePage = ({canView, data: {company, product_services: services, finan
                 <title>My Profile</title>
             </Head>
 
-            <Profile company={company} services={services} finance={finance} market={market} level={level} profile={profile} interests={interests} userType={userType} hasEdit profileContent={profileContent} connections={connections} />
+            <Profile company={company} services={services} finance={finance} market={market} level={level}
+                     profile={profile} interests={interests} userType={userType} hasEdit profileContent={profileContent}
+                     connections={connections} loggedInUser={loggedInUser}/>
         </Layout>
         <style jsx>{`
             .services-stage {
@@ -44,12 +46,14 @@ ProfilePage.getInitialProps = async (ctx) => {
     const url = user.user_type.user_type === 'Investor' ? 'investors' : 'startups';
     const {data: response} = await axiosInstance.get(url, headers);
     const {data: profileContent} = await axiosInstance.get('profile-content', headers);
+    const loggedInUser = User(ctx);
 
     return {
         data: response.data,
         userType: user.user_type.user_type,
         profileContent,
-        canView: isLoggedIn && hasProfile
+        canView: isLoggedIn && hasProfile,
+        loggedInUser
     }
 }
 

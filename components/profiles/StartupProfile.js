@@ -8,11 +8,15 @@ import {showNotifier} from "../../store/actions/notifier";
 import {showImageViewer, showVideoViewer} from "../../store/actions/imageViewer";
 import StartupProfileLevels from "./StartupLevels";
 
-const StartupProfile = ({company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}}) => {
+const StartupProfile = ({company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
     const dispatch = useDispatch();
 
     let levelKeys = [];
-    console.log(level);
+
+    const userType = loggedInUser.user_type.user_type;
+
+    const [connected, setConnected] = useState(isConnected);
+
     if (level) {
         levelKeys = Object.keys(level);
         level = levelKeys.map(key => {
@@ -23,15 +27,23 @@ const StartupProfile = ({company, services: product_services, finance, market, l
         })
     }
 
-    const [hasAccessToProfile, setAccessToProfile] = useState(false);
-
-    const requestPermissionHandler = () => {
+    const requestPermissionHandler = async () => {
         dispatch(loader());
-        setTimeout(() => {
+        try {
+            await axiosInstance.post(`investors/request-permission`, {
+                startup_id: profile.user_id
+            }, {
+                headers: {
+                    Authorization: `Bearer ${Token()}`
+                }
+            })
             dispatch(loader());
-            dispatch(showNotifier('Profile request sent!'))
-        }, 1000);
-        // setAccessToProfile(true);
+            dispatch(showNotifier('Profile request sent!'));
+        } catch (e) {
+            console.log(e);
+            dispatch(loader());
+            dispatch(showNotifier(e.response.data.message));
+        }
     }
 
     useEffect(() => {
@@ -73,20 +85,20 @@ const StartupProfile = ({company, services: product_services, finance, market, l
         });
 
         financeBtn.click(function () {
-            if (!hasAccessToProfile) return;
+            if (!hasPermission) return;
             $('html, body').animate({
                 scrollTop: $('#finance').offset().top - 20
             }, 1000);
         });
 
         marketingSummaryBtn.click(function () {
-            if (!hasAccessToProfile) return;
+            if (!hasPermission) return;
             $('html, body').animate({
                 scrollTop: $('#marketingSummary').offset().top - 20
             }, 1000);
         });
 
-    }, [hasAccessToProfile]);
+    }, [hasPermission]);
 
     const [toggleAbout, setAbout] = useState(false);
     const [toggleFund, setFund] = useState(false);
@@ -259,15 +271,36 @@ const StartupProfile = ({company, services: product_services, finance, market, l
         }
     }
 
-    const connectHandler = async data => {
+    const disconnectHandler = async () => {
         dispatch(loader());
         try {
-            const {data: response} = await axiosInstance.post(`connect`, null, {
+            const {data: response} = await axiosInstance.post(`investors/unfollow`, {
+                follower_id: id
+            }, {
+                headers: {
+                    Authorization: `Bearer ${Token()}`
+                }
+            });
+            setConnected(false);
+            dispatch(loader());
+        } catch (e) {
+            console.log(e.response.data.message);
+            dispatch(loader());
+        }
+    }
+
+    const connectHandler = async () => {
+        dispatch(loader());
+        try {
+            const {data: response} = await axiosInstance.post(`investors/follows`, {
+                follower_id: profile.user_id
+            }, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
             console.log(response);
+            setConnected(true);
             dispatch(showNotifier('Connected Successfully'));
             dispatch(loader());
         } catch (e) {
@@ -311,7 +344,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                             </p>
                             <p><img className="location-img" src="/images/icon/location.svg" alt=""/> Lagos, Nigeria</p>
                             <p>{startupProf.company.website}</p>
-                            {!hasEdit && <button onSubmit={connectHandler} className="btn">Connect</button>}
+                            {(!hasEdit && !connected) && <button onClick={connectHandler} className="btn">Connect</button>}
                         </div>
                         <button className="startup-link-view" id="overview-btn">
                             Overview <img src="/images/icon/pie-chart.svg" alt=""/>
@@ -322,11 +355,11 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                         <button className="startup-link-view" id="product-services-btn">
                             Product and Services <img src="/images/icon/product-service-icon.svg" alt=""/>
                         </button>
-                        <button className={`startup-link-view ${!hasAccessToProfile ? 'fade-out' : ''}`}
+                        <button className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
                                 id="finance-btn">
                             Finance <img src="/images/icon/finance-white-icon.svg" alt=""/>
                         </button>
-                        <button className={`startup-link-view ${!hasAccessToProfile ? 'fade-out' : ''}`}
+                        <button className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
                                 id="marketing-summary-btn">
                             Marketing Summary <img src="/images/icon/market-summary-white.svg" alt=""/>
                         </button>
@@ -472,7 +505,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                         }
                     </div>
 
-                    <div className={`startup-heading product-services ${!hasAccessToProfile ? 'fade-out' : ''}`}
+                    <div className={`startup-heading product-services ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
                          id="productServices">
                         <h5>Products and Services</h5>
                         <div className="row">
@@ -533,7 +566,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                             </div>
                         </div>
                         {
-                            hasAccessToProfile &&
+                            (userType === 'Startup' || hasPermission) &&
                             <>
                                 <div className="row">
                                     <div className="col-md-6">
@@ -629,15 +662,18 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                         }
                     </div>
 
-                    {!hasAccessToProfile &&
-                    <div className="request-access d-flex flex-column align-items-center justify-content-center w-100">
-                        <img src="/images/icon/lock.svg" alt=""/>
-                        <button className="btn" onClick={requestPermissionHandler}>Request Permission</button>
-                    </div>}
+                    {
+                        !hasPermission && userType !== 'Startup' &&
+                        <div
+                            className="request-access d-flex flex-column align-items-center justify-content-center w-100">
+                            <img src="/images/icon/lock.svg" alt=""/>
+                            <button className="btn" onClick={requestPermissionHandler}>Request Permission</button>
+                        </div>
+                    }
 
 
                     {
-                        hasAccessToProfile && <>
+                        (userType === 'Startup' || hasPermission) && <>
                             <div className="startup-heading" id="finance">
                                 <h5>Finance</h5>
                                 <div className="row">

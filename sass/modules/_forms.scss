@@ -394,7 +394,15 @@ form {
 
     .select2 {
       margin-top: 31px;
-      margin-left: 5px
+      margin-left: 5px;
+
+      &.investor-country-code {
+        margin-top: 0;
+
+        &+.select2 {
+          margin: -9px 0 0;
+        }
+      }
     }
   }
 

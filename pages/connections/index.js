@@ -4,6 +4,7 @@ import React from "react";
 import StartupComponent from "../../components/discover/StartupComponent";
 import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
+import StartupCard from "../../components/startups/startupCard";
 
 export default function Connections({connections}) {
     console.log(connections);
@@ -13,7 +14,7 @@ export default function Connections({connections}) {
             <title>Connections</title>
         </Head>
 
-        <section className="events discover">
+        <section className="connections">
             <div className="container">
                 <div className="row">
                     <div className="col-12">
@@ -24,7 +25,7 @@ export default function Connections({connections}) {
                     connections.length > 0 && <div className="row">
                         {
                             connections.map(user => {
-                                return <StartupComponent key={user.id} user={user}/>
+                                return <StartupCard key={user.id} startup={user}/>
                             })
                         }
                     </div>

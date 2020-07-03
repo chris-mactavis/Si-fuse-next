@@ -8,6 +8,7 @@ import {loader} from "../../store/actions/loader";
 import React, {useState} from "react";
 import {storeAuth} from "../../store/actions/auth";
 import Router from "next/router";
+import {showNotifier} from "../../store/actions/notifier";
 
 export default function SignupForm({countries, userTypes, query}) {
     const {register, handleSubmit, errors, watch} = useForm();
@@ -23,7 +24,8 @@ export default function SignupForm({countries, userTypes, query}) {
             Router.push('/profile/edit');
         } catch (e) {
             dispatch(loader());
-            throw new Error(e.message);
+            dispatch(showNotifier(e.response.data.message, 'danger'));
+            throw new Error(e.response.data.message);
         }
     }
 

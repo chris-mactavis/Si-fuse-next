@@ -16,10 +16,14 @@ h1 {
 }
 
 h2 {
-  font-size: 5rem;
+  font-size: 4.8rem;
   font-family: $league-spartan;
   text-transform: uppercase;
   color: $color-black;
+
+  @include media("mobile"){
+    font-size: 4rem;
+  }
 }
 
 h3 {
