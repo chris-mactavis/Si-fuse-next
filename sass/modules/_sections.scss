@@ -13,7 +13,7 @@ section {
         height: 100px;
         margin-bottom: -38px;
 
-        @media only screen and (max-width: $min_wide_width) {
+        @media only screen and (max-width: $wide_width) {
           margin-bottom: -32px;
         }
 
@@ -30,7 +30,7 @@ section {
           text-align: left;
         }
 
-        @media only screen and (max-width: $min_wide_width) {
+        @media only screen and (max-width: $wide_width) {
           font-size: 3.5rem;
         }
 
@@ -130,13 +130,13 @@ section {
       position: relative;
     }
 
-    h2 {
-      margin-bottom: 2rem;
-
-      @media only screen and (max-width: $mobile_width) {
-        font-size: 3.5rem;
-      }
-    }
+    //h2 {
+    //  margin-bottom: 2rem;
+    //
+    //  @media only screen and (max-width: $mobile_width) {
+    //    font-size: 3.5rem;
+    //  }
+    //}
 
     .card {
       border: none;

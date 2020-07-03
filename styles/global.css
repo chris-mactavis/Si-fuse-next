@@ -259,10 +259,15 @@ h1 {
 }
 
 h2 {
-  font-size: 5rem;
+  font-size: 4.8rem;
   font-family: "League Spartan", sans-serif;
   text-transform: uppercase;
   color: #3E3E3E;
+}
+@media only screen and (max-width: 576px) {
+  h2 {
+    font-size: 4rem;
+  }
 }
 
 h3 {
@@ -1033,14 +1038,6 @@ section.events {
 }
 section.events .event-slider {
   position: relative;
-}
-section.events h2 {
-  margin-bottom: 2rem;
-}
-@media only screen and (max-width: 576px) {
-  section.events h2 {
-    font-size: 3.5rem;
-  }
 }
 section.events .card {
   border: none;
@@ -1884,7 +1881,7 @@ section.startup-content .startup-sidebar {
   width: 350px;
   z-index: 100;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
   section.startup-content .startup-sidebar {
     width: 300px;
   }
@@ -2613,46 +2610,77 @@ nav.navbar .logo-small-screen {
   }
 }
 
-footer {
-  padding: 6rem 0 5rem;
+footer .footer-content {
+  padding: 6rem 0 2rem;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), black), url(/images/footer-bg.png);
   background-size: cover;
 }
-footer h5 {
+footer .footer-content h5 {
   text-transform: uppercase;
   color: #fff;
   font-weight: bold;
   margin-bottom: 2rem;
   font-size: 20px;
 }
-footer ul {
+footer .footer-content ul {
   list-style: none;
   padding-left: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 }
-footer ul li {
+footer .footer-content ul li {
   color: #fff;
   margin-bottom: 2rem;
 }
-footer .social-icons {
-  display: flex;
-  flex-direction: column;
-}
-footer .social-icons a {
-  margin-bottom: 8px;
-}
-@media only screen and (max-width: 992px) {
-  footer .social-icons a {
-    margin-left: 10px;
-  }
-}
-footer a {
+footer .footer-content a {
   font-weight: normal;
 }
-footer .logo {
+footer .footer-content .logo-column {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column {
+    flex-direction: column;
+    justify-content: start;
+  }
+}
+footer .footer-content .logo-column .logo {
   height: 120px;
   width: auto;
   margin-right: 20px;
+}
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column .logo {
+    height: 72px;
+  }
+}
+footer .footer-content .logo-column .social-icons {
+  display: flex;
+  flex-direction: column;
+}
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column .social-icons {
+    flex-direction: row;
+  }
+}
+footer .footer-content .logo-column .social-icons a {
+  margin-bottom: 8px;
+  margin-left: 10px;
+}
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column .social-icons a {
+    margin: 10px 8px 0 0;
+  }
+}
+footer .copy-wrapper {
+  text-align: center;
+}
+footer .copy-wrapper p {
+  margin-bottom: 0;
+  padding: 10px 0;
+  background: #D32907;
+  color: white;
 }
 
 header.homepage {
@@ -2660,6 +2688,11 @@ header.homepage {
   height: 100vh;
   background-size: cover;
   position: relative;
+}
+@media only screen and (max-width: 576px) {
+  header.homepage {
+    height: 70vh;
+  }
 }
 header.homepage .navbar-brand {
   left: calc(50% + 6px) !important;
@@ -2702,7 +2735,7 @@ header.homepage .header-wrapper h1 {
   margin: 0;
   line-height: 1.6;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
   header.homepage .header-wrapper h1 {
     font-size: 5.5rem;
   }
@@ -2714,7 +2747,7 @@ header.homepage .header-wrapper h1 {
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper h1 {
-    font-size: 3rem;
+    font-size: 3.6rem;
     letter-spacing: 4px;
   }
 }
@@ -2727,7 +2760,8 @@ header.homepage .header-wrapper h1 span {
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper h1 span {
-    padding: 20px 12px 9px;
+    padding: 12px 8px 3px;
+    margin-bottom: 8px;
   }
 }
 header.homepage .scroll {
@@ -2967,7 +3001,7 @@ header .sidebar {
   width: 25%;
   transition: all 0.4s ease-in-out;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
   header .sidebar {
     width: 30%;
   }

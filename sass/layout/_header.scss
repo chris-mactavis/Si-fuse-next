@@ -5,6 +5,10 @@ header {
     background-size: cover;
     position: relative;
 
+    @include media("mobile"){
+      height: 70vh;
+    }
+
     .navbar-brand {
       left: calc(50% + 6px)!important;
     }
@@ -16,14 +20,14 @@ header {
       transform: translateY(-50%);
       top: 50%;
 
-      @media only screen and (max-width: $mobile_width) {
+      @include media("mobile"){
         margin: 0 30px;
       }
 
       .social-icons {
         margin: 20px 100px 0 0;
 
-        @media only screen and (max-width: $mobile_width) {
+        @include media("mobile"){
           display: none;
         }
 
@@ -48,16 +52,16 @@ header {
         margin: 0;
         line-height: 1.6;
 
-        @media only screen and (max-width: $wide_width) {
+        @include media("desktop"){
           font-size: 5.5rem;
         }
 
-        @media only screen and (max-width: $desktop_width) {
+        @include media("tablet"){
           font-size: 4.5rem;
         }
 
-        @media only screen and (max-width: $mobile_width) {
-          font-size: 3rem;
+        @include media("mobile"){
+          font-size: 3.6rem;
           letter-spacing: 4px;
         }
 
@@ -68,8 +72,9 @@ header {
           display: inline-block;
           padding: 20px 12px 0;
 
-          @media only screen and (max-width: $mobile_width) {
-            padding: 20px 12px 9px;
+          @include media("mobile"){
+            padding: 12px 8px 3px;
+            margin-bottom: 8px;
           }
         }
       }
