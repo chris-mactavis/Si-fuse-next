@@ -202,7 +202,7 @@ const Home = ({events, blogs}) => {
             </div>
         </section>
 
-        <section className="events posts">
+        <section className="posts">
             <div className="container">
                 <div className="row">
                     <div className="col-12">
@@ -218,7 +218,13 @@ const Home = ({events, blogs}) => {
                                 <Link href="blog/[slug]" as={`blog/${slug}`}>
                                     <a className="post"
                                        style={{backgroundImage: `url(${image})`}}>
-                                        <p>{title}</p>
+                                        <p>
+                                            {title}
+
+                                            <span className="view">
+                                                view <img src="images/icon/right.png"/>
+                                            </span>
+                                        </p>
                                     </a>
                                 </Link>
                             </div>

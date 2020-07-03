@@ -1175,6 +1175,7 @@ section.events .slick-next::before {
 }
 section.posts {
   background: #ECEFF1;
+  padding: 6rem 0;
 }
 section.posts .post {
   background-repeat: no-repeat;
@@ -1193,13 +1194,32 @@ section.posts .post::after {
   width: 100%;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
 }
-section.posts p {
+section.posts .post p {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
   z-index: 100;
+}
+section.posts .post p span.view {
+  display: block;
+  text-transform: uppercase;
+  margin-top: 20px;
+  position: relative;
+  top: 150px;
+  transition: top 0.3s;
+}
+section.posts .post p span.view img {
+  margin-left: 1rem;
+  height: 14px;
+  position: relative;
+  top: -1px;
+  display: inline;
+}
+section.posts .post:hover p span.view {
+  top: 0;
+  transition: top 0.3s;
 }
 section.posts .slick-dots {
   bottom: -36px;

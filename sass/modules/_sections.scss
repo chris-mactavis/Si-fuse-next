@@ -298,6 +298,7 @@ section {
   &.posts {
     //  background: $dark-light;
     background: #ECEFF1;
+    padding: 6rem 0;
 
     .post {
       background-repeat: no-repeat;
@@ -316,12 +317,38 @@ section {
         width: 100%;
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
       }
-    }
 
-    p {
-      @include abs-center;
-      color: #fff;
-      z-index: 100;
+      p {
+        @include abs-center;
+        color: #fff;
+        z-index: 100;
+
+        span.view{
+          display: block;
+          text-transform: uppercase;
+          margin-top: 20px;
+          position: relative;
+          top: 150px;
+          transition: top 0.3s;
+
+          img {
+            margin-left: 1rem;
+            height: 14px;
+            position: relative;
+            top: -1px;
+            display: inline;
+          }
+        }
+      }
+
+      &:hover{
+        p{
+          span.view{
+            top: 0;
+            transition: top 0.3s;
+          }
+        }
+      }
     }
 
     .slick-dots {
