@@ -78,25 +78,25 @@ export default function Footer() {
                     </Link>
 
                     <div className="social-icons">
-                        <Link href="">
+                        <Link href="//www.facebook.com/SI-Fuse-105249634372571/">
                             <a target="_blank">
                                 <img src="/images/icon/facebook.svg" alt=""/>
                             </a>
                         </Link>
 
-                        <Link href="">
+                        <Link href="//twitter.com/sifuse1">
                             <a target="_blank">
                                 <img src="/images/icon/twitter.svg" alt=""/>
                             </a>
                         </Link>
 
-                        <Link href="">
+                        <Link href="//www.instagram.com/sifuse_africa/">
                             <a target="_blank">
                                 <img src="/images/icon/instagram.svg" alt=""/>
                             </a>
                         </Link>
 
-                        <Link href="">
+                        <Link href="//www.linkedin.com/company/sifuse/about/">
                             <a target="_blank">
                                 <img src="/images/icon/linkedIn.svg" alt=""/>
                             </a>
