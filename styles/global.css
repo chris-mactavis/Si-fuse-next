@@ -961,8 +961,8 @@ section.image-text .investors h3::before {
   content: "";
   position: absolute;
   bottom: 11px;
-  right: -3px;
-  width: 32rem;
+  right: 0;
+  width: 33rem;
   z-index: -1;
   height: 0.7rem;
   background: #D32907;
@@ -1024,7 +1024,13 @@ section.image-text .startups h3 {
   text-align: left;
 }
 section.image-text .startups h3::before {
-  left: -2px;
+  left: 0;
+  width: 31rem;
+}
+@media only screen and (max-width: 576px) {
+  section.image-text .startups h3::before {
+    width: 23rem;
+  }
 }
 section.image-text .startups p {
   text-align: left;
