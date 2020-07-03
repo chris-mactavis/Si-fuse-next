@@ -8,12 +8,14 @@ import {showNotifier} from "../../store/actions/notifier";
 import {showImageViewer, showVideoViewer} from "../../store/actions/imageViewer";
 import StartupProfileLevels from "./StartupLevels";
 
-const StartupProfile = ({company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission}) => {
+const StartupProfile = ({company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
     const dispatch = useDispatch();
 
     let levelKeys = [];
 
     const userType = loggedInUser.user_type.user_type;
+
+    const [connected, setConnected] = useState(isConnected);
 
     if (level) {
         levelKeys = Object.keys(level);
@@ -269,15 +271,36 @@ const StartupProfile = ({company, services: product_services, finance, market, l
         }
     }
 
-    const connectHandler = async data => {
+    const disconnectHandler = async () => {
         dispatch(loader());
         try {
-            const {data: response} = await axiosInstance.post(`connect`, null, {
+            const {data: response} = await axiosInstance.post(`investors/unfollow`, {
+                follower_id: id
+            }, {
+                headers: {
+                    Authorization: `Bearer ${Token()}`
+                }
+            });
+            setConnected(false);
+            dispatch(loader());
+        } catch (e) {
+            console.log(e.response.data.message);
+            dispatch(loader());
+        }
+    }
+
+    const connectHandler = async () => {
+        dispatch(loader());
+        try {
+            const {data: response} = await axiosInstance.post(`investors/follows`, {
+                follower_id: profile.user_id
+            }, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
             console.log(response);
+            setConnected(true);
             dispatch(showNotifier('Connected Successfully'));
             dispatch(loader());
         } catch (e) {
@@ -321,7 +344,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                             </p>
                             <p><img className="location-img" src="/images/icon/location.svg" alt=""/> Lagos, Nigeria</p>
                             <p>{startupProf.company.website}</p>
-                            {!hasEdit && <button onSubmit={connectHandler} className="btn">Connect</button>}
+                            {(!hasEdit && !connected) && <button onClick={connectHandler} className="btn">Connect</button>}
                         </div>
                         <button className="startup-link-view" id="overview-btn">
                             Overview <img src="/images/icon/pie-chart.svg" alt=""/>
