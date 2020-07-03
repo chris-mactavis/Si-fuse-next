@@ -259,10 +259,15 @@ h1 {
 }
 
 h2 {
-  font-size: 5rem;
+  font-size: 4.8rem;
   font-family: "League Spartan", sans-serif;
   text-transform: uppercase;
   color: #3E3E3E;
+}
+@media only screen and (max-width: 576px) {
+  h2 {
+    font-size: 4rem;
+  }
 }
 
 h3 {
@@ -1034,14 +1039,6 @@ section.events {
 section.events .event-slider {
   position: relative;
 }
-section.events h2 {
-  margin-bottom: 2rem;
-}
-@media only screen and (max-width: 576px) {
-  section.events h2 {
-    font-size: 3.5rem;
-  }
-}
 section.events .card {
   border: none;
   display: block;
@@ -1175,6 +1172,7 @@ section.events .slick-next::before {
 }
 section.posts {
   background: #ECEFF1;
+  padding: 6rem 0;
 }
 section.posts .post {
   background-repeat: no-repeat;
@@ -1193,13 +1191,32 @@ section.posts .post::after {
   width: 100%;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
 }
-section.posts p {
+section.posts .post p {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
   z-index: 100;
+}
+section.posts .post p span.view {
+  display: block;
+  text-transform: uppercase;
+  margin-top: 20px;
+  position: relative;
+  top: 150px;
+  transition: top 0.3s;
+}
+section.posts .post p span.view img {
+  margin-left: 1rem;
+  height: 14px;
+  position: relative;
+  top: -1px;
+  display: inline;
+}
+section.posts .post:hover p span.view {
+  top: 0;
+  transition: top 0.3s;
 }
 section.posts .slick-dots {
   bottom: -36px;
@@ -1864,7 +1881,7 @@ section.startup-content .startup-sidebar {
   width: 350px;
   z-index: 100;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
   section.startup-content .startup-sidebar {
     width: 300px;
   }
@@ -2558,7 +2575,7 @@ nav.navbar .logo-container .navbar-brand {
   display: block;
   top: 12px;
   transform: translateX(-50%);
-  left: calc(50% + 2px);
+  left: calc(50% + 5px);
 }
 nav.navbar .logo-container .navbar-brand #notification-btn {
   border: none;
@@ -2593,45 +2610,77 @@ nav.navbar .logo-small-screen {
   }
 }
 
-footer {
-  padding: 7rem 0;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(/images/footer-bg.png);
+footer .footer-content {
+  padding: 6rem 0 2rem;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), black), url(/images/footer-bg.png);
   background-size: cover;
 }
-footer h5 {
+footer .footer-content h5 {
   text-transform: uppercase;
   color: #fff;
   font-weight: bold;
   margin-bottom: 2rem;
   font-size: 20px;
 }
-footer ul {
+footer .footer-content ul {
   list-style: none;
   padding-left: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 }
-footer ul li {
+footer .footer-content ul li {
   color: #fff;
   margin-bottom: 2rem;
 }
-footer .social-icons {
+footer .footer-content a {
+  font-weight: normal;
+}
+footer .footer-content .logo-column {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column {
+    flex-direction: column;
+    justify-content: start;
+  }
+}
+footer .footer-content .logo-column .logo {
+  height: 120px;
+  width: auto;
+  margin-right: 20px;
+}
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column .logo {
+    height: 72px;
+  }
+}
+footer .footer-content .logo-column .social-icons {
   display: flex;
   flex-direction: column;
 }
-footer .social-icons a {
-  margin-bottom: 24px;
-}
-@media only screen and (max-width: 992px) {
-  footer .social-icons a {
-    margin-left: 10px;
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column .social-icons {
+    flex-direction: row;
   }
 }
-footer a {
-  font-weight: normal;
+footer .footer-content .logo-column .social-icons a {
+  margin-bottom: 8px;
+  margin-left: 10px;
 }
-footer .logo {
-  height: 170px;
-  width: auto;
+@media only screen and (max-width: 576px) {
+  footer .footer-content .logo-column .social-icons a {
+    margin: 10px 8px 0 0;
+  }
+}
+footer .copy-wrapper {
+  text-align: center;
+}
+footer .copy-wrapper p {
+  margin-bottom: 0;
+  padding: 10px 0;
+  background: #D32907;
+  color: white;
 }
 
 header.homepage {
@@ -2639,6 +2688,11 @@ header.homepage {
   height: 100vh;
   background-size: cover;
   position: relative;
+}
+@media only screen and (max-width: 576px) {
+  header.homepage {
+    height: 70vh;
+  }
 }
 header.homepage .navbar-brand {
   left: calc(50% + 6px) !important;
@@ -2681,7 +2735,7 @@ header.homepage .header-wrapper h1 {
   margin: 0;
   line-height: 1.6;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
   header.homepage .header-wrapper h1 {
     font-size: 5.5rem;
   }
@@ -2693,7 +2747,7 @@ header.homepage .header-wrapper h1 {
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper h1 {
-    font-size: 3rem;
+    font-size: 3.6rem;
     letter-spacing: 4px;
   }
 }
@@ -2706,7 +2760,8 @@ header.homepage .header-wrapper h1 span {
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper h1 span {
-    padding: 20px 12px 9px;
+    padding: 12px 8px 3px;
+    margin-bottom: 8px;
   }
 }
 header.homepage .scroll {
@@ -2946,7 +3001,7 @@ header .sidebar {
   width: 25%;
   transition: all 0.4s ease-in-out;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
   header .sidebar {
     width: 30%;
   }
@@ -2971,7 +3026,7 @@ header .sidebar.active {
 }
 header .sidebar button {
   position: absolute;
-  right: 47px;
+  right: 62px;
   margin-top: 2rem;
   margin-bottom: 2rem;
   border: none;
@@ -2986,7 +3041,7 @@ header .sidebar .active {
 header .sidebar ul {
   margin: 120px 0 0;
   position: absolute;
-  right: 54px;
+  right: 70px;
   text-align: right;
   list-style: none;
 }
@@ -3028,8 +3083,8 @@ header .account-container {
   }
 }
 header .account-container ul {
-  padding: 40px 50px 0 20px;
-  margin: 10px;
+  padding: 10px 20px;
+  margin: 0;
 }
 @media only screen and (max-width: 576px) {
   header .account-container ul {
@@ -3037,10 +3092,10 @@ header .account-container ul {
   }
 }
 header .account-container ul li {
-  margin-bottom: 40px;
+  margin: 10px 0;
 }
 header .account-container ul li a {
-  font-size: 2rem;
+  font-size: 16px;
   font-weight: normal;
   color: inherit;
   display: flex;
