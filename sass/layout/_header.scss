@@ -451,18 +451,18 @@ header {
     }
 
     ul {
-      padding: 40px 50px 0 20px;
-      margin: 10px;
+      padding: 10px 20px;
+      margin: 0;
 
       @media only screen and (max-width: $mobile_width) {
         padding: 40px 50px 15px 20px;
       }
 
       li {
-        margin-bottom: 40px;
+        margin: 10px 0;
 
         a {
-          font-size: 2rem;
+          font-size: 16px;
           font-weight: normal;
           color: inherit;
           display: flex;

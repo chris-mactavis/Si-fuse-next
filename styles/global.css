@@ -3029,8 +3029,8 @@ header .account-container {
   }
 }
 header .account-container ul {
-  padding: 40px 50px 0 20px;
-  margin: 10px;
+  padding: 10px 20px;
+  margin: 0;
 }
 @media only screen and (max-width: 576px) {
   header .account-container ul {
@@ -3038,10 +3038,10 @@ header .account-container ul {
   }
 }
 header .account-container ul li {
-  margin-bottom: 40px;
+  margin: 10px 0;
 }
 header .account-container ul li a {
-  font-size: 2rem;
+  font-size: 16px;
   font-weight: normal;
   color: inherit;
   display: flex;
