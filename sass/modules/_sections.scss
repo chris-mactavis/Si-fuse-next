@@ -1809,10 +1809,13 @@ section {
     background: $light-grey;
 
     img{
+      max-width: 100%;
+
       @include media("mobile"){
         position: relative;
         margin-left: -15px;
         width: calc(100% + 30px);
+        max-width: none;
       }
     }
 

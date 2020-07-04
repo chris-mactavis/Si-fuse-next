@@ -16,14 +16,13 @@
   font-weight: bold;
   font-style: normal;
 }
-
 @font-face {
   font-family: "HKGrotesk";
   src: url(/fonts/HKGrotesk-SemiBold.otf) format("opentype");
   font-weight: bold;
   font-style: normal;
 }
-.bg, section.reset-password, section.forgot-password, section.timeline, section.startup-content, section.startup-levels, section.single-post {
+.bg, section.reset-password, section.forgot-password, section.timeline, section.connections, section.startup-content, section.startup-levels, section.single-post {
   background: #ECEFF1;
   color: #6B6B6B;
   padding: 80px 0 60px;
@@ -947,9 +946,19 @@ section.image-text .investors h2 {
   position: relative;
   text-transform: uppercase;
 }
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 992px) {
   section.image-text .investors h2 {
     text-align: left;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  section.image-text .investors h2 {
+    font-size: 3.5rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  section.image-text .investors h2 {
+    font-size: 3rem;
   }
 }
 section.image-text .investors h2::before {
@@ -1018,7 +1027,6 @@ section.image-text .startups .img-02 {
 section.image-text .startups h2 {
   text-align: left;
 }
-
 section.image-text .startups h2::before {
   left: 0;
   width: 31rem;
@@ -2330,11 +2338,15 @@ section.faqs article h3::after {
 section.about {
   background: #F8F8F8;
 }
+section.about img {
+  max-width: 100%;
+}
 @media only screen and (max-width: 576px) {
   section.about img {
     position: relative;
     margin-left: -15px;
     width: calc(100% + 30px);
+    max-width: none;
   }
 }
 section.about .white-bg {
@@ -3066,7 +3078,7 @@ header .sidebar button {
 }
 @media only screen and (max-width: 576px) {
   header .sidebar button {
-    right: 26px;
+    right: 20px;
   }
 }
 header .sidebar button:focus {

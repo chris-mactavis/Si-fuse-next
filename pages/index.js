@@ -116,7 +116,7 @@ const Home = ({events, blogs}) => {
                                     <img className="img-01" src="images/icon/01.png" alt=""/>
 
 
-                                    <h3>For investors</h3>
+                                    <h2>For investors</h2>
                                     <p>
                                         Seeking investment opportunities? <br class="d-none d-md-block"/>
                                         Find the right startups that match your <br className="d-none d-md-block"/>
@@ -146,7 +146,7 @@ const Home = ({events, blogs}) => {
                         <div className="investors startups">
                             <img className="img-01 img-02" src="images/icon/02.png" alt=""/>
                               
-                            <h3>For startups</h3>
+                            <h2>For startups</h2>
                             <p>
                                 Do you need funding for your startup? <br className="d-none d-md-block"/>
                                 Get discovered by interested investors <br className="d-none d-md-block"/> within minutes.
