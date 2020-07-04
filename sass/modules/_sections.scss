@@ -26,15 +26,15 @@ section {
         text-align: right;
         position: relative;
 
-        @include media("tablet"){
+        @include media("tablet") {
           text-align: left;
         }
 
-        @include media("desktop"){
+        @include media("desktop") {
           font-size: 3.5rem;
         }
 
-        @include media("mobile"){
+        @include media("mobile") {
           font-size: 3rem;
         }
 
@@ -48,12 +48,12 @@ section {
           height: .7rem;
           background: $orange-red;
 
-          @include media("tablet"){
+          @include media("tablet") {
             left: -3px;
             right: 0;
           }
 
-          @include media("mobile"){
+          @include media("mobile") {
             z-index: 0;
             bottom: 2px;
             width: 25rem;
@@ -111,7 +111,7 @@ section {
           left: 0;
           width: 31rem;
 
-          @include media("mobile"){
+          @include media("mobile") {
             width: 23rem;
           }
         }
@@ -328,7 +328,7 @@ section {
         color: #fff;
         z-index: 100;
 
-        span.view{
+        span.view {
           display: block;
           text-transform: uppercase;
           margin-top: 20px;
@@ -346,9 +346,9 @@ section {
         }
       }
 
-      &:hover{
-        p{
-          span.view{
+      &:hover {
+        p {
+          span.view {
             top: 0;
             transition: top 0.3s;
           }
@@ -1529,6 +1529,7 @@ section {
       .startup-description {
         padding: 30px;
       }
+
       .side-content {
         img {
           margin-bottom: 10px;
@@ -1540,11 +1541,29 @@ section {
           margin-bottom: 10px;
         }
 
+        &.perfect {
+          .grade {
+            background: rgba(23, 221, 23, 0.5);
+          }
+        }
+
+        &.good {
+          .grade {
+            background: RGBA(255, 214, 0, 0.5);
+          }
+        }
+
+        &.fair {
+          .grade {
+            background: RGBA(255, 109, 0, 0.5);
+          }
+        }
+
         .grade {
           align-self: center;
           width: 100px;
           background-color: #B44C00;
-          color: white;
+          text-transform: capitalize;
 
           @media only screen and (max-width: $mobile_width) {
             margin-bottom: 40px;
@@ -1556,6 +1575,7 @@ section {
         ul {
           padding: 0;
         }
+
         li {
           font-size: 14px;
           margin-bottom: 9px;
@@ -1598,21 +1618,23 @@ section {
         z-index: 1;
         margin-bottom: 10px;
       }
+
       .btn {
         align-self: center;
         justify-self: center;
       }
+
       margin-top: -122px;
     }
   }
 
-  &.timeline, &.connections{
+  &.timeline, &.connections {
     @extend .bg;
 
-    article{
+    article {
       background: white;
 
-      h4{
+      h4 {
         text-transform: none;
         font-weight: 400;
         text-align: center;
@@ -1621,58 +1643,58 @@ section {
         margin-bottom: 0;
       }
 
-      .startup-logo{
+      .startup-logo {
         margin: 0 auto;
         display: block;
         padding: 28px;
       }
 
-      .level{
+      .level {
         text-align: center;
         margin: 10px 0;
 
-        .text{
+        .text {
           padding: 5px 0;
         }
 
-        &.perfect{
-          background: rgba(23 ,221, 23, 0.1);
+        &.perfect {
+          background: rgba(23, 221, 23, 0.1);
 
-          p{
-            background: rgba(23 ,221, 23, 0.5);
+          p {
+            background: rgba(23, 221, 23, 0.5);
           }
         }
 
-        &.good{
+        &.good {
           background: RGBA(255, 214, 0, 0.10);
 
-          p{
+          p {
             background: RGBA(255, 214, 0, 0.5);
           }
         }
 
-        &.fair{
+        &.fair {
           background: RGBA(255, 109, 0, 0.1);
 
-          p{
+          p {
             background: RGBA(255, 109, 0, 0.5);
           }
         }
 
-        .icon{
+        .icon {
           height: 18px;
           display: inline;
           margin-right: 3px;
           opacity: 0.9;
 
-          + span{
+          + span {
             display: inline;
           }
         }
 
-        p{
+        p {
           margin-bottom: 0;
-          //color: white;
+          text-transform: capitalize;
           font-size: 12px;
         }
       }
@@ -1686,12 +1708,12 @@ section {
         }
       }
 
-      .tags{
+      .tags {
         text-align: center;
         height: 100%;
         padding: 10px;
 
-        .tag{
+        .tag {
           background: $light-blue;
           padding: 2px 10px;
           color: white;
