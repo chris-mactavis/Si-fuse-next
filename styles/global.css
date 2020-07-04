@@ -16,6 +16,7 @@
   font-weight: bold;
   font-style: normal;
 }
+
 @font-face {
   font-family: "HKGrotesk";
   src: url(/fonts/HKGrotesk-SemiBold.otf) format("opentype");
@@ -1017,6 +1018,7 @@ section.image-text .startups .img-02 {
 section.image-text .startups h2 {
   text-align: left;
 }
+
 section.image-text .startups h2::before {
   left: 0;
   width: 31rem;
@@ -2125,11 +2127,20 @@ section.startup-content .startup-level .side-content p {
   font-weight: 600;
   margin-bottom: 10px;
 }
+section.startup-content .startup-level .side-content.perfect .grade {
+  background: rgba(23, 221, 23, 0.5);
+}
+section.startup-content .startup-level .side-content.good .grade {
+  background: RGBA(255, 214, 0, 0.5);
+}
+section.startup-content .startup-level .side-content.fair .grade {
+  background: RGBA(255, 109, 0, 0.5);
+}
 section.startup-content .startup-level .side-content .grade {
   align-self: center;
   width: 100px;
   background-color: #B44C00;
-  color: white;
+  text-transform: capitalize;
 }
 @media only screen and (max-width: 576px) {
   section.startup-content .startup-level .side-content .grade {
@@ -2179,10 +2190,10 @@ section.startup-content .request-access .btn {
   align-self: center;
   justify-self: center;
 }
-section.timeline article {
+section.timeline article, section.connections article {
   background: white;
 }
-section.timeline article h4 {
+section.timeline article h4, section.connections article h4 {
   text-transform: none;
   font-weight: 400;
   text-align: center;
@@ -2190,62 +2201,63 @@ section.timeline article h4 {
   padding: 15px 0 10px;
   margin-bottom: 0;
 }
-section.timeline article .startup-logo {
+section.timeline article .startup-logo, section.connections article .startup-logo {
   margin: 0 auto;
   display: block;
   padding: 28px;
 }
-section.timeline article .level {
+section.timeline article .level, section.connections article .level {
   text-align: center;
   margin: 10px 0;
 }
-section.timeline article .level .text {
+section.timeline article .level .text, section.connections article .level .text {
   padding: 5px 0;
 }
-section.timeline article .level.perfect {
+section.timeline article .level.perfect, section.connections article .level.perfect {
   background: rgba(23, 221, 23, 0.1);
 }
-section.timeline article .level.perfect p {
+section.timeline article .level.perfect p, section.connections article .level.perfect p {
   background: rgba(23, 221, 23, 0.5);
 }
-section.timeline article .level.good {
+section.timeline article .level.good, section.connections article .level.good {
   background: RGBA(255, 214, 0, 0.1);
 }
-section.timeline article .level.good p {
+section.timeline article .level.good p, section.connections article .level.good p {
   background: RGBA(255, 214, 0, 0.5);
 }
-section.timeline article .level.fair {
+section.timeline article .level.fair, section.connections article .level.fair {
   background: RGBA(255, 109, 0, 0.1);
 }
-section.timeline article .level.fair p {
+section.timeline article .level.fair p, section.connections article .level.fair p {
   background: RGBA(255, 109, 0, 0.5);
 }
-section.timeline article .level .icon {
+section.timeline article .level .icon, section.connections article .level .icon {
   height: 18px;
   display: inline;
   margin-right: 3px;
   opacity: 0.9;
 }
-section.timeline article .level .icon + span {
+section.timeline article .level .icon + span, section.connections article .level .icon + span {
   display: inline;
 }
-section.timeline article .level p {
+section.timeline article .level p, section.connections article .level p {
   margin-bottom: 0;
+  text-transform: capitalize;
   font-size: 12px;
 }
-section.timeline article .tagging {
+section.timeline article .tagging, section.connections article .tagging {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
 }
-section.timeline article .tagging-container {
+section.timeline article .tagging-container, section.connections article .tagging-container {
   padding: 15px;
 }
-section.timeline article .tags {
+section.timeline article .tags, section.connections article .tags {
   text-align: center;
   height: 100%;
   padding: 10px;
 }
-section.timeline article .tags .tag {
+section.timeline article .tags .tag, section.connections article .tags .tag {
   background: #51B8D9;
   padding: 2px 10px;
   color: white;
@@ -3036,14 +3048,9 @@ header .sidebar {
     width: 40%;
   }
 }
-@media only screen and (max-width: 768px) {
-  header .sidebar {
-    width: 50%;
-  }
-}
 @media only screen and (max-width: 576px) {
   header .sidebar {
-    width: 90%;
+    width: 84%;
   }
 }
 header .sidebar.active {
@@ -3059,7 +3066,7 @@ header .sidebar button {
 }
 @media only screen and (max-width: 576px) {
   header .sidebar button {
-    right: 20px;
+    right: 26px;
   }
 }
 header .sidebar button:focus {

@@ -377,20 +377,20 @@ header {
     width: 25%;
     transition: all .4s ease-in-out;
 
-    @media only screen and (max-width: $wide_width) {
+    @include media("desktop"){
       width: 30%;
     }
 
-    @media only screen and (max-width: $desktop_width) {
+    @include media("tablet"){
       width: 40%;
     }
 
-    @media only screen and (max-width: $tablet_width) {
+    @include media("mobile_landscape"){
       width: 50%;
     }
 
-    @media only screen and (max-width: $mobile_width) {
-      width: 90%;
+    @include media("mobile"){
+      width: 84%;
     }
 
     &.active {

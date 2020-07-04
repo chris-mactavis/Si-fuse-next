@@ -115,9 +115,13 @@ const Home = ({events, blogs}) => {
                                 <div className="investors">
                                     <img className="img-01" src="images/icon/01.png" alt=""/>
 
-                                    <h2>For investors</h2>
-                                    <p>Are you seeking investment <br/> opportunities? Find the perfect <br/>
-                                        businesses that match your interests <br/> within minutes.
+
+                                    <h3>For investors</h3>
+                                    <p>
+                                        Seeking investment opportunities? <br class="d-none d-md-block"/>
+                                        Find the right startups that match your <br className="d-none d-md-block"/>
+                                        investment criteria within minutes.
+
                                     </p>
                                     <Link href={isLoggedIn ? '/profile' : '/signup?for=investors'}>
                                         <a className="link">Get started <img src="images/icon/arrow-right.png"
@@ -141,9 +145,11 @@ const Home = ({events, blogs}) => {
                     <div className="col-lg-6 offset-md-1 col-sm-7 col-12 mx-auto">
                         <div className="investors startups">
                             <img className="img-01 img-02" src="images/icon/02.png" alt=""/>
-                            <h2>For startups</h2>
-                            <p>Are you seeking investment <br/> opportunities? Find the perfect <br/>
-                                businesses that match your interests <br/> within minutes.
+                              
+                            <h3>For startups</h3>
+                            <p>
+                                Do you need funding for your startup? <br className="d-none d-md-block"/>
+                                Get discovered by interested investors <br className="d-none d-md-block"/> within minutes.
                             </p>
                             <Link href={isLoggedIn ? '/profile' : '/signup?for=startups'}>
                                 <a className="link">Get started <img src="images/icon/arrow-right.png"

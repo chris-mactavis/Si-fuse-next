@@ -8,10 +8,12 @@ import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {decrementCurrentState} from "../../../store/actions/profile";
 import ErrorSpan from "../../UI/ErrorSpan";
+import {showNotifier} from "../../../store/actions/notifier";
 
 const InvestorMoreInfo = ({investor, stages}) => {
     const dispatch = useDispatch();
     const {register, handleSubmit, errors} = useForm();
+    
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
@@ -21,6 +23,7 @@ const InvestorMoreInfo = ({investor, stages}) => {
                 }
             });
             dispatch(loader());
+            dispatch(showNotifier('Signup Complete'));
             let user = JSON.parse(Cookies.get('user'));
             user.has_profile = 1;
             Cookies.set('user', JSON.stringify(user));
