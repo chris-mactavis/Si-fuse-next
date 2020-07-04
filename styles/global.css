@@ -2131,11 +2131,20 @@ section.startup-content .startup-level .side-content p {
   font-weight: 600;
   margin-bottom: 10px;
 }
+section.startup-content .startup-level .side-content.perfect .grade {
+  background: rgba(23, 221, 23, 0.5);
+}
+section.startup-content .startup-level .side-content.good .grade {
+  background: RGBA(255, 214, 0, 0.5);
+}
+section.startup-content .startup-level .side-content.fair .grade {
+  background: RGBA(255, 109, 0, 0.5);
+}
 section.startup-content .startup-level .side-content .grade {
   align-self: center;
   width: 100px;
   background-color: #B44C00;
-  color: white;
+  text-transform: capitalize;
 }
 @media only screen and (max-width: 576px) {
   section.startup-content .startup-level .side-content .grade {
@@ -2237,6 +2246,7 @@ section.timeline article .level .icon + span, section.connections article .level
 }
 section.timeline article .level p, section.connections article .level p {
   margin-bottom: 0;
+  text-transform: capitalize;
   font-size: 12px;
 }
 section.timeline article .tagging, section.connections article .tagging {

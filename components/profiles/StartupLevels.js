@@ -1,6 +1,8 @@
 import React from "react";
+import {getFairness, startupLevel} from "../../helpers";
 
-const StartupProfileLevels = ({startupLevel, levelKeys, index}) => {
+const StartupProfileLevels = ({startupLevel, levelKeys, index, fairness}) => {
+
     const getLevelName = (name) => {
         switch (name) {
             case 'problem':
@@ -27,14 +29,15 @@ const StartupProfileLevels = ({startupLevel, levelKeys, index}) => {
             <div className="startup-description">
                 <div className="row">
                     <div className="col-md-4">
-                        <div className="d-flex flex-column h-100 justify-content-center text-center side-content">
+                        <div className={`d-flex flex-column h-100 justify-content-center text-center side-content ${getFairness(fairness)}`}>
                             <img src={`/images/icon/startup-level-${levelKeys[index]}.svg`}
                                  alt=""/>
                             <p className="p-0 level-name">{getLevelName(levelKeys[index])}</p>
-                            <div className="grade">Fair</div>
+                            <div className="grade">{getFairness(fairness)}</div>
                         </div>
 
                     </div>
+
                     <div className="col-md-8">
                         <div className="startup-level-content">
                             <ul>

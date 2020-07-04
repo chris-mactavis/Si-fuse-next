@@ -6,7 +6,6 @@ import Token from "../../utils/Token";
 import StartupCard from "../../components/startups/startupCard";
 
 const Timeline = ({data: {data: startups}}) => {
-    console.log(startups);
 
     return <Layout page="Timeline" headerClass="page-header no-bg" redBar>
         <Head>
