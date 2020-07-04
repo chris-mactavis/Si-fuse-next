@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 const aboutUs = () => {
-    return <Layout headerContent={<h1>About Us</h1>} page="About" headerClass="page-header about">
+    return <Layout headerContent={<h1>About Us</h1>} page="About" headerClass="page-header about" whiteAccount="false">
         <Head>
             <title>About Us</title>
         </Head>
@@ -21,7 +21,7 @@ const aboutUs = () => {
                                             <img className="img-fluid" src="/images/about-us-1.jpg"/>
                                         </div>
 
-                                        <div className="col-md-6 d-flex flex-column justify-content-between">
+                                        <div className="col-md-6">
                                             <h5>
                                                 To create a community full of opportunities where African female
                                                 entrepreneurs can thrive.
@@ -38,23 +38,36 @@ const aboutUs = () => {
                                     </div>
 
                                     <div className="row mt-5">
-                                        <div className="col-md-6 text-right d-flex flex-column justify-content-between">
+                                        <div className="col-md-6 d-block d-md-none">
+                                            <img className="img-fluid" src="/images/about-us-2.jpg"/>
+                                        </div>
+
+                                        <div className="col-md-6 text-md-right">
                                             <h5>
                                                 To bridge the gap between female entrepreneurs and investors and foster
                                                 innovation across the continent.
                                             </h5>
 
-                                            <p>
+                                            <p className="mb-4">
                                                 We enable all types of investors to invest in businesses they believe in
                                                 and enable all types of growth-focused businesses and ideas to raise
                                                 capital and a community in the process.
                                             </p>
-                                            <Link href="/faqs">
-                                                <a className="btn w-100">FAQ</a>
-                                            </Link>
+
+                                            <div className="d-block d-md-none text-center mb-3">
+                                                <Link href="/faqs">
+                                                    <a className="btn">Questions?</a>
+                                                </Link>
+                                            </div>
+
+                                            <div className="d-none d-md-block">
+                                                <Link href="/faqs">
+                                                    <a className="btn">Questions?</a>
+                                                </Link>
+                                            </div>
                                         </div>
 
-                                        <div className="col-md-6">
+                                        <div className="col-md-6 d-none d-md-flex">
                                             <img className="img-fluid" src="/images/about-us-2.jpg"/>
                                         </div>
                                     </div>
@@ -69,8 +82,10 @@ const aboutUs = () => {
                         <div className="red-bg">
                             <div className="row">
                                 <div className="col-md-8 offset-md-2 d-flex flex-column justify-content-center">
-                                    <h5 className="mb-3">Our Story As Told By The Founder</h5>
+                                    <h3 className="mb-3 text-white text-center">Our Story As Told By The Founder</h3>
+
                                     <img className="img-fluid text-center mb-5" src="/images/about-us-3.svg"/>
+
                                     <p>
                                         Our dream is to bridge the growing gap between female-led startups and
                                         investors,

@@ -115,7 +115,7 @@ const Home = ({events, blogs}) => {
                                 <div className="investors">
                                     <img className="img-01" src="images/icon/01.png" alt=""/>
 
-                                    <h3>For investors</h3>
+                                    <h2>For investors</h2>
                                     <p>Are you seeking investment <br/> opportunities? Find the perfect <br/>
                                         businesses that match your interests <br/> within minutes.
                                     </p>
@@ -141,7 +141,7 @@ const Home = ({events, blogs}) => {
                     <div className="col-lg-6 offset-md-1 col-sm-7 col-12 mx-auto">
                         <div className="investors startups">
                             <img className="img-01 img-02" src="images/icon/02.png" alt=""/>
-                            <h3>For startups</h3>
+                            <h2>For startups</h2>
                             <p>Are you seeking investment <br/> opportunities? Find the perfect <br/>
                                 businesses that match your interests <br/> within minutes.
                             </p>
@@ -177,7 +177,7 @@ const Home = ({events, blogs}) => {
                                             </div>
 
                                             <div className="background-text">
-                                                <p>{title}</p>
+                                                <h5>{title}</h5>
                                             </div>
 
                                             <div className="meta">
@@ -218,13 +218,13 @@ const Home = ({events, blogs}) => {
                                 <Link href="blog/[slug]" as={`blog/${slug}`}>
                                     <a className="post"
                                        style={{backgroundImage: `url(${image})`}}>
-                                        <p>
+                                        <h5>
                                             {title}
 
                                             <span className="view">
                                                 view <img src="images/icon/right.png"/>
                                             </span>
-                                        </p>
+                                        </h5>
                                     </a>
                                 </Link>
                             </div>

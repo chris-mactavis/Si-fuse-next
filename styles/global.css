@@ -16,6 +16,12 @@
   font-weight: bold;
   font-style: normal;
 }
+@font-face {
+  font-family: "HKGrotesk";
+  src: url(/fonts/HKGrotesk-SemiBold.otf) format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
 .bg, section.reset-password, section.forgot-password, section.timeline, section.startup-content, section.startup-levels, section.single-post {
   background: #ECEFF1;
   color: #6B6B6B;
@@ -248,52 +254,50 @@ html, body {
 
 body {
   font-family: "Fira Sans", sans-serif;
-  font-size: 1.6rem;
+  font-size: 16px;
   color: #3E3E3E;
 }
 
-h1 {
-  font-size: 6rem;
-  font-family: "League Spartan", sans-serif;
+h6, h5, h4, h3, h2, h1 {
+  font-family: "HKGrotesk", sans-serif;
   line-height: 1.4;
 }
 
-h2 {
-  font-size: 4.8rem;
+h1 {
   font-family: "League Spartan", sans-serif;
+  font-size: 60px;
+}
+
+h2 {
+  font-family: "League Spartan", sans-serif;
+  font-size: 40px;
   text-transform: uppercase;
-  color: #3E3E3E;
 }
 @media only screen and (max-width: 576px) {
   h2 {
-    font-size: 4rem;
+    font-size: 30px;
   }
 }
 
 h3 {
-  font-size: 4rem;
-  font-family: "League Spartan", sans-serif;
-  text-transform: uppercase;
-  color: #3E3E3E;
+  font-size: 36px;
+}
+@media only screen and (max-width: 576px) {
+  h3 {
+    font-size: 30px;
+  }
 }
 
 h4 {
-  font-size: 3rem;
-  font-family: "League Spartan", sans-serif;
-  color: #3E3E3E;
-  text-transform: uppercase;
+  font-size: 24px;
 }
 
 h5 {
-  font-size: 2rem;
-  font-family: "League Spartan", sans-serif;
-  color: #3E3E3E;
+  font-size: 18px;
 }
 
 h6 {
   font-size: 1rem;
-  font-family: "League Spartan", sans-serif;
-  color: #3E3E3E;
 }
 
 p, ul, li {
@@ -313,10 +317,10 @@ a {
   font-weight: bold;
   text-decoration: none;
   font-family: "Fira Sans", sans-serif;
-  color: #fff;
+  color: #3E3E3E;
 }
 a:hover {
-  color: #fff;
+  color: inherit;
   text-decoration: none;
 }
 
@@ -799,11 +803,10 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 .btn {
   color: #3E3E3E;
   border: 2px solid;
-  font-size: 2rem;
-  padding: 20px 86px;
+  padding: 20px 80px;
   cursor: pointer;
   text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: 15px;
   letter-spacing: 0.5rem;
   font-weight: 600;
   z-index: 1;
@@ -938,45 +941,36 @@ section.image-text .investors .img-01 {
     height: 75px;
   }
 }
-section.image-text .investors h3 {
+section.image-text .investors h2 {
   text-align: right;
   position: relative;
+  text-transform: uppercase;
 }
-@media only screen and (max-width: 992px) {
-  section.image-text .investors h3 {
+@media only screen and (max-width: 576px) {
+  section.image-text .investors h2 {
     text-align: left;
   }
 }
-@media only screen and (max-width: 1200px) {
-  section.image-text .investors h3 {
-    font-size: 3.5rem;
-  }
-}
-@media only screen and (max-width: 576px) {
-  section.image-text .investors h3 {
-    font-size: 3rem;
-  }
-}
-section.image-text .investors h3::before {
+section.image-text .investors h2::before {
   content: "";
   position: absolute;
   bottom: 11px;
-  right: -3px;
-  width: 32rem;
+  right: 0;
+  width: 33rem;
   z-index: -1;
   height: 0.7rem;
   background: #D32907;
 }
 @media only screen and (max-width: 992px) {
-  section.image-text .investors h3::before {
+  section.image-text .investors h2::before {
     left: -3px;
     right: 0;
   }
 }
 @media only screen and (max-width: 576px) {
-  section.image-text .investors h3::before {
+  section.image-text .investors h2::before {
     z-index: 0;
-    bottom: 2px;
+    bottom: 6px;
     width: 25rem;
   }
 }
@@ -1020,11 +1014,17 @@ section.image-text .startups .img-02 {
     margin-left: 0;
   }
 }
-section.image-text .startups h3 {
+section.image-text .startups h2 {
   text-align: left;
 }
-section.image-text .startups h3::before {
-  left: -2px;
+section.image-text .startups h2::before {
+  left: 0;
+  width: 31rem;
+}
+@media only screen and (max-width: 576px) {
+  section.image-text .startups h2::before {
+    width: 23rem;
+  }
 }
 section.image-text .startups p {
   text-align: left;
@@ -1066,6 +1066,7 @@ section.events .card .view {
   align-items: center;
   text-transform: uppercase;
   font-weight: normal;
+  color: white;
 }
 section.events .card .view img {
   margin-left: 1rem;
@@ -1080,17 +1081,13 @@ section.events .background-text {
   margin: 15px;
   border-bottom: 1px solid #DADADA;
 }
-section.events .background-text p {
-  color: #3E3E3E;
-}
-section.events .background-text p:nth-child(1) {
-  font-size: 1.5rem;
+section.events .background-text h5 {
   font-weight: bold;
   margin-bottom: 5px;
   height: 50px;
 }
 @media only screen and (max-width: 992px) {
-  section.events .background-text p:nth-child(1) {
+  section.events .background-text h5 {
     margin-bottom: 20px;
   }
 }
@@ -1191,7 +1188,7 @@ section.posts .post::after {
   width: 100%;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
 }
-section.posts .post p {
+section.posts .post h5 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1199,7 +1196,7 @@ section.posts .post p {
   color: #fff;
   z-index: 100;
 }
-section.posts .post p span.view {
+section.posts .post h5 span.view {
   display: block;
   text-transform: uppercase;
   margin-top: 20px;
@@ -1207,16 +1204,20 @@ section.posts .post p span.view {
   top: 150px;
   transition: top 0.3s;
 }
-section.posts .post p span.view img {
+section.posts .post h5 span.view img {
   margin-left: 1rem;
   height: 14px;
   position: relative;
   top: -1px;
   display: inline;
 }
-section.posts .post:hover p span.view {
+section.posts .post:hover h5 span.view {
   top: 0;
   transition: top 0.3s;
+}
+section.posts .post:hover h5 span.view img {
+  position: relative;
+  top: -2px;
 }
 section.posts .slick-dots {
   bottom: -36px;
@@ -1376,7 +1377,6 @@ section.single-post .content h1 {
 }
 section.single-post .content h5 {
   font-size: 2rem;
-  font-family: "Fira Sans", sans-serif;
   margin-bottom: 2rem;
   font-weight: 600;
 }
@@ -2321,31 +2321,39 @@ section.about {
 section.about .white-bg {
   padding: 60px 0;
 }
+@media only screen and (max-width: 576px) {
+  section.about .white-bg {
+    padding: 30px 0;
+  }
+}
 section.about .red-bg {
   padding: 60px 0;
   margin-bottom: 10rem;
   background: #D32907;
 }
 section.about h5 {
-  font-size: 20px;
-  font-family: "Fira Sans", sans-serif;
   font-weight: bold;
-  line-height: 150%;
+  margin-bottom: 20px;
+}
+@media only screen and (max-width: 576px) {
+  section.about h5 {
+    padding: 0 10px;
+    margin: 20px 0 10px;
+  }
 }
 section.about p {
-  font-size: 15px;
   margin-bottom: 0;
-  color: #6B6B6B;
+}
+@media only screen and (max-width: 576px) {
+  section.about p {
+    padding: 0 10px;
+  }
+}
+section.about .about-story h5, section.about .about-story p {
+  color: white;
 }
 section.about .about-story h5 {
-  font-size: 26px;
-  color: white;
   text-align: center;
-}
-section.about .about-story p {
-  color: white;
-  font-size: 13px;
-  line-height: 2;
 }
 section.contact-us {
   background: #F8F8F8;
@@ -2633,6 +2641,7 @@ footer .footer-content ul li {
 }
 footer .footer-content a {
   font-weight: normal;
+  color: white;
 }
 footer .footer-content .logo-column {
   display: flex;
@@ -2870,9 +2879,14 @@ header .notification-box ul li a {
   color: #3E3E3E;
 }
 header.page-header {
-  height: 70vh;
+  height: 50vh;
   background-size: cover !important;
   position: relative;
+}
+@media only screen and (max-width: 576px) {
+  header.page-header {
+    height: 20vh;
+  }
 }
 header.page-header h1 {
   font-size: 7.5rem;
@@ -2882,7 +2896,7 @@ header.page-header h1 {
   color: transparent;
   margin: 0;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-text-stroke-width: 2px;
@@ -2896,6 +2910,9 @@ header.page-header h1 {
 @media only screen and (max-width: 576px) {
   header.page-header h1 {
     font-size: 3.5rem;
+    text-align: center;
+    width: 100%;
+    top: 75%;
   }
 }
 header.page-header .center-box {
@@ -3032,6 +3049,11 @@ header .sidebar button {
   border: none;
   background: transparent;
 }
+@media only screen and (max-width: 576px) {
+  header .sidebar button {
+    right: 20px;
+  }
+}
 header .sidebar button:focus {
   outline: none;
 }
@@ -3045,8 +3067,19 @@ header .sidebar ul {
   text-align: right;
   list-style: none;
 }
+@media only screen and (max-width: 576px) {
+  header .sidebar ul {
+    right: 30px;
+    margin: 100px 0 0;
+  }
+}
 header .sidebar ul li {
-  margin-bottom: 4rem;
+  margin-bottom: 40px;
+}
+@media only screen and (max-width: 576px) {
+  header .sidebar ul li {
+    margin-bottom: 20px;
+  }
 }
 header .sidebar ul li a {
   text-transform: uppercase;
@@ -3056,7 +3089,7 @@ header .sidebar ul li a {
 }
 @media only screen and (max-width: 576px) {
   header .sidebar ul li a {
-    font-size: 35px;
+    font-size: 28px;
   }
 }
 header .sidebar .icon-right-display {
@@ -3088,7 +3121,7 @@ header .account-container ul {
 }
 @media only screen and (max-width: 576px) {
   header .account-container ul {
-    padding: 40px 50px 15px 20px;
+    padding: 6px 12px;
   }
 }
 header .account-container ul li {

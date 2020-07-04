@@ -129,7 +129,7 @@ form {
     //  background: transparent;
     //  outline: none;
     //  border: none;
-    //  color: $orange-red;
+    //  color: $red;
     //  padding: 0;
     //  font-size: 1.4rem;
     //  text-transform: uppercase;
@@ -300,12 +300,12 @@ form {
     }
 
     .checkout-label input:checked ~ .checkout-custom {
-      background-color: $orange-red;
+      background-color: $red;
       -webkit-transform: rotate(0deg) scale(1);
       -ms-transform: rotate(0deg) scale(1);
       transform: rotate(0deg) scale(1);
       opacity: 1;
-      border: 2px solid $orange-red;
+      border: 2px solid $red;
     }
 
     .checkout-label input:checked ~ .checkout-custom::after {
@@ -474,7 +474,7 @@ form {
       border: 0;
       outline: none;
       background: transparent;
-      color: $orange-red;
+      color: $red;
       margin-bottom: 4rem;
       padding: 0;
       text-transform: uppercase;
@@ -485,7 +485,7 @@ form {
     }
 
     p {
-      color: $orange-red;
+      color: $red;
       font-size: 1.5rem;
       margin-bottom: 0;
     }
@@ -516,7 +516,7 @@ form {
     }
 
     span {
-      color: $orange-red;
+      color: $red;
       font-weight: bold;
     }
 
