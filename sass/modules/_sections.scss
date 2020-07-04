@@ -22,9 +22,10 @@ section {
         }
       }
 
-      h3 {
+      h2{
         text-align: right;
         position: relative;
+        text-transform: uppercase;
 
         @include media("tablet") {
           text-align: left;
@@ -46,7 +47,7 @@ section {
           width: 33rem;
           z-index: -1;
           height: .7rem;
-          background: $orange-red;
+          background: $red;
 
           @include media("tablet") {
             left: -3px;
@@ -55,7 +56,7 @@ section {
 
           @include media("mobile") {
             z-index: 0;
-            bottom: 2px;
+            bottom: 6px;
             width: 25rem;
           }
         }
@@ -75,7 +76,7 @@ section {
       a {
         display: flex;
         align-items: center;
-        color: $orange-red;
+        color: $red;
         text-transform: uppercase;
         text-align: right;
         justify-content: flex-end;
@@ -104,7 +105,7 @@ section {
         }
       }
 
-      h3 {
+      h2 {
         text-align: left;
 
         &::before {
@@ -172,6 +173,7 @@ section {
         text-transform: uppercase;
         //font-family: $firasans;
         font-weight: normal;
+        color: white;
 
         img {
           margin-left: 1rem;
@@ -190,12 +192,7 @@ section {
       margin: 15px;
       border-bottom: 1px solid $dark-light;
 
-      p {
-        color: $color-black;
-      }
-
-      p:nth-child(1) {
-        font-size: 1.5rem;
+      h5{
         font-weight: $bold;
         margin-bottom: 5px;
         height: 50px;
@@ -323,7 +320,7 @@ section {
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
       }
 
-      p {
+      h5 {
         @include abs-center;
         color: #fff;
         z-index: 100;
@@ -346,11 +343,16 @@ section {
         }
       }
 
-      &:hover {
-        p {
-          span.view {
+      &:hover{
+        h5{
+          span.view{
             top: 0;
             transition: top 0.3s;
+            
+            img{
+              position: relative;
+              top: -2px;
+            }
           }
         }
       }
@@ -570,7 +572,7 @@ section {
 
       h5 {
         font-size: 2rem;
-        font-family: $firasans;
+        //font-family: $firasans;
         margin-bottom: 2rem;
         font-weight: 600;
       }
@@ -643,7 +645,7 @@ section {
         }
 
         .color-red {
-          color: $orange-red;
+          color: $red;
           text-transform: uppercase;
         }
       }
@@ -710,16 +712,16 @@ section {
         width: 3rem;
         height: 3rem;
         display: flex;
-        border: 3px solid $orange-red;
+        border: 3px solid $red;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
         font-weight: 600;
-        color: $orange-red;
+        color: $red;
       }
 
       p {
-        color: $orange-red;
+        color: $red;
         font-weight: $bold;
         margin-left: 5rem;
       }
@@ -747,7 +749,7 @@ section {
         left: 13px;
         width: 0.4rem;
         height: 90%;
-        background: $orange-red;
+        background: $red;
         opacity: 0.5;
       }
 
@@ -758,7 +760,7 @@ section {
         left: 13px;
         width: 0.4rem;
         height: 90%;
-        background: $orange-red;
+        background: $red;
         opacity: 0.5;
       }
     }
@@ -942,7 +944,7 @@ section {
       button {
         background: none;
         border: 0;
-        color: $orange-red;
+        color: $red;
         outline: none;
         text-transform: uppercase;
         font-weight: $bold;
@@ -1260,12 +1262,12 @@ section {
 
         button {
           background: transparent;
-          border: 1px solid $orange-red;
-          color: $orange-red;
+          border: 1px solid $red;
+          color: $red;
           padding: 5px 13px;
 
           &:hover {
-            background: $orange-red;
+            background: $red;
             color: #fff;
 
             //.bold-text {
@@ -1275,7 +1277,7 @@ section {
         }
 
         .edit-profile-btn {
-          background: $orange-red;
+          background: $red;
           border: none;
           color: #fff;
           padding: 5px 7px;
@@ -1293,7 +1295,7 @@ section {
         align-items: center;
         justify-content: space-between;
         padding: 15px 20px;
-        background: $orange-red;
+        background: $red;
         border: none;
         text-transform: uppercase;
         margin-bottom: 2px;
@@ -1313,7 +1315,7 @@ section {
 
     h5 {
       font-family: $firasans;
-      color: $orange-red;
+      color: $red;
       margin-bottom: 20px;
       font-weight: 600;
       text-transform: uppercase;
@@ -1490,7 +1492,7 @@ section {
 
       //.startup-info {
       //  p.red {
-      //    color: $orange-red;
+      //    color: $red;
       //    margin-bottom: 1.5rem;
       //    font-weight: 600;
       //    text-transform: uppercase;
@@ -1789,7 +1791,7 @@ section {
       margin-bottom: 50px;
 
       h3 {
-        color: #D32907;
+        color: $red;
         font-size: 24px;
         text-transform: none;
         font-family: $firasans;
@@ -1804,44 +1806,59 @@ section {
   }
 
   &.about {
-    //padding: 6rem 0;
     background: $light-grey;
-    //margin-bottom: 10rem;
+
+    img{
+      max-width: 100%;
+
+      @include media("mobile"){
+        position: relative;
+        margin-left: -15px;
+        width: calc(100% + 30px);
+        max-width: none;
+      }
+    }
 
     .white-bg {
       padding: 60px 0;
+
+      @include media("mobile"){
+        padding: 30px 15px;
+      }
     }
 
     .red-bg {
       padding: 60px 0;
       margin-bottom: 10rem;
-      background: $orange-red;
+      background: $red;
     }
 
     h5 {
-      font-size: 20px;
-      font-family: $firasans;
       font-weight: bold;
-      line-height: 150%;
+      margin-bottom: 20px;
+
+      @include media("mobile"){
+        margin: 20px 0 10px;
+      }
     }
 
     p {
-      font-size: 15px;
       margin-bottom: 0;
-      color: #6B6B6B;
     }
 
     .about-story {
-      h5 {
-        font-size: 26px;
-        color: white;
-        text-align: center;
+      @include media("mobile"){
+        .red-bg{
+          padding: 30px 15px;
+        }
       }
 
-      p {
+      h5, p{
         color: white;
-        font-size: 13px;
-        line-height: 2;
+      }
+
+      h5 {
+        text-align: center;
       }
     }
   }

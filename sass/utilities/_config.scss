@@ -28,11 +28,14 @@
 @include do-font-face('Fira Sans', 'FiraSans-Bold', '/fonts/', 'ttf', bold, normal);
 @include do-font-face('Fira Sans', 'FiraSans-Regular', '/fonts/', 'ttf', normal, normal);
 @include do-font-face('League Spartan', 'LeagueSpartan-Bold', '/fonts/', 'otf', bold, normal);
+@include do-font-face('HKGrotesk', 'HKGrotesk-SemiBold', '/fonts/', 'otf', bold, normal);
 
 $firasans        : 'Fira Sans', sans-serif;
 $league-spartan     : 'League Spartan', sans-serif;
+$hkgrotesk     : 'HKGrotesk', sans-serif;
 
-$ffh            : $firasans;
+$ffh            : $league-spartan;
+$ffh2           : $hkgrotesk;
 $ffb            : $firasans;
 
 $normal         : normal;
@@ -41,7 +44,7 @@ $bold           : bold;
 // Colors
 
 $dark-brown   : #811A06;
-$orange-red   : #D32907;
+$red   : #D32907;
 $light-grey   : #F8F8F8;
 $dark-light   : #DADADA;
 $light-blue   : #51B8D9;
