@@ -39,7 +39,7 @@ const aboutUs = () => {
 
                                     <div className="row mt-5">
                                         <div className="col-md-6 d-block d-md-none">
-                                            <img className="img-fluid" src="/images/about-us-2.jpg"/>
+                                            <img src="/images/about-us-2.jpg"/>
                                         </div>
 
                                         <div className="col-md-6 text-md-right">

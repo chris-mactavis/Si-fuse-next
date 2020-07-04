@@ -2318,12 +2318,19 @@ section.faqs article h3::after {
 section.about {
   background: #F8F8F8;
 }
+@media only screen and (max-width: 576px) {
+  section.about img {
+    position: relative;
+    margin-left: -15px;
+    width: calc(100% + 30px);
+  }
+}
 section.about .white-bg {
   padding: 60px 0;
 }
 @media only screen and (max-width: 576px) {
   section.about .white-bg {
-    padding: 30px 0;
+    padding: 30px 15px;
   }
 }
 section.about .red-bg {
@@ -2337,7 +2344,6 @@ section.about h5 {
 }
 @media only screen and (max-width: 576px) {
   section.about h5 {
-    padding: 0 10px;
     margin: 20px 0 10px;
   }
 }
@@ -2345,8 +2351,8 @@ section.about p {
   margin-bottom: 0;
 }
 @media only screen and (max-width: 576px) {
-  section.about p {
-    padding: 0 10px;
+  section.about .about-story .red-bg {
+    padding: 30px 15px;
   }
 }
 section.about .about-story h5, section.about .about-story p {
