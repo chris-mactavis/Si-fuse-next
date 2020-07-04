@@ -36,7 +36,7 @@ const Timeline = ({data: {data: startups}}) => {
 
 Timeline.getInitialProps = async (ctx) => {
     try {
-        const {data: response} = await axiosInstance.get('investors/discover?show_full=true', {
+        const {data: response} = await axiosInstance.get('investors/timeline', {
             headers: {
                 'Authorization': `Bearer ${Token(ctx)}`
             }
