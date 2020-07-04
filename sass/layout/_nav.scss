@@ -6,19 +6,21 @@ nav.navbar {
   position: relative;
   height: 64px;
 
-  @media only screen and (max-width: $desktop_width) {
+  @include media("tablet"){
     padding: 0 2rem 0 2rem;
   }
 
-  @media only screen and (max-width: $mobile_width) {
-    padding: 0 2rem 0 2rem;
+  @include media("mobile"){
+    padding: 0 20px 3px 20px;
+    background: white;
+    height: 50px;
   }
 
   ul.navbar-nav {
     flex-direction: row;
     flex-wrap: inherit;
 
-    @media only screen and (max-width: $tablet_width) {
+    @include media("mobile-landscape"){
       display: none;
     }
 
@@ -128,8 +130,8 @@ nav.navbar {
 
     @media only screen and (max-width: $tablet_width) {
       display: block;
-      max-width: 63px;
-      padding: 8px;
+      height: 36px;
+      //padding: 8px;
     }
   }
 

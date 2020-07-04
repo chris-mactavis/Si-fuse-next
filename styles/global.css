@@ -2515,7 +2515,9 @@ nav.navbar {
 }
 @media only screen and (max-width: 576px) {
   nav.navbar {
-    padding: 0 2rem 0 2rem;
+    padding: 0 20px 3px 20px;
+    background: white;
+    height: 50px;
   }
 }
 nav.navbar ul.navbar-nav {
@@ -2613,8 +2615,7 @@ nav.navbar .logo-small-screen {
 @media only screen and (max-width: 768px) {
   nav.navbar .logo-small-screen {
     display: block;
-    max-width: 63px;
-    padding: 8px;
+    height: 36px;
   }
 }
 
@@ -2701,6 +2702,7 @@ header.homepage {
 @media only screen and (max-width: 576px) {
   header.homepage {
     height: 70vh;
+    background-position: 80% top;
   }
 }
 header.homepage .navbar-brand {
@@ -2912,7 +2914,7 @@ header.page-header h1 {
     font-size: 3.5rem;
     text-align: center;
     width: 100%;
-    top: 75%;
+    top: 70%;
   }
 }
 header.page-header .center-box {

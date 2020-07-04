@@ -54,11 +54,15 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
         </div>
 
         <button onClick={openSideBarHandler} className="menu-btn">
-            {
-                redBar
-                    ? <img src="/images/icon/button-red.svg" alt=""/>
-                    : <img src="/images/icon/button.svg" alt=""/>
-            }
+            <img src="/images/icon/button-red.svg" alt=""/>
         </button>
+
+        {/*<button onClick={openSideBarHandler} className="menu-btn">*/}
+        {/*    {*/}
+        {/*        redBar*/}
+        {/*            ? <img src="/images/icon/button-red.svg" alt=""/>*/}
+        {/*            : <img src="/images/icon/button.svg" alt=""/>*/}
+        {/*    }*/}
+        {/*</button>*/}
     </nav>
 }

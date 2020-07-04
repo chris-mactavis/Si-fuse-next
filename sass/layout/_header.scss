@@ -7,6 +7,7 @@ header {
 
     @include media("mobile"){
       height: 70vh;
+      background-position: 80% top;
     }
 
     .navbar-brand {
@@ -246,7 +247,7 @@ header {
         font-size: 3.5rem;
         text-align: center;
         width: 100%;
-        top: 75%;
+        top: 70%;
       }
     }
 
