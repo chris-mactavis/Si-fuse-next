@@ -80,9 +80,12 @@ const InvestorBasicInfo = ({investor, locations}) => {
             return $state;
         };
 
-        $(".select2").select2({
-            templateSelection: formatState
-        });
+        setTimeout(() => {
+            $(".select2").select2({
+                templateSelection: formatState
+            });
+        }, 2000);
+
     }, []);
 
     useEffect(() => {
