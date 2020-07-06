@@ -69,23 +69,18 @@ export default function SideBar({isLoggedIn = false}) {
 
                 {
                     !isLoggedIn
-                        ? <li>
-                            <Link href="/login">
-                                <a>Login</a>
-                            </Link>
-                        </li>
-                        : <li>
-                            <a onClick={logoutHandler}>Logout</a>
-                        </li>
-                }
-
-                {
-                    !isLoggedIn
-                        ? <li>
-                            <Link href="/signup">
-                                <a>Signup</a>
-                            </Link>
-                        </li>
+                        ? <>
+                            <li>
+                                <Link href="/login">
+                                    <a>Login</a>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/signup">
+                                    <a>Signup</a>
+                                </Link>
+                            </li>
+                        </>
                         : <li>
                             <a onClick={logoutHandler}>Logout</a>
                         </li>
