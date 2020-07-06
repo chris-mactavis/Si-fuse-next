@@ -20,9 +20,9 @@ const Faqs = ({faqs}) => {
                                     {
                                         faqs.map(
                                             ({question, answer, id}) => <article key={id}>
-                                                <h3>
+                                                <h4>
                                                     {question}
-                                                </h3>
+                                                </h4>
 
                                                 <p>{answer}</p>
                                             </article>

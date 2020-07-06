@@ -6,7 +6,7 @@ import React from 'react';
 
 const Login = () => {
 
-    return <Layout headerContent={<LoginForm />} page="Login" headerClass="signup">
+    return <Layout headerContent={<LoginForm />} page="Login" headerClass="signup" footer={false}>
         <Head>
             <title>Login</title>
         </Head>

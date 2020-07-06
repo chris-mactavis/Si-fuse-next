@@ -37,7 +37,7 @@ export default function LoginForm() {
             <h1>Login</h1>
             <p className="text-center">
                 <Link href="signup">
-                    <a>Signup Instead?</a>
+                    <a className="text-white">Signup Instead?</a>
                 </Link>
             </p>
 
@@ -52,7 +52,7 @@ export default function LoginForm() {
 
                 <button type="submit" className="btn btn-white">Login</button>
             </form>
-            <p className="text-center">Forgot Password? <Link href="/forgot-password"><a>Click here</a></Link></p>
+            <p className="text-center">Forgot Password? <Link href="/forgot-password"><a className="text-white">Click here</a></Link></p>
         </div>
 
         <style jsx>{`

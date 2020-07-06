@@ -16,8 +16,10 @@
     font-size: 12px;
   }
 
-  @media only screen and (max-width: $mobile_width) {
-    padding: 20px 40px;
+  @include media("mobile"){
+    padding: 10px 20px;
+    font-size: 14px;
+    letter-spacing: 2px;
   }
 
   &::before {

@@ -52,9 +52,10 @@ export default function Events({data: {data: events, links: {next}, meta: {curre
 
                                 <div className="background-text">
                                     <Link href="events/[slug]" as={`events/${event.slug}`}>
-                                        <p>{event.title}</p>
+                                        <h5>{event.title}</h5>
                                     </Link>
                                 </div>
+
 
                                 <div className="meta">
                                     <p>{event.date_formatted}</p>
