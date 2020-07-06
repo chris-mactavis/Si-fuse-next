@@ -10,7 +10,7 @@ import {useSelector} from "react-redux";
 import Notifier from "./UI/Notifier";
 import ImageViewer from "./UI/ImageViewer";
 
-export default function Layout({children, page, headerClass, headerContent, redBar = false, whiteAccount = false}) {
+export default function Layout({children, page, headerClass, headerContent, redBar = false, whiteAccount = false, footer = true}) {
     const isLoggedIn = useSelector(state => state.auth.loggedIn);
     return (
         <>
@@ -72,7 +72,9 @@ export default function Layout({children, page, headerClass, headerContent, redB
 
             {children}
 
-            <Footer />
+            {
+                footer && <Footer />
+            }
         </>
     )
 }

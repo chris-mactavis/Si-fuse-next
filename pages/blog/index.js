@@ -59,7 +59,7 @@ const Blog = ({data: {latest, blogs: {current_page, last_page, data: allBlogs, n
                                         <p>{date_formatted}</p>
                                     </div>
 
-                                    <p className="post-title">{title}</p>
+                                    <h5>{title}</h5>
                                 </a>
                             </Link>
                         </div>)
@@ -81,7 +81,7 @@ const Blog = ({data: {latest, blogs: {current_page, last_page, data: allBlogs, n
                                         <p>{date_formatted}</p>
                                     </div>
 
-                                    <p className="post-title">{title}</p>
+                                    <h5>{title}</h5>
                                 </a>
                             </Link>
                         </div>)

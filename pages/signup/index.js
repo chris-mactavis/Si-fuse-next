@@ -6,7 +6,7 @@ import axiosInstance from "../../config/axios";
 import {withoutAuth} from "../../components/hoc/auth";
 
 const SignUp = ({countries, user_types, query}) => {
-    return <Layout headerContent={<SignupForm countries={countries} userTypes={user_types} query={query} />} page="Signup" headerClass="signup">
+    return <Layout headerContent={<SignupForm countries={countries} userTypes={user_types} query={query} />} page="Signup" headerClass="signup" footer={false}>
         <Head>
             <title>Signup</title>
         </Head>

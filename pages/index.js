@@ -12,88 +12,90 @@ const Home = ({events, blogs}) => {
     const dispatch = useDispatch();
 
     const isLoggedIn = !!Token();
-    console.log(isLoggedIn);
 
     useEffect(() => {
 
         dispatch(resetCurrentState());
-        $('.event-slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            arrows: true,
-            autoplay: true,
-            responsive: [
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 1071,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        arrows: false,
-                        dots: true,
-                    }
-                },
-                {
-                    breakpoint: 576,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        arrows: false,
-                        dots: true,
-                    }
-                },
-            ]
-        });
+        setTimeout(() => {
+            $('.event-slider').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                arrows: true,
+                autoplay: true,
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 1071,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                            arrows: false,
+                            dots: true,
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            arrows: false,
+                            dots: true,
+                        }
+                    },
+                ]
+            });
 
-        $('.posts-slider').slick({
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            arrows: false,
-            dots: true,
-            autoplay: true,
-            responsive: [
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 1071,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 576,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    }
-                },
-            ]
-        });
+            $('.posts-slider').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                arrows: false,
+                dots: true,
+                autoplay: true,
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 1071,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                        }
+                    },
+                ]
+            });
 
-        $('a[href*="#"]:not([href="#"])').click(function () {
-            if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
-                let target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html, body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
+            $('a[href*="#"]:not([href="#"])').click(function () {
+                if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
+                    let target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html, body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                    }
                 }
-            }
-        });
+            });
+        }, 2000);
+
     }, [])
 
     return <Layout
@@ -199,7 +201,7 @@ const Home = ({events, blogs}) => {
                     }
                 </div>
 
-                <div className="text-center button mt-5">
+                <div className="text-center button mt-5 pt-4 pt-md-0">
                     <Link href="events">
                         <a className="btn">All events</a>
                     </Link>
@@ -240,7 +242,7 @@ const Home = ({events, blogs}) => {
                 </div>
             </div>
 
-            <div className="text-center button">
+            <div className="text-center button mt-5 pt-5">
                 <Link href="blog">
                     <a className="btn">The Blog</a>
                 </Link>
