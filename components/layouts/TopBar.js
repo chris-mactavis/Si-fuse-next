@@ -33,7 +33,8 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
                             <img src="/images/icon/account.svg" alt="" className="img-fluid"/>
                         </button>
                         : <button onClick={accountMenuHandler} className="menu-btn active-bar">
-                            <img src="/images/icon/account-white.svg" alt="" className="img-fluid"/>
+                            <img src="/images/icon/account-white.svg" alt="" className="img-fluid d-none d-md-block"/>
+                            <img src="/images/icon/account-grey.svg" alt="" className="img-fluid d-block d-md-none"/>
                         </button>
                 )
         }
@@ -53,7 +54,11 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
             </Link>
         </div>
 
-        <button onClick={openSideBarHandler} className="menu-btn">
+        <button onClick={openSideBarHandler} className="menu-btn d-block d-md-none">
+            <img src="/images/icon/button-red.svg" alt=""/>
+        </button>
+
+        <button onClick={openSideBarHandler} className="menu-btn d-none d-md-block">
             {
                 redBar
                     ? <img src="/images/icon/button-red.svg" alt=""/>

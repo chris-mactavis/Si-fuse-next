@@ -7,6 +7,7 @@ header {
 
     @include media("mobile"){
       height: 70vh;
+      background-position: 80% top;
     }
 
     .navbar-brand {
@@ -67,7 +68,7 @@ header {
 
         span {
           background: #fff;
-          color: $orange-red;
+          color: $red;
           line-height: 0.9;
           display: inline-block;
           padding: 20px 12px 0;
@@ -216,9 +217,13 @@ header {
   }
 
   &.page-header {
-    height: 70vh;
+    height: 50vh;
     background-size: cover !important;
     position: relative;
+
+    @include media("mobile"){
+      height: 20vh;
+    }
 
     h1 {
       font-size: 7.5rem;
@@ -228,7 +233,7 @@ header {
       color: transparent;
       margin: 0;
       position: absolute;
-      top: 50%;
+      top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
       -webkit-text-stroke-width: 2px;
@@ -238,8 +243,11 @@ header {
         font-size: 5rem;
       }
 
-      @media only screen and (max-width: $mobile_width) {
+      @include media("mobile"){
         font-size: 3.5rem;
+        text-align: center;
+        width: 100%;
+        top: 70%;
       }
     }
 
@@ -346,10 +354,10 @@ header {
     height: auto;
 
     nav.navbar ul.navbar-nav li.nav-item .nav-link {
-      color: $orange-red;
+      color: $red;
 
       &:after {
-        background-color: $orange-red;
+        background-color: $red;
       }
     }
   }
@@ -398,7 +406,7 @@ header {
       background: transparent;
 
       @include media("mobile"){
-        right: 26px;
+        right: 20px;
       }
 
       &:focus {
@@ -419,10 +427,15 @@ header {
 
       @include media("mobile"){
         right: 30px;
+        margin: 100px 0 0;
       }
 
       li {
-        margin-bottom: 4rem;
+        margin-bottom: 40px;
+
+        @include media("mobile"){
+          margin-bottom: 20px;
+        }
 
         a {
           text-transform: uppercase;
@@ -430,8 +443,8 @@ header {
           font-family: $league-spartan;
           color: #BF8C83;
 
-          @media only screen and (max-width: $mobile_width) {
-            font-size: 35px;
+          @include media("mobile"){
+            font-size: 28px;
           }
         }
       }
@@ -467,8 +480,8 @@ header {
       padding: 10px 20px;
       margin: 0;
 
-      @media only screen and (max-width: $mobile_width) {
-        padding: 40px 50px 15px 20px;
+      @include media("mobile"){
+        padding: 6px 12px;
       }
 
       li {

@@ -7,6 +7,7 @@ import Token from "../../utils/Token";
 import {showNotifier} from "../../store/actions/notifier";
 import {showImageViewer, showVideoViewer} from "../../store/actions/imageViewer";
 import StartupProfileLevels from "./StartupLevels";
+import {startupLevel} from "../../helpers";
 
 const StartupProfile = ({company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
     const dispatch = useDispatch();
@@ -17,9 +18,13 @@ const StartupProfile = ({company, services: product_services, finance, market, l
 
     const [connected, setConnected] = useState(isConnected);
 
+    const stlevel = startupLevel(level);
+
+    console.log(stlevel);
+
     if (level) {
         levelKeys = Object.keys(level);
-        level = levelKeys.map(key => {
+        level = levelKeys.filter(l => l !== 'all').map(key => {
             if (level[key]) {
                 return JSON.parse(level[key]).map(item => item.split('::')[1]);
             }
@@ -500,6 +505,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                             level
                                 ? level.map((startupLevel, index) => <StartupProfileLevels startupLevel={startupLevel}
                                                                                            key={index} index={index}
+                                                                                           fairness={stlevel[levelKeys[index]]}
                                                                                            levelKeys={levelKeys}/>)
                                 : null
                         }
