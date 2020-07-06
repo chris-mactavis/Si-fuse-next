@@ -8,11 +8,16 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
     }
 
     const accountMenuHandler = () => {
+        if ($('.notification-container').css('display') === 'block') {
+            toggleNotification();
+        }
         $('.account-container').toggle();
     }
 
     const toggleNotification = () => {
-        console.log('notification');
+        if ($('.account-container').css('display') === 'block') {
+            accountMenuHandler();
+        }
         $('.notification-container').toggle();
     }
 
@@ -48,7 +53,8 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
                                 <img src="/images/icon/account-grey.svg" alt="" className="img-fluid d-block d-md-none"/>
                             </button>
                             <button onClick={toggleNotification} id="notification-toggle" className="menu-btn">
-                                <img src="/images/icon/notification-bell-white.svg" alt="" className="img-fluid d-none d-md-block"/>
+                                <img src="/images/icon/notification-bell-white.svg" alt=""
+                                     className="img-fluid d-none d-md-block"/>
                                 <img src="/images/icon/notification-bell.svg" alt="" className="img-fluid d-block d-md-none"/>
                             </button>
                         </div>
