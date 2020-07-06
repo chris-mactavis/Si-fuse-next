@@ -52,11 +52,11 @@ export default function SignupForm({countries, userTypes, query}) {
                     <div className="image-containers">
                         <a href="#" onClick={() => userTypeHandler('Startup')}>
                             <img src="/images/icon/startup.svg" alt=""/>
-                            <p>Start Up</p>
+                            <h4 className="text-white">STARTUP</h4>
                         </a>
                         <a href="#" onClick={() => userTypeHandler('Investor')}>
                             <img src="/images/icon/investor.svg" alt=""/>
-                            <p>investor</p>
+                            <h4 className="text-white">INVESTOR</h4>
                         </a>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ export default function SignupForm({countries, userTypes, query}) {
                     <h1>Sign Up</h1>
                     <p className="text-center">
                         <Link href="login">
-                            <a>Login Instead?</a>
+                            <a className="text-white">Login Instead?</a>
                         </Link>
                     </p>
 
@@ -114,18 +114,18 @@ export default function SignupForm({countries, userTypes, query}) {
                         {
                             accountType === 2 && <>
                                 <select ref={register({required: 'This field is required'})} className="w-100" name="startup_type_id">
-                                    <option value="">Startup Lead</option>
+                                    <option value="">Team Composition</option>
                                     <option value="1">Female Owned</option>
                                     <option value="2">Female Led</option>
-                                    <option value="3">Gender Bias</option>
+                                    <option value="3">Gender Diverse</option>
                                 </select>
                                 {errors.startup_type_id && <Error>{errors.startup_type_id.message}</Error>}
                             </>
                         }
 
-                        <button type="submit" className="btn btn-white">Sign
-                            up
-                        </button>
+                        <button type="submit" className="btn btn-white">Sign up</button>
+
+                        <div onClick={() => setAccountType(null)} className="pointer"><img src="images/icon/arrow-left.svg"/> Back</div>
                     </form>
                 </div>
         }
@@ -134,7 +134,7 @@ export default function SignupForm({countries, userTypes, query}) {
         <style jsx>{`
             .signup-input-container {
                 display: flex;
-                flex-direction: column;
+                flex-directsion: column;
                 margin-bottom: 0;
                 width: 50%;
             }

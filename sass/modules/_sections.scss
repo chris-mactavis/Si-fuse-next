@@ -129,8 +129,12 @@ section {
   }
 
   &.events {
-    padding: 6rem 0;
+    padding: 60px 0;
     background: $light-grey;
+
+    @include media("mobile"){
+      padding: 40px 0;
+    }
 
     .event-slider {
       position: relative;
@@ -196,9 +200,10 @@ section {
         font-weight: $bold;
         margin-bottom: 5px;
         height: 50px;
+        //margin-bottom: 20px;
 
-        @media only screen and (max-width: $desktop_width) {
-          margin-bottom: 20px;
+        @include media("mobile"){
+          //height: 40px;
         }
       }
 
@@ -249,12 +254,13 @@ section {
         font-weight: normal;
         font-size: 1.3rem;
         color: $color-black;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
       }
 
       p:nth-child(2) {
         font-size: 1.3rem;
         color: $color-black;
+        margin-bottom: 20px;
       }
     }
 
@@ -417,17 +423,21 @@ section {
   }
 
   .button {
-    margin-top: 64px;
+    //margin-top: 64px;
 
     @media only screen and (max-width: $desktop_width) {
-      margin-top: 50px !important;
+      //margin-top: 50px !important;
     }
   }
 
   &.blog {
-    padding: 0 0 6rem 0;
-    margin-top: -10rem;
+    padding: 60px 0;
+    //margin-top: -10rem;
     background: transparent;
+
+    @include media("mobile"){
+      padding: 40px 0;
+    }
 
     .blog-post {
       margin-bottom: 30px;
@@ -487,10 +497,7 @@ section {
         }
       }
 
-      p.post-title {
-        font-weight: $bold;
-        //padding-bottom: 1rem;
-        font-size: 1.5rem;
+      h4{
         background: white;
       }
 
@@ -525,13 +532,12 @@ section {
   &.single-post {
     @extend .bg;
 
-    @media only screen and (max-width: $mobile_width) {
-      padding: 60px 10px 60px;
+    @include media("mobile"){
+      padding: 40px 0;
     }
 
-
     .multi {
-      @media only screen and (max-width: $mobile_width) {
+      @include media("mobile"){
         .phone-label {
           margin-top: 4rem;
         }
@@ -542,11 +548,19 @@ section {
       width: 100%;
       height: 400px;
       object-fit: cover;
+
+      @include media("mobile"){
+        height: auto;
+      }
     }
 
     .white-bg {
       background: #fff;
-      padding-bottom: 6rem;
+      padding-bottom: 60px;
+
+      @include media("mobile"){
+        padding-bottom: 30px;
+      }
     }
 
     .content {
@@ -554,31 +568,40 @@ section {
       background: #fff;
       margin-top: -60px;
 
-      @media only screen and (max-width: $mobile_width) {
-        padding: 20px;
+      @include media("mobile"){
+        padding: 10px 20px 20px;
       }
 
       h1 {
         font-size: 36px;
-        font-family: $firasans;
+        font-family: $ffh2;
         padding: 0;
         margin: 0 0 30px;
         text-align: center;
 
-        @media only screen and (max-width: $tablet_width) {
-          font-size: 25px;
+        @include media("mobile"){
+          font-size: 24px;
+          margin: 0 0 20px;
         }
       }
 
       h5 {
         font-size: 2rem;
         //font-family: $firasans;
-        margin-bottom: 2rem;
+        margin-bottom: 20px;
         font-weight: 600;
+
+        @include media("mobile"){
+          margin-bottom: 10px;
+        }
       }
 
       p {
-        text-align: justify;
+        //text-align: justify;
+
+        &:last-child{
+          margin-bottom: 0;
+        }
       }
 
       .category {
@@ -587,8 +610,9 @@ section {
         margin-bottom: 40px;
         position: relative;
 
-        @media only screen and (max-width: $mobile_width) {
+        @include media("mobile"){
           flex-wrap: wrap;
+          margin-bottom: 30px;
         }
 
         &::before {
@@ -600,23 +624,20 @@ section {
           background: #eceff1;
           position: absolute;
           z-index: 1;
-
-          @media only screen and (max-width: $mobile_width) {
-            height: 75px;
-          }
         }
 
         p {
-          font-size: 1.5rem;
+          font-size: 15px;
           font-weight: normal;
           margin-bottom: 0;
           position: relative;
           z-index: 10;
           color: black;
 
-          @media only screen and (max-width: $mobile_width) {
-            margin-bottom: 10px;
-            margin-right: 15px;
+          @include media("mobile"){
+            //margin-bottom: 10px;
+            //margin-right: 15px;
+            font-size: 12px;
           }
 
           &:first-child {
@@ -629,15 +650,19 @@ section {
       .event-category {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         flex-wrap: wrap;
+
+        @include media("mobile"){
+          margin-bottom: 20px;
+        }
 
         p {
           font-size: 1.5rem;
           font-weight: normal;
           margin-bottom: 1rem;
-          display: flex;
-          align-items: center;
+          //display: flex;
+          //align-items: center;
 
           img {
             margin-right: .5rem;
@@ -1785,18 +1810,19 @@ section {
 
     .white-bg {
       padding: 60px 0;
+
+      @include media("mobile"){
+        padding: 30px 15px;
+      }
     }
 
     article {
       margin-bottom: 50px;
 
-      h3 {
+      h4{
         color: $red;
-        font-size: 24px;
         text-transform: none;
-        font-family: $firasans;
         margin-bottom: 10px;
-        //font-weight: bold;
 
         &::after {
           content: '?';
@@ -1868,16 +1894,24 @@ section {
 
     .white-bg {
       padding: 60px 0;
-      margin-top: -60px;
-      margin-bottom: 60px;
+      //margin-top: -60px;
+      //margin-bottom: 60px;
+
+      @include media("mobile"){
+        padding: 30px 15px;
+      }
     }
 
     form {
-      padding: 0 7rem;
+      //padding: 0 7rem;
 
       input, textarea, button {
-        margin-top: 4rem;
+        margin-top: 40px;
         margin-bottom: 0 !important;
+
+        @include media("mobile"){
+          margin-top: 20px;
+        }
       }
 
       textarea {
