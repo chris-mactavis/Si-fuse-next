@@ -6,12 +6,18 @@ import HeaderScroll from "./header/HeaderScroll";
 import Link from "next/link";
 import Footer from "./layouts/Footer";
 import Loader from "./UI/Loader";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector,} from "react-redux";
 import Notifier from "./UI/Notifier";
 import ImageViewer from "./UI/ImageViewer";
+import {fetchNotifications} from "../store/actions/notification";
 
 export default function Layout({children, page, headerClass, headerContent, redBar = false, whiteAccount = false, footer = true}) {
     const isLoggedIn = useSelector(state => state.auth.loggedIn);
+
+    const dispatch = useDispatch();
+
+    isLoggedIn ? dispatch(fetchNotifications()) : null;
+
     return (
         <>
             <Head>

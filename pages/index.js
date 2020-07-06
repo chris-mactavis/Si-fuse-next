@@ -120,7 +120,7 @@ const Home = ({events, blogs}) => {
 
                                     <h2>For investors</h2>
                                     <p>
-                                        Seeking investment opportunities? <br class="d-none d-md-block"/>
+                                        Seeking investment opportunities? <br className="d-none d-md-block"/>
                                         Find the right startups that match your <br className="d-none d-md-block"/>
                                         investment criteria within minutes.
 
