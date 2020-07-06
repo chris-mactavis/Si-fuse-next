@@ -134,7 +134,7 @@ export default function SignupForm({countries, userTypes, query}) {
         <style jsx>{`
             .signup-input-container {
                 display: flex;
-                flex-direction: column;
+                flex-directsion: column;
                 margin-bottom: 0;
                 width: 50%;
             }

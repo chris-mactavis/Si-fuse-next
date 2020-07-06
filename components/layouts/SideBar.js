@@ -42,16 +42,48 @@ export default function SideBar({isLoggedIn = false}) {
                         </li>
                         : null
                 }
+
+                <li>
+                    <Link href="/about-us">
+                        <a>About Us</a>
+                    </Link>
+                </li>
+
                 <li>
                     <Link href="/blog">
                         <a>Blog</a>
                     </Link>
                 </li>
+
+                <li>
+                    <Link href="/events">
+                        <a>Events</a>
+                    </Link>
+                </li>
+
+                <li>
+                    <Link href="/contact-us">
+                        <a>Contact Us</a>
+                    </Link>
+                </li>
+
                 {
                     !isLoggedIn
                         ? <li>
                             <Link href="/login">
                                 <a>Login</a>
+                            </Link>
+                        </li>
+                        : <li>
+                            <a onClick={logoutHandler}>Logout</a>
+                        </li>
+                }
+
+                {
+                    !isLoggedIn
+                        ? <li>
+                            <Link href="/signup">
+                                <a>Signup</a>
                             </Link>
                         </li>
                         : <li>
