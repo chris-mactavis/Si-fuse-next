@@ -39,13 +39,19 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
                                 <img src="/images/icon/account.svg" alt="" className="img-fluid"/>
                             </button>
                             <button onClick={toggleNotification} id="notification-toggle" className="menu-btn">
-                                <img src="/images/icon/notification-bell.svg" alt="" className="img-fluid" />
+                                <img src="/images/icon/notification-bell.svg" alt="" className="img-fluid"/>
                             </button>
                         </div>
-                        : <button onClick={accountMenuHandler} className="menu-btn active-bar">
-                            <img src="/images/icon/account-white.svg" alt="" className="img-fluid d-none d-md-block"/>
-                            <img src="/images/icon/account-grey.svg" alt="" className="img-fluid d-block d-md-none"/>
-                        </button>
+                        : <div className="d-flex">
+                            <button onClick={accountMenuHandler} className="menu-btn active-bar">
+                                <img src="/images/icon/account-white.svg" alt="" className="img-fluid d-none d-md-block"/>
+                                <img src="/images/icon/account-grey.svg" alt="" className="img-fluid d-block d-md-none"/>
+                            </button>
+                            <button onClick={toggleNotification} id="notification-toggle" className="menu-btn">
+                                <img src="/images/icon/notification-bell-white.svg" alt="" className="img-fluid d-none d-md-block"/>
+                                <img src="/images/icon/notification-bell.svg" alt="" className="img-fluid d-block d-md-none"/>
+                            </button>
+                        </div>
                 )
         }
         <Link href="/">
