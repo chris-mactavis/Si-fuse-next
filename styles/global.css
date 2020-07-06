@@ -314,7 +314,6 @@ p {
 
 a {
   font-size: 16px;
-  font-weight: bold;
   text-decoration: none;
   font-family: "Fira Sans", sans-serif;
   color: #3E3E3E;
@@ -685,16 +684,8 @@ form.profile-details .select2.investor-country-code + .select2 {
 }
 form.recovery-pwd {
   background: #fff;
-  padding: 3rem 7rem;
-  width: 90%;
   margin: 0 auto;
   /* Firefox */
-}
-@media only screen and (max-width: 768px) {
-  form.recovery-pwd {
-    padding: 2rem 2rem;
-    width: 100%;
-  }
 }
 form.recovery-pwd .faded {
   opacity: 0.5;
@@ -819,7 +810,9 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 }
 @media only screen and (max-width: 576px) {
   .btn {
-    padding: 20px 40px;
+    padding: 10px 20px;
+    font-size: 14px;
+    letter-spacing: 2px;
   }
 }
 .btn::before {
@@ -1043,8 +1036,13 @@ section.image-text .startups a {
   justify-content: flex-start;
 }
 section.events {
-  padding: 6rem 0;
+  padding: 60px 0;
   background: #F8F8F8;
+}
+@media only screen and (max-width: 576px) {
+  section.events {
+    padding: 40px 0;
+  }
 }
 section.events .event-slider {
   position: relative;
@@ -1096,11 +1094,6 @@ section.events .background-text h5 {
   margin-bottom: 5px;
   height: 50px;
 }
-@media only screen and (max-width: 992px) {
-  section.events .background-text h5 {
-    margin-bottom: 20px;
-  }
-}
 section.events .background-text p:nth-child(2) {
   font-size: 1.3rem;
 }
@@ -1137,11 +1130,12 @@ section.events .meta p:nth-child(1) {
   font-weight: normal;
   font-size: 1.3rem;
   color: #3E3E3E;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 section.events .meta p:nth-child(2) {
   font-size: 1.3rem;
   color: #3E3E3E;
+  margin-bottom: 20px;
 }
 section.events .slick-prev {
   bottom: 30px;
@@ -1271,18 +1265,14 @@ section.posts .message-box .message-info .date {
   font-size: 1.5rem;
   text-align: right;
 }
-section .button {
-  margin-top: 64px;
-}
-@media only screen and (max-width: 992px) {
-  section .button {
-    margin-top: 50px !important;
-  }
-}
 section.blog {
-  padding: 0 0 6rem 0;
-  margin-top: -10rem;
+  padding: 60px 0;
   background: transparent;
+}
+@media only screen and (max-width: 576px) {
+  section.blog {
+    padding: 40px 0;
+  }
 }
 section.blog .blog-post {
   margin-bottom: 30px;
@@ -1335,9 +1325,7 @@ section.blog .blog-post div.meta p {
   margin: 0;
   padding: 0;
 }
-section.blog .blog-post p.post-title {
-  font-weight: bold;
-  font-size: 1.5rem;
+section.blog .blog-post h4 {
   background: white;
 }
 section.discover .card .img-wrapper {
@@ -1346,7 +1334,7 @@ section.discover .card .img-wrapper {
 }
 @media only screen and (max-width: 576px) {
   section.single-post {
-    padding: 60px 10px 60px;
+    padding: 40px 0;
   }
 }
 @media only screen and (max-width: 576px) {
@@ -1359,9 +1347,19 @@ section.single-post .blog-image {
   height: 400px;
   object-fit: cover;
 }
+@media only screen and (max-width: 576px) {
+  section.single-post .blog-image {
+    height: auto;
+  }
+}
 section.single-post .white-bg {
   background: #fff;
-  padding-bottom: 6rem;
+  padding-bottom: 60px;
+}
+@media only screen and (max-width: 576px) {
+  section.single-post .white-bg {
+    padding-bottom: 30px;
+  }
 }
 section.single-post .content {
   padding: 30px;
@@ -1370,28 +1368,34 @@ section.single-post .content {
 }
 @media only screen and (max-width: 576px) {
   section.single-post .content {
-    padding: 20px;
+    padding: 10px 20px 20px;
   }
 }
 section.single-post .content h1 {
   font-size: 36px;
-  font-family: "Fira Sans", sans-serif;
+  font-family: "HKGrotesk", sans-serif;
   padding: 0;
   margin: 0 0 30px;
   text-align: center;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 576px) {
   section.single-post .content h1 {
-    font-size: 25px;
+    font-size: 24px;
+    margin: 0 0 20px;
   }
 }
 section.single-post .content h5 {
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 20px;
   font-weight: 600;
 }
-section.single-post .content p {
-  text-align: justify;
+@media only screen and (max-width: 576px) {
+  section.single-post .content h5 {
+    margin-bottom: 10px;
+  }
+}
+section.single-post .content p:last-child {
+  margin-bottom: 0;
 }
 section.single-post .content .category {
   display: flex;
@@ -1402,6 +1406,7 @@ section.single-post .content .category {
 @media only screen and (max-width: 576px) {
   section.single-post .content .category {
     flex-wrap: wrap;
+    margin-bottom: 30px;
   }
 }
 section.single-post .content .category::before {
@@ -1414,13 +1419,8 @@ section.single-post .content .category::before {
   position: absolute;
   z-index: 1;
 }
-@media only screen and (max-width: 576px) {
-  section.single-post .content .category::before {
-    height: 75px;
-  }
-}
 section.single-post .content .category p {
-  font-size: 1.5rem;
+  font-size: 15px;
   font-weight: normal;
   margin-bottom: 0;
   position: relative;
@@ -1429,8 +1429,7 @@ section.single-post .content .category p {
 }
 @media only screen and (max-width: 576px) {
   section.single-post .content .category p {
-    margin-bottom: 10px;
-    margin-right: 15px;
+    font-size: 12px;
   }
 }
 section.single-post .content .category p:first-child {
@@ -1439,15 +1438,18 @@ section.single-post .content .category p:first-child {
 section.single-post .content .event-category {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   flex-wrap: wrap;
+}
+@media only screen and (max-width: 576px) {
+  section.single-post .content .event-category {
+    margin-bottom: 20px;
+  }
 }
 section.single-post .content .event-category p {
   font-size: 1.5rem;
   font-weight: normal;
   margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
 }
 section.single-post .content .event-category p img {
   margin-right: 0.5rem;
@@ -2322,17 +2324,20 @@ section.faqs {
 section.faqs .white-bg {
   padding: 60px 0;
 }
+@media only screen and (max-width: 576px) {
+  section.faqs .white-bg {
+    padding: 30px 15px;
+  }
+}
 section.faqs article {
   margin-bottom: 50px;
 }
-section.faqs article h3 {
+section.faqs article h4 {
   color: #D32907;
-  font-size: 24px;
   text-transform: none;
-  font-family: "Fira Sans", sans-serif;
   margin-bottom: 10px;
 }
-section.faqs article h3::after {
+section.faqs article h4::after {
   content: "?";
 }
 section.about {
@@ -2390,15 +2395,20 @@ section.contact-us {
 }
 section.contact-us .white-bg {
   padding: 60px 0;
-  margin-top: -60px;
-  margin-bottom: 60px;
 }
-section.contact-us form {
-  padding: 0 7rem;
+@media only screen and (max-width: 576px) {
+  section.contact-us .white-bg {
+    padding: 30px 15px;
+  }
 }
 section.contact-us form input, section.contact-us form textarea, section.contact-us form button {
-  margin-top: 4rem;
+  margin-top: 40px;
   margin-bottom: 0 !important;
+}
+@media only screen and (max-width: 576px) {
+  section.contact-us form input, section.contact-us form textarea, section.contact-us form button {
+    margin-top: 20px;
+  }
 }
 section.contact-us form textarea {
   border: 2px solid #6B6B6B;
@@ -2430,7 +2440,7 @@ input:focus, textarea:focus, select:focus, option:focus button {
 }
 
 .m-right {
-  margin-right: 2rem;
+  margin-right: 20px;
 }
 
 .white-bg {
@@ -3025,7 +3035,7 @@ header.disclaimer {
   background-image: url(/images/disclaimer.svg);
 }
 header.contact-us {
-  background-image: url(/images/contact-us.svg);
+  background-image: url(/images/contact-us.jpg);
 }
 header.no-bg {
   background: #ECEFF1;
@@ -3071,7 +3081,7 @@ header .sidebar.active {
 header .sidebar button {
   position: absolute;
   right: 62px;
-  margin-top: 2rem;
+  margin-top: 15px;
   margin-bottom: 2rem;
   border: none;
   background: transparent;
@@ -3097,7 +3107,7 @@ header .sidebar ul {
 @media only screen and (max-width: 576px) {
   header .sidebar ul {
     right: 30px;
-    margin: 100px 0 0;
+    margin: 80px 0 0;
   }
 }
 header .sidebar ul li {

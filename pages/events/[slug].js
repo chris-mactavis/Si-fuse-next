@@ -130,7 +130,7 @@ export default function Events({event, countries}) {
                                             {
                                                 showRegister
                                                     ? <div>
-                                                        <h5 className="mb-0">Register Event</h5>
+                                                        <h5 className="mb-0 mt-5">Register Event</h5>
                                                         <form onSubmit={handleSubmit(submitHandler)}
                                                               className="profile-details event-register">
                                                             <div className="d-flex">
@@ -236,9 +236,16 @@ export default function Events({event, countries}) {
         <style jsx>{`
             .input-container {
                 display: flex;
-                flex-direction: column;
-                margin-top: 4rem;
+                flex-direction: column;             
+                margin-top: 4rem;               
             }
+            
+            @media (max-width: 767px){
+                .input-container{
+                    margin-top: 20px;
+                }
+            }
+            
             input {
                 width: 100%!important;
                 margin-bottom: 0!important;

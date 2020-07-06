@@ -199,7 +199,7 @@ const Home = ({events, blogs}) => {
                     }
                 </div>
 
-                <div className="text-center button mt-5">
+                <div className="text-center button mt-5 pt-4 pt-md-0">
                     <Link href="events">
                         <a className="btn">All events</a>
                     </Link>
@@ -240,7 +240,7 @@ const Home = ({events, blogs}) => {
                 </div>
             </div>
 
-            <div className="text-center button">
+            <div className="text-center button mt-5 pt-5">
                 <Link href="blog">
                     <a className="btn">The Blog</a>
                 </Link>

@@ -6,7 +6,7 @@ import axiosInstance from "../../config/axios";
 const Disclaimer = ({settings}) => {
     const createMarkup = val => ({__html: val});
 
-    return <Layout headerContent={<h1>Disclaimer</h1>} page="Disclaimer" headerClass="page-header disclaimer">
+    return <Layout headerContent={<h1>Disclaimer</h1>} page="Disclaimer" headerClass="page-header disclaimer" whiteAccount>
         <Head>
             <title>Disclaimer</title>
         </Head>

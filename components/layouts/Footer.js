@@ -73,7 +73,7 @@ export default function Footer() {
 
                     <div className="col-md-3 col-6 logo-column">
                         <Link href="/">
-                            <a className="logo">
+                            <a className="logo d-block">
                                 <img className="logo img-fluid" src="/images/logo.png" alt=""/>
                             </a>
                         </Link>
