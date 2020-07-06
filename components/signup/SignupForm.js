@@ -71,14 +71,14 @@ export default function SignupForm({countries, userTypes, query}) {
                     <form className="sign-up" onSubmit={handleSubmit(signupHandler)}>
                         <div className="w-100 d-flex">
                             <div className="signup-input-container">
-                                <input ref={register({required: true})} className="w-80 m-right signup-input" type="text"
+                                <input ref={register({required: true})} className="m-right signup-input w-100" type="text"
                                        name="first_name"
                                        id="fname" placeholder="First Name"/>
                                 {errors.first_name && <Error>First name is required</Error>}
                             </div>
 
                             <div className="signup-input-container">
-                                <input ref={register({required: true})} className="w-80" type="text" name="last_name"
+                                <input ref={register({required: true})} className="w-100" type="text" name="last_name"
                                        id="lname"
                                        placeholder="Last Name"/>
                                 {errors.last_name && <Error>Last name is required</Error>}

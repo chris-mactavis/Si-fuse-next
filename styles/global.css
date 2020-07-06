@@ -372,7 +372,7 @@ form.sign-up {
 @media only screen and (max-width: 576px) {
   form.sign-up {
     left: unset;
-    padding: 10px;
+    padding: 15px;
   }
 }
 form.sign-up input {
@@ -380,13 +380,13 @@ form.sign-up input {
   border-top: 0;
   border-left: 0;
   border-right: 0;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
   outline: none;
 }
 @media only screen and (max-width: 576px) {
   form.sign-up input {
-    padding-left: 10px;
+    padding-bottom: 5px;
   }
 }
 form.sign-up input::placeholder {
@@ -845,7 +845,7 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 .btn-white {
   width: 100%;
   color: #fff;
-  margin-bottom: 5rem;
+  margin-bottom: 20px;
 }
 .btn-white::before {
   content: "";
@@ -3098,7 +3098,7 @@ header .sidebar .active {
   color: #fff;
 }
 header .sidebar ul {
-  margin: 120px 0 0;
+  margin: 80px 0 0;
   position: absolute;
   right: 70px;
   text-align: right;
@@ -3107,19 +3107,18 @@ header .sidebar ul {
 @media only screen and (max-width: 576px) {
   header .sidebar ul {
     right: 30px;
-    margin: 80px 0 0;
+    margin: 60px 0 0;
   }
 }
 header .sidebar ul li {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 @media only screen and (max-width: 576px) {
   header .sidebar ul li {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 }
 header .sidebar ul li a {
-  text-transform: uppercase;
   font-size: 40px;
   color: #BF8C83;
 }

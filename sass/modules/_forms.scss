@@ -46,7 +46,7 @@ form {
 
     @media only screen and (max-width: $mobile_width) {
       left: unset;
-      padding: 10px;
+      padding: 15px;
     }
 
     input {
@@ -54,12 +54,12 @@ form {
       border-top: 0;
       border-left: 0;
       border-right: 0;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
       outline: none;
 
-      @media only screen and (max-width: $mobile_width) {
-        padding-left: 10px;
+      @include media("mobile"){
+        padding-bottom: 5px;
       }
     }
 
