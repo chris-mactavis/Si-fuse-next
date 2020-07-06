@@ -147,6 +147,12 @@ export default function SideBar({isLoggedIn = false}) {
                                 notifications.map((notification, index) => <SingleNotification key={index}
                                                                                                notification={notification}/>)
                             }
+                            {
+                                notifications.length === 0 && <li>
+                                    <p className="head-text"><img src="/images/icon/empty.svg" alt="" /> Notification Empty</p>
+                                    <p className="msg-text">Your notifications will appear here.</p>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </>

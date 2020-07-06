@@ -3189,6 +3189,7 @@ header .notification-container {
   display: none;
   max-width: 360px;
   min-width: 360px;
+  box-shadow: 2px 2px 7px 6px rgba(0, 0, 0, 0.2);
 }
 header .notification-container:hover {
   overflow-y: scroll;
