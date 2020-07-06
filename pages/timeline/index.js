@@ -6,7 +6,6 @@ import Token from "../../utils/Token";
 import StartupCard from "../../components/startups/startupCard";
 
 const Timeline = ({data: {data: startups}}) => {
-    console.log(startups);
 
     return <Layout page="Timeline" headerClass="page-header no-bg" redBar>
         <Head>
@@ -36,7 +35,7 @@ const Timeline = ({data: {data: startups}}) => {
 
 Timeline.getInitialProps = async (ctx) => {
     try {
-        const {data: response} = await axiosInstance.get('investors/discover?show_full=true', {
+        const {data: response} = await axiosInstance.get('investors/timeline', {
             headers: {
                 'Authorization': `Bearer ${Token(ctx)}`
             }
