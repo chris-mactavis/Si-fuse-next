@@ -1,6 +1,6 @@
 export const startupLevel = (level) => {
     let team = 0, problem = 0, market = 0, business_model = 0, scale = 0, vision = 0, investor_exit = 0, products = 0;
-    if (level) {
+    if (level && level.all) {
         JSON.parse(level.all).forEach(lev => {
             if (lev.length === 2 && lev.startsWith('P')) {
                 problem++;
