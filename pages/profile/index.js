@@ -43,6 +43,7 @@ ProfilePage.getInitialProps = async (ctx) => {
             Authorization: `Bearer ${Token(ctx)}`
         }
     };
+
     const url = user.user_type.user_type === 'Investor' ? 'investors' : 'startups';
     const {data: response} = await axiosInstance.get(url, headers);
     const {data: profileContent} = await axiosInstance.get('profile-content', headers);

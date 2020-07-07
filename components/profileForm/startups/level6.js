@@ -15,9 +15,9 @@ const Level6 = ({startup}) => {
 
     const dispatch = useDispatch();
 
-    const businessModel = () => {
-        if (startup.level && startup.level.hasOwnProperty('business_model')) {
-            let prob = JSON.parse(startup.level.business_model);
+    const team = () => {
+        if (startup.level && startup.level.hasOwnProperty('team')) {
+            let prob = JSON.parse(startup.level.team);
             if (prob && prob.length > 0) {
                 return prob.map(p => p.split('::')[0])
             }
@@ -27,13 +27,13 @@ const Level6 = ({startup}) => {
     }
 
     const nextPageHandler = async data => {
-        if (data.business_model.length === 0) {
+        if (data.team.length === 0) {
             dispatch(showNotifier('Please choose at least one option', 'danger'));
             return;
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/level', {business_model: JSON.stringify(data.business_model)}, {
+            await axiosInstance.post('startups/level', {team: JSON.stringify(data.team)}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -48,85 +48,95 @@ const Level6 = ({startup}) => {
 
     return <section className="startup-levels">
         <div className="container">
-            <div className="row bg-white startup-levels-row">
-                <div className="col-md-12 mx-auto">
-                    <LevelHeader/>
-
-                    <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
+            <div className="row">
+                <div className="col">
+                    <div className="white-bg">
                         <div className="row">
-                            <div className="col-md-8">
+                            <div className="col-md-9 mx-auto">
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="business_model" defaultChecked={businessModel().includes('BM1')}
-                                           value="BM1::We know our total addressable market size and target market share."/>
-                                    <span className="checkout-custom"/>
-                                    We know our total addressable market size and target market share.
-                                </label>
+                                <LevelHeader/>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="business_model" defaultChecked={businessModel().includes('BM2')}
-                                           value="BM2::We understand applicable regulations & have a strategy for compliance."/>
-                                    <span className="checkout-custom"/>
-                                    We understand applicable regulations & have a strategy for compliance.
-                                </label>
+                                <InfoBox heading="Team" text="First, we would like to know more about the team you are building."/>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="business_model" defaultChecked={businessModel().includes('BM3')}
-                                           value="BM3::Initial sales provide evidence that we can capture our target market."/>
-                                    <span className="checkout-custom"/>
-                                    Initial sales provide evidence that we can capture our target market.
-                                </label>
+                                <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="business_model" defaultChecked={businessModel().includes('BM4')}
-                                           value="BM4::We have evidence that our total addressable market is over $1B."/>
-                                    <span className="checkout-custom"/>
-                                    We have evidence that our total addressable market is over $1B.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="team"
+                                               defaultChecked={team().includes('TC1')}
+                                               value="TC1::We have 2+ co-founders with differentiated skills sets."/>
+                                        <span className="checkout-custom"/>
+                                        We have 2+ co-founders with differentiated skills sets.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="business_model" defaultChecked={businessModel().includes('BM5')}
-                                           value="BM5::Large partners are talking with us about distribution, marketing, etc."/>
-                                    <span className="checkout-custom"/>
-                                    Large partners are talking with us about distribution, marketing, etc.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="team"
+                                               defaultChecked={team().includes('TC2')}
+                                               value="TC2::Our team has personally experienced the problem."/>
+                                        <span className="checkout-custom"/>
+                                        Our team has personally experienced the problem.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="business_model" defaultChecked={businessModel().includes('BM6')}
-                                           value="BM6::Our suppliers & distributors see meaningful benefits from our success."/>
-                                    <span className="checkout-custom"/>
-                                    Our suppliers & distributors see meaningful benefits from our success.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="team"
+                                               defaultChecked={team().includes('TC3')}
+                                               value="TC3::Our team can build the product & understand the value chain."/>
+                                        <span className="checkout-custom"/>
+                                        Our team can build the product & understand the value chain.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="business_model" defaultChecked={businessModel().includes('BM7')}
-                                           value="BM7::Our sales cycle meets or beats the industry standard."/>
-                                    <span className="checkout-custom"/>
-                                    Our sales cycle meets or beats the industry standard.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="team"
+                                               defaultChecked={team().includes('TC4')}
+                                               value="TC4::We have a clear strategy and understanding of sales."/>
+                                        <span className="checkout-custom"/>
+                                        We have a clear strategy and understanding of sales.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="business_model" defaultChecked={businessModel().includes('BM8')}
-                                           value="BM8::We have hard-to-beat partnerships for distribution, marketing, growth."/>
-                                    <span className="checkout-custom"/>
-                                    We have hard-to-beat partnerships for distribution, marketing, growth.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="team"
+                                               defaultChecked={team().includes('TC5')}
+                                               value="TC5::Our management, product, & sales teams are ready for growth."/>
+                                        <span className="checkout-custom"/>
+                                        Our management, product, & sales teams are ready for growth.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="business_model" defaultChecked={businessModel().includes('BM9')}
-                                           value="BM9::We have a clear line of sight to industry dominance."/>
-                                    <span className="checkout-custom"/>
-                                    We have a clear line of sight to industry dominance.
-                                </label>
-                            </div>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="team"
+                                               defaultChecked={team().includes('TC6')}
+                                               value="TC6::We understand how our market operates & have strong industry contacts."/>
+                                        <span className="checkout-custom"/>
+                                        We understand how our market operates & have strong industry contacts.
+                                    </label>
 
-                            <div className="col-md-4">
-                                <InfoBox heading="Business Model" text="How much evidence do you have that a large market of customers experiences this problem?"/>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="team"
+                                               defaultChecked={team().includes('TC7')}
+                                               value="TC7::We have an executive team that can lead the company through growth."/>
+                                        <span className="checkout-custom"/>
+                                        We have an executive team that can lead the company through growth.
+                                    </label>
+
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="team"
+                                               defaultChecked={team().includes('TC8')}
+                                               value="TC8::Our team is recognized as market leaders in the industry."/>
+                                        <span className="checkout-custom"/>
+                                        Our team is recognized as market leaders in the industry.
+                                    </label>
+
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="team"
+                                               defaultChecked={team().includes('TC9')}
+                                               value="TC9::Our team is prepared to navigate a merger, acquisition, or IPO."/>
+                                        <span className="checkout-custom"/>
+                                        Our team is prepared to navigate a merger, acquisition, or IPO.
+                                    </label>
+
+                                    <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>
+                                </form>
                             </div>
                         </div>
-
-                        <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)} />
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
