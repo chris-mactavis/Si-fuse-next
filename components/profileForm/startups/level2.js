@@ -15,9 +15,9 @@ const Level2 = ({startup}) => {
 
     const dispatch = useDispatch();
 
-    const team = () => {
-        if (startup.level && startup.level.hasOwnProperty('team')) {
-            let prob = JSON.parse(startup.level.team);
+    const vision = () => {
+        if (startup.level && startup.level.hasOwnProperty('vision')) {
+            let prob = JSON.parse(startup.level.vision);
             if (prob && prob.length > 0) {
                 return prob.map(p => p.split('::')[0])
             }
@@ -27,13 +27,13 @@ const Level2 = ({startup}) => {
     }
 
     const nextPageHandler = async data => {
-        if (data.team.length === 0) {
+        if (data.vision.length === 0) {
             dispatch(showNotifier('Please choose at least one option', 'danger'));
             return;
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/level', {team: JSON.stringify(data.team)}, {
+            await axiosInstance.post('startups/level', {vision: JSON.stringify(data.vision)}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -48,86 +48,94 @@ const Level2 = ({startup}) => {
 
     return <section className="startup-levels">
         <div className="container">
-            <div className="row bg-white startup-levels-row">
-                <div className="col-md-12 mx-auto">
-
-                    <LevelHeader/>
-
-                    <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
+            <div className="row">
+                <div className="col">
+                    <div className="white-bg">
                         <div className="row">
-                            <div className="col-md-8">
+                            <div className="col-md-9 mx-auto">
+                                <LevelHeader/>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="team" defaultChecked={team().includes('TC1')}
-                                           value="TC1::We have 2+ co-founders with differentiated skills sets."/>
-                                    <span className="checkout-custom"/>
-                                    We have 2+ co-founders with differentiated skills sets.
-                                </label>
+                                <InfoBox heading="Vision & Value Proposition"
+                                         text="First, we would like to know more about the team you are building."/>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="team" defaultChecked={team().includes('TC2')}
-                                           value="TC2::Our team has personally experienced the problem."/>
-                                    <span className="checkout-custom"/>
-                                    Our team has personally experienced the problem.
-                                </label>
+                                <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="vision"
+                                               defaultChecked={vision().includes('V1')}
+                                               value="V1::We have a hypothesis for how we will solve this problem."/>
+                                        <span className="checkout-custom"/>
+                                        We have a hypothesis for how we will solve this problem.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="team" defaultChecked={team().includes('TC3')}
-                                           value="TC3::Our team can build the product & understand the value chain."/>
-                                    <span className="checkout-custom"/>
-                                    Our team can build the product & understand the value chain.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="vision"
+                                               defaultChecked={vision().includes('V2')}
+                                               value="V2::Potential customers validate that our solution will solve a key point."/>
+                                        <span className="checkout-custom"/>
+                                        Potential customers validate that our solution will solve a key point.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="team" defaultChecked={team().includes('TC4')}
-                                           value="TC4::We have a clear strategy and understanding of sales."/>
-                                    <span className="checkout-custom"/>
-                                    We have a clear strategy and understanding of sales.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="vision"
+                                               defaultChecked={vision().includes('V3')}
+                                               value="V3::We have evidence that customers will pay our target price."/>
+                                        <span className="checkout-custom"/>
+                                        We have evidence that customers will pay our target price.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="team" defaultChecked={team().includes('TC5')}
-                                           value="TC5::Our management, product, & sales teams are ready for growth."/>
-                                    <span className="checkout-custom"/>
-                                    Our management, product, & sales teams are ready for growth.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="vision"
+                                               defaultChecked={vision().includes('V4')}
+                                               value="V4::Customer feedback shows that our solution is better than others."/>
+                                        <span className="checkout-custom"/>
+                                        Customer feedback shows that our solution is better than others.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="team" defaultChecked={team().includes('TC6')}
-                                           value="TC6::We understand how our market operates & have strong industry contacts."/>
-                                    <span className="checkout-custom"/>
-                                    We understand how our market operates & have strong industry contacts.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="vision"
+                                               defaultChecked={vision().includes('V5')}
+                                               value="V5::Our initial target customers love the product and keep using it."/>
+                                        <span className="checkout-custom"/>
+                                        Our initial target customers love the product and keep using it.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="team" defaultChecked={team().includes('TC7')}
-                                           value="TC7::We have an executive team that can lead the company through growth."/>
-                                    <span className="checkout-custom"/>
-                                    We have an executive team that can lead the company through growth.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="vision"
+                                               defaultChecked={vision().includes('V6')}
+                                               value="V6::We’re selling beyond our initial target customers."/>
+                                        <span className="checkout-custom"/>
+                                        We’re selling beyond our initial target customers.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="team" defaultChecked={team().includes('TC8')}
-                                           value="TC8::Our team is recognized as market leaders in the industry."/>
-                                    <span className="checkout-custom"/>
-                                    Our team is recognized as market leaders in the industry.
-                                </label>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="vision"
+                                               defaultChecked={vision().includes('V7')}
+                                               value="V7::The majority of our sales in our initial market are inbound."/>
+                                        <span className="checkout-custom"/>
+                                        The majority of our sales in our initial market are inbound.
+                                    </label>
 
-                                <label className="checkout-label">
-                                    <input ref={register} type="checkbox" name="team" defaultChecked={team().includes('TC9')}
-                                           value="TC9::Our team is prepared to navigate a merger, acquisition, or IPO."/>
-                                    <span className="checkout-custom"/>
-                                    Our team is prepared to navigate a merger, acquisition, or IPO.
-                                </label>
-                            </div>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="vision"
+                                               defaultChecked={vision().includes('V8')}
+                                               value="V8::Customers are renewing or repurchasing without much sales effort."/>
+                                        <span className="checkout-custom"/>
+                                        Customers are renewing or repurchasing without much sales effort.
+                                    </label>
 
-                            <div className="col-md-4">
-                                <InfoBox heading="Team" text="First, we would like to know more about the team you are building."/>
+                                    <label className="checkout-label">
+                                        <input ref={register} type="checkbox" name="vision"
+                                               defaultChecked={vision().includes('V9')}
+                                               value="V9::We’re recognized as the top solution to this problem."/>
+                                        <span className="checkout-custom"/>
+                                        We’re recognized as the top solution to this problem.
+                                    </label>
+
+                                    <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>
+                                </form>
                             </div>
                         </div>
-
-                        <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)} />
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
