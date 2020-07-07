@@ -12,6 +12,7 @@ import '@synapsestudios/react-drop-n-crop/lib/react-drop-n-crop.css';
 import notifier from "../store/reducers/notifier";
 import imageViewer from "../store/reducers/imageViewer";
 import startupProfile from "../store/reducers/startupProfile";
+import notifications from "../store/reducers/notification";
 
 const reducers = combineReducers({
     auth: auth,
@@ -19,7 +20,8 @@ const reducers = combineReducers({
     profile: profile,
     notifier: notifier,
     imageViewer: imageViewer,
-    startupProfile: startupProfile
+    startupProfile: startupProfile,
+    notifications: notifications
 });
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware)));

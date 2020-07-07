@@ -21,7 +21,7 @@ const InvestorProfile = ({profile, interests, connections}) => {
                                      className="img-fluid img-profile"/>
                                 <p className="investor-name">{`${profile.user.first_name} ${profile.user.last_name}`}</p>
                                 <p>
-                                    <img className="location-img" src="/images/icon/location.svg" alt=""/> {profile.user.country.country}
+                                    <img className="location-img" src="/images/icon/location.svg" alt=""/> {profile.user.country ? profile.user.country.country : ''}
                                 </p>
                                 <p className="pointer" onClick={() => goTo(profile.website)}>{profile.website}</p>
                                 <button className="edit-investors-profile" onClick={() => Router.push('/profile/edit')}>Edit Profile</button>

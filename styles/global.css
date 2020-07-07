@@ -3173,6 +3173,113 @@ header .account-container ul li a img {
 header .account-container ul li .bold {
   font-weight: 600;
 }
+header .notification-container {
+  width: 25%;
+  background: #F8F8F8;
+  padding: 20px 0;
+  color: #6B6B6B;
+  z-index: 700;
+  position: absolute;
+  left: 90px;
+  max-height: 700px;
+  overflow: hidden;
+  display: none;
+  max-width: 360px;
+  min-width: 360px;
+  box-shadow: 2px 2px 7px 6px rgba(0, 0, 0, 0.2);
+}
+header .notification-container:hover {
+  overflow-y: scroll;
+}
+@media only screen and (max-width: 1200px) {
+  header .notification-container {
+    overflow: auto;
+    width: max-content;
+  }
+}
+@media only screen and (max-width: 992px) {
+  header .notification-container {
+    left: 60px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  header .notification-container {
+    left: 0;
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+header .notification-container h6 {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: normal;
+  padding-left: 20px;
+  color: #6B6B6B;
+  letter-spacing: 1px;
+}
+header .notification-container ul {
+  padding: 0;
+}
+header .notification-container ul li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+header .notification-container ul li:hover {
+  background: #FFEEEB;
+}
+header .notification-container ul li p {
+  margin-bottom: 10px;
+}
+header .notification-container ul li .head-text {
+  color: #D32907;
+  font-weight: bold;
+}
+header .notification-container ul li .head-text img {
+  margin-right: 5px;
+}
+header .notification-container ul li .msg-text {
+  font-size: 14px;
+}
+header .notification-container ul li .msg-text a {
+  color: #6B6B6B;
+  text-decoration: underline;
+}
+header .notification-container ul li .msg-text a:hover {
+  color: #6B6B6B;
+}
+header .notification-container ul li button {
+  background: transparent;
+  padding: 5px 20px;
+  text-transform: uppercase;
+  margin-right: 10px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  outline: none;
+}
+header .notification-container ul li .accept-btn {
+  border: 2px solid #D32907;
+  color: #D32907;
+}
+header .notification-container ul li .accept-btn:hover {
+  color: #fff;
+  background-color: #D32907;
+}
+header .notification-container ul li .decline-btn {
+  border: 2px solid #989898;
+  color: #989898;
+}
+header .notification-container ul li .decline-btn:hover {
+  color: #fff;
+  background-color: #989898;
+}
+header .notification-container ul li span {
+  font-size: 14px;
+  opacity: 0.5;
+}
 header.signup {
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/images/signup-banner.png);
   height: 100vh;
