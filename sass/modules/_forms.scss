@@ -276,6 +276,10 @@ form {
         -o-transition: all 0.3s ease-out;
         border: 2px solid $color-black-2;
 
+        @include media("mobile"){
+          top: 5px;
+        }
+
         &::after {
           position: absolute;
           content: "";

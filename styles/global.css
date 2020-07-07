@@ -291,6 +291,11 @@ h3 {
 h4 {
   font-size: 24px;
 }
+@media only screen and (max-width: 576px) {
+  h4 {
+    font-size: 21px;
+  }
+}
 
 h5 {
   font-size: 18px;
@@ -572,6 +577,11 @@ form.profile-details .checkout-label .checkout-custom {
   -ms-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
   border: 2px solid #6B6B6B;
+}
+@media only screen and (max-width: 576px) {
+  form.profile-details .checkout-label .checkout-custom {
+    top: 5px;
+  }
 }
 form.profile-details .checkout-label .checkout-custom::after {
   position: absolute;
@@ -1717,13 +1727,28 @@ section.message-read .open-message .bold {
 section.message-read .open-message .reply-details {
   display: none;
 }
+@media only screen and (max-width: 576px) {
+  section.startup-levels {
+    padding: 30px 0;
+  }
+}
 section.startup-levels .white-bg {
   padding: 60px 0;
+}
+@media only screen and (max-width: 576px) {
+  section.startup-levels .white-bg {
+    padding: 30px 15px;
+  }
 }
 section.startup-levels .steps-wrapper {
   margin-bottom: 30px;
   position: relative;
   width: calc(100% - 20px);
+}
+@media only screen and (max-width: 576px) {
+  section.startup-levels .steps-wrapper {
+    display: none;
+  }
 }
 section.startup-levels .steps-wrapper::before {
   position: absolute;
@@ -3084,11 +3109,11 @@ header .sidebar ul {
   }
 }
 header .sidebar ul li {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 @media only screen and (max-width: 576px) {
   header .sidebar ul li {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
   }
 }
 header .sidebar ul li a {

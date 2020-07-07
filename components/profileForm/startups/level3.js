@@ -14,10 +14,9 @@ const Level3 = ({startup}) => {
     const {register, handleSubmit} = useForm();
 
     const dispatch = useDispatch();
-
-    const vision = () => {
-        if (startup.level && startup.level.hasOwnProperty('vision')) {
-            let prob = JSON.parse(startup.level.vision);
+    const products = () => {
+        if (startup.level && startup.level.hasOwnProperty('products')) {
+            let prob = JSON.parse(startup.level.products);
             if (prob && prob.length > 0) {
                 return prob.map(p => p.split('::')[0])
             }
@@ -27,13 +26,13 @@ const Level3 = ({startup}) => {
     }
 
     const nextPageHandler = async data => {
-        if (data.vision.length === 0) {
+        if (data.products.length === 0) {
             dispatch(showNotifier('Please choose at least one option', 'danger'));
             return;
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/level', {vision: JSON.stringify(data.vision)}, {
+            await axiosInstance.post('startups/level', {products: JSON.stringify(data.products)}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -55,80 +54,79 @@ const Level3 = ({startup}) => {
                             <div className="col-md-9 mx-auto">
                                 <LevelHeader/>
 
-                                <InfoBox heading="Vision & Value Proposition"
-                                         text="First, we would like to know more about the team you are building."/>
+                                <InfoBox heading="Products" text="How mature are your product and feedback loops?"/>
 
                                 <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="vision"
-                                               defaultChecked={vision().includes('V1')}
-                                               value="V1::We have a hypothesis for how we will solve this problem."/>
+                                        <input ref={register} type="checkbox" name="products"
+                                               defaultChecked={products().includes('PR1')}
+                                               value="PR1::We have the ability to develop a low-fi prototype."/>
                                         <span className="checkout-custom"/>
-                                        We have a hypothesis for how we will solve this problem.
+                                        We have the ability to develop a low-fi prototype.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="vision"
-                                               defaultChecked={vision().includes('V2')}
-                                               value="V2::Potential customers validate that our solution will solve a key point."/>
+                                        <input ref={register} type="checkbox" name="products"
+                                               defaultChecked={products().includes('PR2')}
+                                               value="PR2::We’ve built a low-fidelity prototype."/>
                                         <span className="checkout-custom"/>
-                                        Potential customers validate that our solution will solve a key point.
+                                        We’ve built a low-fidelity prototype.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="vision"
-                                               defaultChecked={vision().includes('V3')}
-                                               value="V3::We have evidence that customers will pay our target price."/>
+                                        <input ref={register} type="checkbox" name="products"
+                                               defaultChecked={products().includes('PR3')}
+                                               value="PR3::We’ve built a working prototype and have a product roadmap."/>
                                         <span className="checkout-custom"/>
-                                        We have evidence that customers will pay our target price.
+                                        We’ve built a working prototype and have a product roadmap.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="vision"
-                                               defaultChecked={vision().includes('V4')}
-                                               value="V4::Customer feedback shows that our solution is better than others."/>
+                                        <input ref={register} type="checkbox" name="products"
+                                               defaultChecked={products().includes('PR4')}
+                                               value="PR4::Our team understands product management and associated costs."/>
                                         <span className="checkout-custom"/>
-                                        Customer feedback shows that our solution is better than others.
+                                        Our team understands product management and associated costs.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="vision"
-                                               defaultChecked={vision().includes('V5')}
-                                               value="V5::Our initial target customers love the product and keep using it."/>
+                                        <input ref={register} type="checkbox" name="products"
+                                               defaultChecked={products().includes('PR5')}
+                                               value="PR5::Our product is almost ready for broad commercial distribution."/>
                                         <span className="checkout-custom"/>
-                                        Our initial target customers love the product and keep using it.
+                                        Our product is almost ready for broad commercial distribution.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="vision"
-                                               defaultChecked={vision().includes('V6')}
-                                               value="V6::We’re selling beyond our initial target customers."/>
+                                        <input ref={register} type="checkbox" name="products"
+                                               defaultChecked={products().includes('PR6')}
+                                               value="PR6::Our core product is complete, in the market, and gathering feedback."/>
                                         <span className="checkout-custom"/>
-                                        We’re selling beyond our initial target customers.
+                                        Our core product is complete, in the market, and gathering feedback.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="vision"
-                                               defaultChecked={vision().includes('V7')}
-                                               value="V7::The majority of our sales in our initial market are inbound."/>
+                                        <input ref={register} type="checkbox" name="products"
+                                               defaultChecked={products().includes('PR7')}
+                                               value="PR7::Our product is built for scale & new offerings are in progress."/>
                                         <span className="checkout-custom"/>
-                                        The majority of our sales in our initial market are inbound.
+                                        Our product is built for scale & new offerings are in progress.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="vision"
-                                               defaultChecked={vision().includes('V8')}
-                                               value="V8::Customers are renewing or repurchasing without much sales effort."/>
+                                        <input ref={register} type="checkbox" name="products"
+                                               defaultChecked={products().includes('PR8')}
+                                               value="PR8::Our product is successfully handling dramatic growth."/>
                                         <span className="checkout-custom"/>
-                                        Customers are renewing or repurchasing without much sales effort.
+                                        Our product is successfully handling dramatic growth.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="vision"
-                                               defaultChecked={vision().includes('V9')}
-                                               value="V9::We’re recognized as the top solution to this problem."/>
+                                        <input ref={register} type="checkbox" name="products"
+                                               defaultChecked={products().includes('PR9')}
+                                               value="PR9::Our product is recognized as the top in the industry."/>
                                         <span className="checkout-custom"/>
-                                        We’re recognized as the top solution to this problem.
+                                        Our product is recognized as the top in the industry.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>
@@ -139,7 +137,8 @@ const Level3 = ({startup}) => {
                 </div>
             </div>
         </div>
-    </section>;
+    </section>
+        ;
 }
 
 export default Level3;

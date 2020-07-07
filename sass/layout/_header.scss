@@ -432,10 +432,10 @@ header {
       }
 
       li {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
 
         @include media("mobile"){
-          margin-bottom: 15px;
+          margin-bottom: 12px;
         }
 
         a {

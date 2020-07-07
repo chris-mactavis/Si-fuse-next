@@ -24,7 +24,7 @@ const LevelHeader = ({isChecked, isClickable, isActive}) => {
         }
     }
 
-    const labels = ['Problem', 'Team', 'Vision', 'Product', 'Market', "Model", "Scale", 'Exit'];
+    const labels = ['Problem', 'Vision', 'Product', 'Market', "Model", 'Team', "Scale", 'Exit'];
 
     return <div className="steps-wrapper">
         <div className="steps">

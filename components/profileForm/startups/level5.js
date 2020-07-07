@@ -15,9 +15,9 @@ const Level5 = ({startup}) => {
 
     const dispatch = useDispatch();
 
-    const market = () => {
-        if (startup.level && startup.level.hasOwnProperty('market')) {
-            let prob = JSON.parse(startup.level.market);
+    const businessModel = () => {
+        if (startup.level && startup.level.hasOwnProperty('business_model')) {
+            let prob = JSON.parse(startup.level.business_model);
             if (prob && prob.length > 0) {
                 return prob.map(p => p.split('::')[0])
             }
@@ -27,13 +27,13 @@ const Level5 = ({startup}) => {
     }
 
     const nextPageHandler = async data => {
-        if (data.market.length === 0) {
+        if (data.business_model.length === 0) {
             dispatch(showNotifier('Please choose at least one option', 'danger'));
             return;
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/level', {market: JSON.stringify(data.market)}, {
+            await axiosInstance.post('startups/level', {business_model: JSON.stringify(data.business_model)}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -55,79 +55,80 @@ const Level5 = ({startup}) => {
                             <div className="col-md-9 mx-auto">
                                 <LevelHeader/>
 
-                                <InfoBox heading="Market" text="How much evidence do you have that a large market of customers experiences this problem?"/>
+                                <InfoBox heading="Business Model" text="How much evidence do you have that your business model will work?"/>
 
                                 <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
+
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="market"
-                                               defaultChecked={market().includes('M1')}
-                                               value="M1::We know our total addressable market size and target market share."/>
+                                        <input ref={register} type="checkbox" name="business_model"
+                                               defaultChecked={businessModel().includes('BM1')}
+                                               value="BM1::We have an outline of a revenue model."/>
                                         <span className="checkout-custom"/>
-                                        We know our total addressable market size and target market share.
+                                        We have an outline of a revenue model.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="market"
-                                               defaultChecked={market().includes('M2')}
-                                               value="M2::We understand applicable regulations & have a strategy for compliance."/>
+                                        <input ref={register} type="checkbox" name="business_model"
+                                               defaultChecked={businessModel().includes('BM2')}
+                                               value="BM2::Existing pricing and business models support our revenue model."/>
                                         <span className="checkout-custom"/>
-                                        We understand applicable regulations & have a strategy for compliance.
+                                        Existing pricing and business models support our revenue model.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="market"
-                                               defaultChecked={market().includes('M3')}
-                                               value="M3::Initial sales provide evidence that we can capture our target market."/>
+                                        <input ref={register} type="checkbox" name="business_model"
+                                               defaultChecked={businessModel().includes('BM3')}
+                                               value="BM3::We can articulate the cost structure & unit economics in our industry."/>
                                         <span className="checkout-custom"/>
-                                        Initial sales provide evidence that we can capture our target market.
+                                        We can articulate the cost structure & unit economics in our industry.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="market"
-                                               defaultChecked={market().includes('M4')}
-                                               value="M4::We have evidence that our total addressable market is over $1B."/>
+                                        <input ref={register} type="checkbox" name="business_model"
+                                               defaultChecked={businessModel().includes('BM4')}
+                                               value="BM4::We have projected revenues and costs and have a strategy to hit them."/>
                                         <span className="checkout-custom"/>
-                                        We have evidence that our total addressable market is over $1B.
+                                        We have projected revenues and costs and have a strategy to hit them.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="market"
-                                               defaultChecked={market().includes('M5')}
-                                               value="M5::Large partners are talking with us about distribution, marketing, etc."/>
+                                        <input ref={register} type="checkbox" name="business_model"
+                                               defaultChecked={businessModel().includes('BM5')}
+                                               value="BM5::5. Our actual revenues & costs support future positive unit economics."/>
                                         <span className="checkout-custom"/>
-                                        Large partners are talking with us about distribution, marketing, etc.
+                                        Our actual revenues & costs support future positive unit economics.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="market"
-                                               defaultChecked={market().includes('M6')}
-                                               value="M6::Our suppliers & distributors see meaningful benefits from our success."/>
+                                        <input ref={register} type="checkbox" name="business_model"
+                                               defaultChecked={businessModel().includes('BM6')}
+                                               value="BM6::Our customer acquisition costs are going down & pricing is going up."/>
                                         <span className="checkout-custom"/>
-                                        Our suppliers & distributors see meaningful benefits from our success.
+                                        Our customer acquisition costs are going down & pricing is going up.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="market"
-                                               defaultChecked={market().includes('M7')}
-                                               value="M7::Our sales cycle meets or beats the industry standard."/>
+                                        <input ref={register} type="checkbox" name="business_model"
+                                               defaultChecked={businessModel().includes('BM7')}
+                                               value="BM7::We've validated our business model. We have strong unit economics."/>
                                         <span className="checkout-custom"/>
-                                        Our sales cycle meets or beats the industry standard.
+                                        We've validated our business model. We have strong unit economics.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="market"
-                                               defaultChecked={market().includes('M8')}
-                                               value="M8::We have hard-to-beat partnerships for distribution, marketing, growth."/>
+                                        <input ref={register} type="checkbox" name="business_model"
+                                               defaultChecked={businessModel().includes('BM8')}
+                                               value="BM8::We're rapidly growing each month and we've got a path to profitability."/>
                                         <span className="checkout-custom"/>
-                                        We have hard-to-beat partnerships for distribution, marketing, growth.
+                                        We're rapidly growing each month and we've got a path to profitability.
                                     </label>
 
                                     <label className="checkout-label">
-                                        <input ref={register} type="checkbox" name="market"
-                                               defaultChecked={market().includes('M9')}
-                                               value="M9::We have a clear line of sight to industry dominance."/>
+                                        <input ref={register} type="checkbox" name="business_model"
+                                               defaultChecked={businessModel().includes('BM9')}
+                                               value="BM9::Our revenue has met or exceeded investors' targets for multiple years."/>
                                         <span className="checkout-custom"/>
-                                        We have a clear line of sight to industry dominance.
+                                        Our revenue has met or exceeded investors' targets for multiple years.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>
@@ -139,7 +140,7 @@ const Level5 = ({startup}) => {
             </div>
         </div>
     </section>
-        ;
+;
 }
 
 export default Level5;
