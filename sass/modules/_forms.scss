@@ -253,8 +253,7 @@ form {
       display: block;
       position: relative;
       cursor: pointer;
-      padding-left: 3rem;
-      margin-right: 2rem;
+      padding-left: 40px;
       font-weight: normal;
 
       input {
@@ -275,7 +274,7 @@ form {
         -moz-transition: all 0.3s ease-out;
         -ms-transition: all 0.3s ease-out;
         -o-transition: all 0.3s ease-out;
-        border: 3px solid $color-black-2;
+        border: 2px solid $color-black-2;
 
         &::after {
           position: absolute;

@@ -61,7 +61,8 @@ export default function SignupForm({countries, userTypes, query}) {
                     </div>
                 </div>
                 : <div className="signup-content mt-5 pt-5">
-                    <h1>Sign Up</h1>
+                    <h1 className="profile-signup">{accountType === 2 && "Startup"} {accountType === 1 && "Investor"} Sign Up</h1>
+
                     <p className="text-center">
                         <Link href="login">
                             <a className="text-white">Login Instead?</a>

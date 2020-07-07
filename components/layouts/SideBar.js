@@ -86,9 +86,7 @@ export default function SideBar({isLoggedIn = false}) {
                                 <a>Signup</a>
                             </Link>
                         </li>
-                        : <li>
-                            <a onClick={logoutHandler}>Logout</a>
-                        </li>
+                        : null
                 }
             </ul>
         </div>
