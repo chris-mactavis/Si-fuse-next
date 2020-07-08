@@ -22,7 +22,7 @@ const ProfilePage = ({canView, data: {company, product_services: services, finan
 
             <Profile company={company} services={services} finance={finance} market={market} level={level}
                      profile={profile} interests={interests} userType={userType} hasEdit profileContent={profileContent}
-                     connections={connections} loggedInUser={loggedInUser}/>
+                     connections={connections} loggedInUser={loggedInUser} hasPermission={true}/>
         </Layout>
         <style jsx>{`
             .services-stage {
