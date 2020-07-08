@@ -798,7 +798,7 @@ section {
     .social-links-input {
       .link-container {
         position: relative;
-
+        flex: 1;
         &::before {
           content: '';
           position: absolute;
@@ -1245,12 +1245,12 @@ section {
       }
 
       .profile-content {
-        padding: 25px 0;
+        padding: 5px 0;
         background: #fff;
         text-align: center;
 
         .img-profile {
-          max-width: 130px;
+          width: 60px;
           margin-bottom: 15px;
           cursor: pointer;
         }
