@@ -73,12 +73,7 @@ export default function ForgotPasswordForm() {
 
     return <>
         <div className="signup-content mt-5 pt-5">
-            <h1>Reset Password</h1>
-            <p className="text-center">
-                <Link href="login">
-                    <a className="text-white"><img src="images/icon/arrow-left.svg"/> &nbsp; Back to Login</a>
-                </Link>
-            </p>
+            <h1 className="mb-5">Reset Password</h1>
 
             {
                 showForm &&
@@ -94,6 +89,12 @@ export default function ForgotPasswordForm() {
             {
                 showResetMessage && <p className="reset-password-message text-center">An email has been sent to <strong>{email}</strong>, check your inbox and click on the link provided.</p>
             }
+
+            <p>
+                <Link href="login">
+                    <a className="text-white"><img src="images/icon/arrow-left.svg"/> &nbsp; Back to Login</a>
+                </Link>
+            </p>
         </div>
     </>
 }
