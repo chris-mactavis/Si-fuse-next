@@ -27,7 +27,7 @@ const InvestorMoreInfo = ({investor, stages}) => {
             let user = JSON.parse(Cookies.get('user'));
             user.has_profile = 1;
             Cookies.set('user', JSON.stringify(user));
-            Router.push('/');
+            Router.push('/timeline');
         } catch (e) {
             dispatch(loader());
             console.log(e);

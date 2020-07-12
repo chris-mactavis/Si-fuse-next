@@ -1575,6 +1575,7 @@ section.profile .fade {
 }
 section.profile .social-links-input .link-container {
   position: relative;
+  flex: 1;
 }
 section.profile .social-links-input .link-container::before {
   content: "";
@@ -1909,12 +1910,12 @@ section.startup-content .startup-sidebar {
   }
 }
 section.startup-content .startup-sidebar .profile-content {
-  padding: 25px 0;
+  padding: 5px 0;
   background: #fff;
   text-align: center;
 }
 section.startup-content .startup-sidebar .profile-content .img-profile {
-  max-width: 130px;
+  width: 60px;
   margin-bottom: 15px;
   cursor: pointer;
 }
@@ -3117,7 +3118,7 @@ header .sidebar ul li {
   }
 }
 header .sidebar ul li a {
-  font-size: 40px;
+  font-size: 32px;
   color: #BF8C83;
 }
 @media only screen and (max-width: 576px) {

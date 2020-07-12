@@ -59,6 +59,7 @@ const InvestorProfile = ({profile, interests, connections}) => {
                         connections.length > 0 && <div className="row">
                             {
                                 connections.map(user => {
+                                    console.log(user);
                                     return <StartupComponent key={user.id} user={user}/>
                                 })
                             }
