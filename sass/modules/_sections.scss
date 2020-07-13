@@ -1289,6 +1289,29 @@ section {
         #message {
           margin-left: 10px;
         }
+
+        .phone-div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          p {
+            margin-bottom: 0;
+          }
+          img {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+          }
+
+          &:hover {
+            img {
+              display: block;
+            }
+          }
+        }
       }
 
       .startup-link-view {
@@ -1363,8 +1386,6 @@ section {
       &:hover {
         .edit-icon {
           display: block;
-
-
         }
       }
 

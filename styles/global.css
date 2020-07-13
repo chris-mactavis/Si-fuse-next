@@ -1944,6 +1944,25 @@ section.startup-content .startup-sidebar .profile-content .edit-profile-btn {
 section.startup-content .startup-sidebar .profile-content #message {
   margin-left: 10px;
 }
+section.startup-content .startup-sidebar .profile-content .phone-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+section.startup-content .startup-sidebar .profile-content .phone-div p {
+  margin-bottom: 0;
+}
+section.startup-content .startup-sidebar .profile-content .phone-div img {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+section.startup-content .startup-sidebar .profile-content .phone-div:hover img {
+  display: block;
+}
 section.startup-content .startup-sidebar .startup-link-view {
   color: #fff;
   width: 100%;
