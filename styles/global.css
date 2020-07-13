@@ -366,7 +366,6 @@ form.search select:not(multiple) {
   }
 }
 form.sign-up {
-  width: 70%;
   margin: 0 auto;
 }
 @media only screen and (max-width: 768px) {
@@ -930,7 +929,7 @@ section.image-text .investors {
   }
 }
 section.image-text .investors .img-01 {
-  height: 100px;
+  height: 80px;
   margin-bottom: -38px;
 }
 @media only screen and (max-width: 1200px) {

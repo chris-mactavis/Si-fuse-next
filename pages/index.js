@@ -147,7 +147,7 @@ const Home = ({events, blogs}) => {
                         <img className="img-fluid" src="images/startups.png" alt=""/>
                     </div>
 
-                    <div className="col-lg-6 offset-md-1 col-sm-7 col-12 mx-auto">
+                    <div className="col-lg-5 offset-md-2 col-sm-7 col-12 mx-auto">
                         <div className="investors startups">
                             <img className="img-01 img-02" src="images/icon/02.png" alt=""/>
 
