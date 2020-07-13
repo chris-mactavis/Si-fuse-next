@@ -20,7 +20,6 @@ const StartupProfile = ({company, services: product_services, finance, market, l
 
     const stlevel = startupLevel(level);
 
-    console.log(stlevel);
 
     if (level) {
         levelKeys = Object.keys(level);
@@ -120,6 +119,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
     const [toggleProductImages, setProductImages] = useState(false);
     const [toggleProductVideo, setProductVideo] = useState(false);
     const [togglePitchVideo, setPitchVideo] = useState(false);
+    const [togglePhone, setPhone] = useState(false);
 
     const [startupProf, setStartupProfile] = useState({company, product_services, finance, market, profile, level});
 
@@ -158,6 +158,8 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                 return setProductVideo(state => !state);
             case 'pitchVideo':
                 return setPitchVideo(state => !state);
+            case 'phone':
+                return setPhone(state => !state);
             default:
                 return true;
         }
@@ -179,6 +181,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
         setProductImages(false);
         setProductVideo(false);
         setPitchVideo(false);
+        setPhone(false);
     }
 
     const onSubmitHandler = async data => {
@@ -347,9 +350,35 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                             <p className="profile-name">
                                 {startupProf.company.name}
                             </p>
+
                             <p><img className="location-img" src="/images/icon/location.svg" alt=""/> Lagos, Nigeria</p>
+
                             <p>{startupProf.company.website}</p>
-                            {(!hasEdit && !connected) && <button onClick={connectHandler} className="btn">Connect</button>}
+
+                            {
+                                !togglePhone && <div className="phone-div w-50 mx-auto">
+                                    <p>{startupProf.company.phone}</p>
+                                    {
+                                        hasEdit && <img
+                                            onClick={() => toggleFormHandler('phone')}
+                                            className="edit-icon"
+                                            title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
+                                    }
+                                </div>
+                            }
+
+                            {
+                                togglePhone && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                     className="profile-details overview-form">
+                                    <input type="text" name="phone" ref={register}
+                                           className="full-width edit-input"
+                                           defaultValue={startupProf.company.phone}/>
+                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                </form>
+                            }
+
+                            {(!hasEdit && !connected) &&
+                            <button onClick={connectHandler} className="btn">Connect</button>}
                         </div>
                         <button className="startup-link-view" id="overview-btn">
                             Overview <img src="/images/icon/pie-chart.svg" alt=""/>
@@ -360,12 +389,14 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                         <button className="startup-link-view" id="product-services-btn">
                             Product and Services <img src="/images/icon/product-service-icon.svg" alt=""/>
                         </button>
-                        <button className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
-                                id="finance-btn">
+                        <button
+                            className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
+                            id="finance-btn">
                             Finance <img src="/images/icon/finance-white-icon.svg" alt=""/>
                         </button>
-                        <button className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
-                                id="marketing-summary-btn">
+                        <button
+                            className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
+                            id="marketing-summary-btn">
                             Marketing Summary <img src="/images/icon/market-summary-white.svg" alt=""/>
                         </button>
                     </div>
@@ -377,9 +408,12 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                         <div className="row">
                             <div className="col-12">
                                 <div className="startup-description">
-                                    {hasEdit &&
-                                    <img onClick={() => toggleFormHandler('about')} className="edit-icon" title="Edit"
-                                         src="/images/icon/pencil-icon.svg" alt=""/>}
+                                    {
+                                        hasEdit &&
+                                        <img onClick={() => toggleFormHandler('about')} className="edit-icon"
+                                             title="Edit"
+                                             src="/images/icon/pencil-icon.svg" alt=""/>
+                                    }
 
                                     <img src="/images/icon/building.svg" alt=""/>
                                     <p className="profile-name">
@@ -511,8 +545,9 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                         }
                     </div>
 
-                    <div className={`startup-heading product-services ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
-                         id="productServices">
+                    <div
+                        className={`startup-heading product-services ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
+                        id="productServices">
                         <h5>Products and Services</h5>
                         <div className="row">
                             <div className="col-md-4">

@@ -1,12 +1,12 @@
 import Layout from "../../components/layout";
-import React from "react";
+import React, {useEffect} from "react";
 import ProfileOne from "../../components/profileForm/startups/one";
 import ProfileTwo from "../../components/profileForm/startups/two";
 import ProfileThree from "../../components/profileForm/startups/three";
 import ProfileFive from "../../components/profileForm/startups/five";
 import Head from "next/head";
 import {auth} from "../../components/hoc/auth";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
 import {ProfileFour} from "../../components/profileForm/startups/four";
@@ -22,8 +22,17 @@ import Level5 from "../../components/profileForm/startups/level5";
 import Level6 from "../../components/profileForm/startups/level6";
 import Level7 from "../../components/profileForm/startups/level7";
 import Level8 from "../../components/profileForm/startups/level8";
+import {setCurrentState} from "../../store/actions/profile";
 
 const Profile = ({startup, industries, locations, stages, loggedInUser, investor}) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (!startup.has_profile) {
+            dispatch(setCurrentState(startup.profile_stage));
+        }
+    }, []);
+
     const currentProfile = useSelector(state => state.profile.currentState);
     const userType = loggedInUser.user_type.user_type;
 
@@ -31,21 +40,21 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
         if (userType === 'Startup') {
             switch (currentProfile) {
                 case 1:
-                    return <Level1 startup={startup} />;
+                    return <Level1 startup={startup}/>;
                 case 2:
-                    return <Level2 startup={startup} />;
+                    return <Level2 startup={startup}/>;
                 case 3:
-                    return <Level3 startup={startup} />;
+                    return <Level3 startup={startup}/>;
                 case 4:
-                    return <Level4 startup={startup} />;
+                    return <Level4 startup={startup}/>;
                 case 5:
-                    return <Level5 startup={startup} />;
+                    return <Level5 startup={startup}/>;
                 case 6:
-                    return <Level6 startup={startup} />;
+                    return <Level6 startup={startup}/>;
                 case 7:
-                    return <Level7 startup={startup} />;
+                    return <Level7 startup={startup}/>;
                 case 8:
-                    return <Level8 startup={startup} />;
+                    return <Level8 startup={startup}/>;
                 case 9:
                     return <ProfileOne startup={startup} locations={locations}/>;
                 case 10:
@@ -64,7 +73,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
                 case 2:
                     return <InvestorPreference industries={industries} investor={investor}/>;
                 case 3:
-                    return <InvestorMoreInfo industries={industries} stages={stages} investor={investor} />
+                    return <InvestorMoreInfo industries={industries} stages={stages} investor={investor}/>
             }
         }
     }
@@ -74,7 +83,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
 
         <Head>
             <title>Profile</title>
-            <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+            <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
             <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         </Head>
 
