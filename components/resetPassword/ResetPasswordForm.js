@@ -86,27 +86,3 @@ export default function ResetPasswordForm({tokenIsValid, reason, token = null}) 
         </div>
     </>
 }
-
-ResetPasswordForm.getInitialProps = async ({query}) => {
-    if (!query.hasOwnProperty('token')) {
-        return {
-            tokenIsValid: false,
-            reason: null
-        }
-    }
-    try {
-        const {data: response} = await axiosInstance.post(`validate-reset-token`, query)
-
-        return {
-            token: query.token,
-            tokenIsValid: response.message === 'token confirmed',
-            reason: null
-        }
-
-    } catch (e) {
-        return {
-            tokenIsValid: false,
-            reason: e.response.data.message
-        }
-    }
-}

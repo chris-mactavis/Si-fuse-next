@@ -120,13 +120,38 @@ import Head from "next/head";
 import {withoutAuth} from "../../components/hoc/auth";
 import React from 'react';
 import ResetPasswordForm from "../../components/resetPassword/ResetPasswordForm";
+import axiosInstance from "../../config/axios";
 
-const Forgot = () => {
-    return <Layout headerContent={<ResetPasswordForm />} page="Reset-Password" headerClass="signup" footer={false}>
+const Forgot = ({tokenIsValid, reason, token}) => {
+    return <Layout headerContent={<ResetPasswordForm tokenIsValid={tokenIsValid} reason={reason} token={token} />} page="Reset-Password" headerClass="signup" footer={false}>
         <Head>
             <title>Reset Password</title>
         </Head>
     </Layout>
+}
+
+Forgot.getInitialProps = async ({query}) => {
+    console.log(query);
+    if (!query.hasOwnProperty('token')) {
+        return {
+            tokenIsValid: false,
+            reason: null
+        }
+    }
+    try {
+        const {data: response} = await axiosInstance.post(`validate-reset-token`, query)
+        return {
+            token: query.token,
+            tokenIsValid: response.message === 'token confirmed',
+            reason: null
+        }
+
+    } catch (e) {
+        return {
+            tokenIsValid: false,
+            reason: e.response.data.message
+        }
+    }
 }
 
 export default withoutAuth(Forgot);
