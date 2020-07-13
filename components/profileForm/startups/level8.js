@@ -33,7 +33,7 @@ const Level8 = ({startup}) => {
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/level', {investor_exit: JSON.stringify(data.investor_exit)}, {
+            await axiosInstance.post('startups/level', {investor_exit: JSON.stringify(data.investor_exit), profile_stage: 9}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
