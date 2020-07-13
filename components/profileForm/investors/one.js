@@ -89,7 +89,6 @@ const InvestorBasicInfo = ({investor, locations}) => {
     }, []);
 
     useEffect(() => {
-        console.log('in here')
         window.scrollTo(0, 0);
     }, []);
 

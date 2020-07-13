@@ -1,12 +1,14 @@
 import Layout from "../../components/layout";
 import Head from "next/head";
-import React, {useState} from "react";
 import Link from "next/link";
+import React, {useState} from "react";
 import axiosInstance from "../../config/axios";
+import Token from "../../utils/Token";
+import {auth} from "../../components/hoc/auth";
 import {useDispatch} from "react-redux";
 import {loader} from "../../store/actions/loader";
 
-export default function Events({data: {data: events, links: {next}, meta: {current_page, last_page}}}) {
+const MyEvents = ({data: {data: events, links: {next}, meta: {current_page, last_page}}}) => {
     const [allEvents, setEvents] = useState(events);
     const [nextUrl, setNextUrl] = useState(next);
     const [lastPage, setLastPage] = useState(last_page);
@@ -30,16 +32,16 @@ export default function Events({data: {data: events, links: {next}, meta: {curre
         }
     }
 
-    return <Layout page="Events" headerClass="page-header events" headerContent={<h1>Events</h1>} whiteAccount>
+    return <Layout page="My Events" headerClass="page-header events" headerContent={<h1>My Events</h1>} whiteAccount>
         <Head>
-            <title>Events</title>
+            <title>My Events</title>
         </Head>
 
         <section className="events">
             <div className="container">
                 <div className="row">
                     {
-                        allEvents.map(event => <div className="col-md-4" key={event.id}>
+                        allEvents.map(({event}) => <div className="col-md-4" key={event.id}>
                             <div className="card">
                                 <Link href="events/[slug]" as={`events/${event.slug}`}>
                                     <div className="position-relative">
@@ -79,10 +81,16 @@ export default function Events({data: {data: events, links: {next}, meta: {curre
     </Layout>
 }
 
-Events.getInitialProps = async () => {
-    const {data: response} = await axiosInstance.get('events?paginate=12');
+MyEvents.getInitialProps = async (ctx) => {
+    const {data: data} = await axiosInstance.get('user-events?paginate=12', {
+        headers: {
+            Authorization: `Bearer ${Token(ctx)}`
+        }
+    });
 
     return {
-        data: response
+        data
     }
 }
+
+export default auth(MyEvents);
