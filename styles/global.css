@@ -863,8 +863,8 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
   left: 0;
   height: 100%;
   width: 3px;
-  background-color: #fff;
-  color: #000;
+  background-color: #D32907;
+  color: white;
   -webkit-transform: scaleY(0);
   transform: scaleY(0);
   -webkit-transition: width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s, background-color 0.1s, -webkit-transform 0.2s;
@@ -876,11 +876,11 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 .btn-white:hover::before {
   transform: scaleY(1);
   width: 100%;
-  color: #000;
+  color: white;
 }
 .btn-white:hover {
-  color: #000;
-  border-color: #fff;
+  color: white;
+  border-color: #D32907;
 }
 
 .btn-profile {

@@ -126,7 +126,7 @@ export default function SignupForm({countries, userTypes, query}) {
 
                         <button type="submit" className="btn btn-white">Sign up</button>
 
-                        <div onClick={() => setAccountType(null)} className="pointer"><img src="images/icon/arrow-left.svg"/> Back</div>
+                        <div onClick={() => setAccountType(null)} className="pointer"><img src="images/icon/arrow-left.svg"/> Back to Options</div>
                     </form>
                 </div>
         }
