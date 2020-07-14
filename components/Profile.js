@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import StartupProfile from "./profiles/StartupProfile";
 import InvestorProfile from "./profiles/InvestorProfile";
 
-const Profile = ({company, services, finance, market, userType, profile, interests, level = null, hasEdit = false, id = null, isConnected = null, profileContent = null, connections = [], loggedInUser, hasPermission}) => {
+const Profile = ({startupComments, company, services, finance, market, userType, profile, interests, level = null, hasEdit = false, id = null, isConnected = null, profileContent = null, connections = [], loggedInUser, hasPermission}) => {
 
     return <>
         {
@@ -10,7 +10,7 @@ const Profile = ({company, services, finance, market, userType, profile, interes
                 ?
                 <StartupProfile company={company} services={services} userType="startup" finance={finance} level={level}
                                 market={market} profile={profile} profileContent={profileContent} hasEdit={hasEdit}
-                                loggedInUser={loggedInUser} hasPermission={hasPermission} isConnected={isConnected}/>
+                                loggedInUser={loggedInUser} hasPermission={hasPermission} isConnected={isConnected} startupComments={startupComments} />
                 :
                 <InvestorProfile profile={profile} interests={interests} userType="investor" connections={connections}/>
         }
