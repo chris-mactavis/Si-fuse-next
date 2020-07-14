@@ -2217,6 +2217,29 @@ section.startup-content .request-access .btn {
   align-self: center;
   justify-self: center;
 }
+section.startup-content .startup-comments .comment {
+  display: flex;
+  flex-direction: column;
+}
+section.startup-content .startup-comments .comment-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 13px;
+}
+section.startup-content .startup-comments .comment-replies {
+  margin-top: 10px;
+}
+section.startup-content .startup-comments .comment-replies a {
+  cursor: pointer;
+}
+section.startup-content .startup-comments .comment-replies .replies .reply {
+  border: 1px solid;
+  font-size: 13px;
+  padding: 10px;
+  margin-top: 5px;
+}
 section.timeline article, section.connections article {
   background: white;
 }

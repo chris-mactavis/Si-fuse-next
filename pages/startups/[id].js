@@ -7,7 +7,8 @@ import Token from "../../utils/Token";
 import Profile from "../../components/Profile";
 import {User} from "../../utils/User";
 
-export default function SingleStartup({startup: {profile, company, level, product_services: services, finance, market}, id, isConnected, profileContent, loggedInUser, hasPermission}) {
+export default function SingleStartup({startup: {profile, company, level, product_services: services, finance, market, comments: startupComments}, id, isConnected, profileContent, loggedInUser, hasPermission}) {
+    console.log(startupComments);
     return <>
         <Layout headerContent={null} headerClass="page-header no-bg" redBar>
             <Head>
@@ -16,7 +17,7 @@ export default function SingleStartup({startup: {profile, company, level, produc
 
             <Profile profile={profile} company={company} services={services} finance={finance} level={level}
                      market={market} userType="startup" id={id} isConnected={isConnected}
-                     profileContent={profileContent} loggedInUser={loggedInUser} hasPermission={hasPermission}/>
+                     profileContent={profileContent} loggedInUser={loggedInUser} hasPermission={hasPermission} startupComments={startupComments}/>
         </Layout>
         <style jsx>{`
             .services-stage {
