@@ -9,6 +9,7 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import profile from "../store/reducers/profile";
 import '@synapsestudios/react-drop-n-crop/lib/react-drop-n-crop.min.css';
 import '@synapsestudios/react-drop-n-crop/lib/react-drop-n-crop.css';
+import '../public/slim/slim.min.css';
 import notifier from "../store/reducers/notifier";
 import imageViewer from "../store/reducers/imageViewer";
 import startupProfile from "../store/reducers/startupProfile";

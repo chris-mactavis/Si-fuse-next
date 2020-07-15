@@ -1023,6 +1023,10 @@ section {
       //left: calc(50% - 8px);
       //transform: translateX(-50%);
 
+      &.startup-profile{
+        margin-bottom: 60px;
+      }
+
       @include media("mobile") {
         display: none;
       }

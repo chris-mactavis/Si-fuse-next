@@ -8,6 +8,7 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "@slim": "4.19.0",
     "@synapsestudios/react-drop-n-crop": "^0.2.0",
     "axios": "^0.19.2",
     "cookie-parser": "^1.4.5",

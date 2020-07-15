@@ -56,9 +56,9 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
                 case 8:
                     return <Level8 startup={startup}/>;
                 case 9:
-                    return <ProfileOne startup={startup} locations={locations}/>;
+                    return <ProfileOne startup={startup} locations={locations} industries={industries}/>;
                 case 10:
-                    return <ProfileTwo startup={startup} locations={locations} industries={industries}/>;
+                    return <ProfileTwo startup={startup}/>;
                 case 11:
                     return <ProfileThree startup={startup}/>;
                 case 12:
