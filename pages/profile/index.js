@@ -18,6 +18,7 @@ const ProfilePage = ({canView, data: {company, product_services: services, finan
         <Layout headerContent={null} headerClass="page-header no-bg" redBar>
             <Head>
                 <title>My Profile</title>
+                <script src="/js/rater.min.js"/>
             </Head>
 
             <Profile company={company} services={services} finance={finance} market={market} level={level}

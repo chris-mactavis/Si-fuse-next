@@ -1,6 +1,7 @@
 export const INCREMENT_CURRENT_STATE = 'INCREMENT_CURRENT_STATE';
 export const DECREMENT_CURRENT_STATE = 'DECREMENT_CURRENT_STATE';
 export const RESET_CURRENT_STATE = 'RESET_CURRENT_STATE';
+export const SET_CURRENT_STATE = 'SET_CURRENT_STATE';
 
 export const incrementCurrentState = () => ({
     type: INCREMENT_CURRENT_STATE
@@ -12,4 +13,9 @@ export const decrementCurrentState = () => ({
 
 export const resetCurrentState = () => ({
     type: RESET_CURRENT_STATE
+})
+
+export const setCurrentState = currentState => ({
+    type: SET_CURRENT_STATE,
+    currentState
 })

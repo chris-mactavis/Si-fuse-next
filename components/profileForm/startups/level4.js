@@ -33,7 +33,7 @@ const Level4 = ({startup}) => {
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/level', {market: JSON.stringify(data.market)}, {
+            await axiosInstance.post('startups/level', {market: JSON.stringify(data.market), profile_stage: 5}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }

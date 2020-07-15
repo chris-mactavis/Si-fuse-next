@@ -32,7 +32,7 @@ const Level3 = ({startup}) => {
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/level', {products: JSON.stringify(data.products)}, {
+            await axiosInstance.post('startups/level', {products: JSON.stringify(data.products), profile_stage: 4}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }

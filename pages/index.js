@@ -14,8 +14,8 @@ const Home = ({events, blogs}) => {
     const isLoggedIn = !!Token();
 
     useEffect(() => {
-
         dispatch(resetCurrentState());
+
         setTimeout(() => {
             $('.event-slider').slick({
                 slidesToShow: 3,
@@ -106,6 +106,7 @@ const Home = ({events, blogs}) => {
     >
         <Head>
             <title>SI Fuse</title>
+            <script src="/js/text.js"></script>
         </Head>
 
         <section id="second-section" className="image-text">
@@ -116,7 +117,6 @@ const Home = ({events, blogs}) => {
                             <div className="col-lg-5 col-sm-7 col-12 mx-auto">
                                 <div className="investors">
                                     <img className="img-01" src="images/icon/01.png" alt=""/>
-
 
                                     <h2>For investors</h2>
                                     <p>
@@ -147,7 +147,7 @@ const Home = ({events, blogs}) => {
                         <img className="img-fluid" src="images/startups.png" alt=""/>
                     </div>
 
-                    <div className="col-lg-6 offset-md-1 col-sm-7 col-12 mx-auto">
+                    <div className="col-lg-5 offset-md-2 col-sm-7 col-12 mx-auto">
                         <div className="investors startups">
                             <img className="img-01 img-02" src="images/icon/02.png" alt=""/>
 

@@ -9,10 +9,12 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import profile from "../store/reducers/profile";
 import '@synapsestudios/react-drop-n-crop/lib/react-drop-n-crop.min.css';
 import '@synapsestudios/react-drop-n-crop/lib/react-drop-n-crop.css';
+import '../public/slim/slim.min.css';
 import notifier from "../store/reducers/notifier";
 import imageViewer from "../store/reducers/imageViewer";
 import startupProfile from "../store/reducers/startupProfile";
 import notifications from "../store/reducers/notification";
+import {addStartups} from "../store/actions/discover";
 
 const reducers = combineReducers({
     auth: auth,
@@ -21,10 +23,11 @@ const reducers = combineReducers({
     notifier: notifier,
     imageViewer: imageViewer,
     startupProfile: startupProfile,
-    notifications: notifications
+    notifications: notifications,
+    addStartups: addStartups
 });
 
-const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware)));
+const store = process.env.environment === 'dev' ? createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware))) : createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export default function App({Component, pageProps}) {
     return <Provider store={store}><Component {...pageProps} /></Provider>

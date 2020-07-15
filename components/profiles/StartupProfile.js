@@ -9,7 +9,7 @@ import {showImageViewer, showVideoViewer} from "../../store/actions/imageViewer"
 import StartupProfileLevels from "./StartupLevels";
 import {startupLevel} from "../../helpers";
 
-const StartupProfile = ({company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
+const StartupProfile = ({rating, startupComments, company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
     const dispatch = useDispatch();
 
     let levelKeys = [];
@@ -18,9 +18,17 @@ const StartupProfile = ({company, services: product_services, finance, market, l
 
     const [connected, setConnected] = useState(isConnected);
 
-    const stlevel = startupLevel(level);
+    let theStartupComments = userType === 'Investor' ? startupComments : startup.comments;
 
-    console.log(stlevel);
+    let startupRating = userType === 'Investor' ? rating : startup.rating;
+
+    const [comments, setComment] = useState(theStartupComments.map(comment => {
+        comment['showReply'] = false;
+        comment['showReplyForm'] = false;
+        return comment;
+    }));
+
+    const stlevel = startupLevel(level);
 
     if (level) {
         levelKeys = Object.keys(level);
@@ -57,6 +65,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
         const productServiceBtn = $('#product-services-btn');
         const financeBtn = $('#finance-btn');
         const marketingSummaryBtn = $('#marketing-summary-btn');
+        const commentsBtn = $('#comments-btn');
 
         if ($(window).width() > 768) {
             $(window).scroll(function (e) {
@@ -103,6 +112,13 @@ const StartupProfile = ({company, services: product_services, finance, market, l
             }, 1000);
         });
 
+        commentsBtn.click(function () {
+            if (!hasPermission) return;
+            $('html, body').animate({
+                scrollTop: $('#comments').offset().top - 20
+            }, 1000);
+        });
+
     }, [hasPermission]);
 
     const [toggleAbout, setAbout] = useState(false);
@@ -120,10 +136,12 @@ const StartupProfile = ({company, services: product_services, finance, market, l
     const [toggleProductImages, setProductImages] = useState(false);
     const [toggleProductVideo, setProductVideo] = useState(false);
     const [togglePitchVideo, setPitchVideo] = useState(false);
+    const [togglePhone, setPhone] = useState(false);
+    const [starRating, setStarRating] = useState(startupRating || {formatted_rating: 0, overall_rating: 0, total_rating: 0});
 
     const [startupProf, setStartupProfile] = useState({company, product_services, finance, market, profile, level});
 
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, reset} = useForm();
 
     const toggleFormHandler = (item) => {
         closeAllForms();
@@ -158,6 +176,8 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                 return setProductVideo(state => !state);
             case 'pitchVideo':
                 return setPitchVideo(state => !state);
+            case 'phone':
+                return setPhone(state => !state);
             default:
                 return true;
         }
@@ -179,6 +199,7 @@ const StartupProfile = ({company, services: product_services, finance, market, l
         setProductImages(false);
         setProductVideo(false);
         setPitchVideo(false);
+        setPhone(false);
     }
 
     const onSubmitHandler = async data => {
@@ -315,6 +336,113 @@ const StartupProfile = ({company, services: product_services, finance, market, l
         }
     }
 
+    const commentHandler = async data => {
+        if (data.comment) {
+            try {
+                const {data: {data: response}} = await axiosInstance.post('investors/comments', {
+                    ...data,
+                    owner_id: profile.user_id
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${Token()}`
+                    }
+                });
+
+                response['showReply'] = false;
+                response['showReplyForm'] = false;
+
+                setComment(comments => comments.concat(response));
+
+                reset();
+
+            } catch (e) {
+                dispatch(showNotifier(e.response.data.message, 'danger'));
+            }
+        }
+    }
+
+    const replyHandler = async data => {
+        if (data.reply) {
+            try {
+                const {data: {data: response}} = await axiosInstance.post('replies', data, {
+                    headers: {
+                        Authorization: `Bearer ${Token()}`
+                    }
+                });
+
+                const theCommentIndex = comments.findIndex(comment => comment.id === +data.comment_id);
+                const prevComment = comments[theCommentIndex];
+                const replies = prevComment.replies.concat(response);
+
+                prevComment.replies = replies;
+                reset();
+
+            } catch (e) {
+                dispatch(showNotifier(e.response.data.message, 'danger'));
+            }
+        }
+    }
+
+    const showReplyHandler = commentId => {
+        setComment(comments => {
+            return [...comments].map(x => {
+                if (+x.id === +commentId) {
+                    x.showReply = true;
+                }
+                return x;
+            })
+        });
+    }
+
+    const showReplyFormHandler = commentId => {
+        setComment(comm => {
+            return [...comm].map(x => {
+                if (x.id === commentId) {
+                    x.showReply = true;
+                    x.showReplyForm = true;
+                }
+                return x;
+            })
+        });
+    }
+
+    function selectedCountHandler(count) {
+        setSelectedStarCount(count);
+    }
+
+
+    useEffect(() => {
+        const options = {
+            max_value: 5,
+            step_size: 1,
+            initial_value: 1,
+            change_once: true,
+            cursor: 'pointer',
+            readonly: userType !== 'Investor'
+        }
+
+        setTimeout(() => {
+            $(".rater-js").rate(options);
+
+            $(".rater-js").on("change", async function (ev, data) {
+                try {
+                    const {data: response} = await axiosInstance.post('rate', {
+                        rating: data.to,
+                        startup_id: profile.user_id
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${Token()}`
+                        }
+                    });
+
+                    setStarRating(response.data);
+                } catch (e) {
+                    dispatch(showNotifier('Cannot rate at the moment. Please try later!', 'danger'));
+                }
+            });
+        }, 1000);
+    }, []);
+
     return <section className="startup-content">
         <div className="container">
             <div className="row">
@@ -347,9 +475,35 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                             <p className="profile-name">
                                 {startupProf.company.name}
                             </p>
+
                             <p><img className="location-img" src="/images/icon/location.svg" alt=""/> Lagos, Nigeria</p>
+
                             <p>{startupProf.company.website}</p>
-                            {(!hasEdit && !connected) && <button onClick={connectHandler} className="btn">Connect</button>}
+
+                            {
+                                !togglePhone && <div className="phone-div w-50 mx-auto">
+                                    <p>{startupProf.company.phone}</p>
+                                    {
+                                        hasEdit && <img
+                                            onClick={() => toggleFormHandler('phone')}
+                                            className="edit-icon"
+                                            title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
+                                    }
+                                </div>
+                            }
+
+                            {
+                                togglePhone && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                     className="profile-details overview-form">
+                                    <input type="text" name="phone" ref={register}
+                                           className="full-width edit-input"
+                                           defaultValue={startupProf.company.phone}/>
+                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                </form>
+                            }
+
+                            {(!hasEdit && !connected) &&
+                            <button onClick={connectHandler} className="btn">Connect</button>}
                         </div>
                         <button className="startup-link-view" id="overview-btn">
                             Overview <img src="/images/icon/pie-chart.svg" alt=""/>
@@ -360,13 +514,19 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                         <button className="startup-link-view" id="product-services-btn">
                             Product and Services <img src="/images/icon/product-service-icon.svg" alt=""/>
                         </button>
-                        <button className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
-                                id="finance-btn">
+                        <button
+                            className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
+                            id="finance-btn">
                             Finance <img src="/images/icon/finance-white-icon.svg" alt=""/>
                         </button>
-                        <button className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
-                                id="marketing-summary-btn">
+                        <button
+                            className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
+                            id="marketing-summary-btn">
                             Marketing Summary <img src="/images/icon/market-summary-white.svg" alt=""/>
+                        </button>
+                        <button
+                            className="startup-link-view" id="comments-btn">
+                            Comments <img src="/images/icon/market-summary-white.svg" alt=""/>
                         </button>
                     </div>
                 </div>
@@ -377,9 +537,12 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                         <div className="row">
                             <div className="col-12">
                                 <div className="startup-description">
-                                    {hasEdit &&
-                                    <img onClick={() => toggleFormHandler('about')} className="edit-icon" title="Edit"
-                                         src="/images/icon/pencil-icon.svg" alt=""/>}
+                                    {
+                                        hasEdit &&
+                                        <img onClick={() => toggleFormHandler('about')} className="edit-icon"
+                                             title="Edit"
+                                             src="/images/icon/pencil-icon.svg" alt=""/>
+                                    }
 
                                     <img src="/images/icon/building.svg" alt=""/>
                                     <p className="profile-name">
@@ -511,8 +674,9 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                         }
                     </div>
 
-                    <div className={`startup-heading product-services ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
-                         id="productServices">
+                    <div
+                        className={`startup-heading product-services ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
+                        id="productServices">
                         <h5>Products and Services</h5>
                         <div className="row">
                             <div className="col-md-4">
@@ -862,6 +1026,94 @@ const StartupProfile = ({company, services: product_services, finance, market, l
                             </div>
                         </>
                     }
+
+                    <div className="startup-heading startup-comments" id="comments">
+
+                        <div className="d-flex justify-content-between">
+                            <h5 className={!hasPermission ? 'mt-5' : ''}>Comments ({comments.length})</h5>
+                            <div className="startup-ratings-section">
+                                <div className="startup-ratings">
+                                    <span className="mr-5">Rate Startup</span>
+                                    <div className="rater-js" data-rate-value="6"/>
+                                    <span className="rate-total">{starRating.formatted_rating}</span>
+                                </div>
+                                <span className="rating-count">{starRating.total_rating} {starRating.total_rating > 1 ? 'Ratings' : 'Rating'}</span>
+                            </div>
+                        </div>
+
+                        <div className="row">
+
+                            <div className="col-12">
+                                {
+                                    comments.map(comment => <div key={comment.id}
+                                                                 className="startup-description comment">
+                                        <div>
+                                            {comment.comment}
+                                        </div>
+
+                                        <div className="comment-info">
+                                            <span>{comment.commentator} • {comment.date_added}</span>
+                                        </div>
+
+                                        <div className="comment-replies">
+                                            <div className="reply-actions">
+                                                <a
+                                                    onClick={() => comment.replies.length > 0 ? showReplyHandler(comment.id) : null}>
+                                                    {comment.replies.length > 0 ? `${comment.replies.length} ${comment.replies.length === 1 ? 'reply' : 'replies'}` : 'No replies yet'}
+                                                </a>
+                                                {
+                                                    hasPermission && <>&nbsp;•&nbsp; <a
+                                                        onClick={() => showReplyFormHandler(comment.id)}>Reply</a></>
+                                                }
+                                            </div>
+
+                                            {
+                                                (comment.showReply && comment.showReplyForm) &&
+                                                <form className="w-100 profile-details"
+                                                      onSubmit={handleSubmit(replyHandler)}>
+                                                    <textarea ref={register} className="full-width mb-0" name="reply"
+                                                              rows="1"
+                                                              placeholder="Reply" required/>
+                                                    <input type="hidden" name="comment_id" ref={register}
+                                                           defaultValue={comment.id}/>
+
+                                                    <button className="btn btn-sm" type="submit">Reply</button>
+                                                </form>
+                                            }
+
+                                            {
+                                                comment.showReply && <div className="replies">
+                                                    {
+                                                        comment.replies.map(reply => <div key={reply.id}
+                                                                                          className="reply">
+                                                            <div>{reply.reply}</div>
+
+                                                            <div className="comment-info">
+                                                                <span>{reply.replier} • {reply.date_added}</span>
+                                                            </div>
+                                                        </div>)
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>)
+                                }
+                            </div>
+
+                            {
+                                userType === 'Investor' && hasPermission && <div className="col-12 mb-4">
+                                    <form className="w-100 profile-details" onSubmit={handleSubmit(commentHandler)}>
+                                    <textarea className="full-width mb-0" ref={register} name="comment" rows="5"
+                                              placeholder="Drop your comment here" required/>
+
+                                        <button className="btn btn-sm" type="submit">Comment</button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>
