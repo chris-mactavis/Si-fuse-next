@@ -20,7 +20,9 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
             readonly: true
         }
 
-        $(".rater-js").rate(options);
+        setTimeout(() => {
+            $(".rater-js").rate(options);
+        }, 1000);
     }, []);
 
     return <div className="row mb-5 pointer" onClick={() => Router.push('/startups/[id]', `/startups/${slug}`)}>
