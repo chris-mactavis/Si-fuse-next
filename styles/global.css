@@ -22,7 +22,7 @@
   font-weight: bold;
   font-style: normal;
 }
-.bg, section.reset-password, section.forgot-password, section.timeline, section.connections, section.startup-content, section.startup-levels, section.single-post {
+.bg, section.reset-password, section.forgot-password, section.timeline, section.connections, section.discover, section.startup-content, section.startup-levels, section.single-post {
   background: #ECEFF1;
   color: #6B6B6B;
   padding: 80px 0 60px;
@@ -2112,10 +2112,49 @@ section.startup-content .request-access .btn {
   align-self: center;
   justify-self: center;
 }
-section.timeline article, section.connections article {
+section.startup-content .startup-comments .comment {
+  display: flex;
+  flex-direction: column;
+}
+section.startup-content .startup-comments .comment-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 13px;
+}
+section.startup-content .startup-comments .comment-replies {
+  margin-top: 10px;
+}
+section.startup-content .startup-comments .comment-replies a {
+  cursor: pointer;
+}
+section.startup-content .startup-comments .comment-replies .replies .reply {
+  border: 1px solid;
+  font-size: 13px;
+  padding: 10px;
+  margin-top: 5px;
+}
+section.startup-content .startup-ratings-section {
+  display: flex;
+  flex-direction: column;
+}
+section.startup-content .startup-ratings-section .startup-ratings {
+  display: flex;
+  align-items: center;
+}
+section.startup-content .startup-ratings-section .startup-ratings .rate-total {
+  font-size: 20px;
+  margin-left: 5px;
+}
+section.startup-content .startup-ratings-section .rating-count {
+  align-self: flex-end;
+  font-size: 13px;
+}
+section.timeline article, section.connections article, section.discover article {
   background: white;
 }
-section.timeline article h4, section.connections article h4 {
+section.timeline article h4, section.connections article h4, section.discover article h4 {
   text-transform: none;
   font-weight: 400;
   text-align: center;
@@ -2123,63 +2162,63 @@ section.timeline article h4, section.connections article h4 {
   padding: 15px 0 10px;
   margin-bottom: 0;
 }
-section.timeline article .startup-logo, section.connections article .startup-logo {
+section.timeline article .startup-logo, section.connections article .startup-logo, section.discover article .startup-logo {
   margin: 0 auto;
   display: block;
   padding: 28px;
 }
-section.timeline article .level, section.connections article .level {
+section.timeline article .level, section.connections article .level, section.discover article .level {
   text-align: center;
   margin: 10px 0;
 }
-section.timeline article .level .text, section.connections article .level .text {
+section.timeline article .level .text, section.connections article .level .text, section.discover article .level .text {
   padding: 5px 0;
 }
-section.timeline article .level.perfect, section.connections article .level.perfect {
+section.timeline article .level.perfect, section.connections article .level.perfect, section.discover article .level.perfect {
   background: rgba(23, 221, 23, 0.1);
 }
-section.timeline article .level.perfect p, section.connections article .level.perfect p {
+section.timeline article .level.perfect p, section.connections article .level.perfect p, section.discover article .level.perfect p {
   background: rgba(23, 221, 23, 0.5);
 }
-section.timeline article .level.good, section.connections article .level.good {
+section.timeline article .level.good, section.connections article .level.good, section.discover article .level.good {
   background: RGBA(255, 214, 0, 0.1);
 }
-section.timeline article .level.good p, section.connections article .level.good p {
+section.timeline article .level.good p, section.connections article .level.good p, section.discover article .level.good p {
   background: RGBA(255, 214, 0, 0.5);
 }
-section.timeline article .level.fair, section.connections article .level.fair {
+section.timeline article .level.fair, section.connections article .level.fair, section.discover article .level.fair {
   background: RGBA(255, 109, 0, 0.1);
 }
-section.timeline article .level.fair p, section.connections article .level.fair p {
+section.timeline article .level.fair p, section.connections article .level.fair p, section.discover article .level.fair p {
   background: RGBA(255, 109, 0, 0.5);
 }
-section.timeline article .level .icon, section.connections article .level .icon {
+section.timeline article .level .icon, section.connections article .level .icon, section.discover article .level .icon {
   height: 18px;
   display: inline;
   margin-right: 3px;
   opacity: 0.9;
 }
-section.timeline article .level .icon + span, section.connections article .level .icon + span {
+section.timeline article .level .icon + span, section.connections article .level .icon + span, section.discover article .level .icon + span {
   display: inline;
 }
-section.timeline article .level p, section.connections article .level p {
+section.timeline article .level p, section.connections article .level p, section.discover article .level p {
   margin-bottom: 0;
   text-transform: capitalize;
   font-size: 12px;
 }
-section.timeline article .tagging, section.connections article .tagging {
+section.timeline article .tagging, section.connections article .tagging, section.discover article .tagging {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
 }
-section.timeline article .tagging-container, section.connections article .tagging-container {
+section.timeline article .tagging-container, section.connections article .tagging-container, section.discover article .tagging-container {
   padding: 15px;
 }
-section.timeline article .tags, section.connections article .tags {
+section.timeline article .tags, section.connections article .tags, section.discover article .tags {
   text-align: center;
   height: 100%;
   padding: 10px;
 }
-section.timeline article .tags .tag, section.connections article .tags .tag {
+section.timeline article .tags .tag, section.connections article .tags .tag, section.discover article .tags .tag {
   background: #51B8D9;
   padding: 2px 10px;
   color: white;
@@ -2327,6 +2366,9 @@ section.contact-us form textarea {
   outline: none;
   padding: 1rem;
   resize: none;
+}
+section .rate-select-layer span, section .rate-select-layer span:hover {
+  color: #D32907;
 }
 
 * {

@@ -29,12 +29,12 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
 
     useEffect(() => {
         if (!startup.has_profile) {
-            dispatch(setCurrentState(startup.profile_stage));
+            dispatch(setCurrentState(userType === 'Investor' ? investor.profile_stage : startup.profile_stage));
         }
     }, []);
 
-    const currentProfile = useSelector(state => state.profile.currentState);
     const userType = loggedInUser.user_type.user_type;
+    const currentProfile = useSelector(state => state.profile.currentState);
 
     const ProfileComponent = () => {
         if (userType === 'Startup') {
