@@ -1709,7 +1709,7 @@ section {
 
   }
 
-  &.timeline, &.connections {
+  &.timeline, &.connections, &.discover {
     @extend .bg;
 
     article {
