@@ -119,7 +119,7 @@ const Discover = ({userType, data, industries, countries}) => {
                                         <option value="">Choose Country</option>
                                         {
                                             countries.map(({country, id}) => <option key={id}
-                                                                                     value={id}>{country}</option>)
+                                                                                     value={country}>{country}</option>)
                                         }
                                     </select>
 
