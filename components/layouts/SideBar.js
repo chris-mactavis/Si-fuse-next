@@ -123,9 +123,9 @@ export default function SideBar({isLoggedIn = false}) {
                                     : null
                             }
                             <li>
-                                <Link href="/events">
+                                <Link href="/my-events">
                                     <a><img src="/images/icon/calendar-icon.svg" alt=""
-                                            className="img-fluid"/> Event</a>
+                                            className="img-fluid"/> My Events</a>
                                 </Link>
                             </li>
                             <li>

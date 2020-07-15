@@ -7,16 +7,18 @@ import Token from "../../utils/Token";
 import Profile from "../../components/Profile";
 import {User} from "../../utils/User";
 
-export default function SingleStartup({startup: {profile, company, level, product_services: services, finance, market}, id, isConnected, profileContent, loggedInUser, hasPermission}) {
+export default function SingleStartup({startup: {profile, company, level, product_services: services, finance, market, comments: startupComments, rating}, id, isConnected, profileContent, loggedInUser, hasPermission}) {
+    console.log(startupComments);
     return <>
         <Layout headerContent={null} headerClass="page-header no-bg" redBar>
             <Head>
                 <title>{company.name}</title>
+                <script src="/js/rater.min.js"/>
             </Head>
 
             <Profile profile={profile} company={company} services={services} finance={finance} level={level}
                      market={market} userType="startup" id={id} isConnected={isConnected}
-                     profileContent={profileContent} loggedInUser={loggedInUser} hasPermission={hasPermission}/>
+                     profileContent={profileContent} loggedInUser={loggedInUser} hasPermission={hasPermission} startupComments={startupComments} rating={rating}/>
         </Layout>
         <style jsx>{`
             .services-stage {

@@ -6,6 +6,9 @@ import {useForm} from "react-hook-form";
 import Error from "../../components/UI/ErrorSpan";
 import {User} from "../../utils/User";
 import Token from "../../utils/Token";
+import {useDispatch} from "react-redux";
+import {loader} from "../../store/actions/loader";
+import {showNotifier} from "../../store/actions/notifier";
 
 export default function Events({event, countries}) {
 
@@ -16,12 +19,43 @@ export default function Events({event, countries}) {
     const [countryFlag, setCountryFlag] = useState('');
     const [currentUser, setCurrentUser] = useState(User());
 
+    const dispatch = useDispatch();
     const toggleRegisterForm = (e) => {
         e.preventDefault();
         setShowRegister(true);
     }
 
+    // useEffect(() => {
+    //     if (showRegister) {
+    //         function formatState(state) {
+    //             if (!state.id) {
+    //                 return state.text;
+    //             }
+    //
+    //             const baseUrl = locations.find(location => location.id === +state.id).flag
+    //
+    //             const $state = $(
+    //                 '<span><img class="img-flag" /> <span></span></span>'
+    //             );
+    //
+    //             // Use .text() instead of HTML string concatenation to avoid script injection issues
+    //             $state.find("span").text(state.text.split('-')[0]);
+    //             $state.find("img").attr("src", baseUrl);
+    //
+    //             return $state;
+    //         };
+    //
+    //         $(".select2").select2({
+    //             templateSelection: formatState
+    //         });
+    //         // setTimeout(() => {
+    //         //
+    //         // }, 2000);
+    //     }
+    // }, [showRegister]);
+
     const submitHandler = async data => {
+        dispatch(loader());
         try {
             let formData = null;
             if (event.is_free) {
@@ -43,10 +77,12 @@ export default function Events({event, countries}) {
                     Authorization: `Bearer ${Token()}`
                 }
             });
-            console.log(response);
+            dispatch(loader());
+            dispatch(showNotifier('Registered for event!'));
         } catch (e) {
             console.log(e);
-            // console.log(e.response.data.message);
+            dispatch(loader());
+            dispatch(showNotifier(e.response.data.message, 'danger'));
         }
     }
 
@@ -168,23 +204,32 @@ export default function Events({event, countries}) {
 
                                                             <div className="d-flex">
                                                                 <div className="input-container small">
-                                                                    <select
-                                                                        ref={register({required: 'This field is required'})}
-                                                                        name="country_code"
-                                                                        id="flag"
-                                                                        className="m-right select-flag mb-0"
-                                                                        onChange={countryChangeHandler}
-                                                                        defaultValue={currentUser ? currentUser.country_id : ''}
-                                                                    >
-                                                                        <option value="">Country Code</option>
+                                                                    <select name="country_code" className="select2"
+                                                                            ref={register({required: "This field is required"})}
+                                                                            defaultValue={currentUser ? currentUser.country_id : ''}>
                                                                         {
-                                                                            countries.map(
-                                                                                ({id, country, country_area_code}) =>
-                                                                                    <option value={id}
-                                                                                            key={id}>{`${country_area_code} (${country})`}</option>
-                                                                            )
+                                                                            countries.map(({id, country_area_code, country}) =>
+                                                                                <option key={id}
+                                                                                        value={id}>{country_area_code} - {country}</option>)
                                                                         }
                                                                     </select>
+                                                                    {/*<select*/}
+                                                                    {/*    ref={register({required: 'This field is required'})}*/}
+                                                                    {/*    name="country_code"*/}
+                                                                    {/*    id="flag"*/}
+                                                                    {/*    className="m-right select-flag mb-0"*/}
+                                                                    {/*    onChange={countryChangeHandler}*/}
+                                                                    {/*    defaultValue={currentUser ? currentUser.country_id : ''}*/}
+                                                                    {/*>*/}
+                                                                    {/*    <option value="">Country Code</option>*/}
+                                                                    {/*    {*/}
+                                                                    {/*        countries.map(*/}
+                                                                    {/*            ({id, country, country_area_code}) =>*/}
+                                                                    {/*                <option value={id}*/}
+                                                                    {/*                        key={id}>{`${country_area_code} (${country})`}</option>*/}
+                                                                    {/*        )*/}
+                                                                    {/*    }*/}
+                                                                    {/*</select>*/}
                                                                     {errors.country_code &&
                                                                     <Error>{errors.country_code.message}</Error>}
                                                                 </div>

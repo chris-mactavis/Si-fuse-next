@@ -9,6 +9,8 @@ import {showNotifier, toggleNotifier} from "../../store/actions/notifier";
 import React from "react";
 import {User} from "../../utils/User";
 
+import {ReCaptcha} from "react-recaptcha-google";
+
 export default function LoginForm() {
     const dispatch = useDispatch();
 
@@ -32,6 +34,8 @@ export default function LoginForm() {
         }
     };
 
+
+
     return <>
         <div className="signup-content mt-5 pt-5">
             <h1>Login</h1>
@@ -51,10 +55,11 @@ export default function LoginForm() {
                 {errors.password && <Error>Password field is required!</Error>}
 
                 <button type="submit" className="btn btn-white">Login</button>
+                {/*<button className="g-recaptcha" data-sitekey="your_site_key" data-callback='onSubmit'>Submit</button>*/}
+
             </form>
             <p className="text-center">Forgot Password? <Link href="/forgot-password"><a className="text-white">Click here</a></Link></p>
         </div>
-
         <style jsx>{`
             .login-input {
                 margin-bottom: 0;

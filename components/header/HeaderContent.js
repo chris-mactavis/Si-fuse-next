@@ -20,6 +20,6 @@ export default function () {
             </a>
         </div>
 
-        <h1>Connecting Investors <br/>with <span>Female led</span> <br/> Startups</h1>
+        <h1>Connecting Investors <br/>with <span className="txt-rotate" data-period="300" data-rotate='["Female led", "Female owned", "Gender diverse"]'></span><br/> Startups</h1>
     </div>
 }
