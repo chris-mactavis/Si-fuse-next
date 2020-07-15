@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import Router from "next/router";
 import {showImageViewer} from "../../store/actions/imageViewer";
-import StartupComponent from "../discover/StartupComponent";
+import StartupCard from "../startups/startupCard";
 
 const InvestorProfile = ({profile, interests, connections}) => {
     const dispatch = useDispatch();
@@ -60,7 +60,7 @@ const InvestorProfile = ({profile, interests, connections}) => {
                             {
                                 connections.map(user => {
                                     console.log(user);
-                                    return <StartupComponent key={user.id} user={user}/>
+                                    return <StartupCard key={user.id} startup={user}/>
                                 })
                             }
                         </div>
