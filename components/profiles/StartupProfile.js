@@ -421,24 +421,26 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
             readonly: userType !== 'Investor'
         }
 
-        $(".rater-js").rate(options);
+        setTimeout(() => {
+            $(".rater-js").rate(options);
 
-        $(".rater-js").on("change", async function (ev, data) {
-            try {
-                const {data: response} = await axiosInstance.post('rate', {
-                    rating: data.to,
-                    startup_id: profile.user_id
-                }, {
-                    headers: {
-                        Authorization: `Bearer ${Token()}`
-                    }
-                });
+            $(".rater-js").on("change", async function (ev, data) {
+                try {
+                    const {data: response} = await axiosInstance.post('rate', {
+                        rating: data.to,
+                        startup_id: profile.user_id
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${Token()}`
+                        }
+                    });
 
-                setStarRating(response.data);
-            } catch (e) {
-                dispatch(showNotifier('Cannot rate at the moment. Please try later!', 'danger'));
-            }
-        });
+                    setStarRating(response.data);
+                } catch (e) {
+                    dispatch(showNotifier('Cannot rate at the moment. Please try later!', 'danger'));
+                }
+            });
+        }, 1000);
     }, []);
 
     return <section className="startup-content">
