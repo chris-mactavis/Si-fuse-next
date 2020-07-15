@@ -18,6 +18,7 @@ const Timeline = ({data, hasProfile}) => {
     return <Layout page="Timeline" headerClass="page-header no-bg" redBar>
         <Head>
             <title>Timeline</title>
+            <script src="/js/rater.min.js"/>
         </Head>
 
         <section className="timeline">
@@ -51,7 +52,6 @@ Timeline.getInitialProps = async (ctx) => {
                 'Authorization': `Bearer ${Token(ctx)}`
             }
         });
-
         return {
             data: response,
             hasProfile

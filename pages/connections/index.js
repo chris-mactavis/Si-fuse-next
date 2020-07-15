@@ -7,11 +7,12 @@ import Token from "../../utils/Token";
 import StartupCard from "../../components/startups/startupCard";
 
 export default function Connections({connections}) {
-    console.log(connections);
+
     return <Layout isLoggedIn whiteAccount headerContent={<h1>Connections</h1>} headerClass="page-header discover"
                    page="Connections">
         <Head>
             <title>Connections</title>
+            <script src="/js/rater.min.js"/>
         </Head>
 
         <section className="connections">

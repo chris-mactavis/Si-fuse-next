@@ -2240,6 +2240,22 @@ section.startup-content .startup-comments .comment-replies .replies .reply {
   padding: 10px;
   margin-top: 5px;
 }
+section.startup-content .startup-ratings-section {
+  display: flex;
+  flex-direction: column;
+}
+section.startup-content .startup-ratings-section .startup-ratings {
+  display: flex;
+  align-items: center;
+}
+section.startup-content .startup-ratings-section .startup-ratings .rate-total {
+  font-size: 20px;
+  margin-left: 5px;
+}
+section.startup-content .startup-ratings-section .rating-count {
+  align-self: flex-end;
+  font-size: 13px;
+}
 section.timeline article, section.connections article {
   background: white;
 }
@@ -2455,6 +2471,9 @@ section.contact-us form textarea {
   outline: none;
   padding: 1rem;
   resize: none;
+}
+section .rate-select-layer span, section .rate-select-layer span:hover {
+  color: #D32907;
 }
 
 * {
