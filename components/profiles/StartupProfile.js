@@ -1101,7 +1101,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                             </div>
 
                             {
-                                hasPermission && <div className="col-12 mb-4">
+                                userType === 'Investor' && hasPermission && <div className="col-12 mb-4">
                                     <form className="w-100 profile-details" onSubmit={handleSubmit(commentHandler)}>
                                     <textarea className="full-width mb-0" ref={register} name="comment" rows="5"
                                               placeholder="Drop your comment here" required/>
