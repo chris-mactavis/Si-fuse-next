@@ -1686,6 +1686,27 @@ section {
         }
       }
     }
+
+    .startup-ratings-section {
+      display: flex;
+      flex-direction: column;
+
+      .startup-ratings {
+        display: flex;
+        align-items: center;
+
+        .rate-total {
+          font-size: 20px;
+          margin-left: 5px;
+        }
+      }
+
+      .rating-count {
+        align-self: flex-end;
+        font-size: 13px;
+      }
+    }
+
   }
 
   &.timeline, &.connections {
@@ -1953,6 +1974,12 @@ section {
         padding: 1rem;
         resize: none;
       }
+    }
+  }
+
+  .rate-select-layer {
+    span, span:hover {
+      color: $red;
     }
   }
 

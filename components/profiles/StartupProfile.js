@@ -9,7 +9,7 @@ import {showImageViewer, showVideoViewer} from "../../store/actions/imageViewer"
 import StartupProfileLevels from "./StartupLevels";
 import {startupLevel} from "../../helpers";
 
-const StartupProfile = ({startupComments, company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
+const StartupProfile = ({rating, startupComments, company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
     const dispatch = useDispatch();
 
     let levelKeys = [];
@@ -20,14 +20,13 @@ const StartupProfile = ({startupComments, company, services: product_services, f
 
     let theStartupComments = userType === 'Investor' ? startupComments : startup.comments;
 
+    let startupRating = userType === 'Investor' ? rating : startup.rating;
 
     const [comments, setComment] = useState(theStartupComments.map(comment => {
         comment['showReply'] = false;
         comment['showReplyForm'] = false;
         return comment;
     }));
-
-    console.log(comments);
 
     const stlevel = startupLevel(level);
 
@@ -138,6 +137,7 @@ const StartupProfile = ({startupComments, company, services: product_services, f
     const [toggleProductVideo, setProductVideo] = useState(false);
     const [togglePitchVideo, setPitchVideo] = useState(false);
     const [togglePhone, setPhone] = useState(false);
+    const [starRating, setStarRating] = useState(startupRating || {formatted_rating: 0, overall_rating: 0, total_rating: 0});
 
     const [startupProf, setStartupProfile] = useState({company, product_services, finance, market, profile, level});
 
@@ -405,6 +405,41 @@ const StartupProfile = ({startupComments, company, services: product_services, f
             })
         });
     }
+
+    function selectedCountHandler(count) {
+        setSelectedStarCount(count);
+    }
+
+
+    useEffect(() => {
+        const options = {
+            max_value: 5,
+            step_size: 1,
+            initial_value: 1,
+            change_once: true,
+            cursor: 'pointer',
+            readonly: userType !== 'Investor'
+        }
+
+        $(".rater-js").rate(options);
+
+        $(".rater-js").on("change", async function (ev, data) {
+            try {
+                const {data: response} = await axiosInstance.post('rate', {
+                    rating: data.to,
+                    startup_id: profile.user_id
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${Token()}`
+                    }
+                });
+
+                setStarRating(response.data);
+            } catch (e) {
+                dispatch(showNotifier('Cannot rate at the moment. Please try later!', 'danger'));
+            }
+        });
+    }, []);
 
     return <section className="startup-content">
         <div className="container">
@@ -991,7 +1026,18 @@ const StartupProfile = ({startupComments, company, services: product_services, f
                     }
 
                     <div className="startup-heading startup-comments" id="comments">
-                        <h5 className={!hasPermission ? 'mt-5' : ''}>Comments ({comments.length})</h5>
+
+                        <div className="d-flex justify-content-between">
+                            <h5 className={!hasPermission ? 'mt-5' : ''}>Comments ({comments.length})</h5>
+                            <div className="startup-ratings-section">
+                                <div className="startup-ratings">
+                                    <span className="mr-5">Rate Startup</span>
+                                    <div className="rater-js" data-rate-value="6"/>
+                                    <span className="rate-total">{starRating.formatted_rating}</span>
+                                </div>
+                                <span className="rating-count">{starRating.total_rating} {starRating.total_rating > 1 ? 'Ratings' : 'Rating'}</span>
+                            </div>
+                        </div>
 
                         <div className="row">
 
@@ -1014,7 +1060,8 @@ const StartupProfile = ({startupComments, company, services: product_services, f
                                                     {comment.replies.length > 0 ? `${comment.replies.length} ${comment.replies.length === 1 ? 'reply' : 'replies'}` : 'No replies yet'}
                                                 </a>
                                                 {
-                                                    hasPermission && <>&nbsp;•&nbsp; <a onClick={() => showReplyFormHandler(comment.id)}>Reply</a></>
+                                                    hasPermission && <>&nbsp;•&nbsp; <a
+                                                        onClick={() => showReplyFormHandler(comment.id)}>Reply</a></>
                                                 }
                                             </div>
 
