@@ -105,7 +105,7 @@ export default function ProfileOne({industries, startup, locations}) {
     useEffect(() => {
         window.scrollTo(0, 0);
 
-        toDataURL('profilePicture.result', function (result) {
+        toDataURL(profilePicture.result, function (result) {
             setLocalImage(result);
         });
         // const image1 = new Image();
