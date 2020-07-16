@@ -105,7 +105,7 @@ export default function ProfileOne({industries, startup, locations}) {
     useEffect(() => {
         window.scrollTo(0, 0);
 
-        toDataURL(profilePicture.result, function (result) {
+        toDataURL('http://sifuse.test/images/user-3.jpg', function (result) {
             setLocalImage(result);
         });
         // const image1 = new Image();
@@ -157,20 +157,20 @@ export default function ProfileOne({industries, startup, locations}) {
                                     <form onSubmit={handleSubmit(submitHandler)} className="profile-details">
                                         <div className="row">
                                             <div className="col-md-4">
-                                                {/*<DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}} value={profilePicture}/>*/}
+                                                <DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}} value={profilePicture}/>
 
-                                                {
-                                                    localImage && <Slim ratio="1:1"
-                                                        // initialImage="/images/blog-1.jpg"
-                                                        // minSize={{width: 600, height: 400}}
-                                                          service={slimService.bind(this)}
-                                                          serviceFormat="file"
-                                                          push={true}>
-                                                        {/*didInit={ slimInit.bind(this) }>*/}
-                                                        <img src={localImage} alt=""/>
-                                                        <input type="file" name="foo"/>
-                                                    </Slim>
-                                                }
+                                                {/*{*/}
+                                                {/*    localImage && <Slim ratio="1:1"*/}
+                                                {/*        // initialImage="/images/blog-1.jpg"*/}
+                                                {/*        // minSize={{width: 600, height: 400}}*/}
+                                                {/*          service={slimService.bind(this)}*/}
+                                                {/*          serviceFormat="file"*/}
+                                                {/*          push={true}>*/}
+                                                {/*        /!*didInit={ slimInit.bind(this) }>*!/*/}
+                                                {/*        <img src={localImage} alt=""/>*/}
+                                                {/*        <input type="file" name="foo"/>*/}
+                                                {/*    </Slim>*/}
+                                                {/*}*/}
 
                                                 <input ref={register({required: 'This field is required'})}
                                                        type="hidden"
