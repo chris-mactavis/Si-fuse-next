@@ -5,13 +5,13 @@ header {
     background-size: cover;
     position: relative;
 
-    @include media("mobile"){
+    @include media("mobile") {
       height: 70vh;
       background-position: 80% top;
     }
 
     .navbar-brand {
-      left: calc(50% + 6px)!important;
+      left: calc(50% + 6px) !important;
     }
 
     .header-wrapper {
@@ -21,14 +21,14 @@ header {
       transform: translateY(-50%);
       top: 50%;
 
-      @include media("mobile"){
+      @include media("mobile") {
         margin: 0 30px;
       }
 
       .social-icons {
-        margin: 20px 100px 0 0;
+        margin: 15px 100px 0 0;
 
-        @include media("mobile"){
+        @include media("mobile") {
           display: none;
         }
 
@@ -36,7 +36,7 @@ header {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 50px;
+          margin-bottom: 52px;
 
           &:last-child {
             margin-bottom: 0;
@@ -53,29 +53,34 @@ header {
         margin: 0;
         line-height: 1.72;
 
-        @include media("desktop"){
+        @include media("desktop") {
           font-size: 5.5rem;
         }
 
-        @include media("tablet"){
+        @include media("tablet") {
           font-size: 4.5rem;
         }
 
-        @include media("mobile"){
+        @include media("mobile") {
           font-size: 3.6rem;
           letter-spacing: 4px;
         }
 
-        span.txt-rotate{
-          background: #fff;
-          color: $red;
-          line-height: 0.9;
-          display: inline-block;
-          padding: 20px 12px 0;
+        div.changing-text {
+          max-width: 900px;
 
-          @include media("mobile"){
-            padding: 12px 8px 3px;
-            margin-bottom: 8px;
+          span {
+            background: #fff;
+            color: $red;
+            line-height: 0.9;
+            display: inline-block;
+            padding: 20px 12px 3px;
+            margin-left: 20px;
+
+            @include media("mobile") {
+              padding: 12px 8px 3px;
+              margin-bottom: 8px;
+            }
           }
         }
       }
@@ -221,7 +226,7 @@ header {
     background-size: cover !important;
     position: relative;
 
-    @include media("mobile"){
+    @include media("mobile") {
       height: 20vh;
     }
 
@@ -243,7 +248,7 @@ header {
         font-size: 5rem;
       }
 
-      @include media("mobile"){
+      @include media("mobile") {
         font-size: 3.5rem;
         text-align: center;
         width: 100%;
@@ -378,19 +383,19 @@ header {
     width: 25%;
     transition: all .4s ease-in-out;
 
-    @include media("desktop"){
+    @include media("desktop") {
       width: 30%;
     }
 
-    @include media("tablet"){
+    @include media("tablet") {
       width: 40%;
     }
 
-    @include media("mobile_landscape"){
+    @include media("mobile_landscape") {
       width: 50%;
     }
 
-    @include media("mobile"){
+    @include media("mobile") {
       width: 84%;
     }
 
@@ -406,7 +411,7 @@ header {
       border: none;
       background: transparent;
 
-      @include media("mobile"){
+      @include media("mobile") {
         right: 20px;
       }
 
@@ -426,7 +431,7 @@ header {
       text-align: right;
       list-style: none;
 
-      @include media("mobile"){
+      @include media("mobile") {
         right: 30px;
         margin: 60px 0 0;
       }
@@ -434,7 +439,7 @@ header {
       li {
         margin-bottom: 15px;
 
-        @include media("mobile"){
+        @include media("mobile") {
           margin-bottom: 12px;
         }
 
@@ -443,7 +448,7 @@ header {
           //font-family: $league-spartan;
           color: #BF8C83;
 
-          @include media("mobile"){
+          @include media("mobile") {
             font-size: 28px;
           }
         }
@@ -470,7 +475,7 @@ header {
     z-index: 110;
     position: absolute;
     left: 67px;
-    box-shadow: 2px 2px 7px 6px rgba(0,0,0,.2);
+    box-shadow: 2px 2px 7px 6px rgba(0, 0, 0, .2);
 
     @media only screen and (max-width: $desktop_width) {
       left: 27px;
@@ -480,7 +485,7 @@ header {
       padding: 10px 20px;
       margin: 0;
 
-      @include media("mobile"){
+      @include media("mobile") {
         padding: 6px 12px;
       }
 
@@ -499,7 +504,7 @@ header {
           }
         }
 
-        .bold{
+        .bold {
           font-weight: 600;
         }
 
@@ -657,10 +662,10 @@ header {
         -webkit-text-stroke-color: white;
         text-align: center;
 
-        &.profile-signup{
+        &.profile-signup {
           font-size: 50px;
 
-          @include media('mobile'){
+          @include media('mobile') {
             font-size: 32px;
           }
         }
@@ -775,6 +780,4 @@ header {
       }
     }
   }
-
 }
-

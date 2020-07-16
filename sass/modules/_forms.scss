@@ -218,13 +218,14 @@ form {
       position: relative;
 
       input {
-        padding-left: 15px;
+        padding-left: 30px;
       }
 
       &::before {
         content: '$';
         position: absolute;
-        top: 2px;
+        top: 3px;
+        left: 15px;
       }
     }
 
