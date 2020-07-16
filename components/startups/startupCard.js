@@ -178,8 +178,7 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
                                 <span className="tag">{finance.geographical_focus}</span>}
                                 {finance.revenue_type && <span className="tag">{finance.revenue_type}</span>}
                                 {finance.growth_projection && <span className="tag">{finance.growth_projection}</span>}
-                                {company.clients_serviced && JSON.parse(company.clients_serviced) ? JSON.parse(company.clients_serviced).map(client => <span
-                                    className="tag" key={client}>{client}</span>) : null}
+                                {company.clients_serviced && <span className="tag">{company.clients_serviced}</span>}
                                 {finance.investor_type && <span className="tag">{finance.investor_type}</span>}
                                 {finance.funding_stage && <span className="tag">{finance.funding_stage}</span>}
                             </div>

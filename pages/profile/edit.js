@@ -38,7 +38,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
 
     const ProfileComponent = () => {
         if (userType === 'Startup') {
-            switch (currentProfile) {
+            switch (9) {
                 case 1:
                     return <Level1 startup={startup}/>;
                 case 2:
