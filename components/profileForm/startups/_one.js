@@ -159,15 +159,15 @@ export default function ProfileOne({startup, locations}) {
                                         <div className="row">
                                             <div className="col-md-4">
                                                 {/*<label htmlFor="profile-pic">Profile Picture</label>*/}
-                                                <DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}} value={profilePicture}/>
+                                                {/*<DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}} value={profilePicture}/>*/}
 
-                                                {/*<Slim ratio="1:1"*/}
-                                                {/*      initialImage="/images/blog-1.jpg"*/}
-                                                {/*      minSize={ { width:600, height:400 } }*/}
-                                                {/*      service={ slimService.bind(this) }*/}
-                                                {/*      didInit={ slimInit.bind(this) }>*/}
-                                                {/*    <input type="file" name="foo"/>*/}
-                                                {/*</Slim>*/}
+                                                <Slim ratio="1:1"
+                                                      initialImage="/images/blog-1.jpg"
+                                                      minSize={ { width:600, height:400 } }
+                                                      service={ slimService.bind(this) }
+                                                      didInit={ slimInit.bind(this) }>
+                                                    <input type="file" name="foo"/>
+                                                </Slim>
 
                                                 <input ref={register({required: 'This field is required'})} type="hidden" defaultValue={profilePicture.result}/>
 
