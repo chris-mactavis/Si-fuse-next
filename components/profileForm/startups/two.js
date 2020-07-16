@@ -45,53 +45,69 @@ export default function ProfileThree({startup}) {
                                 <div className="col-md-9 mx-auto">
                                     <StartupProfileHeader />
 
+                                    <div className="numbers d-md-none num-alone">
+                                        <div className="number">3</div>
+                                        <p>Product and Services</p>
+                                    </div>
+
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
-                                        <div className="numbers d-md-none num-alone">
-                                            <div className="number">3</div>
-                                            <p>Product and Services</p>
+                                        <div className="row">
+                                            <div className="col-md-4 text-center">
+                                                // Logo uploaded <br/>
+                                                <img className="img-fluid " src="/images/mactavis-logo.png" alt=""/>
+                                                // Company name
+                                            </div>
+
+                                            <div className="col-md-8">
+                                                <div className="input-group-container">
+                                                    <input ref={register({required: 'Please enter a product name'})} className="full-width mb-0"
+                                                           type="text" name="product_name"
+                                                           placeholder="Product/Service Name"
+                                                           defaultValue={hasProduct() ? startup.product_services.product_name : ''}/>
+                                                    {errors.product_name && <ErrorSpan>{errors.product_name.message}</ErrorSpan>}
+                                                </div>
+
+                                                <div className="input-group-container">
+                                                    <textarea ref={register} className="full-width" placeholder="Customer problem" name="customer_problem" rows="4"
+                                                              defaultValue={hasProduct() ? startup.product_services.customer_problem : ''}/>
+                                                </div>
+
+                                                <div className="input-group-container">
+                                                    <textarea ref={register} className="full-width" name="proposed_solution" rows="4" placeholder="Proposed solution"
+                                                              defaultValue={hasProduct() ? startup.product_services.proposed_solution : ''}/>
+                                                </div>
+
+                                                <div className="input-group-container">
+                                                    <textarea ref={register} className="full-width" name="value_proposition" placeholder="Value proposition" rows="4"
+                                                          defaultValue={hasProduct() ? startup.product_services.value_proposition : ''}/>
+                                                </div>
+
+                                                <div className="input-group-container">
+                                                    // Use slim
+                                                    <input ref={register} className="full-width" name="product_images"
+                                                           placeholder="e.g. https://image.com/one.jpg, https://image.com/two.jpg"
+                                                           defaultValue={hasProduct() ? startup.product_services.product_image_string : ''}/>
+                                                </div>
+
+                                                <div className="input-group-container">
+                                                    <input ref={register} type="url" className="full-width" name="product_video_url"
+                                                           placeholder="Product Video (paste your youtube video embed code)"
+                                                           defaultValue={hasProduct() ? startup.product_services.product_video_url : ''}/>
+                                                </div>
+
+                                                <div className="input-group-container">
+                                                    <input ref={register} type="url" className="full-width" name="pitch_video_url"
+                                                           placeholder="Pitch Video (paste your youtube video embed code)"
+                                                           defaultValue={hasProduct() ? startup.product_services.pitch_video_url : ''}/>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <input ref={register({required: 'Please enter a product name'})} className="full-width mb-0"
-                                               type="text" name="product_name"
-                                               placeholder="Product Name"
-                                               defaultValue={hasProduct() ? startup.product_services.product_name : ''}/>
-                                        {errors.product_name && <ErrorSpan>{errors.product_name.message}</ErrorSpan>}
-
-                                        <label className="customer-problem-label">Customer Problem</label>
-                                        <textarea ref={register} className="full-width" name="customer_problem" id="" cols="30"
-                                                  rows="5"
-                                                  defaultValue={hasProduct() ? startup.product_services.customer_problem : ''}/>
-
-                                        <label>Proposed Solution</label>
-                                        <textarea ref={register} className="full-width" name="proposed_solution" id="" cols="30"
-                                                  rows="5"
-                                                  defaultValue={hasProduct() ? startup.product_services.proposed_solution : ''}/>
-
-                                        <label>Value Proposition</label>
-                                        <textarea ref={register} className="full-width" name="value_proposition" id="" cols="30"
-                                                  rows="5"
-                                                  defaultValue={hasProduct() ? startup.product_services.value_proposition : ''}/>
-
-                                        <label>Product Images</label>
-                                        <input ref={register} className="full-width" name="product_images"
-                                               placeholder="e.g. https://image.com/one.jpg, https://image.com/two.jpg"
-                                               defaultValue={hasProduct() ? startup.product_services.product_image_string : ''}/>
-
-                                        <label>Product Video</label>
-                                        <input ref={register} type="url" className="full-width" name="product_video_url"
-                                               placeholder="Product Video Url"
-                                               defaultValue={hasProduct() ? startup.product_services.product_video_url : ''}/>
-
-                                        <label>Pitch Video</label>
-                                        <input ref={register} type="url" className="full-width" name="pitch_video_url"
-                                               placeholder="Pitch Video Url"
-                                               defaultValue={hasProduct() ? startup.product_services.pitch_video_url : ''}/>
-
                                         <div className="d-flex">
-                                            <button className="btn btn-sm btn-profile mr-2"
-                                                    onClick={() => dispatch(decrementCurrentState())} type="button">Previous
+                                            <button className="btn prev mr-auto" onClick={() => dispatch(decrementCurrentState())} type="button">
+                                                <span/> Previous
                                             </button>
-                                            <button className="btn btn-sm btn-profile ml-2" type="submit">Save & Next</button>
+                                            <button className="btn next ml-auto" type="submit">Save & Next <span/></button>
                                         </div>
                                     </form>
                                 </div>

@@ -330,9 +330,9 @@ export default function ProfileOne({industries, startup, locations}) {
                 // margin-bottom: 0!important;
                 // margin-top: 4rem;
             }
-            .btn {
-                margin-top: 4rem;
-            }
+            // .btn {
+            //     margin-top: 4rem;
+            // }
             .business_summary {
                 margin-top: 4rem;
             }

@@ -11,9 +11,9 @@ const StartupProfileHeader = ({isChecked, isClickable, isActive}) => {
             case 10:
                 return '28%';
             case 11:
-                return '55%';
+                return '50%';
             case 12:
-                return '80%';
+                return '73%';
             default:
                 return '105%';
         }
