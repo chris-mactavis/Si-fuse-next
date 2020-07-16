@@ -105,7 +105,7 @@ export default function ProfileOne({industries, startup, locations}) {
     useEffect(() => {
         window.scrollTo(0, 0);
 
-        toDataURL('https://cdn.pixabay.com/photo/2020/06/14/01/19/poppy-5296176_1280.jpg', function (result) {
+        toDataURL('profilePicture.result', function (result) {
             setLocalImage(result);
         });
         // const image1 = new Image();
