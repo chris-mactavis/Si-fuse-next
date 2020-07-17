@@ -8,8 +8,15 @@ import {decrementCurrentState, incrementCurrentState} from "../../../store/actio
 import ErrorSpan from "../../UI/ErrorSpan";
 import StartupProfileHeader from "./StartupProfileHeader";
 import DropNCrop from "@synapsestudios/react-drop-n-crop";
+import {FilePond, registerPlugin} from "react-filepond";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+
+
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 export default function ProfileThree({startup}) {
+    console.log(startup);
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -24,16 +31,22 @@ export default function ProfileThree({startup}) {
 
     const [productVideo, setProductVideo] = useState(hasProduct() ? startup.product_services.product_video_url : '');
     const [pitchVideo, setPitchVideo] = useState(hasProduct() ? startup.product_services.pitch_video_url : '');
+    const [productImages, setProductImages] = useState(hasProduct() ? startup.product_services.product_image_array.map(img => ({source: img})) : []);
+    console.log(productImages);
 
     const onSubmitHandler = async data => {
         dispatch(loader());
+        let formData = new FormData();
+        Object.keys(data).forEach(dataItem => formData.append(dataItem, data[dataItem]));
+        productImages.forEach(pImage => formData.append('product_images[]', pImage));
 
         try {
-            await axiosInstance.post('startups/product-service', data, {
+            const response = await axiosInstance.post('startups/product-service', formData, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
+            console.log(response)
             dispatch(loader());
             dispatch(incrementCurrentState());
         } catch (e) {
@@ -49,6 +62,10 @@ export default function ProfileThree({startup}) {
             }
         }
     };
+
+    const handleInit = () => {
+        // console.log(this.pond);
+    }
 
     return <>
         <section className="startup-levels">
@@ -87,7 +104,8 @@ export default function ProfileThree({startup}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <textarea ref={register({required: 'This field is required'})} className="full-width"
+                                                    <textarea ref={register({required: 'This field is required'})}
+                                                              className="full-width"
                                                               placeholder="Customer problem" name="customer_problem"
                                                               rows="4"
                                                               defaultValue={hasProduct() ? startup.product_services.customer_problem : ''}/>
@@ -96,7 +114,8 @@ export default function ProfileThree({startup}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <textarea ref={register({required: 'This field is required'})} className="full-width"
+                                                    <textarea ref={register({required: 'This field is required'})}
+                                                              className="full-width"
                                                               name="proposed_solution" rows="4"
                                                               placeholder="Proposed solution"
                                                               defaultValue={hasProduct() ? startup.product_services.proposed_solution : ''}/>
@@ -105,7 +124,8 @@ export default function ProfileThree({startup}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <textarea ref={register({required: 'This field is required'})} className="full-width"
+                                                    <textarea ref={register({required: 'This field is required'})}
+                                                              className="full-width"
                                                               name="value_proposition" placeholder="Value proposition"
                                                               rows="4"
                                                               defaultValue={hasProduct() ? startup.product_services.value_proposition : ''}/>
@@ -114,15 +134,28 @@ export default function ProfileThree({startup}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    // Use slim
+                                                    <FilePond
+                                                        // ref={ref => (this.pond = ref)}
+                                                        files={productImages}
+                                                        allowMultiple={true}
+                                                        // server="/api"
+                                                        name="files"
+                                                        oninit={() => handleInit()}
+                                                        onupdatefiles={fileItems => {
+                                                            setProductImages(fileItems.map(fileItem => fileItem.file))
+                                                        }}
+                                                    />
+
+
                                                     {/*<DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}} value={profilePicture}/>*/}
-                                                    <input ref={register} className="full-width" name="product_images"
-                                                           placeholder="e.g. https://image.com/one.jpg, https://image.com/two.jpg"
-                                                           defaultValue={hasProduct() ? startup.product_services.product_image_string : ''}/>
+                                                    {/*<input ref={register} className="full-width" name="product_images"*/}
+                                                    {/*       placeholder="e.g. https://image.com/one.jpg, https://image.com/two.jpg"*/}
+                                                    {/*       defaultValue={hasProduct() ? startup.product_services.product_image_string : ''}/>*/}
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <input ref={register({required: 'This field is required'})} type="text"
+                                                    <input ref={register({required: 'This field is required'})}
+                                                           type="text"
                                                            onKeyUp={(e) => setProductVideo(e.target.value)}
                                                            className="full-width" name="product_video_url"
                                                            placeholder="Product Video (paste your youtube video embed code)"
@@ -134,7 +167,8 @@ export default function ProfileThree({startup}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <input ref={register({required: 'This field is required'})} type="text"
+                                                    <input ref={register({required: 'This field is required'})}
+                                                           type="text"
                                                            onKeyUp={(e) => setPitchVideo(e.target.value)}
                                                            className="full-width" name="pitch_video_url"
                                                            placeholder="Pitch Video (paste your youtube video embed code)"

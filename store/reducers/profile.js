@@ -53,7 +53,6 @@ const profile = (state = initialState, action) => {
                 currentLevelState: action.currentLevelState
             }
         case SET_COMPANY_PROFILE_IMAGE:
-            console.log(action.props);
             return {
                 ...state,
                 companyProfileImage: action.props.companyProfileImage,
