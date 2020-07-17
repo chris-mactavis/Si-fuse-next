@@ -3,7 +3,6 @@ import {incrementCurrentState, setCompanyProfileImage} from "../../../store/acti
 import React, {useCallback, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import Error from "../../UI/ErrorSpan";
-import DropNCrop from "@synapsestudios/react-drop-n-crop";
 import axiosInstance from "../../../config/axios";
 import {loader} from "../../../store/actions/loader";
 import Token from "../../../utils/Token";
@@ -30,35 +29,10 @@ export default function ProfileOne({industries, startup, locations}) {
     //     src: null,
     //     error: null,
     // });
-    const [profilePicture, setProfilePicture] = useState([]);
     const hasCompany = () => startup.hasOwnProperty('company') && startup.company;
-    console.log(profilePicture);
-
-    useEffect(() => {
-        // setProfilePicture({
-        //     result: startup.company && startup.company.logo_url ? startup.company.logo_url : '',
-        //     filename: null,
-        //     filetype: null,
-        //     src: null,
-        //     error: null,
-        // })
-    }, []);
-
-    const handleChange = useCallback(
-        evt => {
-            const {name, value} = evt.target;
-
-            console.log('onChange:', {name, value});
-            triggerValidation({name});
-        },
-        [formState.touched, triggerValidation]
-    );
+    const [profilePicture, setProfilePicture] = useState(hasCompany() ? startup.company.logo_url : '');
 
     const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
-
-    const onChangePicture = value => {
-        setProfilePicture(value);
-    }
 
     const submitHandler = async data => {
         let formData = new FormData();
@@ -67,14 +41,8 @@ export default function ProfileOne({industries, startup, locations}) {
                 formData.append(dataItem, data[dataItem])
             }
         });
-        console.log(data);
         data.team.forEach(t => formData.append('team[]', t));
         formData.append('logo', profilePicture[0]);
-        // if (profilePicture.filename) {
-        //     data['logo'] = profilePicture.result;
-        // } else {
-        //     data['is_editing'] = true;
-        // }
         dispatch(loader());
         try {
             const {data: response} = await axiosInstance.post('startups/company', formData, {
@@ -82,7 +50,6 @@ export default function ProfileOne({industries, startup, locations}) {
                     Authorization: `Bearer ${Token()}`
                 }
             });
-            console.log(response.data.company.logo_url);
             dispatch(loader());
             dispatch(setCompanyProfileImage({companyProfileImage: response.data.company.logo_url, companyName: data.name}));
             dispatch(incrementCurrentState());
@@ -92,20 +59,6 @@ export default function ProfileOne({industries, startup, locations}) {
             setAdminError(e.response.data.errors);
             dispatch(loader());
         }
-    }
-
-    function toDataURL(url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function () {
-            var reader = new FileReader();
-            reader.onloadend = function () {
-                callback(reader.result);
-            }
-            reader.readAsDataURL(xhr.response);
-        };
-        xhr.open('GET', url);
-        xhr.responseType = 'blob';
-        xhr.send();
     }
 
     useEffect(() => {
@@ -127,7 +80,7 @@ export default function ProfileOne({industries, startup, locations}) {
 
         // form data to post to server
         // set serviceFormat to "file" to receive an array of files
-        console.log(formData)
+        setProfilePicture(formData)
 
         // call these methods to handle upload state
         console.log(progress, success, failure)
@@ -154,30 +107,28 @@ export default function ProfileOne({industries, startup, locations}) {
                                                 {/*           cropperOptions={{aspectRatio: 1 / 1}}*/}
                                                 {/*           value={profilePicture}/>*/}
 
-                                                <FilePond
-                                                    // ref={ref => (this.pond = ref)}
-                                                    files={profilePicture}
-                                                    allowMultiple={false}
-                                                    labelIdle=""
-                                                    name="files"
-                                                    onupdatefiles={fileItems => {
-                                                        setProfilePicture(fileItems.map(fileItem => fileItem.file))
-                                                    }}
-                                                />
+                                                {/*<FilePond*/}
+                                                {/*    // ref={ref => (this.pond = ref)}*/}
+                                                {/*    files={profilePicture}*/}
+                                                {/*    allowMultiple={false}*/}
+                                                {/*    labelIdle=""*/}
+                                                {/*    name="files"*/}
+                                                {/*    onupdatefiles={fileItems => {*/}
+                                                {/*        setProfilePicture(fileItems.map(fileItem => fileItem.file))*/}
+                                                {/*    }}*/}
+                                                {/*/>*/}
 
 
-                                                {/*{*/}
-                                                {/*    localImage && <Slim ratio="1:1"*/}
-                                                {/*        // initialImage="/images/blog-1.jpg"*/}
-                                                {/*        // minSize={{width: 600, height: 400}}*/}
-                                                {/*          service={slimService.bind(this)}*/}
-                                                {/*          serviceFormat="file"*/}
-                                                {/*          push={true}>*/}
-                                                {/*        /!*didInit={ slimInit.bind(this) }>*!/*/}
-                                                {/*        <img src={localImage} alt=""/>*/}
-                                                {/*        <input type="file" name="foo"/>*/}
-                                                {/*    </Slim>*/}
-                                                {/*}*/}
+                                                {
+                                                    <Slim ratio="1:1"
+                                                          service={slimService.bind(this)}
+                                                          serviceFormat="file"
+                                                          push={true}>
+                                                        {/*didInit={ slimInit.bind(this) }>*/}
+                                                        <img src={hasCompany() ? startup.company.logo_url : ''} alt=""/>
+                                                        <input type="file" name="foo"/>
+                                                    </Slim>
+                                                }
 
                                                 <input ref={register({required: 'This field is required'})}
                                                        type="hidden"
