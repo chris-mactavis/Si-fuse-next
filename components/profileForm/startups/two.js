@@ -56,7 +56,7 @@ export default function ProfileThree({startup}) {
     }
 
     const createMarkup = (content) => {
-        if (content.includes('<iframe')) {
+        if (content && content.includes('<iframe')) {
             return {
                 __html: content
             }
