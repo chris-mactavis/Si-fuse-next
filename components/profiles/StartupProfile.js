@@ -668,6 +668,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                             level
                                 ? level.map((startupLevel, index) => <StartupProfileLevels startupLevel={startupLevel}
                                                                                            key={index} index={index}
+                                                                                           hasEdit={hasEdit}
                                                                                            fairness={stlevel[levelKeys[index]]}
                                                                                            levelKeys={levelKeys}/>)
                                 : null
