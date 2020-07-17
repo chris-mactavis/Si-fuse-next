@@ -28,9 +28,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!startup.has_profile) {
             dispatch(setCurrentState(userType === 'Investor' ? investor.profile_stage : startup.profile_stage));
-        }
     }, []);
 
     const userType = loggedInUser.user_type.user_type;
@@ -40,30 +38,14 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
         if (userType === 'Startup') {
             switch (currentProfile) {
                 case 1:
-                    return <Level1 startup={startup}/>;
-                case 2:
-                    return <Level2 startup={startup}/>;
-                case 3:
-                    return <Level3 startup={startup}/>;
-                case 4:
-                    return <Level4 startup={startup}/>;
-                case 5:
-                    return <Level5 startup={startup}/>;
-                case 6:
-                    return <Level6 startup={startup}/>;
-                case 7:
-                    return <Level7 startup={startup}/>;
-                case 8:
-                    return <Level8 startup={startup}/>;
-                case 9:
                     return <ProfileOne startup={startup} locations={locations} industries={industries}/>;
-                case 10:
+                case 2:
                     return <ProfileTwo startup={startup}/>;
-                case 11:
+                case 3:
                     return <ProfileThree startup={startup}/>;
-                case 12:
+                case 4:
                     return <ProfileFour startup={startup}/>;
-                case 13:
+                case 5:
                     return <ProfileFive startup={startup}/>;
             }
         } else {

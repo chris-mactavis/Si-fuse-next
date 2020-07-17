@@ -2,7 +2,7 @@ import React from "react";
 import InfoBox from "./InfoBox";
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
+import {incrementCurrentLevelState} from "../../../store/actions/profile";
 import LevelButtonsComponent from "./LevelButtons";
 import LevelHeader from "./LevelHeader";
 import {loader} from "../../../store/actions/loader";
@@ -39,7 +39,7 @@ const Level5 = ({startup}) => {
                 }
             })
             dispatch(loader());
-            dispatch(incrementCurrentState());
+            dispatch(incrementCurrentLevelState());
         } catch (e) {
             console.log(e);
             dispatch(loader());
@@ -53,7 +53,7 @@ const Level5 = ({startup}) => {
                     <div className="white-bg">
                         <div className="row">
                             <div className="col-md-9 mx-auto">
-                                <LevelHeader/>
+                                <LevelHeader isLevel/>
 
                                 <InfoBox heading="Business Model" text="How much evidence do you have that your business model will work?"/>
 
