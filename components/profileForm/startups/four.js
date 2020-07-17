@@ -1,24 +1,26 @@
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
-import {error} from "next/dist/build/output/log";
-import ErrorSpan from "../../UI/ErrorSpan";
 import StartupProfileHeader from "./StartupProfileHeader";
+import ErrorSpan from "../../UI/ErrorSpan";
 
 export const ProfileFour = ({startup}) => {
     const dispatch = useDispatch();
 
     const hasFinance = () => startup.hasOwnProperty('finance') && startup.finance;
 
+    const savedCompanyProfileImage = useSelector(state => state.profile.companyProfileImage)
+    const savedCompanyName = useSelector(state => state.profile.companyName)
+
     const {register, handleSubmit, errors} = useForm();
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
-            const {data: response} = await axiosInstance.post('startups/finance', data, {
+            const {data: response} = await axiosInstance.post('startups/finance', {...data, profile_stage: 5}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -35,6 +37,11 @@ export const ProfileFour = ({startup}) => {
         window.scrollTo(0, 0);
     }, []);
 
+    const formatInput = e => {
+        const value = e.target.value.split(',').join('');
+        document.getElementById('invested-funding').value = (+value).toLocaleString();
+    }
+
     return <>
         <section className="startup-levels">
             <div className="container">
@@ -43,7 +50,7 @@ export const ProfileFour = ({startup}) => {
                         <div className="white-bg">
                             <div className="row">
                                 <div className="col-md-9 mx-auto">
-                                    <StartupProfileHeader />
+                                    <StartupProfileHeader/>
 
                                     <div className="numbers d-md-none num-alone">
                                         <p>Funding</p>
@@ -52,19 +59,23 @@ export const ProfileFour = ({startup}) => {
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="row">
                                             <div className="col-md-4 text-center">
-                                                // Logo uploaded <br/>
-                                                <img className="img-fluid " src="/images/mactavis-logo.png" alt=""/>
-                                                // Company name
+                                                <img className="img-fluid "
+                                                     src={savedCompanyProfileImage || startup.company.logo_url} alt=""/>
+                                                <br/>
+                                                <h4 className="mt-2">{savedCompanyName || startup.company.name}</h4>
                                             </div>
 
                                             <div className="col-md-8">
                                                 <div className="input-group-container">
-                                                    // Allow only numbers, add commas automatically
                                                     <div className="currency-input">
-                                                        <input ref={register}
+                                                        <input ref={register({required: 'This field is required'})}
+                                                               onKeyUp={formatInput}
                                                                defaultValue={hasFinance() ? startup.finance.invested_funding : ''}
-                                                               className="full-width" type="text" name="invested_funding" id=""
+                                                               className="full-width" type="text"
+                                                               name="invested_funding" id="invested-funding"
                                                                placeholder="How Much has been invested till date? "/>
+                                                        {errors.invested_funding &&
+                                                        <ErrorSpan>{errors.invested_funding.message}</ErrorSpan>}
                                                     </div>
                                                 </div>
 
@@ -77,7 +88,8 @@ export const ProfileFour = ({startup}) => {
                                                 {/*</div>*/}
 
                                                 <div className="input-group-container">
-                                                    <select name="funding_stage" ref={register}
+                                                    <select name="funding_stage"
+                                                            ref={register({required: 'This field is required'})}
                                                             defaultValue={hasFinance() ? startup.finance.funding_stage : ''}>
                                                         <option value="">What is your current funding stage?</option>
                                                         <option value="Ideation">Ideation</option>
@@ -85,24 +97,35 @@ export const ProfileFour = ({startup}) => {
                                                         <option value="Early stage">Early stage</option>
                                                         <option value="Late stage">Late stage</option>
                                                     </select>
+                                                    {errors.funding_stage &&
+                                                    <ErrorSpan>{errors.funding_stage.message}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <select name="investment_ask" ref={register}
+                                                    <select name="investment_ask"
+                                                            ref={register({required: 'This field is required'})}
                                                             defaultValue={hasFinance() ? startup.finance.investment_ask : ''}>
                                                         <option value="">What is your investment ask?</option>
                                                         <option value="$5,000 - $10,000">$5,000 - $10,000</option>
                                                         <option value="$10,000 - $50,000">$10,000 - $50,000</option>
                                                         <option value="$50,000 - $100,000">$50,000 - $100,000</option>
                                                         <option value="$100,000 - $250,000">$100,000 - $250,000</option>
-                                                        <option value="$250,000 - $1,000,000">$250,000 - $1,000,000</option>
-                                                        <option value="$1,000,000 - $2,000,000">$1,000,000 - $2,000,000</option>
-                                                        <option value="$2,000,000 and above">$2,000,000 and above</option>
+                                                        <option value="$250,000 - $1,000,000">$250,000 - $1,000,000
+                                                        </option>
+                                                        <option value="$1,000,000 - $2,000,000">$1,000,000 -
+                                                            $2,000,000
+                                                        </option>
+                                                        <option value="$2,000,000 and above">$2,000,000 and above
+                                                        </option>
                                                     </select>
+                                                    {errors.investment_ask &&
+                                                    <ErrorSpan>{errors.investment_ask.message}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <select name="geographical_focus" id="" ref={register} defaultValue={hasFinance() ? startup.finance.geographical_focus : ''}>
+                                                    <select name="geographical_focus" id=""
+                                                            ref={register({required: 'This field is required'})}
+                                                            defaultValue={hasFinance() ? startup.finance.geographical_focus : ''}>
                                                         <option value="">Geographical focus</option>
                                                         <option value="North Africa">North Africa</option>
                                                         <option value="East Africa">East Africa</option>
@@ -110,12 +133,16 @@ export const ProfileFour = ({startup}) => {
                                                         <option value="West Africa">West Africa</option>
                                                         <option value="Central Africa">Central Africa</option>
                                                     </select>
+                                                    {errors.geographical_focus &&
+                                                    <ErrorSpan>{errors.geographical_focus.message}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <select name="investor_type" id="" ref={register}
+                                                    <select name="investor_type" id=""
+                                                            ref={register({required: 'This field is required'})}
                                                             defaultValue={hasFinance() ? startup.finance.investor_type : ''}>
-                                                        <option value="">What type of Investor are you looking for?</option>
+                                                        <option value="">What type of Investor are you looking for?
+                                                        </option>
                                                         <option value="Any">Any</option>
                                                         <option value="Venture Capital">Venture Capital</option>
                                                         <option value="Angel Investor">Angel Investor</option>
@@ -123,21 +150,27 @@ export const ProfileFour = ({startup}) => {
                                                         <option value="Financial Institute">Financial Institute</option>
                                                         <option value="Crowd Funding">Crowd Funding</option>
                                                     </select>
+                                                    {errors.investor_type &&
+                                                    <ErrorSpan>{errors.investor_type.message}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <select name="interested_in_mentor" id="" ref={register}
+                                                    <select name="interested_in_mentor" id=""
+                                                            ref={register({required: 'This field is required'})}
                                                             defaultValue={hasFinance() ? startup.finance.interested_in_mentor : ''}>
                                                         <option value="">Are you interested in a mentor?</option>
                                                         <option value="yes">Yes</option>
                                                         <option value="no">No</option>
                                                     </select>
+                                                    {errors.interested_in_mentor &&
+                                                    <ErrorSpan>{errors.interested_in_mentor.message}</ErrorSpan>}
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div className="d-flex">
-                                            <button className="btn prev mr-auto" onClick={() => dispatch(decrementCurrentState())} type="button">
+                                            <button className="btn prev mr-auto"
+                                                    onClick={() => dispatch(decrementCurrentState())} type="button">
                                                 <span/> Previous
                                             </button>
 

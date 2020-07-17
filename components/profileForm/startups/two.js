@@ -1,12 +1,13 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loader} from "../../../store/actions/loader";
 import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 import ErrorSpan from "../../UI/ErrorSpan";
 import StartupProfileHeader from "./StartupProfileHeader";
+import DropNCrop from "@synapsestudios/react-drop-n-crop";
 
 export default function ProfileThree({startup}) {
     useEffect(() => {
@@ -15,8 +16,14 @@ export default function ProfileThree({startup}) {
 
     const dispatch = useDispatch();
 
+    const savedCompanyProfileImage = useSelector(state => state.profile.companyProfileImage)
+    const savedCompanyName = useSelector(state => state.profile.companyName)
+
     const {register, handleSubmit, errors} = useForm();
     const hasProduct = () => startup.hasOwnProperty('product_services') && startup.product_services;
+
+    const [productVideo, setProductVideo] = useState(hasProduct() ? startup.product_services.product_video_url : '');
+    const [pitchVideo, setPitchVideo] = useState(hasProduct() ? startup.product_services.pitch_video_url : '');
 
     const onSubmitHandler = async data => {
         dispatch(loader());
@@ -35,6 +42,14 @@ export default function ProfileThree({startup}) {
         }
     }
 
+    const createMarkup = (content) => {
+        if (content.includes('<iframe')) {
+            return {
+                __html: content
+            }
+        }
+    };
+
     return <>
         <section className="startup-levels">
             <div className="container">
@@ -43,7 +58,7 @@ export default function ProfileThree({startup}) {
                         <div className="white-bg">
                             <div className="row">
                                 <div className="col-md-9 mx-auto">
-                                    <StartupProfileHeader />
+                                    <StartupProfileHeader/>
 
                                     <div className="numbers d-md-none num-alone">
                                         <div className="number">3</div>
@@ -53,61 +68,92 @@ export default function ProfileThree({startup}) {
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="row">
                                             <div className="col-md-4 text-center">
-                                                // Logo uploaded <br/>
-                                                <img className="img-fluid " src="/images/mactavis-logo.png" alt=""/>
-                                                // Company name
+
+                                                <img className="img-fluid "
+                                                     src={savedCompanyProfileImage || startup.company.logo_url} alt=""/>
+                                                <br/>
+                                                <h4 className="mt-2">{savedCompanyName || startup.company.name}</h4>
                                             </div>
 
                                             <div className="col-md-8">
                                                 <div className="input-group-container">
-                                                    <input ref={register({required: 'Please enter a product name'})} className="full-width mb-0"
+                                                    <input ref={register({required: 'Please enter a product name'})}
+                                                           className="full-width mb-0"
                                                            type="text" name="product_name"
                                                            placeholder="Product/Service Name"
                                                            defaultValue={hasProduct() ? startup.product_services.product_name : ''}/>
-                                                    {errors.product_name && <ErrorSpan>{errors.product_name.message}</ErrorSpan>}
+                                                    {errors.product_name &&
+                                                    <ErrorSpan>{errors.product_name.message}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <textarea ref={register} className="full-width" placeholder="Customer problem" name="customer_problem" rows="4"
+                                                    <textarea ref={register({required: 'This field is required'})} className="full-width"
+                                                              placeholder="Customer problem" name="customer_problem"
+                                                              rows="4"
                                                               defaultValue={hasProduct() ? startup.product_services.customer_problem : ''}/>
+                                                    {errors.customer_problem &&
+                                                    <ErrorSpan>{errors.customer_problem.message}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <textarea ref={register} className="full-width" name="proposed_solution" rows="4" placeholder="Proposed solution"
+                                                    <textarea ref={register({required: 'This field is required'})} className="full-width"
+                                                              name="proposed_solution" rows="4"
+                                                              placeholder="Proposed solution"
                                                               defaultValue={hasProduct() ? startup.product_services.proposed_solution : ''}/>
+                                                    {errors.proposed_solution &&
+                                                    <ErrorSpan>{errors.proposed_solution.message}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <textarea ref={register} className="full-width" name="value_proposition" placeholder="Value proposition" rows="4"
-                                                          defaultValue={hasProduct() ? startup.product_services.value_proposition : ''}/>
+                                                    <textarea ref={register({required: 'This field is required'})} className="full-width"
+                                                              name="value_proposition" placeholder="Value proposition"
+                                                              rows="4"
+                                                              defaultValue={hasProduct() ? startup.product_services.value_proposition : ''}/>
+                                                    {errors.value_proposition &&
+                                                    <ErrorSpan>{errors.value_proposition.message}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
                                                     // Use slim
+                                                    {/*<DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}} value={profilePicture}/>*/}
                                                     <input ref={register} className="full-width" name="product_images"
                                                            placeholder="e.g. https://image.com/one.jpg, https://image.com/two.jpg"
                                                            defaultValue={hasProduct() ? startup.product_services.product_image_string : ''}/>
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <input ref={register} type="url" className="full-width" name="product_video_url"
+                                                    <input ref={register({required: 'This field is required'})} type="text"
+                                                           onKeyUp={(e) => setProductVideo(e.target.value)}
+                                                           className="full-width" name="product_video_url"
                                                            placeholder="Product Video (paste your youtube video embed code)"
                                                            defaultValue={hasProduct() ? startup.product_services.product_video_url : ''}/>
+                                                    {errors.product_video_url &&
+                                                    <ErrorSpan>{errors.product_video_url.message}</ErrorSpan>}
+                                                    <div className="iframe-container"
+                                                         dangerouslySetInnerHTML={createMarkup(productVideo)}/>
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <input ref={register} type="url" className="full-width" name="pitch_video_url"
+                                                    <input ref={register({required: 'This field is required'})} type="text"
+                                                           onKeyUp={(e) => setPitchVideo(e.target.value)}
+                                                           className="full-width" name="pitch_video_url"
                                                            placeholder="Pitch Video (paste your youtube video embed code)"
                                                            defaultValue={hasProduct() ? startup.product_services.pitch_video_url : ''}/>
+                                                    {errors.pitch_video_url &&
+                                                    <ErrorSpan>{errors.pitch_video_url.message}</ErrorSpan>}
+                                                    <div className="iframe-container"
+                                                         dangerouslySetInnerHTML={createMarkup(pitchVideo)}/>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div className="d-flex">
-                                            <button className="btn prev mr-auto" onClick={() => dispatch(decrementCurrentState())} type="button">
+                                            <button className="btn prev mr-auto"
+                                                    onClick={() => dispatch(decrementCurrentState())} type="button">
                                                 <span/> Previous
                                             </button>
-                                            <button className="btn next ml-auto" type="submit">Save & Next <span/></button>
+                                            <button className="btn next ml-auto" type="submit">Save & Next <span/>
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
@@ -120,6 +166,12 @@ export default function ProfileThree({startup}) {
         <style jsx>{`
             .customer-problem-label {
                 margin-top: 4rem;
+            }
+            iframe {
+                width: 100%;
+            }
+            .iframe-container {
+                margin-top: 20px;
             }
         `}</style>
     </>

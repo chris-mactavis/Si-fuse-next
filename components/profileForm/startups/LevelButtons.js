@@ -1,5 +1,5 @@
 import React from "react";
-import {decrementCurrentState} from "../../../store/actions/profile";
+import {decrementCurrentLevelState, decrementCurrentState} from "../../../store/actions/profile";
 import {useDispatch} from "react-redux";
 
 const LevelButtonsComponent = ({noPrev = false, nextHandler = null}) => {
@@ -7,7 +7,7 @@ const LevelButtonsComponent = ({noPrev = false, nextHandler = null}) => {
 
     return <div className="d-flex mt-5">
         {!noPrev &&
-            <button className="btn prev mr-auto" type="button" onClick={() => dispatch(decrementCurrentState())}>
+            <button className="btn prev mr-auto" type="button" onClick={() => dispatch(decrementCurrentLevelState())}>
                 <span/> Prev
             </button>
         }

@@ -6,13 +6,13 @@ const StartupProfileHeader = ({isChecked, isClickable, isActive}) => {
 
     const width = () => {
         switch (currentProfile) {
-            case 9:
+            case 1:
                 return '5%';
-            case 10:
+            case 2:
                 return '28%';
-            case 11:
+            case 3:
                 return '50%';
-            case 12:
+            case 4:
                 return '73%';
             default:
                 return '105%';
@@ -24,13 +24,13 @@ const StartupProfileHeader = ({isChecked, isClickable, isActive}) => {
     return <div className="steps-wrapper startup-profile">
         <div className="steps">
             {
-                labels.map((label, index) => < div key={label} className={`step ${currentProfile > (index + 8) ? 'is-active is-checked' : ''} ${currentProfile === index ? 'is-clickable' : ''}`}>
+                labels.map((label, index) => < div key={label} className={`step ${currentProfile > (index) ? 'is-active is-checked' : ''} ${currentProfile === index ? 'is-clickable' : ''}`}>
 
                     <p className="label">{label}</p>
 
                     <div className="circles">
                         <div className="circle"/>
-                        <div className={`circle bigger-circle ${currentProfile > (index + 8) ? 'is-active is-checked is-clickable' : ''}`}/>
+                        <div className={`circle bigger-circle ${currentProfile > (index) ? 'is-active is-checked is-clickable' : ''}`}/>
                     </div>
                 </div>)
             }

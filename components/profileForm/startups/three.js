@@ -1,11 +1,10 @@
 import React, {useEffect} from "react";
 import {useForm} from "react-hook-form";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
-import {error} from "next/dist/build/output/log";
 import ErrorSpan from "../../UI/ErrorSpan";
 import StartupProfileHeader from "./StartupProfileHeader";
 
@@ -14,11 +13,14 @@ export default function ProfileThree({startup}) {
 
     const hasFinance = () => startup.hasOwnProperty('finance') && startup.finance;
 
+    const savedCompanyProfileImage = useSelector(state => state.profile.companyProfileImage)
+    const savedCompanyName = useSelector(state => state.profile.companyName)
+
     const {register, handleSubmit, errors} = useForm();
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
-            const {data: response} = await axiosInstance.post('startups/finance', data, {
+            await axiosInstance.post('startups/finance', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -52,9 +54,9 @@ export default function ProfileThree({startup}) {
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="row">
                                             <div className="col-md-4 text-center">
-                                                // Logo uploaded <br/>
-                                                <img className="img-fluid " src="/images/mactavis-logo.png" alt=""/>
-                                                // Company name
+                                                <img className="img-fluid " src={savedCompanyProfileImage || startup.company.logo_url} alt=""/>
+                                                <br/>
+                                                <h4 className="mt-2">{savedCompanyName || startup.company.name}</h4>
                                             </div>
 
                                              <div className="col-md-8">
@@ -68,7 +70,7 @@ export default function ProfileThree({startup}) {
                                                  </div>
 
                                                  <div className="input-group-container">
-                                                     <select name="capital_needed_for" ref={register} className="capital-select"
+                                                     <select name="capital_needed_for" ref={register({required: 'This field is required'})} className="capital-select"
                                                              defaultValue={hasFinance() ? startup.finance.capital_needed_for : ''}>
                                                          <option value="">Capital Need</option>
                                                          <option value="Proof of concept">Proof of concept</option>
@@ -76,36 +78,39 @@ export default function ProfileThree({startup}) {
                                                          <option value="Growth capital">Growth capital</option>
                                                          <option value="Bridging Capital">Bridging capital</option>
                                                      </select>
+                                                     {errors.capital_needed_for && <ErrorSpan>{errors.capital_needed_for.message}</ErrorSpan>}
                                                  </div>
 
                                                  <div className="input-group-container">
-                                                     // This is not connected to API
-                                                     <select name="business_size" ref={register} defaultValue={hasFinance() ? startup.finance.business_size : ''}>
+                                                     <select name="business_size" ref={register({required: 'This field is required'})} defaultValue={hasFinance() ? startup.finance.business_size : ''}>
                                                          <option value="">Current business size relative to capital need</option>
                                                          <option value="cannot value">No way to value current business worth</option>
                                                          <option value="less than capital needed">Current business worth less than capital needed</option>
                                                          <option value="more">Current business worth more than capital needed</option>
                                                      </select>
+                                                     {errors.business_size && <ErrorSpan>{errors.business_size.message}</ErrorSpan>}
                                                  </div>
 
                                                  <div className="input-group-container">
-                                                     <select name="" ref={register} defaultValue={""}>
+                                                     <select name="cash_flow_projection" ref={register({required: 'This field is required'})} defaultValue={hasFinance() ? startup.finance.cash_flow_projection : ''}>
                                                          <option value="">Cash flow projections for the investment</option>
-                                                         <option value="">Cash flow positive currently</option>
-                                                         <option value="">Cash flow positive during term of investment</option>
-                                                         <option value="">Very uncertain cashflow</option>
-                                                         <option value="">No projection for positive cashflow</option>
+                                                         <option value="positive currently">Cash flow positive currently</option>
+                                                         <option value="positive during term of investment">Cash flow positive during term of investment</option>
+                                                         <option value="uncertain">Very uncertain cashflow</option>
+                                                         <option value="no positive cashflow">No projection for positive cashflow</option>
                                                      </select>
+                                                     {errors.cash_flow_projection && <ErrorSpan>{errors.cash_flow_projection.message}</ErrorSpan>}
                                                  </div>
 
                                                  <div className="input-group-container">
-                                                     <select name="growth_projection" ref={register} defaultValue={hasFinance() ? startup.finance.growth_projection : ''}>
+                                                     <select name="growth_projection" ref={register({required: 'This field is required'})} defaultValue={hasFinance() ? startup.finance.growth_projection : ''}>
                                                          <option value="">What is your growth projection?</option>
                                                          <option value="No Growth Expected">No Growth Expected</option>
                                                          <option value="Stable Growth">Stable Growth</option>
                                                          <option value="High Growth">High Growth</option>
                                                          <option value="Exponential (J-Growth)">Exponential (J-Growth)</option>
                                                      </select>
+                                                     {errors.growth_projection && <ErrorSpan>{errors.growth_projection.message}</ErrorSpan>}
                                                  </div>
                                              </div>
                                         </div>
