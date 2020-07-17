@@ -149,7 +149,7 @@ export default function ProfileOne({industries, startup, locations}) {
 
                                     <form onSubmit={handleSubmit(submitHandler)} className="profile-details">
                                         <div className="row">
-                                            <div className="col-md-4">
+                                            <div className="col-md-4 company-logo">
                                                 {/*<DropNCrop onChange={onChangePicture}*/}
                                                 {/*           cropperOptions={{aspectRatio: 1 / 1}}*/}
                                                 {/*           value={profilePicture}/>*/}
@@ -158,7 +158,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                     // ref={ref => (this.pond = ref)}
                                                     files={profilePicture}
                                                     allowMultiple={false}
-                                                    labelIdle=""
+                                                    labelIdle="Company Logo <br> (Click here to upload)"
                                                     name="files"
                                                     onupdatefiles={fileItems => {
                                                         setProfilePicture(fileItems.map(fileItem => fileItem.file))

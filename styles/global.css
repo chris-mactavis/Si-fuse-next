@@ -2417,18 +2417,6 @@ input:focus, textarea:focus, select:focus, option:focus button {
   cursor: pointer;
 }
 
-.filepond--drop-label {
-  justify-content: start !important;
-  background: #F5F7F8;
-  border-bottom: 1px solid #6B6B6B;
-}
-
-.filepond--drop-label label {
-  padding-left: 12px !important;
-  font-size: 15px !important;
-  color: #929394 !important;
-}
-
 .notification {
   position: fixed;
   display: flex;
