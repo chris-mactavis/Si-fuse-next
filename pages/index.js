@@ -82,6 +82,13 @@ const Home = ({events, blogs}) => {
                 ]
             });
 
+            $('.changing-text').slick({
+                autoplay: true,
+                autoplaySpeed: 3000,
+                arrows: false,
+                fade: true
+            })
+
             $('a[href*="#"]:not([href="#"])').click(function () {
                 if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
                     let target = $(this.hash);
@@ -106,7 +113,6 @@ const Home = ({events, blogs}) => {
     >
         <Head>
             <title>SI Fuse</title>
-            <script src="/js/text.js"></script>
         </Head>
 
         <section id="second-section" className="image-text">
@@ -254,8 +260,6 @@ const Home = ({events, blogs}) => {
                 </Link>
             </div>
         </section>
-
-
     </Layout>
 }
 

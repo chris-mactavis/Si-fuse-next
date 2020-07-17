@@ -20,6 +20,34 @@ export default function () {
             </a>
         </div>
 
-        <h1>Connecting Investors <br/>with <span className="txt-rotate" data-period="300" data-rotate='["Female led", "Female owned", "Gender diverse"]'></span><br/> Startups</h1>
+        {/*<h1>Connecting Investors <br/>with <span className="txt-rotate" data-period="300" data-rotate='["Female led", "Female owned", "Gender diverse"]'></span><br/> Startups</h1>*/}
+        <h1>
+            Connecting Investors
+
+            <div className="changing-text">
+                <div>
+                    WITH
+                    <span>
+                        Female led
+                    </span>
+                </div>
+
+                <div>
+                    WITH
+                    <span>
+                        Female owned
+                    </span>
+                </div>
+
+                <div>
+                    WITH
+                    <span>
+                        Gender diverse
+                    </span>
+                </div>
+            </div>
+
+            Startups
+        </h1>
     </div>
 }

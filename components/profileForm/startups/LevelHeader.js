@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 
-const LevelHeader = ({isChecked, isClickable, isActive}) => {
-    const currentProfile = useSelector(state => state.profile.currentState);
+const LevelHeader = ({isLevel = false}) => {
+    const currentProfile = isLevel ? useSelector(state => state.profile.currentLevelState) : useSelector(state => state.profile.currentState);
 
     const width = () => {
         switch (currentProfile) {
