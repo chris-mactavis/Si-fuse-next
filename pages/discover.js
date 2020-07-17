@@ -178,6 +178,25 @@ const Discover = ({userType, data, industries, countries}) => {
                                         50 and above
                                     </label>
 
+                                    <p className="mb-0">Investment Ask</p>
+                                    <select
+                                        ref={register}
+                                        className="w-100 full-width mb-4" name="investment_ask">
+                                        <option value="">Choose Investment Range</option>
+                                        <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                                        <option value="$10,000 - $50,000">$10,000 - $50,000</option>
+                                        <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                                        <option value="$100,000 - $250,000">$100,000 - $250,000</option>
+                                        <option value="$250,000 - $1,000,000">$250,000 - $1,000,000
+                                        </option>
+                                        <option value="$1,000,000 - $2,000,000">$1,000,000 -
+                                            $2,000,000
+                                        </option>
+                                        <option value="$2,000,000 and above">$2,000,000 and above
+                                        </option>
+                                    </select>
+
+
                                     <button className="btn btn-sm" type="submit">Apply Filter</button>
                                     <button className="btn btn-sm mt-2" type="reset" onClick={resetFilterHandler}>Reset
                                         Filter
