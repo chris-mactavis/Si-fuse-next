@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {decrementCurrentState, incrementCurrentState, setCompanyProfileImage} from "../../../store/actions/profile";
+import {incrementCurrentState, setCompanyProfileImage} from "../../../store/actions/profile";
 import React, {useCallback, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import Error from "../../UI/ErrorSpan";
@@ -9,6 +9,7 @@ import {loader} from "../../../store/actions/loader";
 import Token from "../../../utils/Token";
 import {showNotifier} from "../../../store/actions/notifier";
 import StartupProfileHeader from "./StartupProfileHeader";
+import Router from "next/router";
 import Slim from "../../../public/slim/slim.react";
 
 export default function ProfileOne({industries, startup, locations}) {
@@ -433,7 +434,7 @@ export default function ProfileOne({industries, startup, locations}) {
 
                                         <div className="d-flex">
                                             <button className="btn prev mr-auto"
-                                                    onClick={() => dispatch(decrementCurrentState())} type="button">
+                                                    onClick={() => Router.push('/profile/edit-levels')} type="button">
                                                 <span/> Prev
                                             </button>
 
