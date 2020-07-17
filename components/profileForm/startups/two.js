@@ -139,6 +139,7 @@ export default function ProfileThree({startup}) {
                                                         files={productImages}
                                                         allowMultiple={true}
                                                         // server="/api"
+                                                        labelIdle="Product Images (Click here to upload)"
                                                         name="files"
                                                         oninit={() => handleInit()}
                                                         onupdatefiles={fileItems => {

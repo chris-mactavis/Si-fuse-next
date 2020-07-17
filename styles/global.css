@@ -408,6 +408,9 @@ form.profile-details {
   margin: 0 auto;
   /* Firefox */
 }
+form.profile-details iframe {
+  width: 100%;
+}
 form.profile-details label {
   margin-bottom: 2rem;
 }
@@ -2412,6 +2415,18 @@ input:focus, textarea:focus, select:focus, option:focus button {
 
 .pointer {
   cursor: pointer;
+}
+
+.filepond--drop-label {
+  justify-content: start !important;
+  background: #F5F7F8;
+  border-bottom: 1px solid #6B6B6B;
+}
+
+.filepond--drop-label label {
+  padding-left: 12px !important;
+  font-size: 15px !important;
+  color: #929394 !important;
 }
 
 .notification {
