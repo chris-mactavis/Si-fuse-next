@@ -83,7 +83,9 @@ export default function ProfileOne({industries, startup, locations}) {
         setProfilePicture(formData)
 
         // call these methods to handle upload state
-        console.log(progress, success, failure)
+        // console.log(progress, success, failure)
+
+        success('done');
     }
 
     return <>
@@ -124,7 +126,6 @@ export default function ProfileOne({industries, startup, locations}) {
                                                           service={slimService.bind(this)}
                                                           serviceFormat="file"
                                                           push={true}>
-                                                        {/*didInit={ slimInit.bind(this) }>*/}
                                                         <img src={hasCompany() ? startup.company.logo_url : ''} alt=""/>
                                                         <input type="file" name="foo"/>
                                                     </Slim>
