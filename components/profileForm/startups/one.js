@@ -83,7 +83,9 @@ export default function ProfileOne({industries, startup, locations}) {
         setProfilePicture(formData)
 
         // call these methods to handle upload state
-        console.log(progress, success, failure)
+        // console.log(progress, success, failure)
+
+        success('done');
     }
 
     return <>
@@ -118,17 +120,22 @@ export default function ProfileOne({industries, startup, locations}) {
                                                 {/*    }}*/}
                                                 {/*/>*/}
 
+                                                    {/*<Slim*/}
+                                                    {/*    ratio="1:1"*/}
+                                                    {/*    service={slimService.bind(this)}*/}
+                                                    {/*    serviceFormat="file"*/}
+                                                    {/*    push={true}*/}
+                                                    {/*    label="Company logo <br> (Click here to upload)"*/}
+                                                    {/*>*/}
+                                                    {/*    /!*didInit={ slimInit.bind(this) }>*!/*/}
+                                                    {/*    <img src={hasCompany() ? startup.company.logo_url : null} alt=""/>*/}
 
                                                 {
-                                                    <Slim
-                                                        ratio="1:1"
-                                                        service={slimService.bind(this)}
-                                                        serviceFormat="file"
-                                                        push={true}
-                                                        label="Company logo <br> (Click here to upload)"
-                                                    >
-                                                        {/*didInit={ slimInit.bind(this) }>*/}
-                                                        <img src={hasCompany() ? startup.company.logo_url : null} alt=""/>
+                                                    <Slim ratio="1:1"
+                                                          service={slimService.bind(this)}
+                                                          serviceFormat="file"
+                                                          push={true}>
+                                                        <img src={hasCompany() ? startup.company.logo_url : ''} alt=""/>
                                                         <input type="file" name="foo"/>
                                                     </Slim>
                                                 }
