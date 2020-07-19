@@ -9,13 +9,18 @@ import Token from "../../../utils/Token";
 import {incrementCurrentState} from "../../../store/actions/profile";
 import {showNotifier} from "../../../store/actions/notifier";
 import InvestorProfileHeader from "./InvestorProfileHeader";
+import Slim from "../../../public/slim/slim.react";
 
 const InvestorBasicInfo = ({investor, locations}) => {
+    console.log(investor);
+
     const dispatch = useDispatch();
 
     const {register, handleSubmit, errors} = useForm();
 
     const [adminError, setAdminError] = useState();
+
+    const hasProfilePic = () => investor.hasOwnProperty('profile') && investor.profile;
 
     const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
 
@@ -81,6 +86,14 @@ const InvestorBasicInfo = ({investor, locations}) => {
         window.scrollTo(0, 0);
     }, []);
 
+    const slimService = (formData, progress, success, failure, slim) => {
+        console.log(slim)
+
+        setProfilePicture(formData)
+
+        console.log(progress, success, failure)
+    }
+
     return <>
         <section className="startup-levels">
             <div className="container">
@@ -98,18 +111,19 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                     <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
                                         <div className="row">
                                             <div className="col-md-4 profile-pic">
-                                                {/*<FilePond*/}
-                                                {/*    // ref={ref => (this.pond = ref)}*/}
-                                                {/*    files={profilePicture}*/}
-                                                {/*    allowMultiple={false}*/}
-                                                {/*    labelIdle="Profile Picture <br> (Click here to upload)"*/}
-                                                {/*    name="files"*/}
-                                                {/*    onupdatefiles={fileItems => {setProfilePicture(fileItems.map(fileItem => fileItem.file))*/}
-                                                {/*    }}*/}
-                                                {/*/>*/}
-
-                                                {/*<DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}}*/}
-                                                {/*           value={profilePicture}/>*/}
+                                                {
+                                                    <Slim ratio="1:1"
+                                                          service={slimService.bind(this)}
+                                                          serviceFormat="file"
+                                                          edit="true"
+                                                          push={true}
+                                                          label="Profile Picture <br> (Click here to upload)"
+                                                    >
+                                                        {/*didInit={ slimInit.bind(this) }>*/}
+                                                        <img src={hasProfilePic() ? investor.profile.profile_pic_url : null} alt=""/>
+                                                        <input type="file" name="foo"/>
+                                                    </Slim>
+                                                }
 
                                                 <input ref={register({required: 'This field is required'})} type="hidden"
                                                        defaultValue={profilePicture.result}/>
@@ -177,56 +191,67 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div className="input-group-container">
+                                                    <div className="row">
+                                                        <div className="col-3 pr-0">
+                                                            <select name="country_code" className="select2 country"
+                                                                    ref={register({required: "This field is required"})}
+                                                                    defaultValue={hasProfile() ? investor.profile.country_code : ''}>
+                                                                {
+                                                                    locations.map(({id, country_area_code, country}) => <option key={id}
+                                                                                                                                value={id}>{country_area_code} - {country}</option>)
+                                                                }
+                                                            </select>
+                                                            {errors.country_code && <Error>{errors.country_code.message}</Error>}
+                                                        </div>
+
+                                                        <div className="col-9">
+                                                            <input ref={register({required: "This field is required"})}
+                                                                   className="w-100"
+                                                                   type="number" name="phone" id=""
+                                                                   placeholder="Phone number"
+                                                                   defaultValue={hasProfile() ? investor.profile.phone : ''}/>
+                                                            {errors.phone && <Error>{errors.phone.message}</Error>}
+                                                            {getAdminError('phone') && <Error>{getAdminError('phone')}</Error>}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="input-group-container">
+                                                    <select name="gender" ref={register({required: 'This field is required'})}
+                                                            defaultValue={hasProfile() ? investor.profile.gender : ''}>
+                                                        <option value="">Sex</option>
+                                                        <option value="female">Female</option>
+                                                        <option value="male">Male</option>
+                                                    </select>
+                                                    {errors.gender && <Error>{errors.gender.message}</Error>}
+                                                </div>
+
+                                                <div className="input-group-container">
+                                                    <select ref={register({required: 'Please select a Location'})} name="location_id"
+                                                            defaultValue={hasProfile() ? investor.profile.location_id : ''}>
+                                                        <option value="">Select Location</option>
+                                                        {locations.map(({country, id}) => <option value={id} key={id}>{country}</option>)}
+                                                    </select>
+                                                    {/*{errors.gender && <Error>{errors.gender.message}</Error>}*/}
+                                                </div>
+
+                                                <div className="input-group-container">
+                                                    <textarea ref={register({required: 'This field is required'})} className="full-width mt-0"
+                                                              name="about" id="" placeholder="About yourself"
+                                                              defaultValue={hasProfile() ? investor.profile.about : ''}
+                                                              rows="4"/>
+                                                    {errors.about && <Error>{errors.about.message}</Error>}
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div className="d-flex mt-5">
-                                            <div className="input-group-container w-25 country-div">
-                                                <select name="country_code" className="select2 investor-country-code"
-                                                        ref={register({required: "This field is required"})}
-                                                        defaultValue={hasProfile() ? investor.profile.country_code : ''}>
-                                                    {
-                                                        locations.map(({id, country_area_code, country}) => <option key={id}
-                                                                                                                    value={id}>{country_area_code} - {country}</option>)
-                                                    }
-                                                </select>
-                                                {errors.country_code && <Error>{errors.country_code.message}</Error>}
-                                            </div>
-
-                                            <div className="input-group-container w-75">
-                                                <input ref={register({required: "This field is required"})}
-                                                       className="medium-width w-100 mt-0"
-                                                       type="number" name="phone" id=""
-                                                       placeholder="Phone number"
-                                                       defaultValue={hasProfile() ? investor.profile.phone : ''}/>
-                                                {errors.phone && <Error>{errors.phone.message}</Error>}
-                                                {getAdminError('phone') && <Error>{getAdminError('phone')}</Error>}
-                                            </div>
+                                        <div className="d-flex">
+                                            <button className="btn next ml-auto" type="submit">
+                                                Save & Next <span/>
+                                            </button>
                                         </div>
-
-                                        <select name="gender" ref={register({required: 'This field is required'})}
-                                                defaultValue={hasProfile() ? investor.profile.gender : ''}>
-                                            <option value="">Sex</option>
-                                            <option value="female">Female</option>
-                                            <option value="male">Male</option>
-                                        </select>
-                                        {errors.gender && <Error>{errors.gender.message}</Error>}
-
-                                        <select ref={register({required: 'Please select a Location'})} name="location_id"
-                                                defaultValue={hasProfile() ? investor.profile.location_id : ''}>
-                                            <option value="">Select Location</option>
-                                            {locations.map(({country, id}) => <option value={id} key={id}>{country}</option>)}
-                                        </select>
-                                        {/*{errors.gender && <Error>{errors.gender.message}</Error>}*/}
-
-                                        <label className="industry-label">About yourself (200 words)</label>
-                                        <textarea ref={register({required: 'This field is required'})} className="full-width mt-0"
-                                                  name="about" id="" cols="30"
-                                                  defaultValue={hasProfile() ? investor.profile.about : ''}
-                                                  rows="5"/>
-                                        {errors.about && <Error>{errors.about.message}</Error>}
-
-                                        <button className="btn btn-profile" type="submit">Save & Next</button>
                                     </form>
                                 </div>
                             </div>
@@ -236,31 +261,31 @@ const InvestorBasicInfo = ({investor, locations}) => {
             </div>
         </section>
         <style jsx>{`
-            .input-group-container {
-                display: flex;
-                flex-direction: column;
-                margin-bottom: 0;
-            }
-            input, select, textarea {
-                margin-bottom: 0!important;
-                margin-top: 4rem;
-            }
-            .btn {
-                margin-top: 4rem;
-            }
-            input.country-code {
-                width: 90%;
-            }
-            .country-div {
-                position: relative;
-            }
-            .industry-label, about-label {
-                margin-top: 4rem;
-            }
-            .profile-pic {
-                cursor:pointer;
-                width: 300px;
-            }
+            // .input-group-container {
+            //     display: flex;
+            //     flex-direction: column;
+            //     margin-bottom: 0;
+            // }
+            // input, select, textarea {
+            //     margin-bottom: 0!important;
+            //     margin-top: 4rem;
+            // }
+            // .btn {
+            //     margin-top: 4rem;
+            // }
+            // input.country-code {
+            //     width: 90%;
+            // }
+            // .country-div {
+            //     position: relative;
+            // }
+            // .industry-label, about-label {
+            //     margin-top: 4rem;
+            // }
+            // .profile-pic {
+            //     cursor:pointer;
+            //     width: 300px;
+            // }
         `}</style>
     </>
 }

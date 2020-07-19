@@ -78,7 +78,6 @@ export default function ProfileThree({startup}) {
                                     <StartupProfileHeader/>
 
                                     <div className="numbers d-md-none num-alone">
-                                        <div className="number">3</div>
                                         <p>Product and Services</p>
                                     </div>
 

@@ -408,6 +408,9 @@ form.profile-details {
   margin: 0 auto;
   /* Firefox */
 }
+form.profile-details .slim {
+  background: rgba(236, 239, 241, 0.5);
+}
 form.profile-details iframe {
   width: 100%;
 }

@@ -136,6 +136,10 @@ form {
   &.profile-details {
     margin: 0 auto;
 
+    .slim{
+      background: rgba(236, 239, 241, 0.5);
+    }
+
     iframe{
       width: 100%;
     }

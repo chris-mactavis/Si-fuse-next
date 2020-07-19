@@ -120,26 +120,29 @@ export default function ProfileOne({industries, startup, locations}) {
 
 
                                                 {
-                                                    <Slim ratio="1:1"
-                                                          service={slimService.bind(this)}
-                                                          serviceFormat="file"
-                                                          push={true}>
+                                                    <Slim
+                                                        ratio="1:1"
+                                                        service={slimService.bind(this)}
+                                                        serviceFormat="file"
+                                                        push={true}
+                                                        label="Company logo <br> (Click here to upload)"
+                                                    >
                                                         {/*didInit={ slimInit.bind(this) }>*/}
-                                                        <img src={hasCompany() ? startup.company.logo_url : ''} alt=""/>
+                                                        <img src={hasCompany() ? startup.company.logo_url : null} alt=""/>
                                                         <input type="file" name="foo"/>
                                                     </Slim>
                                                 }
 
-                                                <input ref={register({required: 'This field is required'})}
-                                                       type="hidden"
-                                                       defaultValue={profilePicture.result}/>
-                                                {
-                                                    profilePicture.result ? (
-                                                        <>
-                                                            <img className="profile-pic img-fluid img-thumbnail mt-5"
-                                                                 src={profilePicture.result}/>
-                                                        </>) : null
-                                                }
+                                                {/*<input ref={register({required: 'This field is required'})}*/}
+                                                {/*       type="hidden"*/}
+                                                {/*       defaultValue={profilePicture.result}/>*/}
+                                                {/*{*/}
+                                                {/*    profilePicture.result ? (*/}
+                                                {/*        <>*/}
+                                                {/*            <img className="profile-pic img-fluid img-thumbnail mt-5"*/}
+                                                {/*                 src={profilePicture.result}/>*/}
+                                                {/*        </>) : null*/}
+                                                {/*}*/}
                                                 <span className="d-block">{errors.logo &&
                                                 <Error>Please upload a profile picture!</Error>}</span>
                                             </div>
@@ -415,11 +418,11 @@ export default function ProfileOne({industries, startup, locations}) {
                                         <div className="d-flex">
                                             <button className="btn prev mr-auto"
                                                     onClick={() => Router.push('/profile/edit-levels')} type="button">
-                                                <span/> Prev
+                                                <span/> Previous
                                             </button>
 
                                             <button className="btn next ml-auto" type="submit">
-                                                Next <span/>
+                                               Save & Next <span/>
                                             </button>
                                         </div>
                                     </form>
