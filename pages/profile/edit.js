@@ -45,7 +45,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
                 case 1:
                     return <InvestorBasicInfo investor={investor} locations={locations}/>;
                 case 2:
-                    return <InvestorPreference industries={industries} investor={investor}/>;
+                    return <InvestorPreference industries={industries} investor={investor} stages={stages}/>;
                 case 3:
                     return <InvestorMoreInfo industries={industries} stages={stages} investor={investor}/>
             }

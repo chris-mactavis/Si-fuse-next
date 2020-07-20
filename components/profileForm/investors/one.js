@@ -6,14 +6,12 @@ import {useDispatch} from "react-redux";
 import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
-import {incrementCurrentState} from "../../../store/actions/profile";
+import {incrementCurrentState, setInvestorProfileImage} from "../../../store/actions/profile";
 import {showNotifier} from "../../../store/actions/notifier";
 import InvestorProfileHeader from "./InvestorProfileHeader";
 import Slim from "../../../public/slim/slim.react";
 
 const InvestorBasicInfo = ({investor, locations}) => {
-    // console.log(investor);
-
     const dispatch = useDispatch();
 
     const {register, handleSubmit, errors} = useForm();
@@ -25,29 +23,37 @@ const InvestorBasicInfo = ({investor, locations}) => {
     const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
 
     const [profilePicture, setProfilePicture] = useState([]);
+
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    })
     // const onChangePicture = value => {
     //     setProfilePicture(value);
     // }
     const nextPageHandler = async data => {
-        if (profilePicture.filename) {
-            data['profile_pic'] = profilePicture.result;
-        } else {
-            data['is_editing'] = true;
+        let logo = null;
+        if (profilePicture[0]) {
+            logo = await toBase64(profilePicture[0]);
+            data = {...data, logo};
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('investors', data, {
+            const {data: response} = await axiosInstance.post('investors', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
             dispatch(loader());
+            dispatch(setInvestorProfileImage(response.data.profile.profile_pic_url))
             dispatch(incrementCurrentState());
         } catch (e) {
             console.log(e);
+            dispatch(loader());
             dispatch(showNotifier(e.response.data.message, 'danger'));
             setAdminError(e.response.data.errors);
-            dispatch(loader());
         }
     }
 
@@ -87,207 +93,189 @@ const InvestorBasicInfo = ({investor, locations}) => {
     }, []);
 
     const slimService = (formData, progress, success, failure, slim) => {
-        console.log(slim)
+        console.log(formData)
 
         setProfilePicture(formData)
 
-        console.log(progress, success, failure)
+        success('done');
     }
 
-    return <>
-        <section className="startup-levels">
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <div className="white-bg">
-                            <div className="row">
-                                <div className="col-md-9 mx-auto">
-                                    <InvestorProfileHeader/>
+    return <section className="startup-levels">
+        <div className="container">
+            <div className="row">
+                <div className="col">
+                    <div className="white-bg">
+                        <div className="row">
+                            <div className="col-md-9 mx-auto">
+                                <InvestorProfileHeader/>
 
-                                    <div className="d-md-none">
-                                        <h4 className="text-center mb-3">Basic Information</h4>
-                                    </div>
+                                <div className="d-md-none">
+                                    <h4 className="text-center mb-3">Basic Information</h4>
+                                </div>
 
-                                    <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
-                                        <div className="row">
-                                            <div className="col-md-4 profile-pic mb-5">
-                                                {
-                                                    <Slim ratio="1:1"
-                                                          service={slimService.bind(this)}
-                                                          serviceFormat="file"
-                                                          edit="true"
-                                                          push={true}
-                                                          label="Profile Picture <br> (Click here to upload)"
-                                                    >
-                                                        {/*didInit={ slimInit.bind(this) }>*/}
-                                                        <img src={hasProfilePic() ? investor.profile.profile_pic_url : null} alt=""/>
-                                                        <input type="file" name="foo"/>
-                                                    </Slim>
-                                                }
+                                <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
+                                    <div className="row">
+                                        <div className="col-md-4 profile-pic mb-5">
+                                            {
+                                                <Slim ratio="1:1"
+                                                      service={slimService.bind(this)}
+                                                      serviceFormat="file"
+                                                      push={true}
+                                                      label="Profile Picture <br> (Click here to upload)"
+                                                >
+                                                    {/*didInit={ slimInit.bind(this) }>*/}
+                                                    <img src={hasProfilePic() ? investor.profile.profile_pic_url : null}
+                                                         alt=""/>
+                                                    <input type="file" name="foo"/>
+                                                </Slim>
+                                            }
 
-                                                <input ref={register({required: 'This field is required'})} type="hidden"
-                                                       defaultValue={profilePicture.result}/>
-                                                {
-                                                    profilePicture.result ? (
-                                                        <>
-                                                            <img className="profile-pic img-fluid img-thumbnail mt-5"
-                                                                 src={profilePicture.result}/>
-                                                        </>) : null
-                                                }
-                                                <span className="d-block">{errors.profile_pic &&
-                                                <Error>Please upload a profile picture!</Error>}</span>
+                                            <input ref={register({required: 'This field is required'})} type="hidden"
+                                                   defaultValue={profilePicture.result}/>
+                                            {
+                                                profilePicture.result ? (
+                                                    <>
+                                                        <img className="profile-pic img-fluid img-thumbnail mt-5"
+                                                             src={profilePicture.result}/>
+                                                    </>) : null
+                                            }
+                                            <span className="d-block">{errors.profile_pic &&
+                                            <Error>Please upload a profile picture!</Error>}</span>
+                                        </div>
+
+                                        <div className="col-md-8">
+                                            <div className="input-group-container">
+                                                <input type="text" name="website" ref={
+                                                    register({
+                                                        pattern: {
+                                                            value: /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+                                                            message: 'Please enter a valid URL'
+                                                        }
+                                                    })
+                                                } placeholder="Company Website"
+                                                       defaultValue={hasProfile() ? investor.profile.website : ''}
+                                                       className="full-width w-100"/>
+                                                {errors.website && <Error>{errors.website.message}</Error>}
                                             </div>
 
-                                            <div className="col-md-8">
-                                                <div className="input-group-container">
-                                                    <input type="text" name="website" ref={
-                                                        register({
-                                                            pattern: {
-                                                                value: /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
-                                                                message: 'Please enter a valid URL'
-                                                            }
-                                                        })
-                                                    } placeholder="Company Website" defaultValue={hasProfile() ? investor.profile.website : ''}
-                                                           className="full-width w-100"/>
-                                                    {errors.website && <Error>{errors.website.message}</Error>}
-                                                </div>
-
-                                                <div className="input-group-container">
-                                                    <div className="row">
-                                                        <div className="col-6">
-                                                            <div className="facebook social mb-10">
-                                                                <input ref={register({required: 'This field is required'})} name="facebook" type="text"
-                                                                       className="w-100" defaultValue={hasProfile() ? investor.profile.facebook : ''}
-                                                                       placeholder="Facebook profile url"/>
-                                                                <span className="d-block">{errors.facebook && <Error>{errors.facebook.message}</Error>}</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="pl-0 col-6">
-                                                            <div className="instagram social mb-10">
-                                                                <input ref={register} name="instagram" type="text"
-                                                                       className="w-100"
-                                                                       defaultValue={hasProfile() ? investor.profile.instagram : ''}
-                                                                       placeholder="Instagram profile url"/>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-6">
-                                                            <div className="twitter social">
-                                                                <input ref={register} name="twitter" type="text"
-                                                                       className="w-100"
-                                                                       defaultValue={hasProfile() ? investor.profile.twitter : ''}
-                                                                       placeholder="Twitter profile url"/>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-6 pl-0">
-                                                            <div className="linked-in social">
-                                                                <input ref={register} name="linkedin" type="text"
-                                                                       className="w-100"
-                                                                       defaultValue={hasProfile() ? investor.profile.linkedin : ''}
-                                                                       placeholder="LinkedIn profile url"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="input-group-container">
-                                                    <div className="row">
-                                                        <div className="col-md-3 col-4 pr-0">
-                                                            <select name="country_code" className="select2 country"
-                                                                    ref={register({required: "This field is required"})}
-                                                                    defaultValue={hasProfile() ? investor.profile.country_code : ''}>
-                                                                {
-                                                                    locations.map(({id, country_area_code, country}) => <option key={id}
-                                                                                                                                value={id}>{country_area_code} - {country}</option>)
-                                                                }
-                                                            </select>
-                                                            {errors.country_code && <Error>{errors.country_code.message}</Error>}
-                                                        </div>
-
-                                                        <div className="col-md-9 col-8">
-                                                            <input ref={register({required: "This field is required"})}
+                                            <div className="input-group-container">
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="facebook social mb-10">
+                                                            <input ref={register({required: 'This field is required'})}
+                                                                   name="facebook" type="text"
                                                                    className="w-100"
-                                                                   type="number" name="phone" id=""
-                                                                   placeholder="Phone number"
-                                                                   defaultValue={hasProfile() ? investor.profile.phone : ''}/>
-                                                            {errors.phone && <Error>{errors.phone.message}</Error>}
-                                                            {getAdminError('phone') && <Error>{getAdminError('phone')}</Error>}
+                                                                   defaultValue={hasProfile() ? investor.profile.facebook : ''}
+                                                                   placeholder="Facebook profile url"/>
+                                                            <span className="d-block">{errors.facebook &&
+                                                            <Error>{errors.facebook.message}</Error>}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="pl-0 col-6">
+                                                        <div className="instagram social mb-10">
+                                                            <input ref={register} name="instagram" type="text"
+                                                                   className="w-100"
+                                                                   defaultValue={hasProfile() ? investor.profile.instagram : ''}
+                                                                   placeholder="Instagram profile url"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-6">
+                                                        <div className="twitter social">
+                                                            <input ref={register} name="twitter" type="text"
+                                                                   className="w-100"
+                                                                   defaultValue={hasProfile() ? investor.profile.twitter : ''}
+                                                                   placeholder="Twitter profile url"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-6 pl-0">
+                                                        <div className="linked-in social">
+                                                            <input ref={register} name="linkedin" type="text"
+                                                                   className="w-100"
+                                                                   defaultValue={hasProfile() ? investor.profile.linkedin : ''}
+                                                                   placeholder="LinkedIn profile url"/>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div className="input-group-container">
-                                                    <select name="gender" ref={register({required: 'This field is required'})}
-                                                            defaultValue={hasProfile() ? investor.profile.gender : ''}>
-                                                        <option value="">Sex</option>
-                                                        <option value="female">Female</option>
-                                                        <option value="male">Male</option>
-                                                    </select>
-                                                    {errors.gender && <Error>{errors.gender.message}</Error>}
+                                            <div className="input-group-container">
+                                                <div className="row">
+                                                    <div className="col-md-3 col-4 pr-0">
+                                                        <select name="country_code" className="select2 country"
+                                                                ref={register({required: "This field is required"})}
+                                                                defaultValue={hasProfile() ? investor.profile.country_code : ''}>
+                                                            {
+                                                                locations.map(({id, country_area_code, country}) =>
+                                                                    <option key={id}
+                                                                            value={id}>{country_area_code} - {country}</option>)
+                                                            }
+                                                        </select>
+                                                        {errors.country_code &&
+                                                        <Error>{errors.country_code.message}</Error>}
+                                                    </div>
+
+                                                    <div className="col-md-9 col-8">
+                                                        <input ref={register({required: "This field is required"})}
+                                                               className="w-100"
+                                                               type="number" name="phone" id=""
+                                                               placeholder="Phone number"
+                                                               defaultValue={hasProfile() ? investor.profile.phone : ''}/>
+                                                        {errors.phone && <Error>{errors.phone.message}</Error>}
+                                                        {getAdminError('phone') &&
+                                                        <Error>{getAdminError('phone')}</Error>}
+                                                    </div>
                                                 </div>
+                                            </div>
 
-                                                <div className="input-group-container">
-                                                    <select ref={register({required: 'Please select a Location'})} name="location_id"
-                                                            defaultValue={hasProfile() ? investor.profile.location_id : ''}>
-                                                        <option value="">Select Location</option>
-                                                        {locations.map(({country, id}) => <option value={id} key={id}>{country}</option>)}
-                                                    </select>
-                                                    {/*{errors.gender && <Error>{errors.gender.message}</Error>}*/}
-                                                </div>
+                                            <div className="input-group-container">
+                                                <select name="gender"
+                                                        ref={register({required: 'This field is required'})}
+                                                        defaultValue={hasProfile() ? investor.profile.gender : ''}>
+                                                    <option value="">Sex</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="male">Male</option>
+                                                </select>
+                                                {errors.gender && <Error>{errors.gender.message}</Error>}
+                                            </div>
 
-                                                <div className="input-group-container">
-                                                    <textarea ref={register({required: 'This field is required'})} className="full-width mt-0"
+                                            <div className="input-group-container">
+                                                <select ref={register({required: 'Please select a Location'})}
+                                                        name="location_id"
+                                                        defaultValue={hasProfile() ? investor.profile.location_id : ''}>
+                                                    <option value="">Select Location</option>
+                                                    {locations.map(({country, id}) => <option value={id}
+                                                                                              key={id}>{country}</option>)}
+                                                </select>
+                                                {/*{errors.gender && <Error>{errors.gender.message}</Error>}*/}
+                                            </div>
+
+                                            <div className="input-group-container">
+                                                    <textarea ref={register({required: 'This field is required'})}
+                                                              className="full-width mt-0"
                                                               name="about" id="" placeholder="About yourself"
                                                               defaultValue={hasProfile() ? investor.profile.about : ''}
                                                               rows="4"/>
-                                                    {errors.about && <Error>{errors.about.message}</Error>}
-                                                </div>
+                                                {errors.about && <Error>{errors.about.message}</Error>}
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div className="d-flex">
-                                            <button className="btn next ml-auto" type="submit">
-                                                Save <span/>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                                    <div className="d-flex">
+                                        <button className="btn next ml-auto" type="submit">
+                                            Save <span/>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <style jsx>{`
-            // .input-group-container {
-            //     display: flex;
-            //     flex-direction: column;
-            //     margin-bottom: 0;
-            // }
-            // input, select, textarea {
-            //     margin-bottom: 0!important;
-            //     margin-top: 4rem;
-            // }
-            // .btn {
-            //     margin-top: 4rem;
-            // }
-            // input.country-code {
-            //     width: 90%;
-            // }
-            // .country-div {
-            //     position: relative;
-            // }
-            // .industry-label, about-label {
-            //     margin-top: 4rem;
-            // }
-            // .profile-pic {
-            //     cursor:pointer;
-            //     width: 300px;
-            // }
-        `}</style>
-    </>
+        </div>
+    </section>
 }
 
 export default InvestorBasicInfo;
