@@ -767,7 +767,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                             {
                                                 !toggleProductVideo && <div className="player-thumbnail"
                                                                             onClick={() => dispatch(showVideoViewer(startupProf.product_services.product_video_url))}>
-                                                    <video src={startupProf.product_services.product_video_url}/>
+                                                    <div dangerouslySetInnerHTML={createMarkup(startupProf.product_services.product_video_url)} />
                                                 </div>
                                             }
                                             {
@@ -796,7 +796,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                             {
                                                 !togglePitchVideo && <div className="player-thumbnail"
                                                                           onClick={() => dispatch(showVideoViewer(startupProf.product_services.pitch_video_url))}>
-                                                    <video src={startupProf.product_services.pitch_video_url}/>
+                                                    <div dangerouslySetInnerHTML={createMarkup(startupProf.product_services.pitch_video_url)} />
                                                 </div>
                                             }
                                             {
