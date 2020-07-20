@@ -816,8 +816,10 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 section.image-text {
   padding: 7.5rem 0;
 }
-section.image-text .investors {
-  margin-top: 60px;
+@media only screen and (max-width: 576px) {
+  section.image-text {
+    padding: 5rem 0;
+  }
 }
 @media only screen and (max-width: 576px) {
   section.image-text .investors {
@@ -825,8 +827,9 @@ section.image-text .investors {
   }
 }
 section.image-text .investors .img-01 {
-  height: 80px;
+  height: 70px;
   margin-bottom: -38px;
+  margin-left: 40px;
 }
 @media only screen and (max-width: 1200px) {
   section.image-text .investors .img-01 {
@@ -884,12 +887,17 @@ section.image-text .investors h2::before {
 section.image-text .investors p {
   text-align: right;
   margin-bottom: 2rem;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.7;
 }
 @media only screen and (max-width: 992px) {
   section.image-text .investors p {
     text-align: left;
+  }
+}
+@media only screen and (max-width: 576px) {
+  section.image-text .investors p {
+    font-size: 16px;
   }
 }
 section.image-text .investors a {
@@ -2527,7 +2535,7 @@ nav.navbar {
 }
 @media only screen and (max-width: 576px) {
   nav.navbar {
-    padding: 0 20px 3px 20px;
+    padding: 0 20px 0 20px;
     background: white;
     height: 50px;
   }
@@ -2608,6 +2616,17 @@ nav.navbar .logo-container .navbar-brand #notification-btn {
 nav.navbar .logo-container .navbar-brand img {
   width: 32px;
 }
+nav.navbar .account-btns button img {
+  height: 30px;
+}
+@media only screen and (max-width: 576px) {
+  nav.navbar .account-btns button {
+    padding-left: 0;
+  }
+  nav.navbar .account-btns button img {
+    height: 25px;
+  }
+}
 nav.navbar .active-bar {
   position: relative;
 }
@@ -2628,6 +2647,8 @@ nav.navbar .logo-small-screen {
   nav.navbar .logo-small-screen {
     display: block;
     height: 36px;
+    position: relative;
+    left: -5px;
   }
 }
 
@@ -2706,7 +2727,7 @@ footer .copy-wrapper p {
 }
 
 header.homepage {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url(/images/banner.png);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url(/images/banner-img.jpg);
   height: 100vh;
   background-size: cover;
   position: relative;

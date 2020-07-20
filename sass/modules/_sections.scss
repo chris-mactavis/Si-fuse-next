@@ -2,16 +2,21 @@ section {
   &.image-text {
     padding: 7.5rem 0;
 
+    @include media("mobile") {
+      padding: 5rem 0;
+    }
+
     .investors {
-      margin-top: 60px;
+      //margin-top: 60px;
 
       @media only screen and (max-width: $mobile_width) {
         margin-top: 0;
       }
 
       .img-01 {
-        height: 80px;
+        height: 70px;
         margin-bottom: -38px;
+        margin-left: 40px;
 
         @media only screen and (max-width: $wide_width) {
           margin-bottom: -32px;
@@ -65,11 +70,15 @@ section {
       p {
         text-align: right;
         margin-bottom: 2rem;
-        font-size: 20px;
+        font-size: 18px;
         line-height: 1.7;
 
         @media only screen and (max-width: $desktop_width) {
           text-align: left;
+        }
+
+        @include media("mobile") {
+          font-size: 16px;
         }
       }
 
