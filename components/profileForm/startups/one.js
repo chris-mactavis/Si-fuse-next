@@ -10,28 +10,20 @@ import {showNotifier} from "../../../store/actions/notifier";
 import StartupProfileHeader from "./StartupProfileHeader";
 import Router from "next/router";
 import Slim from "../../../public/slim/slim.react";
-import {FilePond} from "react-filepond";
 
 export default function ProfileOne({industries, startup, locations}) {
+    console.log(startup);
     const dispatch = useDispatch();
     const [size, setSize] = useState(startup.company && startup.company.hasOwnProperty('teams') ? startup.company.teams.length : 1);
     const [adminError, setAdminError] = useState();
-    const [localImage, setLocalImage] = useState(null);
 
     const createArrayWithNumbers = length => {
         return Array.from({length}, (_, k) => k + 0);
     }
     const {register, handleSubmit, errors, getValues, formState, triggerValidation} = useForm();
-    // const [profilePicture, setProfilePicture] = useState({
-    //     result: null,
-    //     filename: null,
-    //     filetype: null,
-    //     src: null,
-    //     error: null,
-    // });
     const hasCompany = () => startup.hasOwnProperty('company') && startup.company;
     const [profilePicture, setProfilePicture] = useState(hasCompany() ? startup.company.logo_url : '');
-
+    console.log(profilePicture);
     const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
 
     const submitHandler = async data => {
@@ -76,7 +68,7 @@ export default function ProfileOne({industries, startup, locations}) {
 
     const slimService = (formData, progress, success, failure, slim) => {
         // slim instance reference
-        // console.log(slim)
+        console.log(formData)
 
         // form data to post to server
         // set serviceFormat to "file" to receive an array of files
@@ -109,10 +101,10 @@ export default function ProfileOne({industries, startup, locations}) {
                                                     <Slim ratio="1:1"
                                                           service={slimService.bind(this)}
                                                           serviceFormat="file"
-                                                          push={true}
                                                           label="Company logo <br> (Click here to upload)"
+                                                          push={true}
                                                     >
-                                                        <img src={hasCompany() ? startup.company.logo_url :null} alt=""/>
+                                                        <img src={hasCompany() ? startup.company.logo_url : null} alt=""/>
                                                         <input type="file" name="foo"/>
                                                     </Slim>
                                                 }

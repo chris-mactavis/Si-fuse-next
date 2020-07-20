@@ -12,6 +12,8 @@ import {startupLevel} from "../../helpers";
 const StartupProfile = ({rating, startupComments, company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
     const dispatch = useDispatch();
 
+    const createMarkup = (content) => ({__html: content});
+
     let levelKeys = [];
 
     const userType = loggedInUser.user_type.user_type;
@@ -581,15 +583,28 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                     </p>
                                     {
                                         !toggleFund && <p className="color-green">
-                                            ${startupProf.finance.funding_needed}
+                                            {startupProf.finance.investment_ask}
                                         </p>
                                     }
                                     {
                                         toggleFund && <form onSubmit={handleSubmit(onSubmitFinanceHandler)}
                                                             className="profile-details overview-form w-100">
-                                            <input type="text" ref={register} name="funding_needed"
-                                                   className="full-width edit-input"
-                                                   defaultValue={startupProf.finance.funding_needed}/>
+                                            <select name="investment_ask"
+                                                    ref={register}
+                                                    defaultValue={startupProf.finance.investment_ask}>
+                                                <option value="">What is your investment ask?</option>
+                                                <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                                                <option value="$10,000 - $50,000">$10,000 - $50,000</option>
+                                                <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                                                <option value="$100,000 - $250,000">$100,000 - $250,000</option>
+                                                <option value="$250,000 - $1,000,000">$250,000 - $1,000,000
+                                                </option>
+                                                <option value="$1,000,000 - $2,000,000">$1,000,000 -
+                                                    $2,000,000
+                                                </option>
+                                                <option value="$2,000,000 and above">$2,000,000 and above
+                                                </option>
+                                            </select>
                                             <button className="btn btn-sm" type={"submit"}>Update</button>
                                         </form>
                                     }
@@ -639,7 +654,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
 
                                     {
                                         !toggleCompanyStage && <p className="text-capitalize">
-                                            {startupProf.product_services.company_stage}
+                                            {startupProf.company.company_stage}
                                         </p>
                                     }
 
@@ -647,7 +662,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                         toggleCompanyStage && <form onSubmit={handleSubmit(onSubmitServiceHandler)}
                                                                     className="profile-details overview-form w-100">
                                             <select name="company_stage" ref={register}
-                                                    defaultValue={startupProf.product_services.company_stage}>
+                                                    defaultValue={startupProf.company.company_stage}>
                                                 <option value="">Select Stage</option>
                                                 <option value="concept">Concept</option>
                                                 <option value="early stage">Early stage</option>
@@ -811,7 +826,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                 Value Proposition
                                             </p>
                                             {!toggleValueProposition &&
-                                            <p className="text-description">{startupProf.company.value_proposition}</p>}
+                                            <p className="text-description">{startupProf.product_services.value_proposition}</p>}
 
                                             {
                                                 toggleValueProposition &&
