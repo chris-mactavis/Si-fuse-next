@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function () {
-    return <div className="header-wrapper">
+    return<div className="header-wrapper">
         <div className="social-icons">
             <a target="_blank" href="//www.facebook.com/SI-Fuse-105249634372571/">
                 <img src="images/icon/facebook.svg" alt=""/>
@@ -22,32 +22,33 @@ export default function () {
 
         {/*<h1>Connecting Investors <br/>with <span className="txt-rotate" data-period="300" data-rotate='["Female led", "Female owned", "Gender diverse"]'></span><br/> Startups</h1>*/}
         <h1>
-            Connecting Investors
+            Connecting <br className="d-md-none"/> Investors With
 
             <div className="changing-text">
                 <div>
-                    WITH
                     <span>
                         Female led
                     </span>
+                    <br className="d-md-none"/>
+                    Startups
                 </div>
 
                 <div>
-                    WITH
                     <span>
                         Female owned
                     </span>
+                    <br className="d-md-none"/>
+                    Startups
                 </div>
 
                 <div>
-                    WITH
                     <span>
                         Gender diverse
                     </span>
+                    <br className="d-md-none"/>
+                    Startups
                 </div>
             </div>
-
-            Startups
         </h1>
     </div>
 }

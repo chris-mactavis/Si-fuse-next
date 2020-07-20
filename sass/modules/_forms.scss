@@ -136,9 +136,27 @@ form {
   &.profile-details {
     margin: 0 auto;
 
+    .slim{
+      background: rgba(236, 239, 241, 0.5);
+    }
+
+    iframe{
+      width: 100%;
+    }
+
+    .company-logo{
+      //.filepond--drop-label{
+      //  padding: 100px 0;
+      //
+      //  label{
+      //
+      //  }
+      //}
+    }
+
     label {
       //display: block;
-      margin-bottom: 2rem;
+      //margin-bottom: 2rem;
       //font-weight: 600;
     }
 

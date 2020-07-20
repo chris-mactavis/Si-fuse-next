@@ -78,7 +78,6 @@ export default function ProfileThree({startup}) {
                                     <StartupProfileHeader/>
 
                                     <div className="numbers d-md-none num-alone">
-                                        <div className="number">3</div>
                                         <p>Product and Services</p>
                                     </div>
 
@@ -139,7 +138,7 @@ export default function ProfileThree({startup}) {
                                                         files={productImages}
                                                         allowMultiple={true}
                                                         // server="/api"
-                                                        labelIdle=""
+                                                        labelIdle="Product Images (Click here to upload)"
                                                         name="files"
                                                         oninit={() => handleInit()}
                                                         onupdatefiles={fileItems => {

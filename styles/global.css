@@ -408,8 +408,11 @@ form.profile-details {
   margin: 0 auto;
   /* Firefox */
 }
-form.profile-details label {
-  margin-bottom: 2rem;
+form.profile-details .slim {
+  background: rgba(236, 239, 241, 0.5);
+}
+form.profile-details iframe {
+  width: 100%;
 }
 form.profile-details .input-group-container {
   margin-bottom: 20px;
@@ -813,8 +816,10 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 section.image-text {
   padding: 7.5rem 0;
 }
-section.image-text .investors {
-  margin-top: 60px;
+@media only screen and (max-width: 576px) {
+  section.image-text {
+    padding: 5rem 0;
+  }
 }
 @media only screen and (max-width: 576px) {
   section.image-text .investors {
@@ -822,8 +827,9 @@ section.image-text .investors {
   }
 }
 section.image-text .investors .img-01 {
-  height: 80px;
+  height: 70px;
   margin-bottom: -38px;
+  margin-left: 40px;
 }
 @media only screen and (max-width: 1200px) {
   section.image-text .investors .img-01 {
@@ -833,6 +839,7 @@ section.image-text .investors .img-01 {
 @media only screen and (max-width: 576px) {
   section.image-text .investors .img-01 {
     height: 75px;
+    margin-left: 0;
   }
 }
 section.image-text .investors h2 {
@@ -881,12 +888,17 @@ section.image-text .investors h2::before {
 section.image-text .investors p {
   text-align: right;
   margin-bottom: 2rem;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.7;
 }
 @media only screen and (max-width: 992px) {
   section.image-text .investors p {
     text-align: left;
+  }
+}
+@media only screen and (max-width: 576px) {
+  section.image-text .investors p {
+    font-size: 16px;
   }
 }
 section.image-text .investors a {
@@ -1499,58 +1511,6 @@ section.profile .social-links-input .instagram::before {
 section.profile .social-links-input .linked-in::before {
   background-image: url("/images/icon/linked-red.svg");
 }
-section.profile .investor-levels [type=radio]:checked,
-section.profile .investor-levels [type=radio]:not(:checked) {
-  position: absolute;
-  left: -9999px;
-}
-section.profile .investor-levels [type=radio]:checked + label,
-section.profile .investor-levels [type=radio]:not(:checked) + label {
-  position: relative;
-  padding-left: 28px;
-  cursor: pointer;
-  line-height: 20px;
-  display: inline-block;
-  color: #666;
-}
-section.profile .investor-levels [type=radio]:checked + label:before,
-section.profile .investor-levels [type=radio]:not(:checked) + label:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 2px;
-  width: 18px;
-  height: 18px;
-  border: 1px solid #D32907;
-  border-radius: 100%;
-  background: #fff;
-}
-section.profile .investor-levels [type=radio]:checked + label:after,
-section.profile .investor-levels [type=radio]:not(:checked) + label:after {
-  content: "";
-  width: 12px;
-  height: 12px;
-  background: #D32907;
-  position: absolute;
-  top: 5px;
-  left: 3px;
-  border-radius: 100%;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-}
-section.profile .investor-levels [type=radio]:not(:checked) + label:after {
-  opacity: 0;
-  -webkit-transform: scale(0);
-  transform: scale(0);
-}
-section.profile .investor-levels [type=radio]:checked + label:after {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-}
-section.profile .investor-levels p {
-  margin-top: 10px;
-}
 section.profile-2 .only::before {
   opacity: 1;
 }
@@ -1745,6 +1705,12 @@ section.startup-levels form .btn.next, section.startup-levels form .btn.prev {
   margin-top: 40px;
   padding: 15px 50px;
 }
+@media only screen and (max-width: 576px) {
+  section.startup-levels form .btn.next, section.startup-levels form .btn.prev {
+    margin-top: 25px;
+    padding: 8px 25px 10px;
+  }
+}
 section.startup-levels form .btn span {
   position: relative;
   width: 30px;
@@ -1775,6 +1741,58 @@ section.startup-levels .info-box-container .info-box p {
 }
 section.startup-levels .info-box-container .info-box span {
   font-size: 13px;
+}
+section.startup-levels .investor-levels [type=radio]:checked,
+section.startup-levels .investor-levels [type=radio]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+section.startup-levels .investor-levels [type=radio]:checked + label,
+section.startup-levels .investor-levels [type=radio]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: #666;
+}
+section.startup-levels .investor-levels [type=radio]:checked + label:before,
+section.startup-levels .investor-levels [type=radio]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #D32907;
+  border-radius: 100%;
+  background: #fff;
+}
+section.startup-levels .investor-levels [type=radio]:checked + label:after,
+section.startup-levels .investor-levels [type=radio]:not(:checked) + label:after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: #D32907;
+  position: absolute;
+  top: 5px;
+  left: 3px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+section.startup-levels .investor-levels [type=radio]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+section.startup-levels .investor-levels [type=radio]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+section.startup-levels .investor-levels p {
+  margin-top: 10px;
 }
 @media only screen and (max-width: 576px) {
   section.startup-content {
@@ -2518,7 +2536,7 @@ nav.navbar {
 }
 @media only screen and (max-width: 576px) {
   nav.navbar {
-    padding: 0 20px 3px 20px;
+    padding: 0 20px 0 20px;
     background: white;
     height: 50px;
   }
@@ -2599,6 +2617,17 @@ nav.navbar .logo-container .navbar-brand #notification-btn {
 nav.navbar .logo-container .navbar-brand img {
   width: 32px;
 }
+nav.navbar .account-btns button img {
+  height: 30px;
+}
+@media only screen and (max-width: 576px) {
+  nav.navbar .account-btns button {
+    padding-left: 0;
+  }
+  nav.navbar .account-btns button img {
+    height: 25px;
+  }
+}
 nav.navbar .active-bar {
   position: relative;
 }
@@ -2619,6 +2648,8 @@ nav.navbar .logo-small-screen {
   nav.navbar .logo-small-screen {
     display: block;
     height: 36px;
+    position: relative;
+    left: -5px;
   }
 }
 
@@ -2697,8 +2728,8 @@ footer .copy-wrapper p {
 }
 
 header.homepage {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url(/images/banner.png);
-  height: 100vh;
+  background: #222;
+  height: 80vh;
   background-size: cover;
   position: relative;
 }
@@ -2708,23 +2739,28 @@ header.homepage {
     background-position: 80% top;
   }
 }
+header.homepage div.particles-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+header.homepage div.particles-wrapper #tsparticles {
+  width: 100%;
+  height: 100%;
+}
 header.homepage .navbar-brand {
   left: calc(50% + 6px) !important;
 }
 header.homepage .header-wrapper {
   display: flex;
-  margin: 0 60px;
   position: absolute;
   transform: translateY(-50%);
   top: 50%;
-}
-@media only screen and (max-width: 576px) {
-  header.homepage .header-wrapper {
-    margin: 0 30px;
-  }
+  width: 100%;
 }
 header.homepage .header-wrapper .social-icons {
   margin: 15px 100px 0 0;
+  display: none;
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper .social-icons {
@@ -2741,13 +2777,13 @@ header.homepage .header-wrapper .social-icons a:last-child {
   margin-bottom: 0;
 }
 header.homepage .header-wrapper h1 {
-  font-size: 5.6rem;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  font-weight: bold;
+  font-family: "HKGrotesk", sans-serif;
+  font-size: 4rem;
+  text-align: center;
   color: #fff;
   margin: 0;
   line-height: 1.72;
+  width: 100%;
 }
 @media only screen and (max-width: 1200px) {
   header.homepage .header-wrapper h1 {
@@ -2761,24 +2797,22 @@ header.homepage .header-wrapper h1 {
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper h1 {
-    font-size: 3.6rem;
-    letter-spacing: 4px;
+    font-size: 3.2rem;
+    letter-spacing: 3px;
   }
-}
-header.homepage .header-wrapper h1 div.changing-text {
-  max-width: 900px;
 }
 header.homepage .header-wrapper h1 div.changing-text span {
   background: #fff;
   color: #D32907;
   line-height: 0.9;
   display: inline-block;
-  padding: 20px 12px 3px;
-  margin-left: 20px;
+  padding: 6px 12px 6px;
+  margin-right: 12px;
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper h1 div.changing-text span {
-    padding: 12px 8px 3px;
+    margin-right: 0;
+    padding: 6px 12px 6px;
     margin-bottom: 8px;
   }
 }

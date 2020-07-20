@@ -6,6 +6,7 @@ export const RESET_CURRENT_STATE = 'RESET_CURRENT_STATE';
 export const SET_CURRENT_STATE = 'SET_CURRENT_STATE';
 export const SET_CURRENT_LEVEL_STATE = 'SET_CURRENT_LEVEL_STATE';
 export const SET_COMPANY_PROFILE_IMAGE = 'SET_COMPANY_PROFILE_IMAGE';
+export const SET_INVESTOR_IMAGE = 'SET_INVESTOR_IMAGE';
 
 export const incrementCurrentState = () => ({
     type: INCREMENT_CURRENT_STATE
@@ -39,4 +40,9 @@ export const setCurrentLevelState = currentLevelState => ({
 export const setCompanyProfileImage = props => ({
     type: SET_COMPANY_PROFILE_IMAGE,
     props
+})
+
+export const setInvestorProfileImage = profileImage => ({
+    type: SET_INVESTOR_IMAGE,
+    profileImage
 })

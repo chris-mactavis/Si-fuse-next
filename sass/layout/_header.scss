@@ -1,7 +1,7 @@
 header {
   &.homepage {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url(/images/banner.png);
-    height: 100vh;
+    background: #222;
+    height: 80vh;
     background-size: cover;
     position: relative;
 
@@ -10,23 +10,38 @@ header {
       background-position: 80% top;
     }
 
+    div.particles-wrapper{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+      #tsparticles{
+        width: 100%;
+        height: 100%;
+      }
+    }
+
     .navbar-brand {
       left: calc(50% + 6px) !important;
     }
 
     .header-wrapper {
       display: flex;
-      margin: 0 60px;
+      //margin: 0 60px;
       position: absolute;
       transform: translateY(-50%);
       top: 50%;
+      width: 100%;
+
+
 
       @include media("mobile") {
-        margin: 0 30px;
+        //margin: 0 15px;
       }
 
       .social-icons {
         margin: 15px 100px 0 0;
+        display: none;
 
         @include media("mobile") {
           display: none;
@@ -45,13 +60,16 @@ header {
       }
 
       h1 {
-        font-size: 5.6rem;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        font-weight: bold;
+        font-family: $ffh2;
+        font-size:4rem;
+        text-align: center;
+        //text-transform: uppercase;
+        //letter-spacing: 3px;
+        //font-weight: bold;
         color: #fff;
         margin: 0;
         line-height: 1.72;
+        width: 100%;
 
         @include media("desktop") {
           font-size: 5.5rem;
@@ -62,23 +80,24 @@ header {
         }
 
         @include media("mobile") {
-          font-size: 3.6rem;
-          letter-spacing: 4px;
+          font-size: 3.2rem;
+          letter-spacing: 3px;
         }
 
         div.changing-text {
-          max-width: 900px;
+          //max-width: 900px;
 
           span {
             background: #fff;
             color: $red;
             line-height: 0.9;
             display: inline-block;
-            padding: 20px 12px 3px;
-            margin-left: 20px;
+            padding: 6px 12px 6px;
+            margin-right: 12px;
 
             @include media("mobile") {
-              padding: 12px 8px 3px;
+              margin-right: 0;
+              padding: 6px 12px 6px;
               margin-bottom: 8px;
             }
           }
