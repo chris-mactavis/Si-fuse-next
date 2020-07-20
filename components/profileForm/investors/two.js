@@ -1,25 +1,110 @@
 import {useForm} from "react-hook-form";
-import React, {useEffect} from "react";
-import {useDispatch} from "react-redux";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
-import Router from "next/router";
-import Cookies from "js-cookie";
 import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 import ErrorSpan from "../../UI/ErrorSpan";
 import InvestorProfileHeader from "./InvestorProfileHeader";
+import Select from "react-select";
 
 const InvestorPreference = ({investor, industries, stages}) => {
+    console.log(investor);
+    const interests = investor.interests;
 
     const {register, handleSubmit, errors} = useForm();
 
     const dispatch = useDispatch();
 
+    const gFocus = [
+        {value: 'North Africa', label: 'North Africa'},
+        {value: 'East Africa', label: 'East Africa'},
+        {value: 'South Africa', label: 'South Africa'},
+        {value: 'West Africa', label: 'West Africa'},
+        {value: 'Central Africa', label: 'Central Africa'}
+    ];
+
+    const socialDistancingOptions = [
+        {value: 'Online events & demo days', label: 'Online events & demo days'},
+        {value: 'Crunchbase', label: 'Crunchbase'},
+        {value: 'Linkedin', label: 'Linkedin'},
+        {value: 'Referrals', label: 'Referrals'},
+        {value: 'Investor network', label: 'Investor network'},
+        {value: 'Business Angel networks like ABAN', label: 'Business Angel networks like ABAN'},
+        {value: 'Existing channels', label: 'Existing channels'},
+    ];
+
+    const investmentTypeOptions = [
+        {value: 'Equity', label: 'Equity'},
+        {value: 'Safe', label: 'Safe'},
+        {value: 'Debt Financing', label: 'Debt Financing'},
+        {value: 'Convertible Notes', label: 'Convertible Notes'},
+        {value: 'Grants', label: 'Grants'},
+    ];
+
+    const defaultSocialDistancing = JSON.parse(interests.dealflow_channel)
+        .map(df => socialDistancingOptions.find(sdo => sdo.value === df));
+    const defaultInvestmentType = JSON.parse(interests.investment_type)
+        .map(df => investmentTypeOptions.find(sdo => sdo.value === df));
+    const defaultGeographicalFocus = JSON.parse(interests.geographical_focus)
+        .map(df => gFocus.find(sdo => sdo.value === df));
+    const defaultStartupStage = JSON.parse(interests.investment_stage_id)
+        .map(df => {
+            const theStage = stages.find(stage => stage.id == df);
+            return {label: theStage.stage, value: theStage.id}
+        });
+    const defaultIndustryFocus = JSON.parse(interests.industry_ids)
+        .map(df => {
+            const gf = industries.find(industry => industry.id == df);
+            return {label: gf.industry, value: gf.id}
+        });
+
+    const savedInvestorProfileImage = useSelector(state => state.profile.investorProfileImage);
+    const [industryFocus, setIndustryFocus] = useState(JSON.parse(interests.industry_ids) || []);
+    const [industryError, setIndustryError] = useState('');
+    const [geographyFocus, setGeographyFocus] = useState(JSON.parse(interests.geographical_focus) || []);
+    const [geographyError, setGeographyError] = useState('');
+    const [startupStage, setStartupStage] = useState(JSON.parse(interests.investment_stage_id) || []);
+    const [startupStageError, setStartupStageError] = useState('');
+    const [socialDistancingChannels, setSocialDistancingChannels] = useState(JSON.parse(interests.dealflow_channel) ||[]);
+    const [socialDistancingChannelsError, setSocialDistancingChannelsError] = useState('');
+    const [investmentTypes, setInvestmentTypes] = useState(JSON.parse(interests.investment_type) || []);
+    const [investmentTypesError, setInvestmentTypesError] = useState('');
+
     const onSubmitHandler = async data => {
+        setIndustryError('');
+        setGeographyError('');
+        setStartupStageError('');
+        setSocialDistancingChannelsError('');
+        setInvestmentTypesError('');
+
+        if (industryFocus.length === 0) {
+            setIndustryError('This field is required');
+            return;
+        }
+        if (geographyFocus.length === 0) {
+            setGeographyError('This field is required');
+            return;
+        }
+        if (startupStage.length === 0) {
+            setStartupStageError('This field is required');
+            return;
+        }
+        if (socialDistancingChannels.length === 0) {
+            setSocialDistancingChannelsError('This field is required');
+            return;
+        }
+        if (investmentTypes.length === 0) {
+            setInvestmentTypesError('This field is required');
+            return;
+        }
+
+        data = {...data, industry_ids: industryFocus, geographical_focus: geographyFocus, investment_stage_id: startupStage, dealflow_channel: socialDistancingChannels, investment_type: investmentTypes};
+
         dispatch(loader());
         try {
-            await axiosInstance.post('investors/interest', data, {
+            const {data: response} = await axiosInstance.post('investors/interest', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -55,22 +140,21 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="row">
                                             <div className="col-md-4">
-                                                <img className="img-fluid" src={investor.profile.profile_pic_url} alt=""/>
+                                                <img className="img-fluid" src={savedInvestorProfileImage || investor.profile.profile_pic_url} alt=""/>
                                                 <br/>
                                                 <h5 className="mt-2">{investor.profile.user.first_name} {investor.profile.user.last_name}</h5>
                                             </div>
 
                                             <div className="col-md-8">
                                                 <div className="input-group-container">
-                                                    // Make multi-select
-                                                    <select ref={register({required: 'This field is required'})} name="industry_id"
-                                                            defaultValue={hasInterests() ? investor.interests.industry_id : ''}>
-                                                        <option value="">Industry focus</option>
-                                                        {
-                                                            industries.map(({industry, id}) => <option key={id} value={id}>{industry}</option>)
-                                                        }
-                                                    </select>
-                                                    {errors.industry_id && <ErrorSpan>{errors.industry_id.message}</ErrorSpan>}
+                                                    <Select
+                                                        placeholder="Industry Focus"
+                                                        options={industries.map(({industry, id}) => ({value: id, label: industry}))}
+                                                        defaultValue={defaultIndustryFocus}
+                                                        onChange={(val) => setIndustryFocus(val ? val.map(v => v.value) : [])}
+                                                        isMulti
+                                                    />
+                                                    {industryError && <ErrorSpan>{industryError}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
@@ -88,19 +172,17 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    // Make multi-select
-                                                    <select name="geographical_focus" defaultValue={hasInterests() ? investor.interests.geographical_focus : ''} ref={register}>
-                                                        <option value="">Geographical focus</option>
-                                                        <option value="North Africa">North Africa</option>
-                                                        <option value="East Africa">East Africa</option>
-                                                        <option value="South Africa">South Africa</option>
-                                                        <option value="West Africa">West Africa</option>
-                                                        <option value="Central Africa">Central Africa</option>
-                                                    </select>
+                                                    <Select
+                                                        placeholder="Geographical Focus"
+                                                        options={gFocus}
+                                                        defaultValue={defaultGeographicalFocus}
+                                                        onChange={(val) => setGeographyFocus(val ? val.map(v => v.value) : [])}
+                                                        isMulti
+                                                    />
+                                                    {geographyError && <ErrorSpan>{geographyError}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    // Connect to API
                                                     <select name="investment-range" id="">
                                                         <option value="">Your Investment Range</option>
                                                         <option value="">$5,0000 - $10,000</option>
@@ -114,14 +196,14 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    // Connect to API, Make multi select
-                                                    {/*<select name="investment_stage_id" defaultValue={hasInterests() ? investor.interests.investment_stage_id : ''} ref={register({required: 'This field is required'})}>*/}
-                                                    <select name="investment_stage_id" defaultValue={hasInterests() ? investor.interests.investment_stage_id : ''}>
-                                                        <option value="">Target Startup Stage</option>
-                                                        <option value="">dummy option</option>
-                                                        {/*{stages.map(({stage, id}) => <option key={id} value={id}>{stage}</option>)}*/}
-                                                    </select>
-                                                    {errors.investment_stage_id && <ErrorSpan>{errors.investment_stage_id.message}</ErrorSpan>}
+                                                    <Select
+                                                        placeholder="Target Startup Stage"
+                                                        options={stages.map(({stage, id}) => ({label: stage, value: id}))}
+                                                        defaultValue={defaultStartupStage}
+                                                        onChange={(val) => setStartupStage(val ? val.map(v => v.value) : [])}
+                                                        isMulti
+                                                    />
+                                                    {startupStageError && <ErrorSpan>{startupStageError}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
@@ -191,20 +273,14 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    // Make multi-select
-                                                    <select name="dealflow_channel"
-                                                            defaultValue={hasInterests() ? investor.interests.dealflow_channel : ''}
-                                                            ref={register}>
-                                                        <option value="">Social distancing dealflow channels?</option>
-                                                        <option value="Online events & demo days">Online events & demo days</option>
-                                                        <option value="Crunchbase">Crunchbase</option>
-                                                        <option value="Linkedin">Linkedin</option>
-                                                        <option value="Referrals">Referrals</option>
-                                                        <option value="Investor network">Investor network</option>
-                                                        <option value="Business Angel networks like ABAN">Business Angel networks like ABAN
-                                                        </option>
-                                                        <option value="Existing channels">Existing channels</option>
-                                                    </select>
+                                                    <Select
+                                                        placeholder="Social distancing dealflow channels?"
+                                                        options={socialDistancingOptions}
+                                                        defaultValue={defaultSocialDistancing}
+                                                        onChange={(val) => setSocialDistancingChannels(val ? val.map(v => v.value) : [])}
+                                                        isMulti
+                                                    />
+                                                    {socialDistancingChannelsError && <ErrorSpan>{socialDistancingChannelsError}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
@@ -223,17 +299,14 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    // Make multi-select
-                                                    <select name="investment_type"
-                                                            defaultValue={hasInterests() ? investor.interests.investment_type : ''}
-                                                            ref={register}>
-                                                        <option value="">Investment Type</option>
-                                                        <option value="Equity">Equity</option>
-                                                        <option value="Safe">Safe</option>
-                                                        <option value="Debt Financing">Debt Financing</option>
-                                                        <option value="Convertible Notes">Convertible Notes</option>
-                                                        <option value="Grants">Grants</option>
-                                                    </select>
+                                                    <Select
+                                                        placeholder="Investment Type"
+                                                        options={investmentTypeOptions}
+                                                        defaultValue={defaultInvestmentType}
+                                                        onChange={(val) => setInvestmentTypes(val ? val.map(v => v.value) : [])}
+                                                        isMulti
+                                                    />
+                                                    {investmentTypesError && <ErrorSpan>{investmentTypesError}</ErrorSpan>}
                                                 </div>
                                             </div>
                                         </div>

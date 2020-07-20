@@ -1,6 +1,6 @@
 import React from "react";
 import {useForm} from "react-hook-form";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loader} from "../../../store/actions/loader";
 import Router from "next/router";
 import Cookies from "js-cookie";
@@ -18,9 +18,10 @@ const InvestorMoreInfo = ({investor, stages}) => {
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
-            await axiosInstance.post('investors/interest', data, {
+            await axiosInstance.post('investors/interest-level', data, {
                 headers: {
-                    Authorization: `Bearer ${Token()}`
+                    Authorization: `Bearer ${Token()}`,
+                    'Content-Type': 'application/json'
                 }
             });
             dispatch(loader());
