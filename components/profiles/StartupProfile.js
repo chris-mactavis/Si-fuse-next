@@ -140,7 +140,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     const [starRating, setStarRating] = useState(startupRating || {formatted_rating: 0, overall_rating: 0, total_rating: 0});
 
     const [startupProf, setStartupProfile] = useState({company, product_services, finance, market, profile, level});
-
+    console.log(startupProf);
     const {register, handleSubmit, reset} = useForm();
 
     const toggleFormHandler = (item) => {
@@ -534,40 +534,40 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                 <div className="col-md-8">
                     <div className="startup-heading" id="overview">
                         <h5>Overview</h5>
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="startup-description">
-                                    {
-                                        hasEdit &&
-                                        <img onClick={() => toggleFormHandler('about')} className="edit-icon"
-                                             title="Edit"
-                                             src="/images/icon/pencil-icon.svg" alt=""/>
-                                    }
+                        {/*<div className="row">*/}
+                        {/*    <div className="col-12">*/}
+                        {/*        <div className="startup-description">*/}
+                        {/*            {*/}
+                        {/*                hasEdit &&*/}
+                        {/*                <img onClick={() => toggleFormHandler('about')} className="edit-icon"*/}
+                        {/*                     title="Edit"*/}
+                        {/*                     src="/images/icon/pencil-icon.svg" alt=""/>*/}
+                        {/*            }*/}
 
-                                    <img src="/images/icon/building.svg" alt=""/>
-                                    <p className="profile-name">
-                                        About {startupProf.company.name}
-                                    </p>
-                                    {
-                                        !toggleAbout && <p className="text-description">
-                                            {startupProf.profile.about}
-                                        </p>
-                                    }
-                                    {
-                                        toggleAbout && <form onSubmit={handleSubmit(onSubmitHandler)}
-                                                             className="profile-details overview-form w-100">
-                                            <textarea rows="5" name="about" ref={register}
-                                                      className="full-width edit-input"
-                                                      defaultValue={startupProf.profile.about}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                    <div className="text-right">
-                                        <a href="#">Read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {/*            <img src="/images/icon/building.svg" alt=""/>*/}
+                        {/*            <p className="profile-name">*/}
+                        {/*                About {startupProf.company.name}*/}
+                        {/*            </p>*/}
+                        {/*            {*/}
+                        {/*                !toggleAbout && <p className="text-description">*/}
+                        {/*                    {startupProf.profile.about}*/}
+                        {/*                </p>*/}
+                        {/*            }*/}
+                        {/*            {*/}
+                        {/*                toggleAbout && <form onSubmit={handleSubmit(onSubmitHandler)}*/}
+                        {/*                                     className="profile-details overview-form w-100">*/}
+                        {/*                    <textarea rows="5" name="about" ref={register}*/}
+                        {/*                              className="full-width edit-input"*/}
+                        {/*                              defaultValue={startupProf.profile.about}/>*/}
+                        {/*                    <button className="btn btn-sm" type={"submit"}>Update</button>*/}
+                        {/*                </form>*/}
+                        {/*            }*/}
+                        {/*            <div className="text-right">*/}
+                        {/*                <a href="#">Read more</a>*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
                         <div className="row">
                             <div className="col-md-4">
