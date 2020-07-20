@@ -47,7 +47,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
                 }
             });
             dispatch(loader());
-            dispatch(setInvestorProfileImage(response.data.profile.profile_pic_url))
+            dispatch(setInvestorProfileImage({image: response.data.profile.profile_pic_url, name: res.data.profile.first_name + ' ' + res.data.profile.last_name}))
             dispatch(incrementCurrentState());
         } catch (e) {
             console.log(e);

@@ -60,7 +60,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
             return {label: gf.industry, value: gf.id}
         }) : [];
 
-    const savedInvestorProfileImage = useSelector(state => state.profile.investorProfileImage);
+    const savedInvestorProfile = useSelector(state => state.profile.investorProfileImage);
     const [industryFocus, setIndustryFocus] = useState(interests ? (JSON.parse(interests.industry_ids) || []): []);
     const [industryError, setIndustryError] = useState('');
     const [geographyFocus, setGeographyFocus] = useState(interests ? (JSON.parse(interests.geographical_focus) || []): []);
@@ -140,9 +140,9 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="row">
                                             <div className="col-md-4">
-                                                <img className="img-fluid" src={savedInvestorProfileImage || investor.profile.profile_pic_url} alt=""/>
+                                                <img className="img-fluid" src={savedInvestorProfile.investorProfileImage || investor.profile.profile_pic_url} alt=""/>
                                                 <br/>
-                                                <h5 className="mt-2">{investor.profile.user.first_name} {investor.profile.user.last_name}</h5>
+                                                <h5 className="mt-2">{savedInvestorProfile.investorProfileName || (investor.profile.user.first_name + ' ' + investor.profile.user.last_name)}</h5>
                                             </div>
 
                                             <div className="col-md-8">
