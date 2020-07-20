@@ -839,6 +839,7 @@ section.image-text .investors .img-01 {
 @media only screen and (max-width: 576px) {
   section.image-text .investors .img-01 {
     height: 75px;
+    margin-left: 0;
   }
 }
 section.image-text .investors h2 {
@@ -2727,8 +2728,8 @@ footer .copy-wrapper p {
 }
 
 header.homepage {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url(/images/banner-img.jpg);
-  height: 100vh;
+  background: #222;
+  height: 80vh;
   background-size: cover;
   position: relative;
 }
@@ -2738,23 +2739,28 @@ header.homepage {
     background-position: 80% top;
   }
 }
+header.homepage div.particles-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+header.homepage div.particles-wrapper #tsparticles {
+  width: 100%;
+  height: 100%;
+}
 header.homepage .navbar-brand {
   left: calc(50% + 6px) !important;
 }
 header.homepage .header-wrapper {
   display: flex;
-  margin: 0 60px;
   position: absolute;
   transform: translateY(-50%);
   top: 50%;
-}
-@media only screen and (max-width: 576px) {
-  header.homepage .header-wrapper {
-    margin: 0 15px;
-  }
+  width: 100%;
 }
 header.homepage .header-wrapper .social-icons {
   margin: 15px 100px 0 0;
+  display: none;
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper .social-icons {
@@ -2771,13 +2777,13 @@ header.homepage .header-wrapper .social-icons a:last-child {
   margin-bottom: 0;
 }
 header.homepage .header-wrapper h1 {
-  font-size: 5.6rem;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  font-weight: bold;
+  font-family: "HKGrotesk", sans-serif;
+  font-size: 4rem;
+  text-align: center;
   color: #fff;
   margin: 0;
   line-height: 1.72;
+  width: 100%;
 }
 @media only screen and (max-width: 1200px) {
   header.homepage .header-wrapper h1 {
@@ -2795,21 +2801,18 @@ header.homepage .header-wrapper h1 {
     letter-spacing: 3px;
   }
 }
-header.homepage .header-wrapper h1 div.changing-text {
-  max-width: 900px;
-}
 header.homepage .header-wrapper h1 div.changing-text span {
   background: #fff;
   color: #D32907;
   line-height: 0.9;
   display: inline-block;
-  padding: 20px 12px 3px;
-  margin-left: 20px;
+  padding: 6px 12px 6px;
+  margin-right: 12px;
 }
 @media only screen and (max-width: 576px) {
   header.homepage .header-wrapper h1 div.changing-text span {
-    margin-left: 0;
-    padding: 12px 8px 3px;
+    margin-right: 0;
+    padding: 6px 12px 6px;
     margin-bottom: 8px;
   }
 }

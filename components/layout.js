@@ -10,6 +10,7 @@ import {useDispatch, useSelector,} from "react-redux";
 import Notifier from "./UI/Notifier";
 import ImageViewer from "./UI/ImageViewer";
 import {fetchNotifications} from "../store/actions/notification";
+import Particles from "react-particles-js";
 
 export default function Layout({children, page, headerClass, headerContent, redBar = false, whiteAccount = false, footer = true}) {
     const isLoggedIn = useSelector(state => state.auth.loggedIn);
@@ -74,6 +75,13 @@ export default function Layout({children, page, headerClass, headerContent, redB
                 <SideBar isLoggedIn={isLoggedIn}/>
 
                 {page === 'Home' ? <HeaderScroll/> : null}
+                {page === 'Home' ?
+
+                    <div className="particles-wrapper">
+                        <Particles />
+                    </div>
+
+                : null}
             </header>
 
             {children}

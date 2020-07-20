@@ -8,6 +8,7 @@ import {resetCurrentState} from "../store/actions/profile";
 import {useDispatch} from "react-redux";
 import Token from "../utils/Token";
 
+
 const Home = ({events, blogs}) => {
     const dispatch = useDispatch();
 
