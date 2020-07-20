@@ -3016,6 +3016,9 @@ header.single-events {
 header.events {
   background-image: url(/images/events-banner.jpg);
 }
+header.timeline {
+  background-image: url(/images/events-banner.jpg);
+}
 header.faqs {
   background-image: url(/images/faqs-banner.jpg);
 }

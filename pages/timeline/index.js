@@ -15,7 +15,7 @@ const Timeline = ({data, hasProfile}) => {
 
     const {data: startups} = data;
 
-    return <Layout page="Timeline" headerClass="page-header no-bg" redBar>
+    return <Layout page="Timeline" headerClass="page-header timeline" headerContent={<h1>My Timeline</h1>} whiteAccount>
         <Head>
             <title>Timeline</title>
             <script src="/js/rater.min.js"/>
@@ -23,12 +23,6 @@ const Timeline = ({data, hasProfile}) => {
 
         <section className="timeline">
             <div className="container">
-
-                <div className="row">
-                    <div className="col-12">
-                        <h2 className="text-center">My Timeline</h2>
-                    </div>
-                </div>
 
                 {
                     startups.map(
