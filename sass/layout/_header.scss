@@ -22,7 +22,7 @@ header {
       top: 50%;
 
       @include media("mobile") {
-        margin: 0 30px;
+        margin: 0 15px;
       }
 
       .social-icons {
@@ -62,8 +62,8 @@ header {
         }
 
         @include media("mobile") {
-          font-size: 3.6rem;
-          letter-spacing: 4px;
+          font-size: 3.2rem;
+          letter-spacing: 3px;
         }
 
         div.changing-text {
@@ -78,6 +78,7 @@ header {
             margin-left: 20px;
 
             @include media("mobile") {
+              margin-left: 0;
               padding: 12px 8px 3px;
               margin-bottom: 8px;
             }

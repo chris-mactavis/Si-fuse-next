@@ -9,13 +9,13 @@ const InvestorProfileHeader = ({isChecked, isClickable, isActive}) => {
             case 1:
                 return '8%';
             case 2:
-                return '55%';
+                return '50%';
             default:
                 return '105%';
         }
     }
 
-    const labels = ['Basic Information', 'Startup Preference', 'Investment Level'];
+    const labels = ['Basic Information', 'Investment Composition', 'Startup Preference'];
 
     return <div className="steps-wrapper startup-profile">
         <div className="steps">

@@ -425,11 +425,11 @@ export default function ProfileOne({industries, startup, locations}) {
                                         <div className="d-flex">
                                             <button className="btn prev mr-auto"
                                                     onClick={() => Router.push('/profile/edit-levels')} type="button">
-                                                <span/> Previous
+                                                <span/> Prev
                                             </button>
 
                                             <button className="btn next ml-auto" type="submit">
-                                               Save & Next <span/>
+                                               Save <span/>
                                             </button>
                                         </div>
                                     </form>

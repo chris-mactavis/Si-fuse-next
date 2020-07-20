@@ -12,7 +12,7 @@ import InvestorProfileHeader from "./InvestorProfileHeader";
 import Slim from "../../../public/slim/slim.react";
 
 const InvestorBasicInfo = ({investor, locations}) => {
-    console.log(investor);
+    // console.log(investor);
 
     const dispatch = useDispatch();
 
@@ -104,13 +104,13 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                 <div className="col-md-9 mx-auto">
                                     <InvestorProfileHeader/>
 
-                                    <div className="numbers d-md-none num-alone">
-                                        <p>Basic Information</p>
+                                    <div className="d-md-none">
+                                        <h4 className="text-center mb-3">Basic Information</h4>
                                     </div>
 
                                     <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
                                         <div className="row">
-                                            <div className="col-md-4 profile-pic">
+                                            <div className="col-md-4 profile-pic mb-5">
                                                 {
                                                     <Slim ratio="1:1"
                                                           service={slimService.bind(this)}
@@ -194,7 +194,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
 
                                                 <div className="input-group-container">
                                                     <div className="row">
-                                                        <div className="col-3 pr-0">
+                                                        <div className="col-md-3 col-4 pr-0">
                                                             <select name="country_code" className="select2 country"
                                                                     ref={register({required: "This field is required"})}
                                                                     defaultValue={hasProfile() ? investor.profile.country_code : ''}>
@@ -206,7 +206,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                             {errors.country_code && <Error>{errors.country_code.message}</Error>}
                                                         </div>
 
-                                                        <div className="col-9">
+                                                        <div className="col-md-9 col-8">
                                                             <input ref={register({required: "This field is required"})}
                                                                    className="w-100"
                                                                    type="number" name="phone" id=""
@@ -249,7 +249,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
 
                                         <div className="d-flex">
                                             <button className="btn next ml-auto" type="submit">
-                                                Save & Next <span/>
+                                                Save <span/>
                                             </button>
                                         </div>
                                     </form>
