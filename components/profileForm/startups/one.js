@@ -98,58 +98,25 @@ export default function ProfileOne({industries, startup, locations}) {
                                 <div className="col-md-9 mx-auto">
                                     <StartupProfileHeader/>
 
-                                    <div className="numbers d-md-none num-alone">
-                                        <p>Your company</p>
+                                    <div className="d-md-none">
+                                        <h4 className="text-center mb-3">Your company</h4>
                                     </div>
 
                                     <form onSubmit={handleSubmit(submitHandler)} className="profile-details">
                                         <div className="row">
-                                            <div className="col-md-4 company-logo">
-                                                {/*<DropNCrop onChange={onChangePicture}*/}
-                                                {/*           cropperOptions={{aspectRatio: 1 / 1}}*/}
-                                                {/*           value={profilePicture}/>*/}
-
-                                                {/*<FilePond*/}
-                                                {/*    // ref={ref => (this.pond = ref)}*/}
-                                                {/*    files={profilePicture}*/}
-                                                {/*    allowMultiple={false}*/}
-                                                {/*    labelIdle=""*/}
-                                                {/*    name="files"*/}
-                                                {/*    onupdatefiles={fileItems => {*/}
-                                                {/*        setProfilePicture(fileItems.map(fileItem => fileItem.file))*/}
-                                                {/*    }}*/}
-                                                {/*/>*/}
-
-                                                    {/*<Slim*/}
-                                                    {/*    ratio="1:1"*/}
-                                                    {/*    service={slimService.bind(this)}*/}
-                                                    {/*    serviceFormat="file"*/}
-                                                    {/*    push={true}*/}
-                                                    {/*    label="Company logo <br> (Click here to upload)"*/}
-                                                    {/*>*/}
-                                                    {/*    /!*didInit={ slimInit.bind(this) }>*!/*/}
-                                                    {/*    <img src={hasCompany() ? startup.company.logo_url : null} alt=""/>*/}
-
+                                            <div className="col-md-4 company-logo mb-5">
                                                 {
                                                     <Slim ratio="1:1"
                                                           service={slimService.bind(this)}
                                                           serviceFormat="file"
-                                                          push={true}>
+                                                          push={true}
+                                                          label="Company logo <br> (Click here to upload)"
+                                                    >
                                                         <img src={hasCompany() ? startup.company.logo_url :null} alt=""/>
                                                         <input type="file" name="foo"/>
                                                     </Slim>
                                                 }
 
-                                                {/*<input ref={register({required: 'This field is required'})}*/}
-                                                {/*       type="hidden"*/}
-                                                {/*       defaultValue={profilePicture.result}/>*/}
-                                                {/*{*/}
-                                                {/*    profilePicture.result ? (*/}
-                                                {/*        <>*/}
-                                                {/*            <img className="profile-pic img-fluid img-thumbnail mt-5"*/}
-                                                {/*                 src={profilePicture.result}/>*/}
-                                                {/*        </>) : null*/}
-                                                {/*}*/}
                                                 <span className="d-block">{errors.logo &&
                                                 <Error>Please upload a profile picture!</Error>}</span>
                                             </div>
@@ -190,10 +157,10 @@ export default function ProfileOne({industries, startup, locations}) {
 
                                                 <div className="input-group-container">
                                                     <div className="row align-items-center">
-                                                        <div className="col-3">
+                                                        <div className="col-5 col-md-3">
                                                             <div>Date founded</div>
                                                         </div>
-                                                        <div className="col-9">
+                                                        <div className="col-7 pl-0 col-md-9">
                                                             <input ref={register({required: 'This field is required'})}
                                                                    className="w-100 full-width mt-0"
                                                                    name="doc" type="date" placeholder="Date of Creation"
@@ -324,7 +291,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                                     name="facebook" type="text"
                                                                     className="w-100"
                                                                     defaultValue={hasCompany() ? startup.company.facebook : ''}
-                                                                    placeholder="Facebook profile url"/>
+                                                                    placeholder="Facebook url"/>
                                                                 <span className="d-block">{errors.facebook &&
                                                                 <Error>{errors.facebook.message}</Error>}</span>
                                                             </div>
@@ -337,7 +304,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                                     name="instagram" type="text"
                                                                     className="w-100"
                                                                     defaultValue={hasCompany() ? startup.company.instagram : ''}
-                                                                    placeholder="Instagram profile url"/>
+                                                                    placeholder="Instagram url"/>
                                                                 <span className="d-block">{errors.instagram &&
                                                                 <Error>{errors.instagram.message}</Error>}</span>
                                                             </div>
@@ -350,7 +317,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                                     name="twitter" type="text"
                                                                     className="w-100"
                                                                     defaultValue={hasCompany() ? startup.company.twitter : ''}
-                                                                    placeholder="Twitter profile url"/>
+                                                                    placeholder="Twitter url"/>
                                                                 <span className="d-block">{errors.twitter &&
                                                                 <Error>{errors.twitter.message}</Error>}</span>
                                                             </div>
@@ -363,7 +330,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                                     name="linkedin" type="text"
                                                                     className="w-100"
                                                                     defaultValue={hasCompany() ? startup.company.linkedin : ''}
-                                                                    placeholder="LinkedIn profile url"/>
+                                                                    placeholder="LinkedIn url"/>
                                                                 <span className="d-block">{errors.linkedin &&
                                                                 <Error>{errors.linkedin.message}</Error>}</span>
                                                             </div>

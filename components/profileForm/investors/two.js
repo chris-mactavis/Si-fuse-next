@@ -43,33 +43,33 @@ const InvestorPreference = ({investor, industries, stages}) => {
         {value: 'Grants', label: 'Grants'},
     ];
 
-    const defaultSocialDistancing = JSON.parse(interests.dealflow_channel) ? JSON.parse(interests.dealflow_channel)
+    const defaultSocialDistancing = (interests && JSON.parse(interests.dealflow_channel)) ? JSON.parse(interests.dealflow_channel)
         .map(df => socialDistancingOptions.find(sdo => sdo.value === df)) : [];
-    const defaultInvestmentType = JSON.parse(interests.investment_type) ? JSON.parse(interests.investment_type)
+    const defaultInvestmentType = (interests && JSON.parse(interests.investment_type)) ? JSON.parse(interests.investment_type)
         .map(df => investmentTypeOptions.find(sdo => sdo.value === df)) : [];
-    const defaultGeographicalFocus = JSON.parse(interests.geographical_focus) ? JSON.parse(interests.geographical_focus)
+    const defaultGeographicalFocus = (interests && JSON.parse(interests.geographical_focus)) ? JSON.parse(interests.geographical_focus)
         .map(df => gFocus.find(sdo => sdo.value === df)) : [];
-    const defaultStartupStage = JSON.parse(interests.investment_stage_id) ? JSON.parse(interests.investment_stage_id)
+    const defaultStartupStage = (interests && JSON.parse(interests.investment_stage_id)) ? JSON.parse(interests.investment_stage_id)
         .map(df => {
             const theStage = stages.find(stage => stage.id == df);
             return {label: theStage.stage, value: theStage.id}
         }) : [];
-    const defaultIndustryFocus = JSON.parse(interests.industry_ids) ? JSON.parse(interests.industry_ids)
+    const defaultIndustryFocus = (interests && JSON.parse(interests.industry_ids)) ? JSON.parse(interests.industry_ids)
         .map(df => {
             const gf = industries.find(industry => industry.id == df);
             return {label: gf.industry, value: gf.id}
         }) : [];
 
     const savedInvestorProfileImage = useSelector(state => state.profile.investorProfileImage);
-    const [industryFocus, setIndustryFocus] = useState(JSON.parse(interests.industry_ids) || []);
+    const [industryFocus, setIndustryFocus] = useState(interests ? (JSON.parse(interests.industry_ids) || []): []);
     const [industryError, setIndustryError] = useState('');
-    const [geographyFocus, setGeographyFocus] = useState(JSON.parse(interests.geographical_focus) || []);
+    const [geographyFocus, setGeographyFocus] = useState(interests ? (JSON.parse(interests.geographical_focus) || []): []);
     const [geographyError, setGeographyError] = useState('');
-    const [startupStage, setStartupStage] = useState(JSON.parse(interests.investment_stage_id) || []);
+    const [startupStage, setStartupStage] = useState(interests ? (JSON.parse(interests.investment_stage_id) || []): []);
     const [startupStageError, setStartupStageError] = useState('');
-    const [socialDistancingChannels, setSocialDistancingChannels] = useState(JSON.parse(interests.dealflow_channel) ||[]);
+    const [socialDistancingChannels, setSocialDistancingChannels] = useState(interests ? (JSON.parse(interests.dealflow_channel) ||[]): []);
     const [socialDistancingChannelsError, setSocialDistancingChannelsError] = useState('');
-    const [investmentTypes, setInvestmentTypes] = useState(JSON.parse(interests.investment_type) || []);
+    const [investmentTypes, setInvestmentTypes] = useState(interests ? (JSON.parse(interests.investment_type) || []): []);
     const [investmentTypesError, setInvestmentTypesError] = useState('');
 
     const onSubmitHandler = async data => {

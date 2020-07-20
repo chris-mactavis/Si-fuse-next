@@ -68,6 +68,12 @@ export default function Layout({children, page, headerClass, headerContent, redB
             <ImageViewer />
 
             <header className={headerClass}>
+                {page === 'Home' ?
+                    <div className="particles-wrapper">
+                        <Particles />
+                    </div>
+                    : null}
+
                 <TopBar redBar={redBar} isLoggedIn={isLoggedIn} whiteAccount={whiteAccount}/>
 
                 {headerContent}
@@ -75,13 +81,6 @@ export default function Layout({children, page, headerClass, headerContent, redB
                 <SideBar isLoggedIn={isLoggedIn}/>
 
                 {page === 'Home' ? <HeaderScroll/> : null}
-                {page === 'Home' ?
-
-                    <div className="particles-wrapper">
-                        <Particles />
-                    </div>
-
-                : null}
             </header>
 
             {children}
