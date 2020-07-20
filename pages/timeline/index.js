@@ -35,6 +35,12 @@ const Timeline = ({data, hasProfile}) => {
                         (startup, index) => <StartupCard key={index} startup={startup} />
                     )
                 }
+
+                {
+                    startups.length === 0 && <div className="col-md-4">
+                        No startups!
+                    </div>
+                }
             </div>
         </section>
 
