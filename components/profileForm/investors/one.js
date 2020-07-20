@@ -120,8 +120,8 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                 <Slim ratio="1:1"
                                                       service={slimService.bind(this)}
                                                       serviceFormat="file"
-                                                      push={true}
                                                       label="Profile Picture <br> (Click here to upload)"
+                                                      push={true}
                                                 >
                                                     {/*didInit={ slimInit.bind(this) }>*/}
                                                     <img src={hasProfilePic() ? investor.profile.profile_pic_url : null}
