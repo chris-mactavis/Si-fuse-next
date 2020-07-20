@@ -76,7 +76,7 @@ export default function ProfileOne({industries, startup, locations}) {
 
     const slimService = (formData, progress, success, failure, slim) => {
         // slim instance reference
-        console.log(slim)
+        // console.log(slim)
 
         // form data to post to server
         // set serviceFormat to "file" to receive an array of files
