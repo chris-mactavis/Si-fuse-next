@@ -1390,27 +1390,31 @@ section {
         position: relative;
         width: 100%;
 
+        iframe {
+          width: 100%!important;
+        }
+
         video {
           width: 100%;
           cursor: pointer;
         }
 
-        &::before {
-          content: '';
-
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 40px;
-          height: 40px;
-
-          background-image: url("/images/icon/play.svg");
-          background-size: contain;
-          background-repeat: no-repeat;
-
-          cursor: pointer;
-        }
+        //&::before {
+        //  content: '';
+        //
+        //  position: absolute;
+        //  top: 50%;
+        //  left: 50%;
+        //  transform: translate(-50%, -50%);
+        //  width: 40px;
+        //  height: 40px;
+        //
+        //  background-image: url("/images/icon/play.svg");
+        //  background-size: contain;
+        //  background-repeat: no-repeat;
+        //
+        //  cursor: pointer;
+        //}
       }
 
       &:hover {
