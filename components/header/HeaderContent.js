@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function () {
-    return<div className="header-wrapper">
+    return <div className="header-wrapper">
         <div className="social-icons">
             <a target="_blank" href="//www.facebook.com/SI-Fuse-105249634372571/">
                 <img src="images/icon/facebook.svg" alt=""/>

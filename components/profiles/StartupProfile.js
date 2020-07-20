@@ -12,6 +12,8 @@ import {startupLevel} from "../../helpers";
 const StartupProfile = ({rating, startupComments, company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
     const dispatch = useDispatch();
 
+    const createMarkup = (content) => ({__html: content});
+
     let levelKeys = [];
 
     const userType = loggedInUser.user_type.user_type;
@@ -140,7 +142,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     const [starRating, setStarRating] = useState(startupRating || {formatted_rating: 0, overall_rating: 0, total_rating: 0});
 
     const [startupProf, setStartupProfile] = useState({company, product_services, finance, market, profile, level});
-
+    console.log(startupProf);
     const {register, handleSubmit, reset} = useForm();
 
     const toggleFormHandler = (item) => {
@@ -534,40 +536,40 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                 <div className="col-md-8">
                     <div className="startup-heading" id="overview">
                         <h5>Overview</h5>
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="startup-description">
-                                    {
-                                        hasEdit &&
-                                        <img onClick={() => toggleFormHandler('about')} className="edit-icon"
-                                             title="Edit"
-                                             src="/images/icon/pencil-icon.svg" alt=""/>
-                                    }
+                        {/*<div className="row">*/}
+                        {/*    <div className="col-12">*/}
+                        {/*        <div className="startup-description">*/}
+                        {/*            {*/}
+                        {/*                hasEdit &&*/}
+                        {/*                <img onClick={() => toggleFormHandler('about')} className="edit-icon"*/}
+                        {/*                     title="Edit"*/}
+                        {/*                     src="/images/icon/pencil-icon.svg" alt=""/>*/}
+                        {/*            }*/}
 
-                                    <img src="/images/icon/building.svg" alt=""/>
-                                    <p className="profile-name">
-                                        About {startupProf.company.name}
-                                    </p>
-                                    {
-                                        !toggleAbout && <p className="text-description">
-                                            {startupProf.profile.about}
-                                        </p>
-                                    }
-                                    {
-                                        toggleAbout && <form onSubmit={handleSubmit(onSubmitHandler)}
-                                                             className="profile-details overview-form w-100">
-                                            <textarea rows="5" name="about" ref={register}
-                                                      className="full-width edit-input"
-                                                      defaultValue={startupProf.profile.about}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                    <div className="text-right">
-                                        <a href="#">Read more</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {/*            <img src="/images/icon/building.svg" alt=""/>*/}
+                        {/*            <p className="profile-name">*/}
+                        {/*                About {startupProf.company.name}*/}
+                        {/*            </p>*/}
+                        {/*            {*/}
+                        {/*                !toggleAbout && <p className="text-description">*/}
+                        {/*                    {startupProf.profile.about}*/}
+                        {/*                </p>*/}
+                        {/*            }*/}
+                        {/*            {*/}
+                        {/*                toggleAbout && <form onSubmit={handleSubmit(onSubmitHandler)}*/}
+                        {/*                                     className="profile-details overview-form w-100">*/}
+                        {/*                    <textarea rows="5" name="about" ref={register}*/}
+                        {/*                              className="full-width edit-input"*/}
+                        {/*                              defaultValue={startupProf.profile.about}/>*/}
+                        {/*                    <button className="btn btn-sm" type={"submit"}>Update</button>*/}
+                        {/*                </form>*/}
+                        {/*            }*/}
+                        {/*            <div className="text-right">*/}
+                        {/*                <a href="#">Read more</a>*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
                         <div className="row">
                             <div className="col-md-4">
@@ -581,15 +583,28 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                     </p>
                                     {
                                         !toggleFund && <p className="color-green">
-                                            ${startupProf.finance.funding_needed}
+                                            {startupProf.finance.investment_ask}
                                         </p>
                                     }
                                     {
                                         toggleFund && <form onSubmit={handleSubmit(onSubmitFinanceHandler)}
                                                             className="profile-details overview-form w-100">
-                                            <input type="text" ref={register} name="funding_needed"
-                                                   className="full-width edit-input"
-                                                   defaultValue={startupProf.finance.funding_needed}/>
+                                            <select name="investment_ask"
+                                                    ref={register}
+                                                    defaultValue={startupProf.finance.investment_ask}>
+                                                <option value="">What is your investment ask?</option>
+                                                <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                                                <option value="$10,000 - $50,000">$10,000 - $50,000</option>
+                                                <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                                                <option value="$100,000 - $250,000">$100,000 - $250,000</option>
+                                                <option value="$250,000 - $1,000,000">$250,000 - $1,000,000
+                                                </option>
+                                                <option value="$1,000,000 - $2,000,000">$1,000,000 -
+                                                    $2,000,000
+                                                </option>
+                                                <option value="$2,000,000 and above">$2,000,000 and above
+                                                </option>
+                                            </select>
                                             <button className="btn btn-sm" type={"submit"}>Update</button>
                                         </form>
                                     }
@@ -639,7 +654,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
 
                                     {
                                         !toggleCompanyStage && <p className="text-capitalize">
-                                            {startupProf.product_services.company_stage}
+                                            {startupProf.company.company_stage}
                                         </p>
                                     }
 
@@ -647,7 +662,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                         toggleCompanyStage && <form onSubmit={handleSubmit(onSubmitServiceHandler)}
                                                                     className="profile-details overview-form w-100">
                                             <select name="company_stage" ref={register}
-                                                    defaultValue={startupProf.product_services.company_stage}>
+                                                    defaultValue={startupProf.company.company_stage}>
                                                 <option value="">Select Stage</option>
                                                 <option value="concept">Concept</option>
                                                 <option value="early stage">Early stage</option>
@@ -811,7 +826,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                 Value Proposition
                                             </p>
                                             {!toggleValueProposition &&
-                                            <p className="text-description">{startupProf.company.value_proposition}</p>}
+                                            <p className="text-description">{startupProf.product_services.value_proposition}</p>}
 
                                             {
                                                 toggleValueProposition &&
