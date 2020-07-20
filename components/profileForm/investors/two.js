@@ -148,6 +148,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                             <div className="col-md-8">
                                                 <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Industry Focus"
                                                         options={industries.map(({industry, id}) => ({value: id, label: industry}))}
                                                         defaultValue={defaultIndustryFocus}
@@ -173,6 +174,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
 
                                                 <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Geographical Focus"
                                                         options={gFocus}
                                                         defaultValue={defaultGeographicalFocus}
@@ -197,6 +199,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
 
                                                 <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Target Startup Stage"
                                                         options={stages.map(({stage, id}) => ({label: stage, value: id}))}
                                                         defaultValue={defaultStartupStage}
@@ -274,6 +277,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
 
                                                 <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Social distancing dealflow channels?"
                                                         options={socialDistancingOptions}
                                                         defaultValue={defaultSocialDistancing}
@@ -300,6 +304,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
 
                                                 <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Investment Type"
                                                         options={investmentTypeOptions}
                                                         defaultValue={defaultInvestmentType}

@@ -121,8 +121,8 @@ const Home = ({events, blogs}) => {
                 <div className="row mb-md-5 pb-5 pb-md-0">
                     <div className="col-lg-9 col-12 mx-auto">
                         <div className="row">
-                            <div className="col-lg-6 col-sm-7 col-12 mx-auto">
-                                <div className="investors mt-md-5">
+                            <div className="col-lg-6 col-sm-7 col-12 mx-auto d-flex align-items-center justify-content-end">
+                                <div className="investors">
                                     <img className="img-01" src="images/icon/01.png" alt=""/>
 
                                     <h2>For investors</h2>
@@ -156,8 +156,8 @@ const Home = ({events, blogs}) => {
                                 <img className="img-fluid" src="images/home-startup.png" alt=""/>
                             </div>
 
-                            <div className="col-lg-6 col-sm-7 col-12 mx-auto">
-                                <div className="investors startups mt-md-5">
+                            <div className="col-lg-6 col-sm-7 col-12 mx-auto d-flex align-items-center">
+                                <div className="investors startups">
                                     <img className="img-01 img-02" src="images/icon/02.png" alt=""/>
 
                                     <h2>For startups</h2>

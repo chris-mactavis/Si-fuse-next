@@ -16,7 +16,7 @@ section {
       .img-01 {
         height: 70px;
         margin-bottom: -38px;
-        margin-left: 40px;
+        margin-left: -30px;
 
         @media only screen and (max-width: $wide_width) {
           margin-bottom: -32px;
@@ -108,7 +108,7 @@ section {
 
     .startups {
       .img-02 {
-        margin-left: 20rem;
+        margin-left: 21rem;
 
         @media only screen and (max-width: $desktop_width) {
           margin-left: 0;
