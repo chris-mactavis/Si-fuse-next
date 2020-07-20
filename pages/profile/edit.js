@@ -14,14 +14,6 @@ import {User} from "../../utils/User";
 import InvestorBasicInfo from "../../components/profileForm/investors/one";
 import InvestorPreference from "../../components/profileForm/investors/two";
 import InvestorMoreInfo from "../../components/profileForm/investors/three";
-import Level1 from "../../components/profileForm/startups/level1";
-import Level2 from "../../components/profileForm/startups/level2";
-import Level3 from "../../components/profileForm/startups/level3";
-import Level4 from "../../components/profileForm/startups/level4";
-import Level5 from "../../components/profileForm/startups/level5";
-import Level6 from "../../components/profileForm/startups/level6";
-import Level7 from "../../components/profileForm/startups/level7";
-import Level8 from "../../components/profileForm/startups/level8";
 import {setCurrentState} from "../../store/actions/profile";
 
 const Profile = ({startup, industries, locations, stages, loggedInUser, investor}) => {
@@ -53,7 +45,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
                 case 1:
                     return <InvestorBasicInfo investor={investor} locations={locations}/>;
                 case 2:
-                    return <InvestorPreference industries={industries} investor={investor}/>;
+                    return <InvestorPreference industries={industries} investor={investor} stages={stages}/>;
                 case 3:
                     return <InvestorMoreInfo industries={industries} stages={stages} investor={investor}/>
             }

@@ -3,7 +3,6 @@ import {incrementCurrentState, setCompanyProfileImage} from "../../../store/acti
 import React, {useCallback, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import Error from "../../UI/ErrorSpan";
-import DropNCrop from "@synapsestudios/react-drop-n-crop";
 import axiosInstance from "../../../config/axios";
 import {loader} from "../../../store/actions/loader";
 import Token from "../../../utils/Token";
@@ -11,6 +10,7 @@ import {showNotifier} from "../../../store/actions/notifier";
 import StartupProfileHeader from "./StartupProfileHeader";
 import Router from "next/router";
 import Slim from "../../../public/slim/slim.react";
+import {FilePond} from "react-filepond";
 
 export default function ProfileOne({industries, startup, locations}) {
     const dispatch = useDispatch();
@@ -22,56 +22,36 @@ export default function ProfileOne({industries, startup, locations}) {
         return Array.from({length}, (_, k) => k + 0);
     }
     const {register, handleSubmit, errors, getValues, formState, triggerValidation} = useForm();
-    const [profilePicture, setProfilePicture] = useState({
-        result: null,
-        filename: null,
-        filetype: null,
-        src: null,
-        error: null,
-    });
+    // const [profilePicture, setProfilePicture] = useState({
+    //     result: null,
+    //     filename: null,
+    //     filetype: null,
+    //     src: null,
+    //     error: null,
+    // });
     const hasCompany = () => startup.hasOwnProperty('company') && startup.company;
-
-    useEffect(() => {
-        setProfilePicture({
-            result: startup.company && startup.company.logo_url ? startup.company.logo_url : '',
-            filename: null,
-            filetype: null,
-            src: null,
-            error: null,
-        })
-    }, []);
-
-    const handleChange = useCallback(
-        evt => {
-            const {name, value} = evt.target;
-
-            console.log('onChange:', {name, value});
-            triggerValidation({name});
-        },
-        [formState.touched, triggerValidation]
-    );
+    const [profilePicture, setProfilePicture] = useState(hasCompany() ? startup.company.logo_url : '');
 
     const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
 
-    const onChangePicture = value => {
-        setProfilePicture(value);
-    }
-
     const submitHandler = async data => {
-        if (profilePicture.filename) {
-            data['logo'] = profilePicture.result;
-        } else {
-            data['is_editing'] = true;
-        }
+        let formData = new FormData();
+        Object.keys(data).forEach(dataItem => {
+            if (dataItem !== 'team') {
+                formData.append(dataItem, data[dataItem])
+            }
+        });
+        data.team.forEach(t => formData.append('team[]', t));
+        formData.append('logo', profilePicture[0]);
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/company', data, {
+            const {data: response} = await axiosInstance.post('startups/company', formData, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
             dispatch(loader());
-            dispatch(setCompanyProfileImage({companyProfileImage: profilePicture.result, companyName: data.name}));
+            dispatch(setCompanyProfileImage({companyProfileImage: response.data.company.logo_url, companyName: data.name}));
             dispatch(incrementCurrentState());
         } catch (e) {
             console.log(e)
@@ -81,35 +61,8 @@ export default function ProfileOne({industries, startup, locations}) {
         }
     }
 
-    function toDataURL(url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function () {
-            var reader = new FileReader();
-            reader.onloadend = function () {
-                callback(reader.result);
-            }
-            reader.readAsDataURL(xhr.response);
-        };
-        xhr.open('GET', url);
-        xhr.responseType = 'blob';
-        xhr.send();
-    }
-
     useEffect(() => {
         window.scrollTo(0, 0);
-
-        // toDataURL('http://sifuse.test/images/user-3.jpg', function (result) {
-        //     setLocalImage(result);
-        // });
-        // const image1 = new Image();
-        // // image1.src = profilePicture.result;
-        // // document.body.append(image1);
-        // setTimeout(() => {
-        //     image1.onload = function () {
-        //         setLocalImage(image1);
-        //     }
-        //     image1.src = profilePicture.result;
-        // }, 2000);
     }, [profilePicture]);
 
     // // called when slim has initialized
@@ -123,14 +76,16 @@ export default function ProfileOne({industries, startup, locations}) {
 
     const slimService = (formData, progress, success, failure, slim) => {
         // slim instance reference
-        console.log(slim)
+        // console.log(slim)
 
         // form data to post to server
         // set serviceFormat to "file" to receive an array of files
-        console.log(formData)
+        setProfilePicture(formData)
 
         // call these methods to handle upload state
-        console.log(progress, success, failure)
+        // console.log(progress, success, failure)
+
+        success('done');
     }
 
     return <>
@@ -149,34 +104,52 @@ export default function ProfileOne({industries, startup, locations}) {
 
                                     <form onSubmit={handleSubmit(submitHandler)} className="profile-details">
                                         <div className="row">
-                                            <div className="col-md-4">
-                                                <DropNCrop onChange={onChangePicture}
-                                                           cropperOptions={{aspectRatio: 1 / 1}}
-                                                           value={profilePicture}/>
+                                            <div className="col-md-4 company-logo">
+                                                {/*<DropNCrop onChange={onChangePicture}*/}
+                                                {/*           cropperOptions={{aspectRatio: 1 / 1}}*/}
+                                                {/*           value={profilePicture}/>*/}
 
-                                                {/*{*/}
-                                                {/*    localImage && <Slim ratio="1:1"*/}
-                                                {/*        // initialImage="/images/blog-1.jpg"*/}
-                                                {/*        // minSize={{width: 600, height: 400}}*/}
-                                                {/*          service={slimService.bind(this)}*/}
-                                                {/*          serviceFormat="file"*/}
-                                                {/*          push={true}>*/}
-                                                {/*        /!*didInit={ slimInit.bind(this) }>*!/*/}
-                                                {/*        <img src={localImage} alt=""/>*/}
-                                                {/*        <input type="file" name="foo"/>*/}
-                                                {/*    </Slim>*/}
-                                                {/*}*/}
+                                                {/*<FilePond*/}
+                                                {/*    // ref={ref => (this.pond = ref)}*/}
+                                                {/*    files={profilePicture}*/}
+                                                {/*    allowMultiple={false}*/}
+                                                {/*    labelIdle=""*/}
+                                                {/*    name="files"*/}
+                                                {/*    onupdatefiles={fileItems => {*/}
+                                                {/*        setProfilePicture(fileItems.map(fileItem => fileItem.file))*/}
+                                                {/*    }}*/}
+                                                {/*/>*/}
 
-                                                <input ref={register({required: 'This field is required'})}
-                                                       type="hidden"
-                                                       defaultValue={profilePicture.result}/>
+                                                    {/*<Slim*/}
+                                                    {/*    ratio="1:1"*/}
+                                                    {/*    service={slimService.bind(this)}*/}
+                                                    {/*    serviceFormat="file"*/}
+                                                    {/*    push={true}*/}
+                                                    {/*    label="Company logo <br> (Click here to upload)"*/}
+                                                    {/*>*/}
+                                                    {/*    /!*didInit={ slimInit.bind(this) }>*!/*/}
+                                                    {/*    <img src={hasCompany() ? startup.company.logo_url : null} alt=""/>*/}
+
                                                 {
-                                                    profilePicture.result ? (
-                                                        <>
-                                                            <img className="profile-pic img-fluid img-thumbnail mt-5"
-                                                                 src={profilePicture.result}/>
-                                                        </>) : null
+                                                    <Slim ratio="1:1"
+                                                          service={slimService.bind(this)}
+                                                          serviceFormat="file"
+                                                          push={true}>
+                                                        <img src={hasCompany() ? startup.company.logo_url : ''} alt=""/>
+                                                        <input type="file" name="foo"/>
+                                                    </Slim>
                                                 }
+
+                                                {/*<input ref={register({required: 'This field is required'})}*/}
+                                                {/*       type="hidden"*/}
+                                                {/*       defaultValue={profilePicture.result}/>*/}
+                                                {/*{*/}
+                                                {/*    profilePicture.result ? (*/}
+                                                {/*        <>*/}
+                                                {/*            <img className="profile-pic img-fluid img-thumbnail mt-5"*/}
+                                                {/*                 src={profilePicture.result}/>*/}
+                                                {/*        </>) : null*/}
+                                                {/*}*/}
                                                 <span className="d-block">{errors.logo &&
                                                 <Error>Please upload a profile picture!</Error>}</span>
                                             </div>
@@ -221,7 +194,8 @@ export default function ProfileOne({industries, startup, locations}) {
                                                             <div>Date founded</div>
                                                         </div>
                                                         <div className="col-9">
-                                                            <input ref={register({required: 'This field is required'})} className="w-100 full-width mt-0"
+                                                            <input ref={register({required: 'This field is required'})}
+                                                                   className="w-100 full-width mt-0"
                                                                    name="doc" type="date" placeholder="Date of Creation"
                                                                    defaultValue={hasCompany() ? startup.company.doc : ''}/>
                                                             {errors.doc && <Error>{errors.doc.message}</Error>}
@@ -244,16 +218,19 @@ export default function ProfileOne({industries, startup, locations}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <input ref={register({required: 'Please enter your company email address'})} className="w-100 full-width" type="email"
-                                                           name="email"
-                                                           placeholder="Company email address"
-                                                           defaultValue={hasCompany() ? startup.company.email : ''}/>
+                                                    <input
+                                                        ref={register({required: 'Please enter your company email address'})}
+                                                        className="w-100 full-width" type="email"
+                                                        name="email"
+                                                        placeholder="Company email address"
+                                                        defaultValue={hasCompany() ? startup.company.email : ''}/>
                                                     <span className="d-block">{errors.email &&
                                                     <Error>{errors.email.message}</Error>}</span>
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <input ref={register({required: 'This field is required'})} className="w-100 full-width" type="text"
+                                                    <input ref={register({required: 'This field is required'})}
+                                                           className="w-100 full-width" type="text"
                                                            name="phone"
                                                            placeholder="Company phone number"
                                                            defaultValue={hasCompany() ? startup.company.phone : ''}/>
@@ -262,11 +239,12 @@ export default function ProfileOne({industries, startup, locations}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <input ref={register({required: 'This field is required'})} className="w-100 full-width mt-0"
+                                                    <input ref={register({required: 'This field is required'})}
+                                                           className="w-100 full-width mt-0"
                                                            name="address"
                                                            placeholder="Company address"
                                                            defaultValue={hasCompany() ? startup.company.address : ''}/>
-                                                           <span className="d-block">{errors.address &&
+                                                    <span className="d-block">{errors.address &&
                                                     <Error>{errors.address.message}</Error>}</span>
                                                 </div>
 
@@ -284,7 +262,8 @@ export default function ProfileOne({industries, startup, locations}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <select ref={register({required: 'This field is required'})} className="w-100 full-width"
+                                                    <select ref={register({required: 'This field is required'})}
+                                                            className="w-100 full-width"
                                                             name="no_of_team"
                                                             defaultValue={hasCompany() ? startup.company.no_of_team : ''}>
                                                         <option value="">Team size</option>
@@ -340,56 +319,65 @@ export default function ProfileOne({industries, startup, locations}) {
                                                     <div className="row">
                                                         <div className="col-6">
                                                             <div className="facebook social mb-10">
-                                                                <input ref={register({required: 'This field is required'})} name="facebook" type="text"
-                                                                       className="w-100"
-                                                                       defaultValue={hasCompany() ? startup.company.facebook : ''}
-                                                                       placeholder="Facebook profile url"/>
-                                                                       <span className="d-block">{errors.facebook &&
-                                                    <Error>{errors.facebook.message}</Error>}</span>
+                                                                <input
+                                                                    ref={register({required: 'This field is required'})}
+                                                                    name="facebook" type="text"
+                                                                    className="w-100"
+                                                                    defaultValue={hasCompany() ? startup.company.facebook : ''}
+                                                                    placeholder="Facebook profile url"/>
+                                                                <span className="d-block">{errors.facebook &&
+                                                                <Error>{errors.facebook.message}</Error>}</span>
                                                             </div>
                                                         </div>
 
                                                         <div className="pl-0 col-6">
                                                             <div className="instagram social mb-10">
-                                                                <input ref={register({required: 'This field is required'})} name="instagram" type="text"
-                                                                       className="w-100"
-                                                                       defaultValue={hasCompany() ? startup.company.instagram : ''}
-                                                                       placeholder="Instagram profile url"/>
-                                                                       <span className="d-block">{errors.instagram &&
-                                                    <Error>{errors.instagram.message}</Error>}</span>
+                                                                <input
+                                                                    ref={register({required: 'This field is required'})}
+                                                                    name="instagram" type="text"
+                                                                    className="w-100"
+                                                                    defaultValue={hasCompany() ? startup.company.instagram : ''}
+                                                                    placeholder="Instagram profile url"/>
+                                                                <span className="d-block">{errors.instagram &&
+                                                                <Error>{errors.instagram.message}</Error>}</span>
                                                             </div>
                                                         </div>
 
                                                         <div className="col-6">
                                                             <div className="twitter social">
-                                                                <input ref={register({required: 'This field is required'})} name="twitter" type="text"
-                                                                       className="w-100"
-                                                                       defaultValue={hasCompany() ? startup.company.twitter : ''}
-                                                                       placeholder="Twitter profile url"/>
-                                                                       <span className="d-block">{errors.twitter &&
-                                                    <Error>{errors.twitter.message}</Error>}</span>
+                                                                <input
+                                                                    ref={register({required: 'This field is required'})}
+                                                                    name="twitter" type="text"
+                                                                    className="w-100"
+                                                                    defaultValue={hasCompany() ? startup.company.twitter : ''}
+                                                                    placeholder="Twitter profile url"/>
+                                                                <span className="d-block">{errors.twitter &&
+                                                                <Error>{errors.twitter.message}</Error>}</span>
                                                             </div>
                                                         </div>
 
                                                         <div className="pl-0 col-6">
                                                             <div className="linked-in social">
-                                                                <input ref={register({required: 'This field is required'})} name="linkedin" type="text"
-                                                                       className="w-100"
-                                                                       defaultValue={hasCompany() ? startup.company.linkedin : ''}
-                                                                       placeholder="LinkedIn profile url"/>
-                                                                       <span className="d-block">{errors.linkedin &&
-                                                    <Error>{errors.linkedin.message}</Error>}</span>
+                                                                <input
+                                                                    ref={register({required: 'This field is required'})}
+                                                                    name="linkedin" type="text"
+                                                                    className="w-100"
+                                                                    defaultValue={hasCompany() ? startup.company.linkedin : ''}
+                                                                    placeholder="LinkedIn profile url"/>
+                                                                <span className="d-block">{errors.linkedin &&
+                                                                <Error>{errors.linkedin.message}</Error>}</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <textarea ref={register({required: 'This field is required'})} className="full-width mt-0" name="summary"
+                                                    <textarea ref={register({required: 'This field is required'})}
+                                                              className="full-width mt-0" name="summary"
                                                               id="" cols="30"
                                                               defaultValue={hasCompany() ? startup.company.summary : ''}
                                                               placeholder="Company summary" rows="4"/>
-                                                              <span className="d-block">{errors.summary &&
+                                                    <span className="d-block">{errors.summary &&
                                                     <Error>{errors.summary.message}</Error>}</span>
                                                 </div>
 
@@ -400,7 +388,8 @@ export default function ProfileOne({industries, startup, locations}) {
                                                 {/*</div>*/}
 
                                                 <div className="input-group-container">
-                                                    <select ref={register({required: 'This field is required'})} className="w-100 full-width mt-0"
+                                                    <select ref={register({required: 'This field is required'})}
+                                                            className="w-100 full-width mt-0"
                                                             name="clients_serviced"
                                                             defaultValue={hasCompany() ? startup.company.clients_serviced : ''}>
                                                         <option value="">Clients Serviced</option>
@@ -418,7 +407,8 @@ export default function ProfileOne({industries, startup, locations}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <select name="company_stage" ref={register({required: 'This field is required'})}
+                                                    <select name="company_stage"
+                                                            ref={register({required: 'This field is required'})}
                                                             defaultValue={hasCompany() ? startup.company.company_stage : ''}>
                                                         <option value="">Company Stage</option>
                                                         <option value="concept">Concept</option>
@@ -439,7 +429,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                             </button>
 
                                             <button className="btn next ml-auto" type="submit">
-                                                Next <span/>
+                                               Save <span/>
                                             </button>
                                         </div>
                                     </form>

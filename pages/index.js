@@ -8,6 +8,7 @@ import {resetCurrentState} from "../store/actions/profile";
 import {useDispatch} from "react-redux";
 import Token from "../utils/Token";
 
+
 const Home = ({events, blogs}) => {
     const dispatch = useDispatch();
 
@@ -117,11 +118,11 @@ const Home = ({events, blogs}) => {
 
         <section id="second-section" className="image-text">
             <div className="container">
-                <div className="row mb-5 pb-5 pb-md-0">
-                    <div className="col-lg-10 col-12 mx-auto">
+                <div className="row mb-md-5 pb-5 pb-md-0">
+                    <div className="col-lg-9 col-12 mx-auto">
                         <div className="row">
-                            <div className="col-lg-5 col-sm-7 col-12 mx-auto">
-                                <div className="investors">
+                            <div className="col-lg-6 col-sm-7 col-12 mx-auto">
+                                <div className="investors mt-md-5">
                                     <img className="img-01" src="images/icon/01.png" alt=""/>
 
                                     <h2>For investors</h2>
@@ -141,37 +142,40 @@ const Home = ({events, blogs}) => {
                                 </div>
                             </div>
 
-                            <div className="col-md-6 offset-md-1 d-none d-lg-block">
-                                <img className="img-fluid" src="images/investors.png" alt=""/>
+                            <div className="col-lg-6 d-none d-lg-block">
+                                <img className="img-fluid" src="images/home-investor.png" alt=""/>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="row">
-                    <div className="col-md-5 d-none d-lg-block">
-                        <img className="img-fluid" src="images/startups.png" alt=""/>
-                    </div>
+                    <div className="col-lg-9 mx-auto">
+                        <div className="row">
+                            <div className="col-lg-6 d-none d-lg-block">
+                                <img className="img-fluid" src="images/home-startup.png" alt=""/>
+                            </div>
 
-                    <div className="col-lg-5 offset-md-2 col-sm-7 col-12 mx-auto">
-                        <div className="investors startups">
-                            <img className="img-01 img-02" src="images/icon/02.png" alt=""/>
+                            <div className="col-lg-6 col-sm-7 col-12 mx-auto">
+                                <div className="investors startups mt-md-5">
+                                    <img className="img-01 img-02" src="images/icon/02.png" alt=""/>
 
-                            <h2>For startups</h2>
-                            <p>
-                                Do you need funding for your startup? <br className="d-none d-md-block"/>
-                                Get discovered by interested investors <br className="d-none d-md-block"/> within
-                                minutes.
-                            </p>
-                            {
-                                !isLoggedIn && <Link href={isLoggedIn ? '/profile' : '/signup?for=startups'}>
-                                    <a className="link">Get started <img src="images/icon/arrow-right.png"
-                                                                         alt=""/></a>
-                                </Link>
-                            }
+                                    <h2>For startups</h2>
+                                    <p>
+                                        Do you need funding for your startup? <br className="d-none d-md-block"/>
+                                        Get discovered by interested investors <br className="d-none d-md-block"/> within
+                                        minutes.
+                                    </p>
+                                    {
+                                        !isLoggedIn && <Link href={isLoggedIn ? '/profile' : '/signup?for=startups'}>
+                                            <a className="link">Get started <img src="images/icon/arrow-right.png"
+                                                                                 alt=""/></a>
+                                        </Link>
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
