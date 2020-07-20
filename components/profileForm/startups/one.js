@@ -135,7 +135,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                           service={slimService.bind(this)}
                                                           serviceFormat="file"
                                                           push={true}>
-                                                        <img src={hasCompany() ? startup.company.logo_url : ''} alt=""/>
+                                                        <img src={hasCompany() ? startup.company.logo_url :null} alt=""/>
                                                         <input type="file" name="foo"/>
                                                     </Slim>
                                                 }
