@@ -43,22 +43,22 @@ const InvestorPreference = ({investor, industries, stages}) => {
         {value: 'Grants', label: 'Grants'},
     ];
 
-    const defaultSocialDistancing = JSON.parse(interests.dealflow_channel)
-        .map(df => socialDistancingOptions.find(sdo => sdo.value === df));
-    const defaultInvestmentType = JSON.parse(interests.investment_type)
-        .map(df => investmentTypeOptions.find(sdo => sdo.value === df));
-    const defaultGeographicalFocus = JSON.parse(interests.geographical_focus)
-        .map(df => gFocus.find(sdo => sdo.value === df));
-    const defaultStartupStage = JSON.parse(interests.investment_stage_id)
+    const defaultSocialDistancing = JSON.parse(interests.dealflow_channel) ? JSON.parse(interests.dealflow_channel)
+        .map(df => socialDistancingOptions.find(sdo => sdo.value === df)) : [];
+    const defaultInvestmentType = JSON.parse(interests.investment_type) ? JSON.parse(interests.investment_type)
+        .map(df => investmentTypeOptions.find(sdo => sdo.value === df)) : [];
+    const defaultGeographicalFocus = JSON.parse(interests.geographical_focus) ? JSON.parse(interests.geographical_focus)
+        .map(df => gFocus.find(sdo => sdo.value === df)) : [];
+    const defaultStartupStage = JSON.parse(interests.investment_stage_id) ? JSON.parse(interests.investment_stage_id)
         .map(df => {
             const theStage = stages.find(stage => stage.id == df);
             return {label: theStage.stage, value: theStage.id}
-        });
-    const defaultIndustryFocus = JSON.parse(interests.industry_ids)
+        }) : [];
+    const defaultIndustryFocus = JSON.parse(interests.industry_ids) ? JSON.parse(interests.industry_ids)
         .map(df => {
             const gf = industries.find(industry => industry.id == df);
             return {label: gf.industry, value: gf.id}
-        });
+        }) : [];
 
     const savedInvestorProfileImage = useSelector(state => state.profile.investorProfileImage);
     const [industryFocus, setIndustryFocus] = useState(JSON.parse(interests.industry_ids) || []);
