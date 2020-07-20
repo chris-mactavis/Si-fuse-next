@@ -120,8 +120,8 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                 <Slim ratio="1:1"
                                                       service={slimService.bind(this)}
                                                       serviceFormat="file"
-                                                      push={true}
                                                       label="Profile Picture <br> (Click here to upload)"
+                                                      push={true}
                                                 >
                                                     {/*didInit={ slimInit.bind(this) }>*/}
                                                     <img src={hasProfilePic() ? investor.profile.profile_pic_url : null}
@@ -145,6 +145,13 @@ const InvestorBasicInfo = ({investor, locations}) => {
 
                                         <div className="col-md-8">
                                             <div className="input-group-container">
+                                                <input type="text" name="company name" placeholder="Company Name"
+                                                       defaultValue={hasProfile() ? investor.profile.website : ''}
+                                                       className="full-width w-100"/>
+                                                {errors.website && <Error>{errors.website.message}</Error>}
+                                            </div>
+
+                                            <div className="input-group-container">
                                                 <input type="text" name="website" ref={
                                                     register({
                                                         pattern: {
@@ -152,7 +159,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                             message: 'Please enter a valid URL'
                                                         }
                                                     })
-                                                } placeholder="Company Website"
+                                                } placeholder="Website"
                                                        defaultValue={hasProfile() ? investor.profile.website : ''}
                                                        className="full-width w-100"/>
                                                 {errors.website && <Error>{errors.website.message}</Error>}
@@ -166,7 +173,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                                    name="facebook" type="text"
                                                                    className="w-100"
                                                                    defaultValue={hasProfile() ? investor.profile.facebook : ''}
-                                                                   placeholder="Facebook profile url"/>
+                                                                   placeholder="Facebook url"/>
                                                             <span className="d-block">{errors.facebook &&
                                                             <Error>{errors.facebook.message}</Error>}</span>
                                                         </div>
@@ -177,7 +184,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                             <input ref={register} name="instagram" type="text"
                                                                    className="w-100"
                                                                    defaultValue={hasProfile() ? investor.profile.instagram : ''}
-                                                                   placeholder="Instagram profile url"/>
+                                                                   placeholder="Instagram url"/>
                                                         </div>
                                                     </div>
 
@@ -186,7 +193,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                             <input ref={register} name="twitter" type="text"
                                                                    className="w-100"
                                                                    defaultValue={hasProfile() ? investor.profile.twitter : ''}
-                                                                   placeholder="Twitter profile url"/>
+                                                                   placeholder="Twitter url"/>
                                                         </div>
                                                     </div>
 
@@ -195,7 +202,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                             <input ref={register} name="linkedin" type="text"
                                                                    className="w-100"
                                                                    defaultValue={hasProfile() ? investor.profile.linkedin : ''}
-                                                                   placeholder="LinkedIn profile url"/>
+                                                                   placeholder="LinkedIn url"/>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -37,7 +37,7 @@ export default function LoginForm() {
 
 
     return <>
-        <div className="signup-content mt-5 pt-5">
+        <div className="signup-content">
             <h1>Login</h1>
             <p className="text-center">
                 <Link href="signup">

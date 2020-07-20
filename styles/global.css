@@ -3301,6 +3301,7 @@ header.signup .signup-content {
     left: unset;
     transform: translateY(-50%);
     width: 100%;
+    padding: 30px;
   }
 }
 header.signup .signup-content h1 {
