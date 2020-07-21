@@ -28,7 +28,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
 
     const ProfileComponent = () => {
         if (userType === 'Startup') {
-            switch (currentProfile) {
+            switch (4) {
                 case 1:
                     return <ProfileOne startup={startup} locations={locations} industries={industries}/>;
                 case 2:
@@ -58,7 +58,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
         <Head>
             <title>Profile</title>
             <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
-            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"/>
         </Head>
 
         <ProfileComponent/>
