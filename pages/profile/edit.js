@@ -28,7 +28,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
 
     const ProfileComponent = () => {
         if (userType === 'Startup') {
-            switch (4) {
+            switch (currentProfile) {
                 case 1:
                     return <ProfileOne startup={startup} locations={locations} industries={industries}/>;
                 case 2:
