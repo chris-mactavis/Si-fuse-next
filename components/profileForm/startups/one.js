@@ -10,6 +10,8 @@ import {showNotifier} from "../../../store/actions/notifier";
 import StartupProfileHeader from "./StartupProfileHeader";
 import Router from "next/router";
 import Slim from "../../../public/slim/slim.react";
+import Select from "react-select";
+import ErrorSpan from "../../UI/ErrorSpan";
 
 export default function ProfileOne({industries, startup, locations}) {
     console.log(startup);
@@ -20,13 +22,34 @@ export default function ProfileOne({industries, startup, locations}) {
     const createArrayWithNumbers = length => {
         return Array.from({length}, (_, k) => k + 0);
     }
-    const {register, handleSubmit, errors, getValues, formState, triggerValidation} = useForm();
+
+
+    const clientServicedOptions = [
+        {label: 'B2B', value: 'B2B'},
+        {label: 'B2B2B', value: 'B2B2B'},
+        {label: 'B2B2C', value: 'B2B2C'},
+        {label: 'B2B2G', value: 'B2B2G'},
+        {label: 'B2C', value: 'B2C'},
+        {label: 'C2C', value: 'C2C'},
+        {label: 'Govt. (B2G)', value: 'Govt. (B2G)'},
+        {label: 'Non Profit', value: 'Non Profit'}
+    ];
+
     const hasCompany = () => startup.hasOwnProperty('company') && startup.company;
+    const defaultClientsServiced = (hasCompany() && JSON.parse(startup.company.clients_serviced)) ? JSON.parse(startup.company.clients_serviced)
+        .map(df => clientServicedOptions.find(cso => cso.value === df)) : [];
+
+    const {register, handleSubmit, errors, getValues, formState, triggerValidation} = useForm();
     const [profilePicture, setProfilePicture] = useState(hasCompany() ? startup.company.logo_url : '');
-    console.log(profilePicture);
     const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
+    const [clientServiced, setClientServiced] = useState(hasCompany() ? (JSON.parse(startup.company.clients_serviced) || []): []);
+    const [clientServicedError, setClientServicedError] = useState('');
 
     const submitHandler = async data => {
+        if (clientServiced.length === 0) {
+            setClientServicedError('This field is required');
+            return;
+        }
         let formData = new FormData();
         Object.keys(data).forEach(dataItem => {
             if (dataItem !== 'team') {
@@ -35,6 +58,7 @@ export default function ProfileOne({industries, startup, locations}) {
         });
         data.team.forEach(t => formData.append('team[]', t));
         formData.append('logo', profilePicture[0]);
+        clientServiced.forEach(cs => formData.append('clients_serviced[]', cs));
         dispatch(loader());
         try {
             const {data: response} = await axiosInstance.post('startups/company', formData, {
@@ -57,26 +81,8 @@ export default function ProfileOne({industries, startup, locations}) {
         window.scrollTo(0, 0);
     }, [profilePicture]);
 
-    // // called when slim has initialized
-    // const slimInit = (data, slim) => {
-    //     // slim instance reference
-    //     console.log(slim);
-    //
-    //     // current slim data object and slim reference
-    //     console.log(data);
-    // }
-
     const slimService = (formData, progress, success, failure, slim) => {
-        // slim instance reference
-        console.log(formData)
-
-        // form data to post to server
-        // set serviceFormat to "file" to receive an array of files
         setProfilePicture(formData)
-
-        // call these methods to handle upload state
-        // console.log(progress, success, failure)
-
         success('done');
     }
 
@@ -340,29 +346,15 @@ export default function ProfileOne({industries, startup, locations}) {
                                                     <Error>{errors.summary.message}</Error>}</span>
                                                 </div>
 
-                                                {/*<div className="input-group-container">*/}
-                                                {/*    <textarea ref={register} className="full-width mt-0" name="value_proposition"*/}
-                                                {/*              defaultValue={hasCompany() ? startup.company.value_proposition : ''}*/}
-                                                {/*              placeholder="Value Proposition" id="value-proposition" cols="30" rows="4"/>*/}
-                                                {/*</div>*/}
-
                                                 <div className="input-group-container">
-                                                    <select ref={register({required: 'This field is required'})}
-                                                            className="w-100 full-width mt-0"
-                                                            name="clients_serviced"
-                                                            defaultValue={hasCompany() ? startup.company.clients_serviced : ''}>
-                                                        <option value="">Clients Serviced</option>
-                                                        <option value="B2B">B2B</option>
-                                                        <option value="B2B2B">B2B2B</option>
-                                                        <option value="B2B2C">B2B2C</option>
-                                                        <option value="B2B2G">B2B2G</option>
-                                                        <option value="B2C">B2C</option>
-                                                        <option value="C2C">C2C</option>
-                                                        <option value="Govt. (B2G)">Govt. (B2G)</option>
-                                                        <option value="Non Profit">Non Profit</option>
-                                                    </select>
-                                                    <span className="d-block">{errors.clients_serviced &&
-                                                    <Error>{errors.clients_serviced.message}</Error>}</span>
+                                                    <Select
+                                                        placeholder="Clients Serviced"
+                                                        options={clientServicedOptions}
+                                                        defaultValue={defaultClientsServiced}
+                                                        onChange={(val) => setClientServiced(val ? val.map(v => v.value) : [])}
+                                                        isMulti
+                                                    />
+                                                    {clientServicedError && <ErrorSpan>{clientServicedError}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
