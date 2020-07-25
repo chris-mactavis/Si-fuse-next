@@ -162,12 +162,13 @@ export default function ProfileOne({industries, startup, locations}) {
                                                             <input ref={register({
                                                                 required: 'This field is required',
                                                                 pattern: {
-                                                                    value: /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/,
-                                                                    message: 'Value must match format mm/dd/yyyy'
+                                                                    // value: /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/,
+                                                                    value: /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/,
+                                                                    message: 'Value must match format yyyy/mm/dd'
                                                                 }
                                                             })}
                                                                    className="w-100 full-width mt-0"
-                                                                   name="doc" type="date" placeholder="mm/dd/yyyy"
+                                                                   name="doc" type="date" placeholder="yyyy/mm/dd"
                                                                    defaultValue={hasCompany() ? startup.company.doc : ''}/>
                                                             {errors.doc && <Error>{errors.doc.message}</Error>}
                                                         </div>
