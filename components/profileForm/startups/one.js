@@ -153,9 +153,15 @@ export default function ProfileOne({industries, startup, locations}) {
                                                             <div>Date founded</div>
                                                         </div>
                                                         <div className="col-7 pl-0 col-md-9">
-                                                            <input ref={register({required: 'This field is required'})}
+                                                            <input ref={register({
+                                                                required: 'This field is required',
+                                                                pattern: {
+                                                                    value: /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/,
+                                                                    message: 'Value must match format mm/dd/yyyy'
+                                                                }
+                                                            })}
                                                                    className="w-100 full-width mt-0"
-                                                                   name="doc" type="date" placeholder="Date of Creation"
+                                                                   name="doc" type="date" placeholder="mm/dd/yyyy"
                                                                    defaultValue={hasCompany() ? startup.company.doc : ''}/>
                                                             {errors.doc && <Error>{errors.doc.message}</Error>}
                                                         </div>
