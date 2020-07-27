@@ -91,7 +91,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                     <StartupProfileHeader/>
 
                                     <div className="d-md-none">
-                                        <h4 className="text-center mb-3">Your company</h4>
+                                        <h5 className="text-center mb-3">Your company</h5>
                                     </div>
 
                                     <form onSubmit={handleSubmit(submitHandler)} className="profile-details">

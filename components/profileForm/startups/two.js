@@ -77,18 +77,17 @@ export default function ProfileThree({startup}) {
                                 <div className="col-md-9 mx-auto">
                                     <StartupProfileHeader/>
 
-                                    <div className="numbers d-md-none num-alone">
-                                        <p>Product and Services</p>
+                                    <div className="d-md-none">
+                                        <h4 className="text-center mb-3">Product and Services</h4>
                                     </div>
 
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="row">
-                                            <div className="col-md-4 text-center">
-
+                                            <div className="col-md-4 text-center profile-pic">
                                                 <img className="img-fluid "
                                                      src={savedCompanyProfileImage || startup.company.logo_url} alt=""/>
                                                 <br/>
-                                                <h4 className="mt-2">{savedCompanyName || startup.company.name}</h4>
+                                                <h5 className="mt-2">{savedCompanyName || startup.company.name}</h5>
                                             </div>
 
                                             <div className="col-md-8">
@@ -158,7 +157,7 @@ export default function ProfileThree({startup}) {
                                                            type="text"
                                                            onKeyUp={(e) => setProductVideo(e.target.value)}
                                                            className="full-width" name="product_video_url"
-                                                           placeholder="Product Video (paste your youtube video embed code)"
+                                                           placeholder="Product Video (youtube embed code)"
                                                            defaultValue={hasProduct() ? startup.product_services.product_video_url : ''}/>
                                                     {errors.product_video_url &&
                                                     <ErrorSpan>{errors.product_video_url.message}</ErrorSpan>}
@@ -171,7 +170,7 @@ export default function ProfileThree({startup}) {
                                                            type="text"
                                                            onKeyUp={(e) => setPitchVideo(e.target.value)}
                                                            className="full-width" name="pitch_video_url"
-                                                           placeholder="Pitch Video (paste your youtube video embed code)"
+                                                           placeholder="Pitch Video (youtube embed code)"
                                                            defaultValue={hasProduct() ? startup.product_services.pitch_video_url : ''}/>
                                                     {errors.pitch_video_url &&
                                                     <ErrorSpan>{errors.pitch_video_url.message}</ErrorSpan>}
@@ -184,9 +183,9 @@ export default function ProfileThree({startup}) {
                                         <div className="d-flex">
                                             <button className="btn prev mr-auto"
                                                     onClick={() => dispatch(decrementCurrentState())} type="button">
-                                                <span/> Previous
+                                                <span/> Prev
                                             </button>
-                                            <button className="btn next ml-auto" type="submit">Save & Next <span/>
+                                            <button className="btn next ml-auto" type="submit">Save <span/>
                                             </button>
                                         </div>
                                     </form>

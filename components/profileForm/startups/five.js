@@ -58,18 +58,17 @@ export default function ProfileFive({startup}) {
                                 <div className="col-md-9 mx-auto">
                                     <StartupProfileHeader/>
 
-                                    <div className="numbers d-md-none num-alone">
-                                        <div className="number">5</div>
-                                        <p>Marketing</p>
+                                    <div className="d-md-none">
+                                        <h4 className="text-center mb-3">Marketing</h4>
                                     </div>
 
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="row">
-                                            <div className="col-md-4 text-center">
-                                                <img className="img-fluid "
+                                            <div className="col-md-4 text-center profile-pic">
+                                                <img className="img-fluid"
                                                      src={savedCompanyProfileImage || startup.company.logo_url} alt=""/>
                                                 <br/>
-                                                <h4 className="mt-2">{savedCompanyName || startup.company.name}</h4>
+                                                <h5 className="mt-2">{savedCompanyName || startup.company.name}</h5>
                                             </div>
 
                                             <div className="col-md-8">
@@ -86,7 +85,7 @@ export default function ProfileFive({startup}) {
                                                 <div className="input-group-container">
                                                     <input type="number"
                                                            ref={register({required: 'This field is required'})}
-                                                           placeholder="What is your target market percentage?"
+                                                           placeholder="Target market percentage?"
                                                            defaultValue={hasMarketing() ? startup.market.percentage_of_market : ''}
                                                            className="full-width" name="percentage_of_market"/>
                                                     {errors.percentage_of_market &&
@@ -128,11 +127,11 @@ export default function ProfileFive({startup}) {
                                         <div className="d-flex">
                                             <button className="btn prev mr-auto"
                                                     onClick={() => dispatch(decrementCurrentState())} type="button">
-                                                <span/> Previous
+                                                <span/> Prev
                                             </button>
 
                                             <button className="btn next ml-auto" type="submit">
-                                                Save & Next <span/>
+                                                Save <span/>
                                             </button>
                                         </div>
                                     </form>

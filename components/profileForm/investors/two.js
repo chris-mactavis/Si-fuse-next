@@ -185,19 +185,6 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <select name="investment-range" id="">
-                                                        <option value="">Your Investment Range</option>
-                                                        <option value="">$5,0000 - $10,000</option>
-                                                        <option value="">$10,0000 - $50,000</option>
-                                                        <option value="">$50,0000 - $100,000</option>
-                                                        <option value="">$100,0000 - $250,000</option>
-                                                        <option value="">$250,0000 - $1,000,000</option>
-                                                        <option value="">$1,000,0000 - $2,000,000</option>
-                                                        <option value="">$2,000,0000 and above</option>
-                                                    </select>
-                                                </div>
-
-                                                <div className="input-group-container">
                                                     <Select
                                                         className="multi-select"
                                                         placeholder="Target Startup Stage"

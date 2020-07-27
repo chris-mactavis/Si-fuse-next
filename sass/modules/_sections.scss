@@ -1158,6 +1158,18 @@ section {
           }
         }
       }
+
+      .profile-pic{
+        img{
+          @include media("mobile"){
+            max-height: 200px;
+          }
+        }
+
+        h5{
+          margin-bottom: 40px;
+        }
+      }
     }
 
 

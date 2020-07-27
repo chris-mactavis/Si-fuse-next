@@ -505,6 +505,7 @@ form.profile-details .checkout-label {
   cursor: pointer;
   padding-left: 40px;
   font-weight: normal;
+  margin-bottom: 10px;
 }
 form.profile-details .checkout-label input {
   position: absolute;
@@ -606,13 +607,19 @@ form.profile-details select:not(multiple), form.profile-details .select2, form.p
   border-left: 0;
   border-top: 0;
   border-right: 0;
-  background: rgba(236, 239, 241, 0.5) url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 25px) center;
+  background: #f4f5f7 url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 25px) center;
   width: 100%;
   border-radius: 0;
   color: #6B6B6B;
 }
+@media only screen and (max-width: 576px) {
+  form.profile-details select:not(multiple), form.profile-details .select2, form.profile-details .multi-select {
+    background: #f4f5f7 url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 10px) center;
+    padding-right: 24px;
+  }
+}
 form.profile-details select:not(multiple).country + .select2, form.profile-details .select2.country + .select2, form.profile-details .multi-select.country + .select2 {
-  background: rgba(236, 239, 241, 0.5) url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 5px) center;
+  background: #f4f5f7 url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 5px) center;
 }
 form.profile-details select:not(multiple) .select2-selection, form.profile-details .select2 .select2-selection, form.profile-details .multi-select .select2-selection {
   border: none;
@@ -1758,6 +1765,14 @@ section.startup-levels form .btn:hover.prev span {
 }
 section.startup-levels form .btn:hover.next span {
   background-image: url("/images/icon/arrow-right.svg");
+}
+@media only screen and (max-width: 576px) {
+  section.startup-levels form .profile-pic img {
+    max-height: 200px;
+  }
+}
+section.startup-levels form .profile-pic h5 {
+  margin-bottom: 40px;
 }
 section.startup-levels .info-box-container .info-box {
   border: 1px solid #B8B8B8;
