@@ -46,7 +46,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
         dispatch(loader());
         try {
             await axiosInstance.post(`investors/request-permission`, {
-                startup_id: profile.user_id
+                startup_id: company.user_id
             }, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
@@ -321,7 +321,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
         dispatch(loader());
         try {
             const {data: response} = await axiosInstance.post(`investors/follows`, {
-                follower_id: profile.user_id
+                follower_id: company.user_id
             }, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
@@ -332,7 +332,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
             dispatch(showNotifier('Connected Successfully'));
             dispatch(loader());
         } catch (e) {
-            dispatch(showNotifier(e.response.data.message, 'danger'));
+            dispatch(showNotifier(e, 'danger'));
             dispatch(loader());
             console.log(e);
         }
@@ -343,7 +343,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
             try {
                 const {data: {data: response}} = await axiosInstance.post('investors/comments', {
                     ...data,
-                    owner_id: profile.user_id
+                    owner_id: company.user_id
                 }, {
                     headers: {
                         Authorization: `Bearer ${Token()}`
@@ -430,7 +430,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                 try {
                     const {data: response} = await axiosInstance.post('rate', {
                         rating: data.to,
-                        startup_id: profile.user_id
+                        startup_id: company.user_id
                     }, {
                         headers: {
                             Authorization: `Bearer ${Token()}`
