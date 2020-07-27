@@ -42,7 +42,7 @@ export const setCompanyProfileImage = props => ({
     props
 })
 
-export const setInvestorProfileImage = profileImage => ({
+export const setInvestorProfileImage = props => ({
     type: SET_INVESTOR_IMAGE,
-    profileImage
+    props
 })

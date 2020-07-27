@@ -61,6 +61,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
         }) : [];
 
     const savedInvestorProfileImage = useSelector(state => state.profile.investorProfileImage);
+    const savedInvestorProfileName = useSelector(state => state.profile.investorProfileName);
     const [industryFocus, setIndustryFocus] = useState(interests ? (JSON.parse(interests.industry_ids) || []): []);
     const [industryError, setIndustryError] = useState('');
     const [geographyFocus, setGeographyFocus] = useState(interests ? (JSON.parse(interests.geographical_focus) || []): []);
@@ -142,7 +143,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                             <div className="col-md-4">
                                                 <img className="img-fluid" src={savedInvestorProfileImage || investor.profile.profile_pic_url} alt=""/>
                                                 <br/>
-                                                <h5 className="mt-2">{investor.profile.user.first_name} {investor.profile.user.last_name}</h5>
+                                                <h5 className="mt-2">{savedInvestorProfileName || (investor.profile.user.first_name + ' ' + investor.profile.user.last_name)}</h5>
                                             </div>
 
                                             <div className="col-md-8">
