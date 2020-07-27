@@ -66,6 +66,13 @@ const MyEvents = ({data: {data: events, links: {next}, meta: {current_page, last
                             </div>
                         </div>)
                     }
+
+                    {
+                        allEvents.length === 0 && <div className="col-md-4">
+                            No events!
+                        </div>
+                    }
+
                 </div>
                 {
                     currentPage < lastPage

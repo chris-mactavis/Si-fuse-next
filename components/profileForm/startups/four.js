@@ -7,6 +7,7 @@ import Token from "../../../utils/Token";
 import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 import StartupProfileHeader from "./StartupProfileHeader";
 import ErrorSpan from "../../UI/ErrorSpan";
+import AutoNumeric from 'autonumeric';
 
 export const ProfileFour = ({startup}) => {
     const dispatch = useDispatch();
@@ -35,11 +36,14 @@ export const ProfileFour = ({startup}) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        new AutoNumeric('#invested-funding', {decimalPlaces: 0});
     }, []);
 
-    const formatInput = e => {
-        const value = e.target.value.split(',').join('');
-        document.getElementById('invested-funding').value = (+value).toLocaleString();
+    const isNumberKey = evt => {
+        const charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode !== 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
     }
 
     return <>
@@ -69,7 +73,7 @@ export const ProfileFour = ({startup}) => {
                                                 <div className="input-group-container">
                                                     <div className="currency-input">
                                                         <input ref={register({required: 'This field is required'})}
-                                                               onKeyUp={formatInput}
+                                                               // onKeyPress={isNumberKey}
                                                                defaultValue={hasFinance() ? startup.finance.invested_funding : ''}
                                                                className="full-width" type="text"
                                                                name="invested_funding" id="invested-funding"

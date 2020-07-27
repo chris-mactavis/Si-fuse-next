@@ -40,21 +40,22 @@ const InvestorBasicInfo = ({investor, locations}) => {
             data = {...data, logo};
         }
         dispatch(loader());
-        try {
+        // try {
             const {data: response} = await axiosInstance.post('investors', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
-            dispatch(loader());
-            dispatch(setInvestorProfileImage(response.data.profile.profile_pic_url))
+        console.log(response);
+        dispatch(loader());
+            dispatch(setInvestorProfileImage({image: response.data.profile.profile_pic_url, name: response.data.profile.user.first_name + ' ' + response.data.profile.user.last_name}))
             dispatch(incrementCurrentState());
-        } catch (e) {
-            console.log(e);
-            dispatch(loader());
-            dispatch(showNotifier(e.response.data.message, 'danger'));
-            setAdminError(e.response.data.errors);
-        }
+        // } catch (e) {
+        //     console.log(e);
+        //     dispatch(loader());
+        //     dispatch(showNotifier(e.response.data.message, 'danger'));
+        //     setAdminError(e.response.data.errors);
+        // }
     }
 
     const hasProfile = () => investor.hasOwnProperty('profile') && investor.profile;
