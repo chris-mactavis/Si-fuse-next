@@ -48,7 +48,8 @@ const Discover = ({userType, data, industries, countries}) => {
                     Authorization: `Bearer ${Token()}`
                 }
             });
-            setStartups(response.data);
+            const filteredStartup = response.data.filter(x => x.company);
+            setStartups(filteredStartup);
             setNextUrl(response.links.next);
             setLastPage(response.meta.last_page);
             setCurrentPage(response.meta.current_page);
