@@ -11,7 +11,8 @@ const initialState = {
     currentLevelState: 1,
     companyProfileImage: '',
     companyName: '',
-    investorProfileImage: ''
+    investorProfileImage: '',
+    investorProfileName: ''
 }
 
 const profile = (state = initialState, action) => {
@@ -62,7 +63,8 @@ const profile = (state = initialState, action) => {
         case SET_INVESTOR_IMAGE:
             return {
                 ...state,
-                investorProfileImage: action.profileImage,
+                investorProfileImage: action.props.image,
+                investorProfileName: action.props.name,
             }
         default:
             return state;

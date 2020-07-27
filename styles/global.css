@@ -1921,21 +1921,11 @@ section.startup-content .startup-description .player-thumbnail {
   position: relative;
   width: 100%;
 }
+section.startup-content .startup-description .player-thumbnail iframe {
+  width: 100% !important;
+}
 section.startup-content .startup-description .player-thumbnail video {
   width: 100%;
-  cursor: pointer;
-}
-section.startup-content .startup-description .player-thumbnail::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  background-image: url("/images/icon/play.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
   cursor: pointer;
 }
 section.startup-content .startup-description:hover .edit-icon {
@@ -3024,6 +3014,9 @@ header.single-events {
   height: 10vh;
 }
 header.events {
+  background-image: url(/images/events-banner.jpg);
+}
+header.timeline {
   background-image: url(/images/events-banner.jpg);
 }
 header.faqs {

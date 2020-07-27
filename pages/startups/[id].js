@@ -1,4 +1,3 @@
-import {useRouter} from "next/router";
 import Layout from "../../components/layout";
 import React from "react";
 import Head from "next/head";
