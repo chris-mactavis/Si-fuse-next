@@ -10,7 +10,7 @@ import {profileMiddleWare} from "../../components/hoc/auth";
 
 const ProfilePage = ({canView, data: {company, product_services: services, finance, market, profile, interests, level, connections}, userType, profileContent, loggedInUser}) => {
     if (!canView) {
-        Router.push('/profile/edit');
+        userType === 'Startup' ? Router.push('/profile/edit-levels') : Router.push('/profile/edit');
         return null;
     }
 
@@ -18,6 +18,7 @@ const ProfilePage = ({canView, data: {company, product_services: services, finan
         <Layout headerContent={null} headerClass="page-header no-bg" redBar>
             <Head>
                 <title>My Profile</title>
+                <script src="/js/rater.min.js"/>
             </Head>
 
             <Profile company={company} services={services} finance={finance} market={market} level={level}

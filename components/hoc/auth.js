@@ -76,25 +76,26 @@ export const profileMiddleWare = Component => {
     const isServer = typeof window === 'undefined';
     const Wrapper = (props) => {
         if (props.isLoggedIn && !props.hasProfile && !isServer && props.currentPage !== '/profile/edit') {
-            Router.push('/profile/edit')
+            Router.push('/profile/edit-levels')
         }
         return <Component {...props} />
     }
 
     Wrapper.getInitialProps = async (ctx) => {
-        let isLoggedIn, hasProfile, currentPage;
+        let isLoggedIn, hasProfile, currentPage, user;
         if (isServer && ctx.res) {
             isLoggedIn = !!ctx.req.cookies.token;
-            const user = ctx.req.cookies.user;
+            user = ctx.req.cookies.user;
             hasProfile = user ? JSON.parse(user).has_profile : false;
             currentPage = ctx.pathname;
-            if (isLoggedIn && !hasProfile && currentPage !== '/profile/edit') {
-                ctx.res.writeHead(302, {Location: '/profile/edit'});
+            if (isLoggedIn && !hasProfile && currentPage !== '/profile/edit-levels') {
+                const location = user && JSON.parse(user).user_type.user_type === 'Investor' ? '/profile/edit' : '/profile/edit-levels';
+                ctx.res.writeHead(302, {Location: location});
                 ctx.res.end();
             }
         } else {
             isLoggedIn = !!Cookies.get('token');
-            const user = Cookies.get('user');
+            user = Cookies.get('user');
             hasProfile = user ? JSON.parse(user).has_profile : false;
             currentPage = ctx.pathname;
         }
@@ -103,7 +104,7 @@ export const profileMiddleWare = Component => {
             Component.getInitialProps &&
             (await Component.getInitialProps(ctx));
 
-        return {...componentProps, isLoggedIn, hasProfile, currentPage};
+        return {...componentProps, isLoggedIn, hasProfile, currentPage, user};
     }
 
     return Wrapper;

@@ -2,13 +2,13 @@ import React from "react";
 import InfoBox from "./InfoBox";
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 import LevelButtonsComponent from "./LevelButtons";
 import LevelHeader from "./LevelHeader";
 import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {showNotifier} from "../../../store/actions/notifier";
+import {incrementCurrentLevelState} from "../../../store/actions/profile";
 
 const Level7 = ({startup}) => {
     const {register, handleSubmit} = useForm();
@@ -39,7 +39,7 @@ const Level7 = ({startup}) => {
                 }
             })
             dispatch(loader());
-            dispatch(incrementCurrentState());
+            dispatch(incrementCurrentLevelState());
         } catch (e) {
             console.log(e);
             dispatch(loader());
@@ -53,7 +53,7 @@ const Level7 = ({startup}) => {
                     <div className="white-bg">
                         <div className="row">
                             <div className="col-md-9 mx-auto">
-                                <LevelHeader/>
+                                <LevelHeader isLevel/>
 
                                 <InfoBox heading="Scale" text="What scale are you operating at?"/>
 

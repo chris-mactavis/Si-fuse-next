@@ -15,24 +15,25 @@ const Timeline = ({data, hasProfile}) => {
 
     const {data: startups} = data;
 
-    return <Layout page="Timeline" headerClass="page-header no-bg" redBar>
+    return <Layout page="Timeline" headerClass="page-header timeline" headerContent={<h1>My Timeline</h1>} whiteAccount>
         <Head>
             <title>Timeline</title>
+            <script src="/js/rater.min.js"/>
         </Head>
 
         <section className="timeline">
             <div className="container">
 
-                <div className="row">
-                    <div className="col-12">
-                        <h2 className="text-center">My Timeline</h2>
-                    </div>
-                </div>
-
                 {
                     startups.map(
                         (startup, index) => <StartupCard key={index} startup={startup} />
                     )
+                }
+
+                {
+                    startups.length === 0 && <div className="col-md-4">
+                        No startups!
+                    </div>
                 }
             </div>
         </section>
@@ -51,7 +52,6 @@ Timeline.getInitialProps = async (ctx) => {
                 'Authorization': `Bearer ${Token(ctx)}`
             }
         });
-
         return {
             data: response,
             hasProfile

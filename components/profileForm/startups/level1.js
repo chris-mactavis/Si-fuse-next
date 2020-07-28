@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import InfoBox from "./InfoBox";
 import {useForm} from "react-hook-form";
-import {incrementCurrentState} from "../../../store/actions/profile";
+import {incrementCurrentLevelState} from "../../../store/actions/profile";
 import {useDispatch, useSelector} from "react-redux";
 import LevelHeader from "./LevelHeader";
 import LevelButtonsComponent from "./LevelButtons";
@@ -40,7 +40,7 @@ const Level1 = ({startup}) => {
             })
             // dispatch(setStartupData(response.data));
             dispatch(loader());
-            dispatch(incrementCurrentState());
+            dispatch(incrementCurrentLevelState());
         } catch (e) {
             console.log(e);
             dispatch(loader());
@@ -54,7 +54,7 @@ const Level1 = ({startup}) => {
                     <div className="white-bg">
                         <div className="row">
                             <div className="col-md-9 mx-auto">
-                                <LevelHeader/>
+                                <LevelHeader isLevel/>
 
                                 <InfoBox heading="Problem" text="Tell us about the problem you're tackling"/>
 

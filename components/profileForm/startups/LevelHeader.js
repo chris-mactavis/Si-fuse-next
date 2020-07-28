@@ -1,26 +1,26 @@
 import {useSelector} from "react-redux";
 
-const LevelHeader = ({isChecked, isClickable, isActive}) => {
-    const currentProfile = useSelector(state => state.profile.currentState);
+const LevelHeader = ({isLevel = false}) => {
+    const currentProfile = isLevel ? useSelector(state => state.profile.currentLevelState) : useSelector(state => state.profile.currentState);
 
     const width = () => {
         switch (currentProfile) {
             case 1:
                 return '3%';
             case 2:
-                return '17%';
+                return '18%';
             case 3:
-                return '30%';
+                return '33%';
             case 4:
-                return '45%';
+                return '48%';
             case 5:
-                return '59%';
+                return '62%';
             case 6:
                 return '74%';
             case 7:
                 return '87%';
             default:
-                return '100%';
+                return '105%';
         }
     }
 
