@@ -21,7 +21,11 @@ export default function SignupForm({countries, userTypes, query}) {
             const {data} = await axiosInstance.post('signup', {...formData, user_type_id: accountType});
             dispatch(storeAuth(data))
             dispatch(loader());
-            Router.push('/profile/edit');
+            if (accountType === 2) {
+                Router.push('/profile/edit-levels');
+            } else {
+                Router.push('/profile/edit');
+            }
         } catch (e) {
             dispatch(loader());
             dispatch(showNotifier(e.response.data.message, 'danger'));
@@ -61,7 +65,8 @@ export default function SignupForm({countries, userTypes, query}) {
                     </div>
                 </div>
                 : <div className="signup-content mt-5 pt-5">
-                    <h1 className="profile-signup">{accountType === 2 && "Startup"} {accountType === 1 && "Investor"} Sign Up</h1>
+                    <h1 className="profile-signup">{accountType === 2 && "Startup"} {accountType === 1 && "Investor"} Sign
+                        Up</h1>
 
                     <p className="text-center">
                         <Link href="login">
@@ -114,7 +119,8 @@ export default function SignupForm({countries, userTypes, query}) {
 
                         {
                             accountType === 2 && <>
-                                <select ref={register({required: 'This field is required'})} className="w-100" name="startup_type_id">
+                                <select ref={register({required: 'This field is required'})} className="w-100"
+                                        name="startup_type_id">
                                     <option value="">Team Composition</option>
                                     <option value="1">Female Owned</option>
                                     <option value="2">Female Led</option>
@@ -126,7 +132,9 @@ export default function SignupForm({countries, userTypes, query}) {
 
                         <button type="submit" className="btn btn-white">Sign up</button>
 
-                        <div onClick={() => setAccountType(null)} className="pointer"><img src="images/icon/arrow-left.svg"/> Back to Options</div>
+                        <div onClick={() => setAccountType(null)} className="pointer"><img
+                            src="images/icon/arrow-left.svg"/> Back to Options
+                        </div>
                     </form>
                 </div>
         }

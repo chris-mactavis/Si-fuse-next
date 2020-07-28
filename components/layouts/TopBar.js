@@ -39,15 +39,15 @@ export default function TopBar({redBar = false, isLoggedIn = false, whiteAccount
                 </ul>
                 : (
                     !whiteAccount
-                        ? <div>
-                            <button onClick={accountMenuHandler} className="menu-btn">
+                        ? <div className="account-btns">
+                            <button onClick={accountMenuHandler} className="menu-btn ">
                                 <img src="/images/icon/account.svg" alt="" className="img-fluid"/>
                             </button>
                             <button onClick={toggleNotification} id="notification-toggle" className="menu-btn">
                                 <img src="/images/icon/notification-bell.svg" alt="" className="img-fluid"/>
                             </button>
                         </div>
-                        : <div className="d-flex">
+                        : <div className="d-flex account-btns">
                             <button onClick={accountMenuHandler} className="menu-btn active-bar">
                                 <img src="/images/icon/account-white.svg" alt="" className="img-fluid d-none d-md-block"/>
                                 <img src="/images/icon/account-grey.svg" alt="" className="img-fluid d-block d-md-none"/>

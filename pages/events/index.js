@@ -80,7 +80,7 @@ export default function Events({data: {data: events, links: {next}, meta: {curre
 }
 
 Events.getInitialProps = async () => {
-    const {data: response} = await axiosInstance.get('events?paginate=3');
+    const {data: response} = await axiosInstance.get('events?paginate=12');
 
     return {
         data: response

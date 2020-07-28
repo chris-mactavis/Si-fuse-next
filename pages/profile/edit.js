@@ -14,56 +14,30 @@ import {User} from "../../utils/User";
 import InvestorBasicInfo from "../../components/profileForm/investors/one";
 import InvestorPreference from "../../components/profileForm/investors/two";
 import InvestorMoreInfo from "../../components/profileForm/investors/three";
-import Level1 from "../../components/profileForm/startups/level1";
-import Level2 from "../../components/profileForm/startups/level2";
-import Level3 from "../../components/profileForm/startups/level3";
-import Level4 from "../../components/profileForm/startups/level4";
-import Level5 from "../../components/profileForm/startups/level5";
-import Level6 from "../../components/profileForm/startups/level6";
-import Level7 from "../../components/profileForm/startups/level7";
-import Level8 from "../../components/profileForm/startups/level8";
 import {setCurrentState} from "../../store/actions/profile";
 
 const Profile = ({startup, industries, locations, stages, loggedInUser, investor}) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!startup.has_profile) {
-            dispatch(setCurrentState(startup.profile_stage));
-        }
+            dispatch(setCurrentState(userType === 'Investor' ? investor.profile_stage : startup.profile_stage));
     }, []);
 
-    const currentProfile = useSelector(state => state.profile.currentState);
     const userType = loggedInUser.user_type.user_type;
+    const currentProfile = useSelector(state => state.profile.currentState);
 
     const ProfileComponent = () => {
         if (userType === 'Startup') {
             switch (currentProfile) {
                 case 1:
-                    return <Level1 startup={startup}/>;
+                    return <ProfileOne startup={startup} locations={locations} industries={industries}/>;
                 case 2:
-                    return <Level2 startup={startup}/>;
+                    return <ProfileTwo startup={startup}/>;
                 case 3:
-                    return <Level3 startup={startup}/>;
-                case 4:
-                    return <Level4 startup={startup}/>;
-                case 5:
-                    return <Level5 startup={startup}/>;
-                case 6:
-                    return <Level6 startup={startup}/>;
-                case 7:
-                    return <Level7 startup={startup}/>;
-                case 8:
-                    return <Level8 startup={startup}/>;
-                case 9:
-                    return <ProfileOne startup={startup} locations={locations}/>;
-                case 10:
-                    return <ProfileTwo startup={startup} locations={locations} industries={industries}/>;
-                case 11:
                     return <ProfileThree startup={startup}/>;
-                case 12:
+                case 4:
                     return <ProfileFour startup={startup}/>;
-                case 13:
+                case 5:
                     return <ProfileFive startup={startup}/>;
             }
         } else {
@@ -71,7 +45,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
                 case 1:
                     return <InvestorBasicInfo investor={investor} locations={locations}/>;
                 case 2:
-                    return <InvestorPreference industries={industries} investor={investor}/>;
+                    return <InvestorPreference industries={industries} investor={investor} stages={stages}/>;
                 case 3:
                     return <InvestorMoreInfo industries={industries} stages={stages} investor={investor}/>
             }
@@ -84,7 +58,7 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
         <Head>
             <title>Profile</title>
             <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
-            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"/>
         </Head>
 
         <ProfileComponent/>

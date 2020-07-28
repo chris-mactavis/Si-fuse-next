@@ -1,7 +1,12 @@
 import React from "react";
 import {getFairness, startupLevel} from "../../helpers";
+import {useDispatch} from "react-redux";
+import {setCurrentLevelState} from "../../store/actions/profile";
+import Router from "next/router";
 
-const StartupProfileLevels = ({startupLevel, levelKeys, index, fairness}) => {
+const StartupProfileLevels = ({hasEdit = false, startupLevel, levelKeys, index, fairness}) => {
+
+    const dispatch = useDispatch();
 
     const getLevelName = (name) => {
         switch (name) {
@@ -24,9 +29,17 @@ const StartupProfileLevels = ({startupLevel, levelKeys, index, fairness}) => {
         }
     }
 
+    const goToLevel = level => {
+        console.log(level);
+        Router.push('/profile/edit-levels');
+    }
+
     return <div className="row">
         <div className="col-md-12">
             <div className="startup-description">
+                {hasEdit &&
+                <img onClick={() => goToLevel(index)} className="edit-icon"
+                     title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
                 <div className="row">
                     <div className="col-md-4">
                         <div className={`d-flex flex-column h-100 justify-content-center text-center side-content ${getFairness(fairness)}`}>
