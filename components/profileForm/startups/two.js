@@ -11,12 +11,12 @@ import DropNCrop from "@synapsestudios/react-drop-n-crop";
 import {FilePond, registerPlugin} from "react-filepond";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import {setStartupData} from "../../../store/actions/startupProfile";
 
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-export default function ProfileThree({startup}) {
-    console.log(startup);
+export default function ProfileTwo({startup}) {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -32,7 +32,6 @@ export default function ProfileThree({startup}) {
     const [productVideo, setProductVideo] = useState(hasProduct() ? startup.product_services.product_video_url : '');
     const [pitchVideo, setPitchVideo] = useState(hasProduct() ? startup.product_services.pitch_video_url : '');
     const [productImages, setProductImages] = useState(hasProduct() ? startup.product_services.product_image_array.map(img => ({source: img})) : []);
-    console.log(productImages);
 
     const onSubmitHandler = async data => {
         dispatch(loader());
@@ -41,12 +40,12 @@ export default function ProfileThree({startup}) {
         productImages.forEach(pImage => formData.append('product_images[]', pImage));
 
         try {
-            const response = await axiosInstance.post('startups/product-service', formData, {
+            const {data: response} = await axiosInstance.post('startups/product-service', formData, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
-            console.log(response)
+            dispatch(setStartupData(response.data));
             dispatch(loader());
             dispatch(incrementCurrentState());
         } catch (e) {

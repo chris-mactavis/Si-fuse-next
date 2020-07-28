@@ -18,8 +18,9 @@ import {auth} from "../../components/hoc/auth";
 import Token from "../../utils/Token";
 import {User} from "../../utils/User";
 import axiosInstance from "../../config/axios";
+import {setStartupData} from "../../store/actions/startupProfile";
 
-const EditLevels = ({startup, industries, locations, stages, loggedInUser}) => {
+const EditLevels = ({startup}) => {
 
     const dispatch = useDispatch();
 
@@ -27,27 +28,27 @@ const EditLevels = ({startup, industries, locations, stages, loggedInUser}) => {
         dispatch(setCurrentLevelState(startup.profile_level_stage));
     }, []);
 
-    const currentProfile = useSelector(state => state.profile.currentLevelState);
-    console.log(startup.profile_level_stage);
+    const currentProfileStage = useSelector(state => state.profile.currentLevelState);
+    const currentStartupProfile = useSelector(state => state.startupProfile.startup) || startup;
 
     const ProfileComponent = () => {
-        switch (currentProfile) {
+        switch (currentProfileStage) {
             case 1:
-                return <Level1 startup={startup}/>;
+                return <Level1 startup={currentStartupProfile}/>;
             case 2:
-                return <Level2 startup={startup}/>;
+                return <Level2 startup={currentStartupProfile}/>;
             case 3:
-                return <Level3 startup={startup}/>;
+                return <Level3 startup={currentStartupProfile}/>;
             case 4:
-                return <Level4 startup={startup}/>;
+                return <Level4 startup={currentStartupProfile}/>;
             case 5:
-                return <Level5 startup={startup}/>;
+                return <Level5 startup={currentStartupProfile}/>;
             case 6:
-                return <Level6 startup={startup}/>;
+                return <Level6 startup={currentStartupProfile}/>;
             case 7:
-                return <Level7 startup={startup}/>;
+                return <Level7 startup={currentStartupProfile}/>;
             case 8:
-                return <Level8 startup={startup}/>;
+                return <Level8 startup={currentStartupProfile}/>;
         }
     }
 

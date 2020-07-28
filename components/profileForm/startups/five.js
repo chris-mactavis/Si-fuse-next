@@ -10,6 +10,7 @@ import {decrementCurrentState} from "../../../store/actions/profile";
 import {showNotifier} from "../../../store/actions/notifier";
 import StartupProfileHeader from "./StartupProfileHeader";
 import ErrorSpan from "../../UI/ErrorSpan";
+import {setStartupData} from "../../../store/actions/startupProfile";
 
 export default function ProfileFive({startup}) {
     useEffect(() => {
@@ -28,11 +29,12 @@ export default function ProfileFive({startup}) {
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/market', data, {
+            const {data: response} = await axiosInstance.post('startups/market', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
+            dispatch(setStartupData(response.data));
             dispatch(loader());
             let user = JSON.parse(Cookies.get('user'));
             if (+user.has_profile === 0) {

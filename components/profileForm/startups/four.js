@@ -8,6 +8,7 @@ import {decrementCurrentState, incrementCurrentState} from "../../../store/actio
 import StartupProfileHeader from "./StartupProfileHeader";
 import ErrorSpan from "../../UI/ErrorSpan";
 import AutoNumeric from 'autonumeric';
+import {setStartupData} from "../../../store/actions/startupProfile";
 
 export const ProfileFour = ({startup}) => {
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const ProfileFour = ({startup}) => {
                     Authorization: `Bearer ${Token()}`
                 }
             });
+            dispatch(setStartupData(response.data));
             dispatch(loader());
             dispatch(incrementCurrentState());
         } catch (e) {

@@ -10,6 +10,7 @@ import {incrementCurrentState, setInvestorProfileImage} from "../../../store/act
 import {showNotifier} from "../../../store/actions/notifier";
 import InvestorProfileHeader from "./InvestorProfileHeader";
 import Slim from "../../../public/slim/slim.react";
+import {setInvestorProfile} from "../../../store/actions/investorProfile";
 
 const InvestorBasicInfo = ({investor, locations}) => {
     const dispatch = useDispatch();
@@ -40,22 +41,25 @@ const InvestorBasicInfo = ({investor, locations}) => {
             data = {...data, logo};
         }
         dispatch(loader());
-        // try {
+        try {
             const {data: response} = await axiosInstance.post('investors', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
-        console.log(response);
-        dispatch(loader());
-            dispatch(setInvestorProfileImage({image: response.data.profile.profile_pic_url, name: response.data.profile.user.first_name + ' ' + response.data.profile.user.last_name}))
+            dispatch(setInvestorProfile(response.data));
+            dispatch(loader());
+            dispatch(setInvestorProfileImage({
+                image: response.data.profile.profile_pic_url,
+                name: response.data.profile.user.first_name + ' ' + response.data.profile.user.last_name
+            }))
             dispatch(incrementCurrentState());
-        // } catch (e) {
-        //     console.log(e);
-        //     dispatch(loader());
-        //     dispatch(showNotifier(e.response.data.message, 'danger'));
-        //     setAdminError(e.response.data.errors);
-        // }
+        } catch (e) {
+            console.log(e);
+            dispatch(loader());
+            dispatch(showNotifier(e.response.data.message, 'danger'));
+            setAdminError(e.response.data.errors);
+        }
     }
 
     const hasProfile = () => investor.hasOwnProperty('profile') && investor.profile;
@@ -146,10 +150,10 @@ const InvestorBasicInfo = ({investor, locations}) => {
 
                                         <div className="col-md-8">
                                             <div className="input-group-container">
-                                                <input type="text" name="company name" placeholder="Company Name"
-                                                       defaultValue={hasProfile() ? investor.profile.website : ''}
+                                                <input type="text" ref={register({required: 'This field is required'})} name="company_name" placeholder="Company Name"
+                                                       defaultValue={hasProfile() ? investor.profile.company_name : ''}
                                                        className="full-width w-100"/>
-                                                {errors.website && <Error>{errors.website.message}</Error>}
+                                                {errors.company_name && <Error>{errors.company_name.message}</Error>}
                                             </div>
 
                                             <div className="input-group-container">

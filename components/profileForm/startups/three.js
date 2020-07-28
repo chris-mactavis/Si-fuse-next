@@ -7,6 +7,7 @@ import Token from "../../../utils/Token";
 import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 import ErrorSpan from "../../UI/ErrorSpan";
 import StartupProfileHeader from "./StartupProfileHeader";
+import {setStartupData} from "../../../store/actions/startupProfile";
 
 export default function ProfileThree({startup}) {
     const dispatch = useDispatch();
@@ -20,11 +21,12 @@ export default function ProfileThree({startup}) {
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/finance', data, {
+            const {data: response} = await axiosInstance.post('startups/finance', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
+            dispatch(setStartupData(response.data));
             dispatch(loader());
             dispatch(incrementCurrentState());
         } catch (e) {
