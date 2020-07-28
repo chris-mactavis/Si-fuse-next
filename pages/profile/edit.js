@@ -24,30 +24,33 @@ const Profile = ({startup, industries, locations, stages, loggedInUser, investor
     }, []);
 
     const userType = loggedInUser.user_type.user_type;
-    const currentProfile = useSelector(state => state.profile.currentState);
+    const currentProfileStage = useSelector(state => state.profile.currentState);
+    const currentStartupProfile = useSelector(state => state.startupProfile.startup) || startup;
+    const currentInvestorProfile = useSelector(state => state.investorProfile.investorProfile) || investor;
+
 
     const ProfileComponent = () => {
         if (userType === 'Startup') {
-            switch (currentProfile) {
+            switch (currentProfileStage) {
                 case 1:
-                    return <ProfileOne startup={startup} locations={locations} industries={industries}/>;
+                    return <ProfileOne startup={currentStartupProfile} locations={locations} industries={industries}/>;
                 case 2:
-                    return <ProfileTwo startup={startup}/>;
+                    return <ProfileTwo startup={currentStartupProfile}/>;
                 case 3:
-                    return <ProfileThree startup={startup}/>;
+                    return <ProfileThree startup={currentStartupProfile}/>;
                 case 4:
-                    return <ProfileFour startup={startup}/>;
+                    return <ProfileFour startup={currentStartupProfile}/>;
                 case 5:
-                    return <ProfileFive startup={startup}/>;
+                    return <ProfileFive startup={currentStartupProfile}/>;
             }
         } else {
-            switch (currentProfile) {
+            switch (currentProfileStage) {
                 case 1:
-                    return <InvestorBasicInfo investor={investor} locations={locations}/>;
+                    return <InvestorBasicInfo investor={currentInvestorProfile} locations={locations}/>;
                 case 2:
-                    return <InvestorPreference industries={industries} investor={investor} stages={stages}/>;
+                    return <InvestorPreference industries={industries} investor={currentInvestorProfile} stages={stages}/>;
                 case 3:
-                    return <InvestorMoreInfo industries={industries} stages={stages} investor={investor}/>
+                    return <InvestorMoreInfo industries={industries} stages={stages} investor={currentInvestorProfile}/>
             }
         }
     }

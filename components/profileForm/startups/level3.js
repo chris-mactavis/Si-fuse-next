@@ -9,6 +9,7 @@ import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {showNotifier} from "../../../store/actions/notifier";
+import {setStartupData} from "../../../store/actions/startupProfile";
 
 const Level3 = ({startup}) => {
     const {register, handleSubmit} = useForm();
@@ -32,11 +33,12 @@ const Level3 = ({startup}) => {
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/level', {products: JSON.stringify(data.products), profile_stage: 4}, {
+            const {data: response} = await axiosInstance.post('startups/level', {products: JSON.stringify(data.products), profile_stage: 4}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             })
+            dispatch(setStartupData(response.data));
             dispatch(loader());
             dispatch(incrementCurrentLevelState());
         } catch (e) {

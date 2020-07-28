@@ -8,6 +8,7 @@ import {decrementCurrentState, incrementCurrentState} from "../../../store/actio
 import ErrorSpan from "../../UI/ErrorSpan";
 import InvestorProfileHeader from "./InvestorProfileHeader";
 import Select from "react-select";
+import {setInvestorProfile} from "../../../store/actions/investorProfile";
 
 const InvestorPreference = ({investor, industries, stages}) => {
     console.log(investor);
@@ -110,6 +111,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
                     Authorization: `Bearer ${Token()}`
                 }
             });
+            dispatch(setInvestorProfile(response.data));
             dispatch(loader());
             dispatch(incrementCurrentState());
         } catch (e) {

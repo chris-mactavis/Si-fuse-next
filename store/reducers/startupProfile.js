@@ -1,7 +1,7 @@
 import {SET_STARTUP_DATA} from "../actions/startupProfile";
 
 const initialState = {
-    startup: null
+    startup: null,
 }
 
 const startupProfile = (state = initialState, action) => {
