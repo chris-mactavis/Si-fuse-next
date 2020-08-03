@@ -8,6 +8,7 @@ import {decrementCurrentState, incrementCurrentState} from "../../../store/actio
 import ErrorSpan from "../../UI/ErrorSpan";
 import InvestorProfileHeader from "./InvestorProfileHeader";
 import Select from "react-select";
+import {setInvestorProfile} from "../../../store/actions/investorProfile";
 
 const InvestorPreference = ({investor, industries, stages}) => {
     console.log(investor);
@@ -110,6 +111,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
                     Authorization: `Bearer ${Token()}`
                 }
             });
+            dispatch(setInvestorProfile(response.data));
             dispatch(loader());
             dispatch(incrementCurrentState());
         } catch (e) {
@@ -149,6 +151,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                             <div className="col-md-8">
                                                 <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Industry Focus"
                                                         options={industries.map(({industry, id}) => ({value: id, label: industry}))}
                                                         defaultValue={defaultIndustryFocus}
@@ -174,6 +177,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
 
                                                 <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Geographical Focus"
                                                         options={gFocus}
                                                         defaultValue={defaultGeographicalFocus}
@@ -184,20 +188,8 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <select name="investment-range" id="">
-                                                        <option value="">Your Investment Range</option>
-                                                        <option value="">$5,0000 - $10,000</option>
-                                                        <option value="">$10,0000 - $50,000</option>
-                                                        <option value="">$50,0000 - $100,000</option>
-                                                        <option value="">$100,0000 - $250,000</option>
-                                                        <option value="">$250,0000 - $1,000,000</option>
-                                                        <option value="">$1,000,0000 - $2,000,000</option>
-                                                        <option value="">$2,000,0000 and above</option>
-                                                    </select>
-                                                </div>
-
-                                                <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Target Startup Stage"
                                                         options={stages.map(({stage, id}) => ({label: stage, value: id}))}
                                                         defaultValue={defaultStartupStage}
@@ -275,6 +267,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
 
                                                 <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Social distancing dealflow channels?"
                                                         options={socialDistancingOptions}
                                                         defaultValue={defaultSocialDistancing}
@@ -301,6 +294,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
 
                                                 <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Investment Type"
                                                         options={investmentTypeOptions}
                                                         defaultValue={defaultInvestmentType}

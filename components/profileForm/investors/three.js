@@ -10,6 +10,7 @@ import {decrementCurrentState} from "../../../store/actions/profile";
 import ErrorSpan from "../../UI/ErrorSpan";
 import {showNotifier} from "../../../store/actions/notifier";
 import InvestorProfileHeader from "./InvestorProfileHeader";
+import {setInvestorProfile} from "../../../store/actions/investorProfile";
 
 const InvestorMoreInfo = ({investor, stages}) => {
     const dispatch = useDispatch();
@@ -18,12 +19,13 @@ const InvestorMoreInfo = ({investor, stages}) => {
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
-            await axiosInstance.post('investors/interest-level', data, {
+            const {data: response} = await axiosInstance.post('investors/interest-level', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`,
                     'Content-Type': 'application/json'
                 }
             });
+            dispatch(setInvestorProfile(response.data));
             dispatch(loader());
             dispatch(showNotifier('Signup Complete'));
             let user = JSON.parse(Cookies.get('user'));

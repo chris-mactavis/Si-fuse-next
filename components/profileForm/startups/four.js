@@ -8,6 +8,7 @@ import {decrementCurrentState, incrementCurrentState} from "../../../store/actio
 import StartupProfileHeader from "./StartupProfileHeader";
 import ErrorSpan from "../../UI/ErrorSpan";
 import AutoNumeric from 'autonumeric';
+import {setStartupData} from "../../../store/actions/startupProfile";
 
 export const ProfileFour = ({startup}) => {
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const ProfileFour = ({startup}) => {
                     Authorization: `Bearer ${Token()}`
                 }
             });
+            dispatch(setStartupData(response.data));
             dispatch(loader());
             dispatch(incrementCurrentState());
         } catch (e) {
@@ -57,16 +59,16 @@ export const ProfileFour = ({startup}) => {
                                     <StartupProfileHeader/>
 
                                     <div className="numbers d-md-none num-alone">
-                                        <p>Funding</p>
+                                        <h4 className="text-center mb-3">Funding</h4>
                                     </div>
 
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="row">
-                                            <div className="col-md-4 text-center">
+                                            <div className="col-md-4 text-center profile-pic">
                                                 <img className="img-fluid "
                                                      src={savedCompanyProfileImage || startup.company.logo_url} alt=""/>
                                                 <br/>
-                                                <h4 className="mt-2">{savedCompanyName || startup.company.name}</h4>
+                                                <h5 className="mt-2">{savedCompanyName || startup.company.name}</h5>
                                             </div>
 
                                             <div className="col-md-8">
@@ -77,7 +79,7 @@ export const ProfileFour = ({startup}) => {
                                                                defaultValue={hasFinance() ? startup.finance.invested_funding : ''}
                                                                className="full-width" type="text"
                                                                name="invested_funding" id="invested-funding"
-                                                               placeholder="How Much has been invested till date? "/>
+                                                               placeholder="Investment amount till date"/>
                                                         {errors.invested_funding &&
                                                         <ErrorSpan>{errors.invested_funding.message}</ErrorSpan>}
                                                     </div>
@@ -175,11 +177,11 @@ export const ProfileFour = ({startup}) => {
                                         <div className="d-flex">
                                             <button className="btn prev mr-auto"
                                                     onClick={() => dispatch(decrementCurrentState())} type="button">
-                                                <span/> Previous
+                                                <span/> Prev
                                             </button>
 
                                             <button className="btn next ml-auto" type="submit">
-                                                Save & Next <span/>
+                                                Save <span/>
                                             </button>
                                         </div>
                                     </form>
