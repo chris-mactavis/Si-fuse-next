@@ -7,81 +7,113 @@ import axiosInstance from "../config/axios";
 import {resetCurrentState} from "../store/actions/profile";
 import {useDispatch} from "react-redux";
 import Token from "../utils/Token";
-
+import Slider from "react-slick";
 
 const Home = ({events, blogs}) => {
     const dispatch = useDispatch();
 
     const isLoggedIn = !!Token();
 
+    const settingsEvent = {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: true,
+        autoplay: true,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1071,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    dots: true,
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    dots: true,
+                }
+            },
+        ]
+    };
+
+    const settingsBlog = {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: false,
+        dots: true,
+        autoplay: true,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1071,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            },
+        ]
+    }
+
     useEffect(() => {
         dispatch(resetCurrentState());
 
         setTimeout(() => {
-            $('.event-slider').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                arrows: true,
-                autoplay: true,
-                responsive: [
-                    {
-                        breakpoint: 1200,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 1071,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1,
-                            arrows: false,
-                            dots: true,
-                        }
-                    },
-                    {
-                        breakpoint: 576,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                            arrows: false,
-                            dots: true,
-                        }
-                    },
-                ]
-            });
 
-            $('.posts-slider').slick({
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                arrows: false,
-                dots: true,
-                autoplay: true,
-                responsive: [
-                    {
-                        breakpoint: 1200,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 1071,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1,
-                        }
-                    },
-                    {
-                        breakpoint: 576,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1,
-                        }
-                    },
-                ]
-            });
+            // $('.posts-slider').slick({
+            //     slidesToShow: 4,
+            //     slidesToScroll: 1,
+            //     arrows: false,
+            //     dots: true,
+            //     autoplay: true,
+            //     responsive: [
+            //         {
+            //             breakpoint: 1200,
+            //             settings: {
+            //                 slidesToShow: 3,
+            //                 slidesToScroll: 1
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 1071,
+            //             settings: {
+            //                 slidesToShow: 2,
+            //                 slidesToScroll: 1,
+            //             }
+            //         },
+            //         {
+            //             breakpoint: 576,
+            //             settings: {
+            //                 slidesToShow: 1,
+            //                 slidesToScroll: 1,
+            //             }
+            //         },
+            //     ]
+            // });
 
             $('.changing-text').slick({
                 autoplay: true,
@@ -121,10 +153,10 @@ const Home = ({events, blogs}) => {
                 <div className="row mb-md-5 pb-5 pb-md-0">
                     <div className="col-lg-9 col-12 mx-auto">
                         <div className="row">
-                            <div className="col-lg-6 col-sm-7 col-12 mx-auto d-flex align-items-center justify-content-end">
+                            <div
+                                className="col-lg-6 col-sm-7 col-12 mx-auto d-flex align-items-center justify-content-end">
                                 <div className="investors">
                                     <img className="img-01" src="images/icon/01.png" alt=""/>
-
                                     <h2>For investors</h2>
                                     <p>
                                         Seeking investment opportunities? <br className="d-none d-md-block"/>
@@ -163,7 +195,8 @@ const Home = ({events, blogs}) => {
                                     <h2>For startups</h2>
                                     <p>
                                         Do you need funding for your startup? <br className="d-none d-md-block"/>
-                                        Get discovered by interested investors <br className="d-none d-md-block"/> within
+                                        Get discovered by interested investors <br
+                                        className="d-none d-md-block"/> within
                                         minutes.
                                     </p>
                                     {
@@ -189,32 +222,34 @@ const Home = ({events, blogs}) => {
                 </div>
 
                 <div className="row event-slider">
-                    {
-                        events.map(({id, date_formatted, image, country, title, slug}) => <div className="col-md-4"
-                                                                                               key={id}>
-                                <Link href="events/[slug]" as={`events/${slug}`}>
-                                    <a>
-                                        <div className="card">
-                                            <div className="position-relative">
-                                                <img className="card-img-top img-fluid" src={image}/>
-                                                <a className="view" href="#">view <img src="images/icon/right.png" alt=""/></a>
-                                            </div>
+                    <div className="col-md-12">
+                        <Slider {...settingsEvent}>
+                            {events.map(({id, date_formatted, image, country, title, slug}) => <div className="col-md-4"
+                                                                                                    key={id}>
+                                    <Link href="events/[slug]" as={`events/${slug}`}>
+                                        <a>
+                                            <div className="card">
+                                                <div className="position-relative">
+                                                    <img className="card-img-top img-fluid" src={image}/>
+                                                    <a className="view" href="#">view <img src="images/icon/right.png"
+                                                                                           alt=""/></a>
+                                                </div>
 
-                                            <div className="background-text">
-                                                <h5>{title}</h5>
-                                            </div>
+                                                <div className="background-text">
+                                                    <h5>{title}</h5>
+                                                </div>
 
-                                            <div className="meta">
-                                                <p>{date_formatted}</p>
-                                                <p>{country}</p>
+                                                <div className="meta">
+                                                    <p>{date_formatted}</p>
+                                                    <p>{country}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </Link>
-                            </div>
-                        )
-
-                    }
+                                        </a>
+                                    </Link>
+                                </div>
+                            )}
+                        </Slider>
+                    </div>
                 </div>
 
                 <div className="text-center button mt-5 pt-4 pt-md-0">
@@ -237,24 +272,28 @@ const Home = ({events, blogs}) => {
 
             <div className="container-fluid">
                 <div className="row posts-slider">
-                    {
-                        blogs.map(({slug, id, title, image}) => <div className="col-md-3 px-0" key={id}>
-                                <Link href="blog/[slug]" as={`blog/${slug}`}>
-                                    <a className="post"
-                                       style={{backgroundImage: `url(${image})`}}>
-                                        <h5>
-                                            {title}
+                    <div className="col-md-12">
+                        <Slider {...settingsBlog}>
+                            {
+                                blogs.map(({slug, id, title, image}) => <div className="col-md-3 px-0" key={id}>
+                                        <Link href="blog/[slug]" as={`blog/${slug}`}>
+                                            <a className="post"
+                                               style={{backgroundImage: `url(${image})`}}>
+                                                <h5>
+                                                    {title}
 
-                                            <span className="view">
+                                                    <span className="view">
                                                 view <img src="images/icon/right.png"/>
                                             </span>
-                                        </h5>
-                                    </a>
-                                </Link>
-                            </div>
-                        )
+                                                </h5>
+                                            </a>
+                                        </Link>
+                                    </div>
+                                )
 
-                    }
+                            }
+                        </Slider>
+                    </div>
                 </div>
             </div>
 
