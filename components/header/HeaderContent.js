@@ -1,6 +1,15 @@
 import React from "react";
+import Slider from "react-slick";
 
 export default function () {
+
+    const changingText = {
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: false,
+        fade: true
+    }
+
     return <div className="header-wrapper">
         <div className="social-icons">
             <a target="_blank" href="//www.facebook.com/SI-Fuse-105249634372571/">
@@ -25,29 +34,32 @@ export default function () {
             Connecting <br className="d-md-none"/> Investors With
 
             <div className="changing-text">
-                <div>
+                <Slider {...changingText}>
+                    <div>
                     <span>
                         Female led
                     </span>
-                    <br className="d-md-none"/>
-                    Startups
-                </div>
+                        <br className="d-md-none"/>
+                        Startups
+                    </div>
 
-                <div>
+                    <div>
                     <span>
                         Female owned
                     </span>
-                    <br className="d-md-none"/>
-                    Startups
-                </div>
+                        <br className="d-md-none"/>
+                        Startups
+                    </div>
 
-                <div>
+                    <div>
                     <span>
                         Gender diverse
                     </span>
-                    <br className="d-md-none"/>
-                    Startups
-                </div>
+                        <br className="d-md-none"/>
+                        Startups
+                    </div>
+                </Slider>
+
             </div>
         </h1>
     </div>
