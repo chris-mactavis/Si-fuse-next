@@ -201,7 +201,7 @@ form {
       height: 244px !important;
     }
 
-    input, textarea, select, .select2{
+    input, textarea, select, .select2, .multi-select{
       border-left: 0;
       border-top: 0;
       border-right: 0;
@@ -209,7 +209,7 @@ form {
       padding: 6px 10px;
       //margin-bottom: 20px;
       outline: none;
-      background: rgba($blue-grey, 0.5);
+      background: #f4f5f7;
       resize: none;
 
       &:focus, &:active{
@@ -218,6 +218,40 @@ form {
 
       &::placeholder {
         color: $color-black;
+      }
+    }
+
+    .multi-select{
+      padding-top: 0;
+      padding-bottom: 0;
+
+      >div{
+        border: none;
+        background: transparent;
+        box-shadow: none !important;
+
+        + div{
+          background: #f4f5f7;
+          padding: 0 10px;
+          position: relative;
+          left: -10px;
+        }
+
+        &:focus{
+          box-shadow: none;
+        }
+
+        >div{
+          padding: 0;
+
+          &:nth-child(2){
+            display: none;
+          }
+
+          >div{
+            padding: 0;
+          }
+        }
       }
     }
 
@@ -278,6 +312,7 @@ form {
       cursor: pointer;
       padding-left: 40px;
       font-weight: normal;
+      margin-bottom: 10px;
 
       input {
         position: absolute;
@@ -381,20 +416,25 @@ form {
       display: none;
     }
 
-    select:not(multiple), .select2 {
+    select:not(multiple), .select2, .multi-select {
       -webkit-appearance: none;
       -moz-appearance: none;
       cursor: pointer;
       border-left: 0;
       border-top: 0;
       border-right: 0;
-      background: rgba($blue-grey, 0.5) url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 25px) center;
+      background: #f4f5f7 url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 25px) center;
       width: 100%;
       border-radius: 0;
       color: $color-black-2;
 
+      @include media("mobile"){
+        background: #f4f5f7 url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 10px) center;
+        padding-right: 24px;
+      }
+
       &.country + .select2{
-        background: rgba($blue-grey, 0.5) url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 5px) center;
+        background: #f4f5f7 url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 5px) center;
       }
 
       .select2-selection {

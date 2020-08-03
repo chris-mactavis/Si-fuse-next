@@ -48,7 +48,8 @@ const Discover = ({userType, data, industries, countries}) => {
                     Authorization: `Bearer ${Token()}`
                 }
             });
-            setStartups(response.data);
+            const filteredStartup = response.data.filter(x => x.company);
+            setStartups(filteredStartup);
             setNextUrl(response.links.next);
             setLastPage(response.meta.last_page);
             setCurrentPage(response.meta.current_page);
@@ -198,7 +199,7 @@ const Discover = ({userType, data, industries, countries}) => {
 
 
                                     <button className="btn btn-sm" type="submit">Apply Filter</button>
-                                    <button className="btn btn-sm mt-2" type="reset" onClick={resetFilterHandler}>Reset
+                                    <button className="btn btn-sm mt-0 mt-md-2 ml-3 ml-md-0" type="reset" onClick={resetFilterHandler}>Reset
                                         Filter
                                     </button>
                                 </form>

@@ -423,21 +423,48 @@ form.profile-details .team-founders + .team-founders {
 form.profile-details .dropzone {
   height: 244px !important;
 }
-form.profile-details input, form.profile-details textarea, form.profile-details select, form.profile-details .select2 {
+form.profile-details input, form.profile-details textarea, form.profile-details select, form.profile-details .select2, form.profile-details .multi-select {
   border-left: 0;
   border-top: 0;
   border-right: 0;
   border-bottom: 1px solid #6B6B6B;
   padding: 6px 10px;
   outline: none;
-  background: rgba(236, 239, 241, 0.5);
+  background: #f4f5f7;
   resize: none;
 }
-form.profile-details input:focus, form.profile-details input:active, form.profile-details textarea:focus, form.profile-details textarea:active, form.profile-details select:focus, form.profile-details select:active, form.profile-details .select2:focus, form.profile-details .select2:active {
+form.profile-details input:focus, form.profile-details input:active, form.profile-details textarea:focus, form.profile-details textarea:active, form.profile-details select:focus, form.profile-details select:active, form.profile-details .select2:focus, form.profile-details .select2:active, form.profile-details .multi-select:focus, form.profile-details .multi-select:active {
   border-color: #D32907;
 }
-form.profile-details input::placeholder, form.profile-details textarea::placeholder, form.profile-details select::placeholder, form.profile-details .select2::placeholder {
+form.profile-details input::placeholder, form.profile-details textarea::placeholder, form.profile-details select::placeholder, form.profile-details .select2::placeholder, form.profile-details .multi-select::placeholder {
   color: #3E3E3E;
+}
+form.profile-details .multi-select {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+form.profile-details .multi-select > div {
+  border: none;
+  background: transparent;
+  box-shadow: none !important;
+}
+form.profile-details .multi-select > div + div {
+  background: #f4f5f7;
+  padding: 0 10px;
+  position: relative;
+  left: -10px;
+}
+form.profile-details .multi-select > div:focus {
+  box-shadow: none;
+}
+form.profile-details .multi-select > div > div {
+  padding: 0;
+}
+form.profile-details .multi-select > div > div:nth-child(2) {
+  display: none;
+}
+form.profile-details .multi-select > div > div > div {
+  padding: 0;
 }
 form.profile-details input[type=number]::-webkit-outer-spin-button,
 form.profile-details input[type=number]::-webkit-inner-spin-button {
@@ -478,6 +505,7 @@ form.profile-details .checkout-label {
   cursor: pointer;
   padding-left: 40px;
   font-weight: normal;
+  margin-bottom: 10px;
 }
 form.profile-details .checkout-label input {
   position: absolute;
@@ -572,42 +600,48 @@ form.profile-details #video-upload::after {
 form.profile-details .input-file[type=file] {
   display: none;
 }
-form.profile-details select:not(multiple), form.profile-details .select2 {
+form.profile-details select:not(multiple), form.profile-details .select2, form.profile-details .multi-select {
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
   border-left: 0;
   border-top: 0;
   border-right: 0;
-  background: rgba(236, 239, 241, 0.5) url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 25px) center;
+  background: #f4f5f7 url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 25px) center;
   width: 100%;
   border-radius: 0;
   color: #6B6B6B;
 }
-form.profile-details select:not(multiple).country + .select2, form.profile-details .select2.country + .select2 {
-  background: rgba(236, 239, 241, 0.5) url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 5px) center;
+@media only screen and (max-width: 576px) {
+  form.profile-details select:not(multiple), form.profile-details .select2, form.profile-details .multi-select {
+    background: #f4f5f7 url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 10px) center;
+    padding-right: 24px;
+  }
 }
-form.profile-details select:not(multiple) .select2-selection, form.profile-details .select2 .select2-selection {
+form.profile-details select:not(multiple).country + .select2, form.profile-details .select2.country + .select2, form.profile-details .multi-select.country + .select2 {
+  background: #f4f5f7 url(/images/icon/drop-down-black.svg) no-repeat calc(100% - 5px) center;
+}
+form.profile-details select:not(multiple) .select2-selection, form.profile-details .select2 .select2-selection, form.profile-details .multi-select .select2-selection {
   border: none;
   background: transparent !important;
   height: 20px;
 }
-form.profile-details select:not(multiple) .select2-selection .select2-selection__rendered, form.profile-details .select2 .select2-selection .select2-selection__rendered {
+form.profile-details select:not(multiple) .select2-selection .select2-selection__rendered, form.profile-details .select2 .select2-selection .select2-selection__rendered, form.profile-details .multi-select .select2-selection .select2-selection__rendered {
   padding: 0;
   line-height: 1.2;
 }
-form.profile-details select:not(multiple) .select2-selection__arrow, form.profile-details .select2 .select2-selection__arrow {
+form.profile-details select:not(multiple) .select2-selection__arrow, form.profile-details .select2 .select2-selection__arrow, form.profile-details .multi-select .select2-selection__arrow {
   display: none;
 }
-form.profile-details select:not(multiple) .select2-selection__rendered img, form.profile-details .select2 .select2-selection__rendered img {
+form.profile-details select:not(multiple) .select2-selection__rendered img, form.profile-details .select2 .select2-selection__rendered img, form.profile-details .multi-select .select2-selection__rendered img {
   height: 13px;
   position: relative;
   top: -1px;
 }
-form.profile-details select:not(multiple) .select2-selection__rendered img + span, form.profile-details .select2 .select2-selection__rendered img + span {
+form.profile-details select:not(multiple) .select2-selection__rendered img + span, form.profile-details .select2 .select2-selection__rendered img + span, form.profile-details .multi-select .select2-selection__rendered img + span {
   padding-left: 5px;
 }
-form.profile-details select:not(multiple) .select2-selection__rendered img > span, form.profile-details .select2 .select2-selection__rendered img > span {
+form.profile-details select:not(multiple) .select2-selection__rendered img > span, form.profile-details .select2 .select2-selection__rendered img > span, form.profile-details .multi-select .select2-selection__rendered img > span {
   display: inline-block;
   margin-top: 2px;
 }
@@ -829,7 +863,7 @@ section.image-text {
 section.image-text .investors .img-01 {
   height: 70px;
   margin-bottom: -38px;
-  margin-left: 40px;
+  margin-left: -30px;
 }
 @media only screen and (max-width: 1200px) {
   section.image-text .investors .img-01 {
@@ -923,7 +957,7 @@ section.image-text .investors a img {
   top: -2px;
 }
 section.image-text .startups .img-02 {
-  margin-left: 20rem;
+  margin-left: 21rem;
 }
 @media only screen and (max-width: 992px) {
   section.image-text .startups .img-02 {
@@ -1731,6 +1765,14 @@ section.startup-levels form .btn:hover.prev span {
 }
 section.startup-levels form .btn:hover.next span {
   background-image: url("/images/icon/arrow-right.svg");
+}
+@media only screen and (max-width: 576px) {
+  section.startup-levels form .profile-pic img {
+    max-height: 200px;
+  }
+}
+section.startup-levels form .profile-pic h5 {
+  margin-bottom: 40px;
 }
 section.startup-levels .info-box-container .info-box {
   border: 1px solid #B8B8B8;

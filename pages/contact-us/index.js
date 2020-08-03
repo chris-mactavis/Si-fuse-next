@@ -8,6 +8,7 @@ import {loader} from "../../store/actions/loader";
 import {User} from "../../utils/User";
 import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
+import {showNotifier} from "../../store/actions/notifier";
 
 const ContactUs = ({user}) => {
 
@@ -23,6 +24,7 @@ const ContactUs = ({user}) => {
                 }
             });
             reset();
+            dispatch(showNotifier('Message sent successfully. We\'ll be in touch shortly!'));
             dispatch(loader());
         } catch (e) {
             console.log(e.response.data.message);

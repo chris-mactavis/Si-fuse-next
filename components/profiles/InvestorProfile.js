@@ -5,6 +5,7 @@ import {showImageViewer} from "../../store/actions/imageViewer";
 import StartupCard from "../startups/startupCard";
 
 const InvestorProfile = ({profile, interests, connections}) => {
+    console.log(interests);
     const dispatch = useDispatch();
 
     const goTo = url => window.open(url.includes('http') ? url : `http://${url}`, '_blank');
@@ -59,8 +60,7 @@ const InvestorProfile = ({profile, interests, connections}) => {
                         connections.length > 0 && <div className="row">
                             {
                                 connections.map(user => {
-                                    console.log(user);
-                                    return <StartupCard key={user.id} startup={user}/>
+                                    return <StartupCard key={user.slug} startup={user}/>
                                 })
                             }
                         </div>

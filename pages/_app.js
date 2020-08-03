@@ -11,12 +11,14 @@ import '@synapsestudios/react-drop-n-crop/lib/react-drop-n-crop.css';
 import notifier from "../store/reducers/notifier";
 import imageViewer from "../store/reducers/imageViewer";
 import startupProfile from "../store/reducers/startupProfile";
+import investorProfile from "../store/reducers/investorProfile";
 import notifications from "../store/reducers/notification";
 import {addStartups} from "../store/actions/discover";
 import '../styles/global.css';
 import '../public/slim/slim.min.css';
 import '../public/css/filepond.css'
 import '../public/css/filepond-plugin-image-preview.css'
+import "slick-carousel/slick/slick.css";
 
 const reducers = combineReducers({
     auth: auth,
@@ -25,8 +27,9 @@ const reducers = combineReducers({
     notifier: notifier,
     imageViewer: imageViewer,
     startupProfile: startupProfile,
+    investorProfile: investorProfile,
     notifications: notifications,
-    addStartups: addStartups
+    addStartups: addStartups,
 });
 
 const store = process.env.environment === 'dev' ? createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware))) : createStore(reducers, applyMiddleware(thunkMiddleware));

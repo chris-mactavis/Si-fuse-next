@@ -9,6 +9,7 @@ import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {showNotifier} from "../../../store/actions/notifier";
 import Router from "next/router";
+import {setStartupData} from "../../../store/actions/startupProfile";
 
 const Level8 = ({startup}) => {
     const {register, handleSubmit} = useForm();
@@ -33,11 +34,12 @@ const Level8 = ({startup}) => {
         }
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/level', {investor_exit: JSON.stringify(data.investor_exit), profile_stage: 8}, {
+            const {data: response} = await axiosInstance.post('startups/level', {investor_exit: JSON.stringify(data.investor_exit), profile_stage: 8}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             })
+            dispatch(setStartupData(response.data));
             dispatch(loader());
             Router.push('/profile/edit');
         } catch (e) {

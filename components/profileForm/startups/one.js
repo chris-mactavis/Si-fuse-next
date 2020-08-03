@@ -12,9 +12,9 @@ import Router from "next/router";
 import Slim from "../../../public/slim/slim.react";
 import Select from "react-select";
 import ErrorSpan from "../../UI/ErrorSpan";
+import {setStartupData} from "../../../store/actions/startupProfile";
 
 export default function ProfileOne({industries, startup, locations}) {
-    console.log(startup);
     const dispatch = useDispatch();
     const [size, setSize] = useState(startup.company && startup.company.hasOwnProperty('teams') ? startup.company.teams.length : 1);
     const [adminError, setAdminError] = useState();
@@ -22,7 +22,6 @@ export default function ProfileOne({industries, startup, locations}) {
     const createArrayWithNumbers = length => {
         return Array.from({length}, (_, k) => k + 0);
     }
-
 
     const clientServicedOptions = [
         {label: 'B2B', value: 'B2B'},
@@ -66,6 +65,7 @@ export default function ProfileOne({industries, startup, locations}) {
                     Authorization: `Bearer ${Token()}`
                 }
             });
+            dispatch(setStartupData(response.data));
             dispatch(loader());
             dispatch(setCompanyProfileImage({companyProfileImage: response.data.company.logo_url, companyName: data.name}));
             dispatch(incrementCurrentState());
@@ -97,7 +97,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                     <StartupProfileHeader/>
 
                                     <div className="d-md-none">
-                                        <h4 className="text-center mb-3">Your company</h4>
+                                        <h5 className="text-center mb-3">Your company</h5>
                                     </div>
 
                                     <form onSubmit={handleSubmit(submitHandler)} className="profile-details">

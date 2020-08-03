@@ -7,6 +7,7 @@ import Token from "../../../utils/Token";
 import {decrementCurrentState, incrementCurrentState} from "../../../store/actions/profile";
 import ErrorSpan from "../../UI/ErrorSpan";
 import StartupProfileHeader from "./StartupProfileHeader";
+import {setStartupData} from "../../../store/actions/startupProfile";
 
 export default function ProfileThree({startup}) {
     const dispatch = useDispatch();
@@ -20,11 +21,12 @@ export default function ProfileThree({startup}) {
     const onSubmitHandler = async data => {
         dispatch(loader());
         try {
-            await axiosInstance.post('startups/finance', data, {
+            const {data: response} = await axiosInstance.post('startups/finance', data, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
             });
+            dispatch(setStartupData(response.data));
             dispatch(loader());
             dispatch(incrementCurrentState());
         } catch (e) {
@@ -47,16 +49,16 @@ export default function ProfileThree({startup}) {
                                 <div className="col-md-9 mx-auto">
                                     <StartupProfileHeader/>
 
-                                    <div className="numbers d-md-none num-alone">
-                                        <p>Finance</p>
+                                    <div className="d-md-none text-center">
+                                        <h4>Finance</h4>
                                     </div>
 
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="row">
-                                            <div className="col-md-4 text-center">
+                                            <div className="col-md-4 profile-pic text-center">
                                                 <img className="img-fluid " src={savedCompanyProfileImage || startup.company.logo_url} alt=""/>
                                                 <br/>
-                                                <h4 className="mt-2">{savedCompanyName || startup.company.name}</h4>
+                                                <h5 className="mt-2">{savedCompanyName || startup.company.name}</h5>
                                             </div>
 
                                              <div className="col-md-8">
@@ -83,7 +85,7 @@ export default function ProfileThree({startup}) {
 
                                                  <div className="input-group-container">
                                                      <select name="business_size" ref={register({required: 'This field is required'})} defaultValue={hasFinance() ? startup.finance.business_size : ''}>
-                                                         <option value="">Current business size relative to capital need</option>
+                                                         <option value="">Business size relative to capital need</option>
                                                          <option value="cannot value">No way to value current business worth</option>
                                                          <option value="less than capital needed">Current business worth less than capital needed</option>
                                                          <option value="more">Current business worth more than capital needed</option>
@@ -93,7 +95,7 @@ export default function ProfileThree({startup}) {
 
                                                  <div className="input-group-container">
                                                      <select name="cash_flow_projection" ref={register({required: 'This field is required'})} defaultValue={hasFinance() ? startup.finance.cash_flow_projection : ''}>
-                                                         <option value="">Cash flow projections for the investment</option>
+                                                         <option value="">Cash flow projections for investment</option>
                                                          <option value="positive currently">Cash flow positive currently</option>
                                                          <option value="positive during term of investment">Cash flow positive during term of investment</option>
                                                          <option value="uncertain">Very uncertain cashflow</option>
@@ -117,11 +119,11 @@ export default function ProfileThree({startup}) {
 
                                         <div className="d-flex">
                                             <button className="btn prev mr-auto" onClick={() => dispatch(decrementCurrentState())} type="button">
-                                                <span/> Previous
+                                                <span/> Prev
                                             </button>
 
                                             <button className="btn next ml-auto" type="submit">
-                                                Save & Next <span/>
+                                                Save <span/>
                                             </button>
                                         </div>
                                     </form>

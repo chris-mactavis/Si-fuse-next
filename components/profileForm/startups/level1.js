@@ -9,10 +9,10 @@ import {loader} from "../../../store/actions/loader";
 import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {showNotifier} from "../../../store/actions/notifier";
+import {setStartupData} from "../../../store/actions/startupProfile";
 
 const Level1 = ({startup}) => {
     const dispatch = useDispatch();
-
     const {register, handleSubmit} = useForm();
 
     const problem = () => {
@@ -37,8 +37,8 @@ const Level1 = ({startup}) => {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
-            })
-            // dispatch(setStartupData(response.data));
+            });
+            dispatch(setStartupData(response.data));
             dispatch(loader());
             dispatch(incrementCurrentLevelState());
         } catch (e) {
