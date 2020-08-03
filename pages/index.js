@@ -83,45 +83,6 @@ const Home = ({events, blogs}) => {
         dispatch(resetCurrentState());
 
         setTimeout(() => {
-
-            // $('.posts-slider').slick({
-            //     slidesToShow: 4,
-            //     slidesToScroll: 1,
-            //     arrows: false,
-            //     dots: true,
-            //     autoplay: true,
-            //     responsive: [
-            //         {
-            //             breakpoint: 1200,
-            //             settings: {
-            //                 slidesToShow: 3,
-            //                 slidesToScroll: 1
-            //             }
-            //         },
-            //         {
-            //             breakpoint: 1071,
-            //             settings: {
-            //                 slidesToShow: 2,
-            //                 slidesToScroll: 1,
-            //             }
-            //         },
-            //         {
-            //             breakpoint: 576,
-            //             settings: {
-            //                 slidesToShow: 1,
-            //                 slidesToScroll: 1,
-            //             }
-            //         },
-            //     ]
-            // });
-
-            $('.changing-text').slick({
-                autoplay: true,
-                autoplaySpeed: 3000,
-                arrows: false,
-                fade: true
-            })
-
             $('a[href*="#"]:not([href="#"])').click(function () {
                 if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
                     let target = $(this.hash);
