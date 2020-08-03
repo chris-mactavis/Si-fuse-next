@@ -10,6 +10,8 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
 
     const [starRating, setStarRating] = useState(rating || {formatted_rating: 0, overall_rating: 0, total_rating: 0});
 
+    const clientServiced = company.clients_serviced && JSON.parse(company.clients_serviced).length > 0 ? JSON.parse(company.clients_serviced) : [];
+
     useEffect(() => {
         const options = {
             max_value: 5,
@@ -178,7 +180,7 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
                                 <span className="tag">{finance.geographical_focus}</span>}
                                 {finance.revenue_type && <span className="tag">{finance.revenue_type}</span>}
                                 {finance.growth_projection && <span className="tag">{finance.growth_projection}</span>}
-                                {company.clients_serviced && <span className="tag">{company.clients_serviced}</span>}
+                                {clientServiced.map(client => <span key={client} className="tag">{client}</span> )}
                                 {finance.investor_type && <span className="tag">{finance.investor_type}</span>}
                                 {finance.funding_stage && <span className="tag">{finance.funding_stage}</span>}
                             </div>
