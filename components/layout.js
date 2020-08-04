@@ -51,6 +51,7 @@ export default function Layout({children, page, headerClass, headerContent, redB
                 <link rel="stylesheet" type="text/css" href="/slim/slim.min.css"/>
                 <link rel="stylesheet" type="text/css" href="/css/filepond.css"/>
                 <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
+                <link rel="stylesheet" type="text/css" href="/css/react-drop-n-crop.min.css"/>
                 <link rel="stylesheet" type="text/css" href="/css/filepond-plugin-image-preview.css"/>
 
                 <link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
