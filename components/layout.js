@@ -47,6 +47,7 @@ export default function Layout({children, page, headerClass, headerContent, redB
 
                 <link rel="stylesheet"
                       href="/css/bootstrap.min.css"/>
+                <link rel="stylesheet" type="text/css" href="/css/global.css"/>
                 {/*<link rel="stylesheet" href="/css/main.css"/>*/}
 
                 <link rel="stylesheet" type="text/css" href="/slick/slick.css"/>

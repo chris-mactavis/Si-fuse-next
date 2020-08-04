@@ -14,7 +14,7 @@ import startupProfile from "../store/reducers/startupProfile";
 import investorProfile from "../store/reducers/investorProfile";
 import notifications from "../store/reducers/notification";
 import {addStartups} from "../store/actions/discover";
-import '../styles/global.css';
+// import '../styles/global.css';
 import '../public/slim/slim.min.css';
 import '../public/css/filepond.css'
 import '../public/css/filepond-plugin-image-preview.css'
