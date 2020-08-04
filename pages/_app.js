@@ -18,7 +18,7 @@ import '../styles/global.css';
 import '../public/slim/slim.min.css';
 import '../public/css/filepond.css'
 import '../public/css/filepond-plugin-image-preview.css'
-import "slick-carousel/slick/slick.css";
+import "../public/css/slick.css";
 
 const reducers = combineReducers({
     auth: auth,
