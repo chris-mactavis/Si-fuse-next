@@ -1,14 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Slider from "react-slick";
 
 export default function () {
 
-    const changingText = {
+    const [changingText, setChangingText] = useState({
         autoplay: true,
         autoplaySpeed: 3000,
         arrows: false,
         fade: true
-    }
+    });
+
+    useEffect(() => {
+        window.addEventListener('scroll', (event) => {
+            if (window.pageYOffset >= 319) {
+                setChangingText({
+                    autoplay: false,
+                    autoplaySpeed: 3000,
+                    arrows: false,
+                    fade: false
+                })
+            } else {
+                setChangingText({
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    arrows: false,
+                    fade: true
+                })
+            }
+        })
+    }, []);
 
     return <div className="header-wrapper">
         <div className="social-icons">
