@@ -143,9 +143,9 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="row">
                                             <div className="col-md-4">
-                                                <img className="img-fluid" src={savedInvestorProfileImage || investor.profile.profile_pic_url} alt=""/>
+                                                <img className="img-fluid" src={savedInvestorProfileImage || (investor.profile ? investor.profile.profile_pic_url : '')} alt=""/>
                                                 <br/>
-                                                <h5 className="mt-2">{savedInvestorProfileName || (investor.profile.user.first_name + ' ' + investor.profile.user.last_name)}</h5>
+                                                <h5 className="mt-2">{savedInvestorProfileName || (investor.profile ? (investor.profile.user.first_name + ' ' + investor.profile.user.last_name) : '')}</h5>
                                             </div>
 
                                             <div className="col-md-8">

@@ -2553,6 +2553,40 @@ input:focus, textarea:focus, select:focus, option:focus button {
   bottom: 27px;
 }
 
+.scroll-to-top {
+  position: fixed;
+  bottom: 100px;
+  right: 105px;
+}
+.scroll-to-top button {
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  display: block;
+  padding: 0;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+.scroll-to-top button::before {
+  content: "";
+  font-size: unset;
+  opacity: 1;
+  display: inline-block;
+  background: url(/images/icon/up-arrow.png) no-repeat center;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+  position: absolute;
+}
+
 nav.navbar {
   font-size: 1.6rem;
   padding: 0 6rem 0 6rem;
