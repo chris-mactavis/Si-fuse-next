@@ -2464,15 +2464,23 @@ input:focus, textarea:focus, select:focus, option:focus button {
   cursor: pointer;
 }
 
+.complete-registration {
+  padding: 20px 40px;
+  background: #D32907;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
 .notification {
   position: fixed;
   display: flex;
-  top: 50px;
+  top: 110px;
   right: -40px;
   z-index: 100;
   opacity: 0;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
-  padding: 10px 30px 10px 60px;
+  padding: 20px 50px 20px 115px;
   transition: 0.3s all;
   color: white;
 }
@@ -2500,7 +2508,7 @@ input:focus, textarea:focus, select:focus, option:focus button {
 }
 .notification.show {
   display: block;
-  right: 20px;
+  right: 65px;
   opacity: 1;
 }
 .notification span {

@@ -1,13 +1,13 @@
 .notification {
   position: fixed;
   display: flex;
-  top: 50px;
+  top: 110px;
   right: -40px;
   z-index: 100;
   opacity: 0;
 
   box-shadow: 2px 4px 8px rgba(0, 0, 0, .5);
-  padding: 10px 30px 10px 60px;
+  padding: 20px 50px 20px 115px;;
   transition: .3s all;
 
   color: white;
@@ -41,7 +41,7 @@
 
   &.show {
     display: block;
-    right: 20px;
+    right: 65px;
     opacity: 1;
   }
 

@@ -86,7 +86,6 @@ export const profileMiddleWare = Component => {
         if (isServer && ctx.res) {
             isLoggedIn = !!ctx.req.cookies.token;
             user = ctx.req.cookies.user;
-            console.log(user);
             hasProfile = user ? JSON.parse(user).has_profile : false;
             currentPage = ctx.pathname;
             if (isLoggedIn && !hasProfile && currentPage !== '/profile/edit-levels') {
