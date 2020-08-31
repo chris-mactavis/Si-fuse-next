@@ -11,11 +11,19 @@ import Notifier from "./UI/Notifier";
 import ImageViewer from "./UI/ImageViewer";
 import {fetchNotifications} from "../store/actions/notification";
 import Particles from "react-particles-js";
+import Router from "next/router";
+import Cookies from "js-cookie";
 
 export default function Layout({children, page, headerClass, headerContent, redBar = false, whiteAccount = false, footer = true}) {
     const isLoggedIn = useSelector(state => state.auth.loggedIn);
 
     const dispatch = useDispatch();
+
+    const goToProfile = () => {
+        Router.push('/profile/edit');
+    }
+
+    const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
 
     isLoggedIn ? dispatch(fetchNotifications()) : null;
 
@@ -73,11 +81,15 @@ export default function Layout({children, page, headerClass, headerContent, redB
             <ImageViewer />
 
             <header className={headerClass}>
+                {
+                    user ? (!user.has_profile && <div className="complete-registration" onClick={goToProfile}>Complete Your Profile</div>) : null
+                }
                 {page === 'Home' ?
                     <div className="particles-wrapper">
                         <Particles />
                     </div>
                     : null}
+
 
                 <TopBar redBar={redBar} isLoggedIn={isLoggedIn} whiteAccount={whiteAccount}/>
 
