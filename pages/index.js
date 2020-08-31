@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Layout from "../components/layout";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import HeaderContent from "../components/header/HeaderContent";
 import Link from "next/link";
 import axiosInstance from "../config/axios";
@@ -79,6 +79,18 @@ const Home = ({events, blogs}) => {
         ]
     }
 
+    const [showScroller, setShowScroller] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener('scroll', (event) => {
+            if (window.pageYOffset >= 300) {
+                setShowScroller(true);
+            } else {
+                setShowScroller(false);
+            }
+        });
+    }, [])
+
     useEffect(() => {
         dispatch(resetCurrentState());
 
@@ -98,6 +110,13 @@ const Home = ({events, blogs}) => {
         }, 2000);
 
     }, [])
+
+    const scrollToTop = () => {
+        if (document.body.scrollTop !== 0 || document.documentElement.scrollTop !== 0) {
+            window.scrollBy(0, -50);
+            requestAnimationFrame(scrollToTop);
+        }
+    }
 
     return <Layout
         page="Home"
@@ -264,6 +283,14 @@ const Home = ({events, blogs}) => {
                 </Link>
             </div>
         </section>
+
+        {
+            showScroller && <div className="scroll-to-top" onClick={scrollToTop}>
+                <button type="button" data-role="none" className="">
+                </button>
+            </div>
+        }
+
     </Layout>
 }
 
