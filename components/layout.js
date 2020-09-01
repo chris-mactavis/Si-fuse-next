@@ -74,21 +74,26 @@ export default function Layout({children, page, headerClass, headerContent, redB
                 <script src="/js/main.js"/>
             </Head>
 
-            <Loader />
+            <Loader/>
 
-            <Notifier />
+            <Notifier/>
 
-            <ImageViewer />
+            <ImageViewer/>
+
+            {
+                user ? (!user.has_profile &&
+                    <div className="complete-registration" onClick={goToProfile}>Complete Your Profile</div>) : null
+            }
 
             <header className={headerClass}>
+
                 {
-                    user ? (!user.has_profile && <div className="complete-registration" onClick={goToProfile}>Complete Your Profile</div>) : null
+                    page === 'Home' ?
+                        <div className="particles-wrapper">
+                            <Particles/>
+                        </div>
+                        : null
                 }
-                {page === 'Home' ?
-                    <div className="particles-wrapper">
-                        <Particles />
-                    </div>
-                    : null}
 
 
                 <TopBar redBar={redBar} isLoggedIn={isLoggedIn} whiteAccount={whiteAccount}/>
@@ -103,7 +108,7 @@ export default function Layout({children, page, headerClass, headerContent, redB
             {children}
 
             {
-                footer && <Footer />
+                footer && <Footer/>
             }
         </>
     )
