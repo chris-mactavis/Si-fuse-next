@@ -204,13 +204,13 @@ const Home = ({events, blogs}) => {
                 <div className="row event-slider">
                     <div className="col-md-12">
                         <Slider {...settingsEvent}>
-                            {events.map(({id, date_formatted, image, country, title, slug}) => <div className="col-md-4"
+                            {events.map(({id, date_formatted, image_thumbnail, country, title, slug}) => <div className="col-md-4"
                                                                                                     key={id}>
                                     <Link href="events/[slug]" as={`events/${slug}`}>
                                         <a>
                                             <div className="card">
                                                 <div className="position-relative">
-                                                    <img className="card-img-top img-fluid" src={image}/>
+                                                    <img className="card-img-top img-fluid" src={image_thumbnail}/>
                                                     <a className="view" href="#">view <img src="images/icon/right.png"
                                                                                            alt=""/></a>
                                                 </div>

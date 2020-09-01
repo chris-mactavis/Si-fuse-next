@@ -43,7 +43,7 @@ export default function Events({data: {data: events, links: {next}, meta: {curre
                             <div className="card">
                                 <Link href="events/[slug]" as={`events/${event.slug}`}>
                                     <div className="position-relative">
-                                        <img className="card-img-top img-fluid" src={event.image}/>
+                                        <img className="card-img-top img-fluid" src={event.image_thumbnail}/>
                                         <a className="view text-white">view <img src="/images/icon/right.png"
                                                                                  alt=""/></a>
 
