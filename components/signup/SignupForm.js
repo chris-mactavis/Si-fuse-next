@@ -20,6 +20,7 @@ export default function SignupForm({countries, userTypes, query}) {
         try {
             const {data} = await axiosInstance.post('signup', {...formData, user_type_id: accountType});
             dispatch(storeAuth(data))
+            dispatch(showNotifier('Account registration successfully!'));
             dispatch(loader());
             if (accountType === 2) {
                 Router.push('/profile/edit-levels');

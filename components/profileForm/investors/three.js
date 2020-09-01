@@ -25,6 +25,7 @@ const InvestorMoreInfo = ({investor, stages}) => {
                     'Content-Type': 'application/json'
                 }
             });
+            
             dispatch(setInvestorProfile(response.data));
             dispatch(loader());
             dispatch(showNotifier('Signup Complete'));
@@ -56,70 +57,75 @@ const InvestorMoreInfo = ({investor, stages}) => {
 
                                     <form onSubmit={handleSubmit(onSubmitHandler)} className="profile-details">
                                         <div className="investor-levels">
-                                            <input ref={register} type="radio" name="startup_level" id="level-1" value="1"
+                                            <input ref={register} type="radio" name="startup_level" id="level-1"
+                                                   value="1"
                                                    defaultChecked={hasInterests() && investor.interests.startup_level === '1'}/>
                                             <label htmlFor="level-1" className="radio-label">
                                                 <span className="input-label">Level 1</span>
-                                                <p>The entrepreneurs are off to a great start. The founding team has been
-                                                    established, and whether or not they have a product prototype or a
-                                                    business
-                                                    model, they’ve identified an important problem to solve.</p>
+                                                <p>I am interested in a startup that have a well established founding
+                                                    team, that have gone ahead to identified a key/vital problem in
+                                                    their industry to solve. They do not need to have a product protype
+                                                    or a business model.</p>
                                             </label>
 
-                                            <input ref={register} type="radio" name="startup_level" id="level-2" value="2"
+                                            <input ref={register} type="radio" name="startup_level" id="level-2"
+                                                   value="2"
                                                    defaultChecked={hasInterests() && investor.interests.startup_level === '2'}/>
                                             <label htmlFor="level-2" className="radio-label">
                                                 <span className="input-label">Level 2</span>
-                                                <p>The founding team has crafted a vision for how they’ll solve the problem
-                                                    they’re
-                                                    tackling. Next investors will expect to see validation that the value
-                                                    proposition is truly valuable to potential customers.</p>
+                                                <p>I am interested in a start-up where the founders have developed a
+                                                    value proposition on how they plan on solving an identified problem,
+                                                    and can show investors that their value proposition is valuable to
+                                                    potential consumers/customers.</p>
                                             </label>
 
-                                            <input ref={register} type="radio" name="startup_level" id="level-3" value="3"
+                                            <input ref={register} type="radio" name="startup_level" id="level-3"
+                                                   value="3"
                                                    defaultChecked={hasInterests() && investor.interests.startup_level === '3'}/>
                                             <label htmlFor="level-3" className="radio-label">
                                                 <span className="input-label">Level 3</span>
-                                                <p>They’re starting to prove that they’re onto something. They have initial
-                                                    validation that their solution is valuable. They have begun testing
-                                                    their
-                                                    pricing with early prototypes and the data shows that customers will pay
-                                                    a price
-                                                    that could sustain the business.</p>
+                                                <p>I am interested in a start-up that has evidence that validates their
+                                                    solution is valuable to customers and have started trials of their
+                                                    price strategy with early prototypes with a report that shows
+                                                    customers/consumers can afford a price that would drive business
+                                                    sustainability.</p>
                                             </label>
 
-                                            <input ref={register} type="radio" name="startup_level" id="level-4" value="4"
+                                            <input ref={register} type="radio" name="startup_level" id="level-4"
+                                                   value="4"
                                                    defaultChecked={hasInterests() && investor.interests.startup_level === '4'}/>
                                             <label htmlFor="level-4" className="radio-label">
                                                 <span className="input-label">Level 4</span>
-                                                <p>It’s clear they’ve found an opportunity. Reliable public or third-party
-                                                    data provides strong evidence that the total addressable market is over $10 million
-                                                    and they’re well positioned to enter the market. Next investors will
-                                                    want to see evidence that they can build a profitable business within this
-                                                    market.
+                                                <p>I am interested in a start-up with an obvious business opportunity
+                                                    that has a reliable third party data to validate that their total
+                                                    available market is over $1 million and are well positioned to
+                                                    penetrate this market. Also can provide proof to investors that they
+                                                    can establish a profitable business within the market.
                                                 </p>
                                             </label>
 
-                                            <input ref={register} type="radio" name="startup_level" id="level-5" value="5"
+                                            <input ref={register} type="radio" name="startup_level" id="level-5"
+                                                   value="5"
                                                    defaultChecked={hasInterests() && investor.interests.startup_level === '5'}/>
                                             <label htmlFor="level-5" className="radio-label">
                                                 <span className="input-label">Level 5</span>
-                                                <p>They’ve reached a major inflection point. They have paying customers, are
-                                                    lowering acquisition costs, and the data indicate they can reach
-                                                    positive unit
-                                                    economics. Next investors will want to see the business succeeding with
-                                                    customers beyond early adopters.</p>
+                                                <p>I am interested in a start-up that have reached a business turning
+                                                    point, with paying clients, reduced acquisition cost, with data that
+                                                    shows that they could attain a positive unit economics. Also, can
+                                                    provide investors with a road map how the business tend to capture
+                                                    customers past early adopters.</p>
                                             </label>
 
-                                            <input ref={register} type="radio" name="startup_level" id="level-6" value="6"
+                                            <input ref={register} type="radio" name="startup_level" id="level-6"
+                                                   value="6"
                                                    defaultChecked={hasInterests() && investor.interests.startup_level === '6'}/>
                                             <label htmlFor="level-6" className="radio-label">
                                                 <span className="input-label">Level 6</span>
-                                                <p>They’ve accomplished a critical step. They’re demonstrating that average
-                                                    customers beyond early adopters are finding value in your product. Next
-                                                    investors will want to see product-market fit, namely that unit
-                                                    economics are
-                                                    positive with a healthy margin among average customers.</p>
+                                                <p>I am interested in start-up that have completed vital business steps
+                                                    and are demonstrating that customers past the early adopters see
+                                                    value in their products/services. And can provide investors with
+                                                    proof of product/market fit, specifically that their unit economics
+                                                    are positives with favourable avarage profit margin.</p>
                                             </label>
 
                                             <input ref={register} value={7} type="radio" name="startup_level" value="7"
@@ -127,46 +133,42 @@ const InvestorMoreInfo = ({investor, stages}) => {
                                                    defaultChecked={hasInterests() && investor.interests.startup_level === '7'}/>
                                             <label htmlFor="level-7" className="radio-label">
                                                 <span className="input-label">Level 7</span>
-                                                <p>This is perhaps the hardest level to achieve, and they’ve done it.
-                                                    They’ve proven
-                                                    that they can make a profit from each customer and now just need to
-                                                    scale up the
-                                                    business. Next investors will be looking to see how rapidly they scale
-                                                    sales and
-                                                    manage the growing pains of a burgeoning organization.</p>
+                                                <p>I am interested in start-up that have shown that they could make
+                                                    profits from every customers/consumers and now simply want to expand
+                                                    the business. They are willing to show investors how quickly they
+                                                    can expand sales and manage the increasing pains of an growing
+                                                    organization.</p>
                                             </label>
 
-                                            <input ref={register} type="radio" name="startup_level" id="level-8" value="8"
+                                            <input ref={register} type="radio" name="startup_level" id="level-8"
+                                                   value="8"
                                                    defaultChecked={hasInterests() && investor.interests.startup_level === '8'}/>
                                             <label htmlFor="level-8" className="radio-label">
                                                 <span className="input-label">Level 8</span>
-                                                <p>They’re scaling rapidly and have found the formula for success. The value
-                                                    proposition, product, and business model are all validated. They’re
-                                                    focusing on
-                                                    sales, growth, and managing the team as it too scales in new and
-                                                    challenging
-                                                    ways. Now that they’ve proven it’s a great business most early investors
-                                                    will be
-                                                    looking for liquidity next.</p>
+                                                <p>I am interested in a start-up that is expanding quickly and have
+                                                    developed working strategies for business growth. With sustainable
+                                                    value proposition, products and revenue model. While, concentrating
+                                                    on sales, growth, and managing the team as it also grows in new and
+                                                    challenging ways. They can also provide early investors with
+                                                    liquidity and exit plan.</p>
                                             </label>
 
-                                            <input ref={register} type="radio" name="startup_level" id="level-9" value="9"
+                                            <input ref={register} type="radio" name="startup_level" id="level-9"
+                                                   value="9"
                                                    defaultChecked={hasInterests() && investor.interests.startup_level === '9'}/>
                                             <label htmlFor="level-9" className="radio-label">
                                                 <span className="input-label">Level 9</span>
-                                                <p>They’ve achieved a rare and impressive feat. They’ve acquired substantial
-                                                    market
-                                                    share and are recognized as a leader in the industry. The team is lining
-                                                    up an
-                                                    exit for investors, and a new source of capital if they need it. They
-                                                    are in the
-                                                    midst of serious negotiations and should be signing a deal relatively
-                                                    soon.</p>
+                                                <p> I am interested in a start-up that have built an extraordinary and
+                                                    spectacular enterprise, have gained large market share and
+                                                    recognized as a pace-setter in their industry. They are currently in
+                                                    the midst of a significant negotiations for investor's exit and new
+                                                    source of capital, and should be signing a deal soon.</p>
                                             </label>
                                         </div>
 
                                         <div className="d-flex">
-                                            <button className="btn prev mr-auto" onClick={() => dispatch(decrementCurrentState())} type="button">
+                                            <button className="btn prev mr-auto"
+                                                    onClick={() => dispatch(decrementCurrentState())} type="button">
                                                 <span/> Prev
                                             </button>
                                             <button className="btn next ml-auto" type="submit">

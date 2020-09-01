@@ -64,73 +64,73 @@ const Level7 = ({startup}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="scale"
                                                defaultChecked={scale().includes('S1')}
-                                               value="S1::We’ve identified multiple possible markets or customer segments."/>
+                                               value="S1::We’ve recognized a couple viable markets or consumer segments that would drive scalability and growth."/>
                                         <span className="checkout-custom"/>
-                                        We’ve identified multiple possible markets or customer segments.
+                                        We’ve recognized a couple viable markets or consumer segments that would drive scalability and growth.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="scale"
                                                defaultChecked={scale().includes('S2')}
-                                               value="S2::We have evidence that multiple markets experience this problem."/>
+                                               value="S2::We have proof that several markets experiences the problem our creative solution solves."/>
                                         <span className="checkout-custom"/>
-                                        We have evidence that multiple markets experience this problem.
+                                        We have proof that several markets experiences the problem our creative solution solves.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="scale"
                                                defaultChecked={scale().includes('S3')}
-                                               value="S3::We have a clear strategy to scale to multiple markets."/>
+                                               value="S3::We have a clear strategic approach for penetration/scaling into several identified markets."/>
                                         <span className="checkout-custom"/>
-                                        We have a clear strategy to scale to multiple markets.
+                                        We have a clear strategic approach for penetration/scaling into several identified markets.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="scale"
                                                defaultChecked={scale().includes('S4')}
-                                               value="S4::Customers in multiple markets find value in our solution."/>
+                                               value="S4::Customers in several identified markets see value in our solution and are willing to pay our fee."/>
                                         <span className="checkout-custom"/>
-                                        Customers in multiple markets find value in our solution.
+                                        Customers in several identified markets see value in our solution and are willing to pay our fee.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="scale"
                                                defaultChecked={scale().includes('S5')}
-                                               value="S5::Our unit economics are tipping to positive in at least two markets."/>
+                                               value="S5::Our business model (company's performance) have been favourable in at least two identified markets."/>
                                         <span className="checkout-custom"/>
-                                        Our unit economics are tipping to positive in at least two markets.
+                                        Our business model (company's performance) have been favourable in at least two identified markets.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="scale"
                                                defaultChecked={scale().includes('S6')}
-                                               value="S6::We’ve cleared regulatory challenges and have a clear IP strategy."/>
+                                               value="S6::We’ve cleared regulatory issues and have a clear IP strategy."/>
                                         <span className="checkout-custom"/>
-                                        We’ve cleared regulatory challenges and have a clear IP strategy.
+                                        We’ve cleared regulatory issues and have a clear IP strategy.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="scale"
                                                defaultChecked={scale().includes('S7')}
-                                               value="S7::Our unit economics are positive in multiple markets."/>
+                                               value="S7::Our business model (company's performance) have been wonderful at several identified markets."/>
                                         <span className="checkout-custom"/>
-                                        Our unit economics are positive in multiple markets.
+                                        Our business model (company's performance) have been wonderful at several identified markets.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="scale"
                                                defaultChecked={scale().includes('S8')}
-                                               value="S8::Growth in our customer base is accelerating month-on-month"/>
+                                               value="S8::The growth in our consumer base is increasing rapidly monthly."/>
                                         <span className="checkout-custom"/>
-                                        Growth in our customer base is accelerating month-on-month
+                                        The growth in our consumer base is increasing rapidly monthly.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="scale"
                                                defaultChecked={scale().includes('S9')}
-                                               value="S9::Unit economics are strong for multiple markets or customer segments."/>
+                                               value="S9::Our business model (company's performance) is good to be replicated at several markets or consumer segments."/>
                                         <span className="checkout-custom"/>
-                                        Unit economics are strong for multiple markets or customer segments.
+                                        Our business model (company's performance) is good to be replicated at several markets or consumer segments.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>
