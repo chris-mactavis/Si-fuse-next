@@ -57,80 +57,80 @@ const Level5 = ({startup}) => {
                             <div className="col-md-9 mx-auto">
                                 <LevelHeader isLevel/>
 
-                                <InfoBox heading="Business Model" text="How much evidence do you have that your business model will work?"/>
+                                <InfoBox heading="Business Model" text="What proof do you have that validates your business model?"/>
 
                                 <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="business_model"
                                                defaultChecked={businessModel().includes('BM1')}
-                                               value="BM1::We have an outline of a revenue model."/>
+                                               value="BM1::We have a well defined model for revenue generation."/>
                                         <span className="checkout-custom"/>
-                                        We have an outline of a revenue model.
+                                        We have a well defined model for revenue generation.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="business_model"
                                                defaultChecked={businessModel().includes('BM2')}
-                                               value="BM2::Existing pricing and business models support our revenue model."/>
+                                               value="BM2::Current industry pricing and revenue models backs our model for revenue generation."/>
                                         <span className="checkout-custom"/>
-                                        Existing pricing and business models support our revenue model.
+                                        Current industry pricing and revenue models backs our model for revenue generation.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="business_model"
                                                defaultChecked={businessModel().includes('BM3')}
-                                               value="BM3::We can articulate the cost structure & unit economics in our industry."/>
+                                               value="BM3::Our business model allows us to communicate our pricing and company's performance in our industry"/>
                                         <span className="checkout-custom"/>
-                                        We can articulate the cost structure & unit economics in our industry.
+                                        Our business model allows us to communicate our pricing and company's performance in our industry
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="business_model"
                                                defaultChecked={businessModel().includes('BM4')}
-                                               value="BM4::We have projected revenues and costs and have a strategy to hit them."/>
+                                               value="BM4::Our team have outline revenue and cost projections with strategic approach to achieving them."/>
                                         <span className="checkout-custom"/>
-                                        We have projected revenues and costs and have a strategy to hit them.
+                                        Our team have outline revenue and cost projections with strategic approach to achieving them.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="business_model"
                                                defaultChecked={businessModel().includes('BM5')}
-                                               value="BM5::5. Our actual revenues & costs support future positive unit economics."/>
+                                               value="BM5::Our current revenue & cost validates positive futuristic company's performance."/>
                                         <span className="checkout-custom"/>
-                                        Our actual revenues & costs support future positive unit economics.
+                                        Our current revenue & cost validates positive futuristic company's performance.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="business_model"
                                                defaultChecked={businessModel().includes('BM6')}
-                                               value="BM6::Our customer acquisition costs are going down & pricing is going up."/>
+                                               value="BM6::Our cost for acquiring a customer is on the low while and pricing is on the increase."/>
                                         <span className="checkout-custom"/>
-                                        Our customer acquisition costs are going down & pricing is going up.
+                                        Our cost for acquiring a customer is on the low while and pricing is on the increase.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="business_model"
                                                defaultChecked={businessModel().includes('BM7')}
-                                               value="BM7::We've validated our business model. We have strong unit economics."/>
+                                               value="BM7::Our business model for revenue generation have been tested. And we certainly have a strong unit economics (overall company's performance)."/>
                                         <span className="checkout-custom"/>
-                                        We've validated our business model. We have strong unit economics.
+                                        Our business model for revenue generation have been tested. And we certainly have a strong unit economics (overall company's performance).
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="business_model"
                                                defaultChecked={businessModel().includes('BM8')}
-                                               value="BM8::We're rapidly growing each month and we've got a path to profitability."/>
+                                               value="BM8::Our growth monthly is expeditious with a well thought out route to profitability."/>
                                         <span className="checkout-custom"/>
-                                        We're rapidly growing each month and we've got a path to profitability.
+                                        Our growth monthly is expeditious with a well thought out route to profitability.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="business_model"
                                                defaultChecked={businessModel().includes('BM9')}
-                                               value="BM9::Our revenue has met or exceeded investors' targets for multiple years."/>
+                                               value="BM9::Revenue generated has surpassed our investors' expectations for a number of years."/>
                                         <span className="checkout-custom"/>
-                                        Our revenue has met or exceeded investors' targets for multiple years.
+                                        Revenue generated has surpassed our investors' expectations for a number of years.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>

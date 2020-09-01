@@ -58,80 +58,80 @@ const Level6 = ({startup}) => {
 
                                 <LevelHeader isLevel/>
 
-                                <InfoBox heading="Team" text="First, we would like to know more about the team you are building."/>
+                                <InfoBox heading="Team" text="What kind of team do you have or building?"/>
 
                                 <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC1')}
-                                               value="TC1::We have 2+ co-founders with differentiated skills sets."/>
+                                               value="TC1::Our team is made up of 2 or more co-founders with varying competences."/>
                                         <span className="checkout-custom"/>
-                                        We have 2+ co-founders with differentiated skills sets.
+                                        Our team is made up of 2 or more co-founders with varying competences.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC2')}
-                                               value="TC2::Our team has personally experienced the problem."/>
+                                               value="TC2::Our team consist of individuals that have experience in the problem."/>
                                         <span className="checkout-custom"/>
-                                        Our team has personally experienced the problem.
+                                        Our team consist of individuals that have experience in the problem.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC3')}
-                                               value="TC3::Our team can build the product & understand the value chain."/>
+                                               value="TC3::Our team consist of individuals that can develop the product that solves the problem and understands the supply chain."/>
                                         <span className="checkout-custom"/>
-                                        Our team can build the product & understand the value chain.
+                                        Our team consist of individuals that can develop the product that solves the problem and understands the supply chain.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC4')}
-                                               value="TC4::We have a clear strategy and understanding of sales."/>
+                                               value="TC4::We understand how our marketplace operates & have a robust industry contacts."/>
                                         <span className="checkout-custom"/>
-                                        We have a clear strategy and understanding of sales.
+                                        We understand how our marketplace operates & have a robust industry contacts.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC5')}
-                                               value="TC5::Our management, product, & sales teams are ready for growth."/>
+                                               value="TC5::Our team have a good understanding of how sales work, and have a strategic approach for market penetration."/>
                                         <span className="checkout-custom"/>
-                                        Our management, product, & sales teams are ready for growth.
+                                        Our team have a good understanding of how sales work, and have a strategic approach for market penetration.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC6')}
-                                               value="TC6::We understand how our market operates & have strong industry contacts."/>
+                                               value="TC6::Our management, product, & sales team are equipped for growth."/>
                                         <span className="checkout-custom"/>
-                                        We understand how our market operates & have strong industry contacts.
+                                        Our management, product, & sales team are equipped for growth.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC7')}
-                                               value="TC7::We have an executive team that can lead the company through growth."/>
+                                               value="TC7::Our managerial team are well-equipped to lead the organization through exponential growth."/>
                                         <span className="checkout-custom"/>
-                                        We have an executive team that can lead the company through growth.
+                                        Our managerial team are well-equipped to lead the organization through exponential growth.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC8')}
-                                               value="TC8::Our team is recognized as market leaders in the industry."/>
+                                               value="TC8::Our team comprises of individuals identified as market leaders in the industry."/>
                                         <span className="checkout-custom"/>
-                                        Our team is recognized as market leaders in the industry.
+                                        Our team comprises of individuals identified as market leaders in the industry.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC9')}
-                                               value="TC9::Our team is prepared to navigate a merger, acquisition, or IPO."/>
+                                               value="TC9::Our team is ready to negotiate a merger, acquisition, or IPO."/>
                                         <span className="checkout-custom"/>
-                                        Our team is prepared to navigate a merger, acquisition, or IPO.
+                                        Our team is ready to negotiate a merger, acquisition, or IPO.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>

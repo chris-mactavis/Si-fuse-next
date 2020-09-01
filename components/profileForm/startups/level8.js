@@ -58,80 +58,80 @@ const Level8 = ({startup}) => {
                                 <LevelHeader isLevel/>
 
                                 <InfoBox heading="Investor Exit"
-                                         text="Finally, how much evidence do you have that you can provide liquidity to your investors?"/>
+                                         text="What proof do you have that provides liquidity to your investors?"/>
 
                                 <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="investor_exit"
                                                defaultChecked={investorExit().includes('I1')}
-                                               value="I1::We know what an exit is and understand its importance to investors."/>
+                                               value="I1::Our team understands the need for an investors exit plan because we recognize its significance to investors."/>
                                         <span className="checkout-custom"/>
-                                        We know what an exit is and understand its importance to investors.
+                                        Our team understands the need for an investors exit plan because we recognize its significance to investors.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="investor_exit"
                                                defaultChecked={investorExit().includes('I2')}
-                                               value="I2::We have a vision of how to ultimately deliver liquidity to investors."/>
+                                               value="I2::Our team have a clear direction on how to provide liquidity to our investors."/>
                                         <span className="checkout-custom"/>
-                                        We have a vision of how to ultimately deliver liquidity to investors.
+                                        Our team have a clear direction on how to provide liquidity to our investors.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="investor_exit"
                                                defaultChecked={investorExit().includes('I3')}
-                                               value="I3::Evidence suggests our value proposition is of interest to acquirers"/>
+                                               value="I3::We have proof to shows business acquirers indicating interest in our business solution."/>
                                         <span className="checkout-custom"/>
-                                        Evidence suggests our value proposition is of interest to acquirers
+                                        We have proof to shows business acquirers indicating interest in our business solution.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="investor_exit"
                                                defaultChecked={investorExit().includes('I4')}
-                                               value="I4::Serious companies have made serious investments in our industry."/>
+                                               value="I4::There are track records of big companies making large financial commitment (investment) in our industry."/>
                                         <span className="checkout-custom"/>
-                                        Serious companies have made serious investments in our industry.
+                                        There are track records of big companies making large financial commitment (investment) in our industry.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="investor_exit"
                                                defaultChecked={investorExit().includes('I5')}
-                                               value="I5::We’re seeing inbound interest from large potential acquirers."/>
+                                               value="I5::We're getting numerous requests from big potential acquirers indicating interest."/>
                                         <span className="checkout-custom"/>
-                                        We’re seeing inbound interest from large potential acquirers.
+                                        We're getting numerous requests from big potential acquirers indicating interest.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="investor_exit"
                                                defaultChecked={investorExit().includes('I6')}
-                                               value="I6::We’ve identified specific acquirers or other exit options."/>
+                                               value="I6::Our team have spotted/picked certain business acquirers that have showed interest. Also we've identified other investor's exit options."/>
                                         <span className="checkout-custom"/>
-                                        We’ve identified specific acquirers or other exit options.
+                                        Our team have spotted/picked certain business acquirers that have showed interest. Also we've identified other investor's exit options.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="investor_exit"
                                                defaultChecked={investorExit().includes('I7')}
-                                               value="I7::We have strong relationships with multiple potential acquirers."/>
+                                               value="I7::Our team have built good business relationships with various potential acquirers."/>
                                         <span className="checkout-custom"/>
-                                        We have strong relationships with multiple potential acquirers.
+                                        Our team have built good business relationships with various potential acquirers.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="investor_exit"
                                                defaultChecked={investorExit().includes('I8')}
-                                               value="I8::We’ve turned down an acquisition offer already."/>
+                                               value="I8::There have been acquisition offers thrown at our team that was declined already. or We've previously declined acquisition offer made at us."/>
                                         <span className="checkout-custom"/>
-                                        We’ve turned down an acquisition offer already.
+                                        There have been acquisition offers thrown at our team that was declined already. or We've previously declined acquisition offer made at us.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="investor_exit"
                                                defaultChecked={investorExit().includes('I9')}
-                                               value="I9::We're on the cusp of an exit and reaching the finish line."/>
+                                               value="I9::Our team is currently close to the last phase of an investor exit plan."/>
                                         <span className="checkout-custom"/>
-                                        We're on the cusp of an exit and reaching the finish line.
+                                        Our team is currently close to the last phase of an investor exit plan.
                                     </label>
 
 

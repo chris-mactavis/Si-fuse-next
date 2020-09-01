@@ -58,79 +58,79 @@ const Level2 = ({startup}) => {
                                 <LevelHeader isLevel/>
 
                                 <InfoBox heading="Vision & Value Proposition"
-                                         text="First, we would like to know more about the team you are building."/>
+                                         text="What are the proof that your product is needed by target customers?"/>
 
                                 <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V1')}
-                                               value="V1::We have a hypothesis for how we will solve this problem."/>
+                                               value="V1::Our team has developed a theory on how to address this industry need."/>
                                         <span className="checkout-custom"/>
-                                        We have a hypothesis for how we will solve this problem.
+                                        Our team has developed a theory on how to address this industry need.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V2')}
-                                               value="V2::Potential customers validate that our solution will solve a key point."/>
+                                               value="V2::The rapid adoption of our creative solution by potential customers proves that we addressing a painpoint."/>
                                         <span className="checkout-custom"/>
-                                        Potential customers validate that our solution will solve a key point.
+                                        The rapid adoption of our creative solution by potential customers proves that we addressing a painpoint.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V3')}
-                                               value="V3::We have evidence that customers will pay our target price."/>
+                                               value="V3::Our team has proof that customers will pay a certain amount for our creative solution."/>
                                         <span className="checkout-custom"/>
-                                        We have evidence that customers will pay our target price.
+                                        Our team has proof that customers will pay a certain amount for our creative solution.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V4')}
-                                               value="V4::Customer feedback shows that our solution is better than others."/>
+                                               value="V4::Our customer feedback indicates that our creative solution is way more preferable than others because of our superior offerings."/>
                                         <span className="checkout-custom"/>
-                                        Customer feedback shows that our solution is better than others.
+                                        Our customer feedback indicates that our creative solution is way more preferable than others because of our superior offerings.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V5')}
-                                               value="V5::Our initial target customers love the product and keep using it."/>
+                                               value="V5::Our creative solution is loved and still used by our early target consumers."/>
                                         <span className="checkout-custom"/>
-                                        Our initial target customers love the product and keep using it.
+                                        Our creative solution is loved and still used by our early target consumers.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V6')}
-                                               value="V6::We’re selling beyond our initial target customers."/>
+                                               value="V6::Our team have started making sales far beyond our preliminary target consumers. Which was expected!"/>
                                         <span className="checkout-custom"/>
-                                        We’re selling beyond our initial target customers.
+                                        Our team have started making sales far beyond our preliminary target consumers. Which was expected!
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V7')}
-                                               value="V7::The majority of our sales in our initial market are inbound."/>
+                                               value="V7::A lot of the sales made in the early market were primarily from returning consumers."/>
                                         <span className="checkout-custom"/>
-                                        The majority of our sales in our initial market are inbound.
+                                        A lot of the sales made in the early market were primarily from returning consumers.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V8')}
-                                               value="V8::Customers are renewing or repurchasing without much sales effort."/>
+                                               value="V8::Customers are renewing or repurchasing without a good deal of marketing effort."/>
                                         <span className="checkout-custom"/>
-                                        Customers are renewing or repurchasing without much sales effort.
+                                        Customers are renewing or repurchasing without a good deal of marketing effort.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V9')}
-                                               value="V9::We’re recognized as the top solution to this problem."/>
+                                               value="V9::Our creative solution is identified as a leading solution to this industry need."/>
                                         <span className="checkout-custom"/>
-                                        We’re recognized as the top solution to this problem.
+                                        Our creative solution is identified as a leading solution to this industry need.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>

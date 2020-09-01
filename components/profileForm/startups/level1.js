@@ -56,80 +56,80 @@ const Level1 = ({startup}) => {
                             <div className="col-md-9 mx-auto">
                                 <LevelHeader isLevel/>
 
-                                <InfoBox heading="Problem" text="Tell us about the problem you're tackling"/>
+                                <InfoBox heading="Problem" text="We would like to know the industry need you're addressing"/>
 
                                 <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="problem"
                                                defaultChecked={problem().includes('P1')}
-                                               value="P1::We're a global leader in solving this problem."/>
+                                               value="P1::Our team have recognized a specific, important, industry need that requires a solution."/>
                                         <span className="checkout-custom"/>
-                                        We're a global leader in solving this problem.
+                                        Our team have recognized a specific, important, industry need that requires a solution.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="problem"
                                                defaultChecked={problem().includes('P2')}
-                                               value="P2::We’re beginning to have systems-level change in solving our problem."/>
+                                               value="P2::Our team have a creative solution that addresses this need with the capability to bring it to life."/>
                                         <span className="checkout-custom"/>
-                                        We’re beginning to have systems-level change in solving our problem.
+                                        Our team have a creative solution that addresses this need with the capability to bring it to life.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="problem"
                                                defaultChecked={problem().includes('P3')}
-                                               value="P3::Our vision is proving attainable in a major market."/>
+                                               value="P3::Our team can eloquently outline the unique value proposition of our creative solution offers"/>
                                         <span className="checkout-custom"/>
-                                        Our vision is proving attainable in a major market.
+                                        Our team can eloquently outline the unique value proposition of our creative solution offers.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="problem"
                                                defaultChecked={problem().includes('P4')}
-                                               value="P4::Our vision is being realized with early adopters and gaining ground."/>
+                                               value="P4::Our team is able to describe the importance of our creative solution in the transforming the industry."/>
                                         <span className="checkout-custom"/>
-                                        Our vision is being realized with early adopters and gaining ground.
+                                        Our team is able to describe the importance of our creative solution in the transforming the industry.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="problem"
                                                defaultChecked={problem().includes('P5')}
-                                               value="P5::We have evidence that we're solving our customers' problem."/>
+                                               value="P5::Our team can show proof on how our customer's problems are being fixed by our creative solution."/>
                                         <span className="checkout-custom"/>
-                                        We have evidence that we're solving our customers' problem.
+                                        Our team can show proof on how our customer's problems are being fixed by our creative solution.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="problem"
                                                defaultChecked={problem().includes('P6')}
-                                               value="P6::We can explain how this solution will transform the industry."/>
+                                               value="P6::Industry early adopters have started usage of our creative solution and it rapidly being adopted."/>
                                         <span className="checkout-custom"/>
-                                        We can explain how this solution will transform the industry.
+                                        Industry early adopters have started usage of our creative solution and it rapidly being adopted.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="problem"
                                                defaultChecked={problem().includes('P7')}
-                                               value="P7::We can articulate why our vision offers a superior value proposition."/>
+                                               value="P7::There are evidence that shows our creative solution is being adopted in a large market."/>
                                         <span className="checkout-custom"/>
-                                        We can articulate why our vision offers a superior value proposition.
+                                        There are evidence that shows our creative solution is being adopted in a large market.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="problem"
                                                defaultChecked={problem().includes('P8')}
-                                               value="P8::We have a vision for how to solve the problem and can execute on it."/>
+                                               value="P8::Our team is starting systems-wide changes that would aid to better address this industry need."/>
                                         <span className="checkout-custom"/>
-                                        We have a vision for how to solve the problem and can execute on it.
+                                        Our team is starting systems-wide changes that would aid to better address this industry need.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="problem"
                                                defaultChecked={problem().includes('P9')}
-                                               value="P9::We’ve identified a specific, important, and large problem."/>
+                                               value="P9::We are considered a global leader because of our creative solution."/>
                                         <span className="checkout-custom"/>
-                                        We’ve identified a specific, important, and large problem.
+                                        We are considered a global leader because of our creative solution.
                                     </label>
 
                                     <LevelButtonsComponent noPrev nextHandler={handleSubmit(nextPageHandler)}/>

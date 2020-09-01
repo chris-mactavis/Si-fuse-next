@@ -57,79 +57,79 @@ const Level4 = ({startup}) => {
                             <div className="col-md-9 mx-auto">
                                 <LevelHeader isLevel/>
 
-                                <InfoBox heading="Market" text="How much evidence do you have that a large market of customers experiences this problem?"/>
+                                <InfoBox heading="Market" text="What are your proof that a large pool of customers experiences this problem?"/>
 
                                 <form onSubmit={handleSubmit(nextPageHandler)} className="profile-details">
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M1')}
-                                               value="M1::We know our total addressable market size and target market share."/>
+                                               value="M1::Our team is aware of our overall potential market size and the market share allocated to our business proposition."/>
                                         <span className="checkout-custom"/>
-                                        We know our total addressable market size and target market share.
+                                        Our team is aware of our overall potential market size and the market share allocated to our business proposition.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M2')}
-                                               value="M2::We understand applicable regulations & have a strategy for compliance."/>
+                                               value="M2::We are very much aware of relevant regulations that bounds our market & have a strategic approach for compliance."/>
                                         <span className="checkout-custom"/>
-                                        We understand applicable regulations & have a strategy for compliance.
+                                        We are very much aware of relevant regulations that bounds our market & have a strategic approach for compliance.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M3')}
-                                               value="M3::Initial sales provide evidence that we can capture our target market."/>
+                                               value="M3::Early sales income shows proof that we ender value to our target market."/>
                                         <span className="checkout-custom"/>
-                                        Initial sales provide evidence that we can capture our target market.
+                                        Early sales income shows proof that we ender value to our target market.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M4')}
-                                               value="M4::We have evidence that our total addressable market is over $1B."/>
+                                               value="M4::We have proof that our overall potential market is over $1M."/>
                                         <span className="checkout-custom"/>
-                                        We have evidence that our total addressable market is over $1B.
+                                        We have proof that our overall potential market is over $1M.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M5')}
-                                               value="M5::Large partners are talking with us about distribution, marketing, etc."/>
+                                               value="M5::Large-scale associates/partners have showed interest in distribution, marketing, sales, etc., of our products"/>
                                         <span className="checkout-custom"/>
-                                        Large partners are talking with us about distribution, marketing, etc.
+                                        Large-scale associates/partners have showed interest in distribution, marketing, sales, etc., of our products
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M6')}
-                                               value="M6::Our suppliers & distributors see meaningful benefits from our success."/>
+                                               value="M6::Our suppliers & vendors have made significant profits from our product's success."/>
                                         <span className="checkout-custom"/>
-                                        Our suppliers & distributors see meaningful benefits from our success.
+                                        Our suppliers & vendors have made significant profits from our product's success.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M7')}
-                                               value="M7::Our sales cycle meets or beats the industry standard."/>
+                                               value="M7::Our process for driving sales/selling a products is very efficients and surpasses industry standard."/>
                                         <span className="checkout-custom"/>
-                                        Our sales cycle meets or beats the industry standard.
+                                        Our process for driving sales/selling a products is very efficients and surpasses industry standard.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M8')}
-                                               value="M8::We have hard-to-beat partnerships for distribution, marketing, growth."/>
+                                               value="M8::Our partnership for distribution, marketing and business growth is rock solid/ We can boast of rock solid partnership for distribution, marketing and  business growth."/>
                                         <span className="checkout-custom"/>
-                                        We have hard-to-beat partnerships for distribution, marketing, growth.
+                                        Our partnership for distribution, marketing and business growth is rock solid/ We can boast of rock solid partnership for distribution, marketing and  business growth.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M9')}
-                                               value="M9::We have a clear line of sight to industry dominance."/>
+                                               value="M9::We have a clear vision on how we want to dorminate the industry with our product."/>
                                         <span className="checkout-custom"/>
-                                        We have a clear line of sight to industry dominance.
+                                        We have a clear vision on how we want to dorminate the industry with our product.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>
