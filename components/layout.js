@@ -82,7 +82,7 @@ export default function Layout({children, page, headerClass, headerContent, redB
 
             {
                 user ? (!user.has_profile &&
-                    <div className="complete-registration" onClick={goToProfile}>Complete Your Profile</div>) : null
+                    <div className="complete-registration" onClick={goToProfile}>Please Complete Your Profile</div>) : null
             }
 
             <header className={headerClass}>
