@@ -4,7 +4,7 @@ export const User = (ctx) => {
     const isServer = typeof window === 'undefined';
 
     if (isServer && ctx) {
-        return JSON.parse(ctx.req.cookies.user);
+        return ctx.req.cookies.user ? JSON.parse(ctx.req.cookies.user) : null;
     }
 
     return Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
