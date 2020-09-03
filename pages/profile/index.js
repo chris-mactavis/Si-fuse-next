@@ -7,13 +7,10 @@ import Token from "../../utils/Token";
 import Profile from "../../components/Profile";
 import {User} from "../../utils/User";
 import {profileMiddleWare} from "../../components/hoc/auth";
+import nookies from "nookies";
+import Cookies from "js-cookie";
 
 const ProfilePage = ({canView, data: {company, product_services: services, finance, market, profile, interests, level, connections}, userType, profileContent, loggedInUser}) => {
-    if (!canView) {
-        userType === 'Startup' ? Router.push('/profile/edit-levels') : Router.push('/profile/edit');
-        return null;
-    }
-
     return <>
         <Layout headerContent={null} headerClass="page-header no-bg" redBar>
             <Head>
@@ -38,6 +35,28 @@ ProfilePage.getInitialProps = async (ctx) => {
     const user = User(ctx);
     const isLoggedIn = Token(ctx);
     const hasProfile = user ? user.has_profile : false;
+
+    if (!isLoggedIn) {
+        if (typeof window === 'undefined') {
+            nookies.set(ctx, 'redirectIntended', ctx.pathname, {});
+            ctx.res.writeHead(302, {Location: '/login'});
+            ctx.res.end();
+        } else {
+            Cookies.set('redirectIntended', '/profile');
+            Router.push('/login');
+            return {};
+        }
+    }
+
+    if (!user.has_profile) {
+        if (typeof window === 'undefined') {
+            ctx.res.writeHead(302, {Location: user.user_type.user_type === 'Investor' ? '/profile/edit' : '/profile/edit-levels'});
+            ctx.res.end();
+        } else {
+            Router.push(user.user_type.user_type === 'Investor' ? '/profile/edit' : '/profile/edit-levels');
+            return {};
+        }
+    }
 
     const headers = {
         headers: {

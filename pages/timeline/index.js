@@ -7,11 +7,7 @@ import StartupCard from "../../components/startups/startupCard";
 import {User} from "../../utils/User";
 import Router from "next/router";
 
-const Timeline = ({data, hasProfile}) => {
-    if (!hasProfile) {
-        Router.push('/profile/edit');
-        return null;
-    }
+const Timeline = ({data}) => {
 
     const {data: startups} = data;
 
@@ -46,6 +42,16 @@ Timeline.getInitialProps = async (ctx) => {
     const user = User(ctx);
     const hasProfile = user ? user.has_profile : false;
 
+    if (!user.has_profile) {
+        if (typeof window === 'undefined') {
+            ctx.res.writeHead(302, {Location: '/profile/edit'});
+            ctx.res.end();
+        } else {
+            Router.push('/profile/edit');
+            return {};
+        }
+    }
+
     try {
         const {data: response} = await axiosInstance.get('investors/timeline', {
             headers: {
@@ -53,8 +59,7 @@ Timeline.getInitialProps = async (ctx) => {
             }
         });
         return {
-            data: response,
-            hasProfile
+            data: response
         }
     } catch (e) {
         console.log(e.response.data.message);

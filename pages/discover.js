@@ -252,6 +252,16 @@ Discover.getInitialProps = async (ctx) => {
         }
     }
 
+    if (!user.has_profile) {
+        if (typeof window === 'undefined') {
+            ctx.res.writeHead(302, {Location: user.user_type.user_type === 'Investor' ? '/profile/edit' : '/profile/edit-levels'});
+            ctx.res.end();
+        } else {
+            Router.push(user.user_type.user_type === 'Investor' ? '/profile/edit' : '/profile/edit-levels');
+            return {};
+        }
+    }
+
     const userType = user.user_type.user_type;
     const url = userType === 'Investor' ? '/investors/discover?paginate=4' : '/startups/discover?paginate=4';
 
@@ -274,4 +284,4 @@ Discover.getInitialProps = async (ctx) => {
     }
 }
 
-export default compose(profileMiddleWare, auth)(Discover);
+export default compose(auth)(Discover);
