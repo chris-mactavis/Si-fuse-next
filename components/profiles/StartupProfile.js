@@ -327,7 +327,6 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                     Authorization: `Bearer ${Token()}`
                 }
             });
-            console.log(response);
             setConnected(true);
             dispatch(showNotifier('Connected Successfully'));
             dispatch(loader());
@@ -621,7 +620,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                     </p>
 
                                     {
-                                        !toggleIndustry && <p className="p-move-down industry-paragraph">
+                                        !toggleIndustry && <p className="p-move-down">
                                             <span className="industry-span">{startupProf.company.industry}</span>
                                         </p>
                                     }
@@ -1043,14 +1042,14 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                         </>
                     }
 
-                    <div className="startup-heading startup-comments" id="comments">
+                    <div className="startup-heading startup-comments mt-4" id="comments">
 
                         <div className="d-flex justify-content-between">
                             <h5 className={!hasPermission ? 'mt-5' : ''}>Comments ({comments.length})</h5>
                             <div className="startup-ratings-section">
                                 <div className="startup-ratings">
                                     <span className="mr-5">Rate Startup</span>
-                                    <div className="rater-js" data-rate-value="6"/>
+                                    <div className="rater-js" data-rate-value={starRating.total_rating} />
                                     <span className="rate-total">{starRating.formatted_rating}</span>
                                 </div>
                                 <span className="rating-count">{starRating.total_rating} {starRating.total_rating > 1 ? 'Ratings' : 'Rating'}</span>
