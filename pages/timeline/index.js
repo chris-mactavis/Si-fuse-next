@@ -40,7 +40,6 @@ const Timeline = ({data}) => {
 
 Timeline.getInitialProps = async (ctx) => {
     const user = User(ctx);
-    const hasProfile = user ? user.has_profile : false;
 
     if (!user.has_profile) {
         if (typeof window === 'undefined') {
