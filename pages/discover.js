@@ -219,6 +219,19 @@ const Discover = ({userType, data, industries, countries}) => {
                             {
                                 allStartups.map((user, index) => <StartupCard key={index} startup={user}/>)
                             }
+                            {
+                                allStartups.length === 0 && <div className="row mb-5 w-100">
+                                    <div className="col">
+                                        <article>
+                                            <div className="row">
+                                                <div className="col">
+                                                    <h4>No startup matches that requirement</h4>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            }
                         </div>
 
                         {

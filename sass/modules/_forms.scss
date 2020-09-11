@@ -162,6 +162,10 @@ form {
 
     .input-group-container{
       margin-bottom: 20px;
+
+      .multi-select {
+        z-index: 100;
+      }
     }
 
     .team-founders + .team-founders{

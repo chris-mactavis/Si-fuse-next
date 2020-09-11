@@ -1,7 +1,6 @@
 import Layout from "../../components/layout";
 import Head from "next/head";
 import React from "react";
-import StartupComponent from "../../components/discover/StartupComponent";
 import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
 import StartupCard from "../../components/startups/startupCard";

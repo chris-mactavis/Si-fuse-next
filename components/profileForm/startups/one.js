@@ -355,6 +355,7 @@ export default function ProfileOne({industries, startup, locations}) {
 
                                                 <div className="input-group-container">
                                                     <Select
+                                                        className="multi-select"
                                                         placeholder="Clients Serviced"
                                                         options={clientServicedOptions}
                                                         defaultValue={defaultClientsServiced}
