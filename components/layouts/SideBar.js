@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../store/actions/auth";
@@ -7,18 +7,45 @@ import Router from 'next/router';
 import {User} from "../../utils/User";
 import {showNotifier} from "../../store/actions/notifier";
 import SingleNotification from "../notifications/single-notification";
-import {fetchNotifications} from "../../store/actions/notification";
-// import Echo from "laravel-echo";
-// import Socketio from 'socket.io-client';
 
 export default function SideBar({isLoggedIn = false}) {
     const dispatch = useDispatch();
 
     const notifications = useSelector(state => state.notifications).notifications;
-
+    const [activeLink, setActiveLink] = useState('home');
     const closeSideBarHandler = () => {
         ToggleSideBar();
     }
+
+    useEffect(() => {
+        if (process.browser) {
+            let activePage = 'home';
+            switch (true) {
+                case window.location.pathname === '/':
+                    activePage = 'home';
+                    break;
+                case window.location.pathname === 'about-us':
+                    activePage = 'about-us';
+                    break;
+                case window.location.pathname.includes('blog'):
+                    activePage = 'blog';
+                    break;
+                case window.location.pathname.includes('events'):
+                    activePage = 'events';
+                    break;
+                case window.location.pathname === '/contact-us':
+                    activePage = 'contact-us';
+                    break;
+                case window.location.pathname === '/login':
+                    activePage = 'login';
+                    break;
+                case window.location.pathname === '/signup':
+                    activePage = 'signup';
+                    break;
+            }
+            setActiveLink(activePage);
+        }
+    }, []);
 
     const logoutHandler = () => {
         dispatch(logout());
@@ -36,7 +63,7 @@ export default function SideBar({isLoggedIn = false}) {
             <ul>
                 <li>
                     <Link href="/">
-                        <a className="active">Home</a>
+                        <a className={activeLink === 'home' ? 'active' : ''}>Home</a>
                     </Link>
                 </li>
                 {
@@ -51,25 +78,25 @@ export default function SideBar({isLoggedIn = false}) {
 
                 <li>
                     <Link href="/about-us">
-                        <a>About Us</a>
+                        <a className={activeLink === 'about-us' ? 'active' : ''}>About Us</a>
                     </Link>
                 </li>
 
                 <li>
                     <Link href="/blog">
-                        <a>Blog</a>
+                        <a className={activeLink === 'blog' ? 'active' : ''}>Blog</a>
                     </Link>
                 </li>
 
                 <li>
                     <Link href="/events">
-                        <a>Events</a>
+                        <a className={activeLink === 'events' ? 'active' : ''}>Events</a>
                     </Link>
                 </li>
 
                 <li>
                     <Link href="/contact-us">
-                        <a>Contact Us</a>
+                        <a className={activeLink === 'contact-us' ? 'active' : ''}>Contact Us</a>
                     </Link>
                 </li>
 
@@ -78,12 +105,12 @@ export default function SideBar({isLoggedIn = false}) {
                         ? <>
                             <li>
                                 <Link href="/login">
-                                    <a>Login</a>
+                                    <a className={activeLink === 'login' ? 'active' : ''}>Login</a>
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/signup">
-                                    <a>Signup</a>
+                                    <a className={activeLink === 'signup' ? 'active' : ''}>Signup</a>
                                 </Link>
                             </li>
                         </>
