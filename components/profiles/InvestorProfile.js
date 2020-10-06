@@ -6,7 +6,6 @@ import StartupCard from "../startups/startupCard";
 import StartupProfileLevels from "./StartupLevels";
 
 const InvestorProfile = ({profile, interests, connections}) => {
-    console.log(interests);
     const dispatch = useDispatch();
 
     const goTo = url => window.open(url.includes('http') ? url : `http://${url}`, '_blank');

@@ -25,6 +25,8 @@ const InvestorBasicInfo = ({investor, locations}) => {
 
     const [profilePicture, setProfilePicture] = useState([]);
 
+    const [profilePicError, setProfilePicError] = useState(null);
+    console.log(profilePicture);
     const toBase64 = file => new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -36,10 +38,21 @@ const InvestorBasicInfo = ({investor, locations}) => {
     // }
     const nextPageHandler = async data => {
         let logo = null;
+
+        setProfilePicError(null);
+        if (!profilePicture || (profilePicture && profilePicture.length === 0)) {
+            setProfilePicError('Please upload a profile picture!');
+            $('html, body').animate({
+                scrollTop: 0
+            }, 500);
+            return;
+        }
+
         if (profilePicture[0]) {
             logo = await toBase64(profilePicture[0]);
             data = {...data, logo};
         }
+
         dispatch(loader());
         try {
             const {data: response} = await axiosInstance.post('investors', data, {
@@ -128,12 +141,13 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                       label="Profile Picture <br> (Click here to upload)"
                                                       push={true}
                                                 >
-                                                    {/*didInit={ slimInit.bind(this) }>*/}
-                                                    <img src={hasProfilePic() ? investor.profile.profile_pic_url : null}
+                                                    <img src={hasProfilePic() ? (investor.profile.profile_pic_url || null) : null}
                                                          alt=""/>
                                                     <input type="file" name="foo"/>
                                                 </Slim>
                                             }
+                                            <span className="d-block" id="profile-pic-error">{profilePicError &&
+                                            <Error>Please upload a profile picture!</Error>}</span>
 
                                             <input ref={register({required: 'This field is required'})} type="hidden"
                                                    defaultValue={profilePicture.result}/>
@@ -174,7 +188,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                 <div className="row">
                                                     <div className="col-6">
                                                         <div className="facebook social mb-10">
-                                                            <input ref={register({required: 'This field is required'})}
+                                                            <input ref={register}
                                                                    name="facebook" type="text"
                                                                    className="w-100"
                                                                    defaultValue={hasProfile() ? investor.profile.facebook : ''}

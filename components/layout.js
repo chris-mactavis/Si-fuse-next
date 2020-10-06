@@ -13,6 +13,7 @@ import {fetchNotifications} from "../store/actions/notification";
 import Particles from "react-particles-js";
 import Router from "next/router";
 import Cookies from "js-cookie";
+import NProgress from "next-nprogress/component";
 
 export default function Layout({children, page, headerClass, headerContent, redBar = false, whiteAccount = false, footer = true}) {
     const isLoggedIn = useSelector(state => state.auth.loggedIn);

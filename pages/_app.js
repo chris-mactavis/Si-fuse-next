@@ -12,6 +12,15 @@ import startupProfile from "../store/reducers/startupProfile";
 import investorProfile from "../store/reducers/investorProfile";
 import notifications from "../store/reducers/notification";
 import {addStartups} from "../store/actions/discover";
+import "nprogress/nprogress.css";
+import dynamic from "next/dynamic";
+
+const TopProgressBar = dynamic(
+    () => {
+        return import("../components/TopProgressBar");
+    },
+    { ssr: false },
+);
 
 const reducers = combineReducers({
     auth: auth,
@@ -28,5 +37,5 @@ const reducers = combineReducers({
 const store = process.env.environment === 'dev' ? createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware))) : createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export default function App({Component, pageProps}) {
-    return <Provider store={store}><Component {...pageProps} /></Provider>
+    return <Provider store={store}><TopProgressBar /><Component {...pageProps} /></Provider>
 }

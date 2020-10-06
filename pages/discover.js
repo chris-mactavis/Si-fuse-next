@@ -25,6 +25,7 @@ const Discover = ({userType, data, industries, countries}) => {
     const [nextUrl, setNextUrl] = useState(links.next);
     const [lastPage, setLastPage] = useState(meta.last_page);
     const [currentPage, setCurrentPage] = useState(meta.current_page);
+    const [lastFilter, setLastFilter] = useState();
     const dispatch = useDispatch();
 
     const {register, handleSubmit} = useForm();
@@ -42,8 +43,10 @@ const Discover = ({userType, data, industries, countries}) => {
 
     const filterHandler = async data => {
         dispatch(loader());
+        setLastFilter(data);
         try {
-            const {data: response} = await axiosInstance.post('investors/filter-discover', {...data, paginate: 4}, {
+            const {data: response} = await axiosInstance.get(`investors/filter-discover?company_stage=${data.company_stage}&country=${data.country}&industry=${data.industry}&investment_ask=${data.investment_ask}&team_size=${data.team_size}&paginate=10`, {
+            // const {data: response} = await axiosInstance.post('investors/filter-discover', {...data, paginate: 10}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -63,8 +66,9 @@ const Discover = ({userType, data, industries, countries}) => {
     const nextPageHandler = async e => {
         e.preventDefault();
         dispatch(loader());
+        const data = lastFilter;
         try {
-            const {data: response} = await axiosInstance.get(`${nextUrl}&paginate=4`, {
+            const {data: response} = await axiosInstance.get(`${nextUrl}&company_stage=${data.company_stage}&country=${data.country}&industry=${data.industry}&investment_ask=${data.investment_ask}&team_size=${data.team_size}&paginate=10`, {
                 headers: {
                     'Authorization': `Bearer ${Token()}`
                 }
@@ -276,7 +280,7 @@ Discover.getInitialProps = async (ctx) => {
     }
 
     const userType = user.user_type.user_type;
-    const url = userType === 'Investor' ? '/investors/discover?paginate=4' : '/startups/discover?paginate=4';
+    const url = userType === 'Investor' ? '/investors/discover?paginate=10' : '/startups/discover?paginate=10';
 
     try {
         const {data} = await axiosInstance.get(url, {

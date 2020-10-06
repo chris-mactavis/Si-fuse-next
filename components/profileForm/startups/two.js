@@ -132,10 +132,8 @@ export default function ProfileTwo({startup}) {
 
                                                 <div className="input-group-container">
                                                     <FilePond
-                                                        // ref={ref => (this.pond = ref)}
                                                         files={productImages}
                                                         allowMultiple={true}
-                                                        // server="/api"
                                                         labelIdle="Product Images (Click here to upload)"
                                                         name="files"
                                                         oninit={() => handleInit()}
@@ -143,12 +141,6 @@ export default function ProfileTwo({startup}) {
                                                             setProductImages(fileItems.map(fileItem => fileItem.file))
                                                         }}
                                                     />
-
-
-                                                    {/*<DropNCrop onChange={onChangePicture} cropperOptions={{aspectRatio: 1 / 1}} value={profilePicture}/>*/}
-                                                    {/*<input ref={register} className="full-width" name="product_images"*/}
-                                                    {/*       placeholder="e.g. https://image.com/one.jpg, https://image.com/two.jpg"*/}
-                                                    {/*       defaultValue={hasProduct() ? startup.product_services.product_image_string : ''}/>*/}
                                                 </div>
 
                                                 <div className="input-group-container">
