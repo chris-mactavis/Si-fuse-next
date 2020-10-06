@@ -22,6 +22,12 @@ export default function SignupForm({countries, userTypes, query}) {
             dispatch(storeAuth(data))
             dispatch(showNotifier('Account registration successful!'));
             dispatch(loader());
+            const redirectToEvent = localStorage.getItem('redirectBackToEvents');
+            if (redirectToEvent) {
+                localStorage.removeItem('redirectBackToEvents');
+                Router.push(redirectToEvent);
+                return;
+            }
             if (accountType === 2) {
                 Router.push('/profile/edit-levels');
             } else {
