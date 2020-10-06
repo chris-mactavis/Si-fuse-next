@@ -15,18 +15,18 @@ const InvestorProfile = ({profile, interests, connections}) => {
         const overviewBtn = $('#overview-btn');
         const connectionsBtn = $('#connections-btn');
 
-        // if ($(window).width() > 768) {
-        //     $(window).scroll(function (e) {
-        //         const $el = $('#sidebar-scroller');
-        //         const isPositionFixed = ($el.css('position') === 'fixed');
-        //         if ($(this).scrollTop() > 140 && !isPositionFixed) {
-        //             $el.css({'position': 'fixed', 'top': '0px'});
-        //         }
-        //         if ($(this).scrollTop() < 140 && isPositionFixed) {
-        //             $el.css({'position': 'static', 'top': '0px'});
-        //         }
-        //     })
-        // }
+        if ($(window).width() > 768) {
+            $(window).scroll(function (e) {
+                const $el = $('#sidebar-scroller');
+                const isPositionFixed = ($el.css('position') === 'fixed');
+                if ($(this).scrollTop() > 140 && !isPositionFixed) {
+                    $el.css({'position': 'fixed', 'top': '0px'});
+                }
+                if ($(this).scrollTop() < 140 && isPositionFixed) {
+                    $el.css({'position': 'static', 'top': '0px'});
+                }
+            })
+        }
 
         overviewBtn.click(function () {
             $('html, body').animate({
@@ -202,10 +202,10 @@ const InvestorProfile = ({profile, interests, connections}) => {
                     </div>
                 </div>
 
-                <div className="row">
+                {/* <div className="row"> */}
 
                     {
-                        connections.length > 0 && <div className="row">
+                        connections.length > 0 && <div>
                             {
                                 connections.map(user => {
                                     return <StartupCard key={user.slug} startup={user}/>
@@ -214,7 +214,7 @@ const InvestorProfile = ({profile, interests, connections}) => {
                         </div>
                     }
 
-                </div>
+                {/* </div> */}
 
                 {/*<div className="text-center button mt-5">*/}
                 {/*    <a href="#" className="btn">Load more</a>*/}
