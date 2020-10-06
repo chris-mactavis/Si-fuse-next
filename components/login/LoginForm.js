@@ -22,6 +22,12 @@ export default function LoginForm() {
         try {
             await dispatch(loginAsync(data));
             dispatch(showNotifier('Logged In'));
+            const redirectToEvent = localStorage.getItem('redirectBackToEvents');
+            if (redirectToEvent) {
+                localStorage.removeItem('redirectBackToEvents');
+                Router.push(redirectToEvent);
+                return;
+            }
             if (User() && User().user_type.user_type === 'Investor') {
                 Router.push('/timeline');
             } else {
