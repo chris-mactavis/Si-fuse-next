@@ -77,6 +77,15 @@ form {
       border-radius: 0;
       border-bottom: 2px solid;
     }
+
+    select.select-opt {
+      option {
+        margin: 40px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+      }
+    }
   }
 
   //&.startup-message {
@@ -138,6 +147,10 @@ form {
 
     .slim{
       background: rgba(236, 239, 241, 0.5);
+    }
+
+    .label-head {
+      color: #D32907;
     }
 
     iframe{
@@ -210,7 +223,7 @@ form {
       border-top: 0;
       border-right: 0;
       border-bottom: 1px solid $color-black-2;
-      padding: 6px 10px;
+      padding: 6px 0;
       //margin-bottom: 20px;
       outline: none;
       background: #f4f5f7;
@@ -495,6 +508,7 @@ form {
     //padding: 3rem 7rem;
     //width: 90%;
     margin: 0 auto;
+    padding: 20px 0 0 20px;
 
     @media only screen and (max-width: $tablet_width) {
       //padding: 2rem 2rem;

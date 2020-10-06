@@ -324,18 +324,11 @@ form.sign-up {
     outline: none;
     border-radius: 0;
     border-bottom: 2px solid; }
-  form.sign-up select.select-opt option {
-    margin: 40px;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4); }
 form.profile-details {
   margin: 0 auto;
   /* Firefox */ }
   form.profile-details .slim {
     background: rgba(236, 239, 241, 0.5); }
-  form.profile-details .label-head {
-    color: #D32907; }
   form.profile-details iframe {
     width: 100%; }
   form.profile-details .input-group-container {
@@ -351,7 +344,7 @@ form.profile-details {
     border-top: 0;
     border-right: 0;
     border-bottom: 1px solid #6B6B6B;
-    padding: 6px 0;
+    padding: 6px 10px;
     outline: none;
     background: #f4f5f7;
     resize: none; }
@@ -532,7 +525,6 @@ form.profile-details {
 form.recovery-pwd {
   background: #fff;
   margin: 0 auto;
-  padding: 20px 0 0 20px;
   /* Firefox */ }
   form.recovery-pwd .faded {
     opacity: .5;
@@ -783,7 +775,8 @@ section.image-text {
   section.image-text .startups a {
     justify-content: flex-start; }
   section.image-text .cursor-pointer {
-    cursor: pointer !important; }
+    cursor: pointer !important;
+    display: none; }
 section.events {
   padding: 60px 0;
   background: #F8F8F8; }
@@ -829,12 +822,7 @@ section.events {
     section.events .background-text h5 {
       font-weight: bold;
       margin-bottom: 5px;
-      height: 50px;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      text-overflow: ellipsis;
-      overflow: hidden; }
+      height: 50px; }
     section.events .background-text p:nth-child(2) {
       font-size: 1.3rem; }
   section.events .event-tag-location {
@@ -1027,8 +1015,6 @@ section.blog {
 section.discover .card .img-wrapper {
   padding: 15px;
   position: relative; }
-section.discover .filter {
-  color: #3E3E3E; }
 @media only screen and (max-width: 576px) {
   section.single-post {
     padding: 40px 0; } }
@@ -1739,9 +1725,7 @@ section.startup-content .startup-ratings-section {
     align-self: flex-end;
     font-size: 13px; }
 section.timeline article, section.connections article, section.discover article {
-  background: white;
-  z-index: 200;
-  position: relative; }
+  background: white; }
   section.timeline article h4, section.connections article h4, section.discover article h4 {
     text-transform: none;
     font-weight: 400;
@@ -1798,7 +1782,7 @@ section.timeline article, section.connections article, section.discover article 
       text-transform: uppercase;
       border-radius: 10px;
       display: inline-block;
-      margin: 8px 2px; }
+      margin: 8px 0; }
 @media only screen and (max-width: 576px) {
   section.forgot-password {
     padding: 60px 0 60px; } }
@@ -1926,8 +1910,7 @@ input:focus, textarea:focus, select:focus, option:focus button {
   cursor: pointer; }
 
 .complete-registration {
-  font-size: 14px;
-  padding: 8px 20px;
+  padding: 20px 40px;
   background: #D32907;
   color: white;
   text-align: center;
@@ -2144,9 +2127,7 @@ nav.navbar {
 footer .footer-content {
   padding: 6rem 0 2rem;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), black), url(/images/footer-bg.png);
-  background-size: cover;
-  z-index: 200;
-  position: relative; }
+  background-size: cover; }
   footer .footer-content h5 {
     text-transform: uppercase;
     color: #fff;

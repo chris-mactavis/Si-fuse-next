@@ -120,7 +120,7 @@ export default function SignupForm({countries, userTypes, query}) {
 
                         {
                             accountType === 2 && <>
-                                <select ref={register({required: 'This field is required'})} className="w-100"
+                                <select ref={register({required: 'This field is required'})} className="w-100 select-opt"
                                         name="startup_type_id">
                                     <option value="">Team Composition</option>
                                     <option value="1">Female Owned</option>
