@@ -16,11 +16,26 @@ import {setStartupData} from "../../../store/actions/startupProfile";
 
 export default function ProfileOne({industries, startup, locations}) {
     const dispatch = useDispatch();
-    const [size, setSize] = useState(startup.company && startup.company.hasOwnProperty('teams') ? startup.company.teams.length : 1);
+    const [members, setMembers] = useState(startup.company && startup.company.hasOwnProperty('teams') ? startup.company.teams : [{member: '', role: ''}]);
     const [adminError, setAdminError] = useState();
-
+    const [value, setValue] = useState();
+    console.log(members);
     const createArrayWithNumbers = length => {
         return Array.from({length}, (_, k) => k + 0);
+    }
+
+    const addMember = (index) => {
+        const prevMembers = members;
+        members.splice(index + 1, 0, {member: '', role: ''});
+        setMembers(members);
+        setValue(index);
+    }
+
+    const removeMember = index => {
+        const prevMembers = [...members];
+        prevMembers.splice(index, 1);
+        setMembers(prevMembers);
+        setValue(index);
     }
 
     const clientServicedOptions = [
@@ -43,8 +58,17 @@ export default function ProfileOne({industries, startup, locations}) {
     const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
     const [clientServiced, setClientServiced] = useState(hasCompany() ? (JSON.parse(startup.company.clients_serviced) || []): []);
     const [clientServicedError, setClientServicedError] = useState('');
-
+    const [profilePicError, setProfilePicError] = useState(null);
+    console.log(profilePicture);
     const submitHandler = async data => {
+        setProfilePicError(null);
+        if (!profilePicture) {
+            setProfilePicError('Please upload a profile picture!');
+            $('html, body').animate({
+                scrollTop: 0
+            }, 500);
+            return;
+        }
         if (clientServiced.length === 0) {
             setClientServicedError('This field is required');
             return;
@@ -110,12 +134,12 @@ export default function ProfileOne({industries, startup, locations}) {
                                                           label="Company logo <br> (Click here to upload)"
                                                           push={true}
                                                     >
-                                                        <img src={hasCompany() ? startup.company.logo_url : null} alt=""/>
+                                                        <img src={hasCompany() ? (startup.company.logo_url || null) : null} alt=""/>
                                                         <input type="file" name="foo"/>
                                                     </Slim>
                                                 }
 
-                                                <span className="d-block">{errors.logo &&
+                                                <span className="d-block" id="profile-pic-error">{(errors.logo || profilePicError) &&
                                                 <Error>Please upload a profile picture!</Error>}</span>
                                             </div>
 
@@ -249,7 +273,43 @@ export default function ProfileOne({industries, startup, locations}) {
 
                                                 <div className="input-group-container">
                                                     {
-                                                        createArrayWithNumbers(size).map(index => <div
+                                                        // createArrayWithNumbers(members).map(index => <div
+                                                        //         className='team-founders d-flex justify-content-between align-items-center'
+                                                        //         key={index}>
+                                                        //         <input type="text"
+                                                        //                ref={register({required: 'This field is required'})}
+                                                        //                name={`team[${index}]`}
+                                                        //                className="small-width-sm mr-3 w-100"
+                                                        //                placeholder="Founder name"
+                                                        //                defaultValue={hasCompany() && startup.company.members.length > 0 ? startup.company.members[index] : ''}/>
+                                                        //
+                                                        //         <input type="text"
+                                                        //                ref={register({required: 'This field is required'})}
+                                                        //                name={`role[${index}]`}
+                                                        //                className="small-width-sm mx-3 w-100"
+                                                        //                placeholder="Role(s)"
+                                                        //                defaultValue={hasCompany() && startup.company.roles.length > 0 ? startup.company.roles[index] : ''}/>
+                                                        //
+                                                        //         <div>
+                                                        //             {
+                                                        //                 index < members - 1 && <div className="team-button"
+                                                        //                                          onClick={() => setMembers(members - 1)}>
+                                                        //                     <img src="/images/icon/minus.svg"/>
+                                                        //                 </div>
+                                                        //             }
+                                                        //
+                                                        //             {
+                                                        //                 index === members - 1 && <div className="team-button"
+                                                        //                                            onClick={() => setMembers(members + 1)}>
+                                                        //                     <img src="/images/icon/plus.svg"/>
+                                                        //                 </div>
+                                                        //             }
+                                                        //
+                                                        //         </div>
+                                                        //     </div>
+                                                        // )
+
+                                                        members.map((s, index) => <div
                                                                 className='team-founders d-flex justify-content-between align-items-center'
                                                                 key={index}>
                                                                 <input type="text"
@@ -257,29 +317,25 @@ export default function ProfileOne({industries, startup, locations}) {
                                                                        name={`team[${index}]`}
                                                                        className="small-width-sm mr-3 w-100"
                                                                        placeholder="Founder name"
-                                                                       defaultValue={hasCompany() && startup.company.members.length > 0 ? startup.company.members[index] : ''}/>
+                                                                       defaultValue={s.member}/>
 
                                                                 <input type="text"
                                                                        ref={register({required: 'This field is required'})}
                                                                        name={`role[${index}]`}
                                                                        className="small-width-sm mx-3 w-100"
                                                                        placeholder="Role(s)"
-                                                                       defaultValue={hasCompany() && startup.company.roles.length > 0 ? startup.company.roles[index] : ''}/>
+                                                                       defaultValue={s.role}/>
 
-                                                                <div>
-                                                                    {
-                                                                        index < size - 1 && <div className="team-button"
-                                                                                                 onClick={() => setSize(size - 1)}>
-                                                                            <img src="/images/icon/minus.svg"/>
-                                                                        </div>
-                                                                    }
+                                                                <div className="d-flex">
+                                                                    <div className="team-button mr-3"
+                                                                         onClick={() => removeMember(index)}>
+                                                                        <img src="/images/icon/minus.svg"/>
+                                                                    </div>
 
-                                                                    {
-                                                                        index === size - 1 && <div className="team-button"
-                                                                                                   onClick={() => setSize(size + 1)}>
-                                                                            <img src="/images/icon/plus.svg"/>
-                                                                        </div>
-                                                                    }
+                                                                    <div className="team-button"
+                                                                         onClick={() => addMember(index)}>
+                                                                        <img src="/images/icon/plus.svg"/>
+                                                                    </div>
 
                                                                 </div>
                                                             </div>

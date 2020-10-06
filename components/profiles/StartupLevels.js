@@ -30,7 +30,6 @@ const StartupProfileLevels = ({hasEdit = false, startupLevel, levelKeys, index, 
     }
 
     const goToLevel = level => {
-        console.log(level);
         Router.push('/profile/edit-levels');
     }
 

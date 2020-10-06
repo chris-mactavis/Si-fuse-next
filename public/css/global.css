@@ -417,6 +417,9 @@ form.profile-details iframe {
 form.profile-details .input-group-container {
   margin-bottom: 20px;
 }
+form.profile-details .input-group-container .multi-select {
+  z-index: 100;
+}
 form.profile-details .team-founders + .team-founders {
   margin-top: 10px;
 }
@@ -773,6 +776,11 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 .btn.btn-sm {
   padding: 10px 20px;
   font-size: 12px;
+}
+.btn.btn-xs {
+  padding: 5px 7px;
+  font-size: 12px;
+  letter-spacing: 0.2rem;
 }
 @media only screen and (max-width: 576px) {
   .btn {

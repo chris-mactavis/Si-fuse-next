@@ -6,7 +6,6 @@ import StartupCard from "../startups/startupCard";
 import StartupProfileLevels from "./StartupLevels";
 
 const InvestorProfile = ({profile, interests, connections}) => {
-    console.log(interests);
     const dispatch = useDispatch();
 
     const goTo = url => window.open(url.includes('http') ? url : `http://${url}`, '_blank');
@@ -15,18 +14,18 @@ const InvestorProfile = ({profile, interests, connections}) => {
         const overviewBtn = $('#overview-btn');
         const connectionsBtn = $('#connections-btn');
 
-        // if ($(window).width() > 768) {
-        //     $(window).scroll(function (e) {
-        //         const $el = $('#sidebar-scroller');
-        //         const isPositionFixed = ($el.css('position') === 'fixed');
-        //         if ($(this).scrollTop() > 140 && !isPositionFixed) {
-        //             $el.css({'position': 'fixed', 'top': '0px'});
-        //         }
-        //         if ($(this).scrollTop() < 140 && isPositionFixed) {
-        //             $el.css({'position': 'static', 'top': '0px'});
-        //         }
-        //     })
-        // }
+        if ($(window).width() > 768) {
+            $(window).scroll(function (e) {
+                const $el = $('#sidebar-scroller');
+                const isPositionFixed = ($el.css('position') === 'fixed');
+                if ($(this).scrollTop() > 140 && !isPositionFixed) {
+                    $el.css({'position': 'fixed', 'top': '0px'});
+                }
+                if ($(this).scrollTop() < 140 && isPositionFixed) {
+                    $el.css({'position': 'static', 'top': '0px'});
+                }
+            })
+        }
 
         overviewBtn.click(function () {
             $('html, body').animate({

@@ -24,6 +24,9 @@ export default function SideBar({isLoggedIn = false}) {
                 case window.location.pathname === '/':
                     activePage = 'home';
                     break;
+                case window.location.pathname === '/discover':
+                    activePage = 'discover';
+                    break;
                 case window.location.pathname === 'about-us':
                     activePage = 'about-us';
                     break;
@@ -70,7 +73,7 @@ export default function SideBar({isLoggedIn = false}) {
                     loggedInUser && loggedInUser.user_type.user_type === 'Investor'
                         ? <li>
                             <Link href="/discover">
-                                <a>Discover</a>
+                                <a className={activeLink === 'discover' ? 'active' : ''}>Discover</a>
                             </Link>
                         </li>
                         : null
