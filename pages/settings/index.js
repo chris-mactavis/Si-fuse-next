@@ -112,13 +112,18 @@ export default function Settings({user}) {
                                 {/*</div>*/}
 
                                 {
-                                    !showForm && <div className="half-width m-bottom mtop">
-                                        <label>Enter Current password to edit account</label>
-                                        <input type="password" placeholder="Current Password" defaultValue={passwordField} onChange={($event) => {
-                                            setPasswordField($event.target.value)
-                                        }} className="full-width"/>
-                                        {passwordError &&
-                                        <ErrorSpan>Please enter your password to continue.</ErrorSpan>}
+                                    !showForm &&   <div className="d-flex">
+                                        <div className="half-width m-bottom mtop">
+                                            <label>Enter Current password to edit account</label>
+                                            <input type="password" placeholder="Current Password" defaultValue={passwordField} onChange={($event) => {
+                                                setPasswordField($event.target.value)
+                                            }} className="full-width"/>
+                                            {passwordError &&
+                                            <ErrorSpan>Please enter your password to continue.</ErrorSpan>}
+                                        </div>
+                                        <div className="half-width">
+                                            &nbsp;
+                                        </div>
                                     </div>
                                 }
 
