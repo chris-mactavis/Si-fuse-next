@@ -24,8 +24,11 @@ const EditLevels = ({startup}) => {
 
     const dispatch = useDispatch();
 
+    const isEditingLevels = useSelector(state => state.profile.isEditingLevels);
+
     useEffect(() => {
-        dispatch(setCurrentLevelState(startup.profile_level_stage));
+        if (!isEditingLevels)
+            dispatch(setCurrentLevelState(startup.profile_level_stage));
     }, []);
 
     const currentProfileStage = useSelector(state => state.profile.currentLevelState);
@@ -34,21 +37,21 @@ const EditLevels = ({startup}) => {
     const ProfileComponent = () => {
         switch (currentProfileStage) {
             case 1:
-                return <Level1 startup={currentStartupProfile}/>;
+                return <Level1 startup={currentStartupProfile} isEditingLevel={isEditingLevels}/>;
             case 2:
-                return <Level2 startup={currentStartupProfile}/>;
+                return <Level2 startup={currentStartupProfile} isEditingLevel={isEditingLevels}/>;
             case 3:
-                return <Level3 startup={currentStartupProfile}/>;
+                return <Level3 startup={currentStartupProfile} isEditingLevel={isEditingLevels}/>;
             case 4:
-                return <Level4 startup={currentStartupProfile}/>;
+                return <Level4 startup={currentStartupProfile} isEditingLevel={isEditingLevels}/>;
             case 5:
-                return <Level5 startup={currentStartupProfile}/>;
+                return <Level5 startup={currentStartupProfile} isEditingLevel={isEditingLevels}/>;
             case 6:
-                return <Level6 startup={currentStartupProfile}/>;
+                return <Level6 startup={currentStartupProfile} isEditingLevel={isEditingLevels}/>;
             case 7:
-                return <Level7 startup={currentStartupProfile}/>;
+                return <Level7 startup={currentStartupProfile} isEditingLevel={isEditingLevels}/>;
             case 8:
-                return <Level8 startup={currentStartupProfile}/>;
+                return <Level8 startup={currentStartupProfile} isEditingLevel={isEditingLevels}/>;
         }
     }
 

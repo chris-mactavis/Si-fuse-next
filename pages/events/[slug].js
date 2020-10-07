@@ -9,6 +9,7 @@ import Token from "../../utils/Token";
 import {useDispatch} from "react-redux";
 import {loader} from "../../store/actions/loader";
 import {showNotifier} from "../../store/actions/notifier";
+import Router from "next/router";
 
 export default function Events({event, countries}) {
 
@@ -55,6 +56,11 @@ export default function Events({event, countries}) {
     // }, [showRegister]);
 
     const submitHandler = async data => {
+        if (!Token()) {
+            localStorage.setItem('redirectBackToEvents', `/events/${event.slug}`);
+            Router.push('/login');
+            return;
+        }
         dispatch(loader());
         try {
             let formData = null;
@@ -62,7 +68,6 @@ export default function Events({event, countries}) {
                 formData = {...data, event_id: event.id};
             } else {
                 const raveResponse = await payWithRave({...data, amount: event.amount, id: event.id});
-                console.log(raveResponse);
                 formData = {
                     ...data,
                     event_id: event.id,
@@ -166,7 +171,7 @@ export default function Events({event, countries}) {
                                             {
                                                 showRegister
                                                     ? <div>
-                                                        <h5 className="mb-0 mt-5">Register Event</h5>
+                                                        <h5 className="mb-0 mt-5">Register For Event</h5>
                                                         <form onSubmit={handleSubmit(submitHandler)}
                                                               className="profile-details event-register">
                                                             <div className="d-flex">
@@ -263,12 +268,14 @@ export default function Events({event, countries}) {
                                 </div>
 
                                 {
-                                    showRegister
-                                        ? null
-                                        : <div className="text-center button">
+                                    (!showRegister && !event.expired) && <div className="text-center button">
                                             <a href="#" onClick={toggleRegisterForm} id="btn-reg"
                                                className="btn">Register</a>
                                         </div>
+                                }
+
+                                {
+                                    (!showRegister && event.expired) && <div className="text-center mt-4 text-uppercase">Registration Closed</div>
                                 }
                             </div>
                         </div>

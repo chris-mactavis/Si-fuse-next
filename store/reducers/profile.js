@@ -3,7 +3,7 @@ import {
     DECREMENT_CURRENT_STATE, INCREMENT_CURRENT_LEVEL_STATE,
     INCREMENT_CURRENT_STATE,
     RESET_CURRENT_STATE, SET_COMPANY_PROFILE_IMAGE, SET_CURRENT_LEVEL_STATE,
-    SET_CURRENT_STATE, SET_INVESTOR_IMAGE
+    SET_CURRENT_STATE, SET_EDIT_LEVELS, SET_INVESTOR_IMAGE
 } from "../actions/profile";
 
 const initialState = {
@@ -12,7 +12,8 @@ const initialState = {
     companyProfileImage: '',
     companyName: '',
     investorProfileImage: '',
-    investorProfileName: ''
+    investorProfileName: '',
+    isEditingLevels: false
 }
 
 const profile = (state = initialState, action) => {
@@ -65,6 +66,11 @@ const profile = (state = initialState, action) => {
                 ...state,
                 investorProfileImage: action.props.image,
                 investorProfileName: action.props.name,
+            }
+        case SET_EDIT_LEVELS:
+            return {
+                ...state,
+                isEditingLevels: action.isEditing
             }
         default:
             return state;

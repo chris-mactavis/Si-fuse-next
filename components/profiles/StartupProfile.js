@@ -8,10 +8,14 @@ import {showNotifier} from "../../store/actions/notifier";
 import {showImageViewer, showVideoViewer} from "../../store/actions/imageViewer";
 import StartupProfileLevels from "./StartupLevels";
 import {startupLevel} from "../../helpers";
+import {FilePond, registerPlugin} from "react-filepond";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 
-const StartupProfile = ({rating, startupComments, company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+
+const StartupProfile = ({rating, startupComments, company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, pendingPermission: pendingPerm, hasPermission, isConnected}) => {
     const dispatch = useDispatch();
-
     const createMarkup = (content) => ({__html: content});
 
     let levelKeys = [];
@@ -19,6 +23,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     const userType = loggedInUser.user_type.user_type;
 
     const [connected, setConnected] = useState(isConnected);
+    const [pendingPermission, setPendingPermission] = useState(pendingPerm);
 
     let theStartupComments = userType === 'Investor' ? startupComments : startup.comments;
 
@@ -52,6 +57,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                     Authorization: `Bearer ${Token()}`
                 }
             })
+            setPendingPermission(true);
             dispatch(loader());
             dispatch(showNotifier('Profile request sent!'));
         } catch (e) {
@@ -101,14 +107,24 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
         });
 
         financeBtn.click(function () {
-            if (!hasPermission) return;
+            if (!hasPermission) {
+                $('html, body').animate({
+                    scrollTop: $('#productServices').offset().top - 20
+                }, 1000);
+                return;
+            }
             $('html, body').animate({
                 scrollTop: $('#finance').offset().top - 20
             }, 1000);
         });
 
         marketingSummaryBtn.click(function () {
-            if (!hasPermission) return;
+            if (!hasPermission) {
+                $('html, body').animate({
+                    scrollTop: $('#productServices').offset().top - 20
+                }, 1000);
+                return;
+            }
             $('html, body').animate({
                 scrollTop: $('#marketingSummary').offset().top - 20
             }, 1000);
@@ -139,10 +155,15 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     const [toggleProductVideo, setProductVideo] = useState(false);
     const [togglePitchVideo, setPitchVideo] = useState(false);
     const [togglePhone, setPhone] = useState(false);
-    const [starRating, setStarRating] = useState(startupRating || {formatted_rating: 0, overall_rating: 0, total_rating: 0});
+    const [starRating, setStarRating] = useState(startupRating || {
+        formatted_rating: 0,
+        overall_rating: 0,
+        total_rating: 0
+    });
 
     const [startupProf, setStartupProfile] = useState({company, product_services, finance, market, profile, level});
-    console.log(startupProf);
+    const [productImages, setProdImages] = useState(startup.product_services ? startup.product_services.product_image_array.map(img => ({source: img})) : []);
+
     const {register, handleSubmit, reset} = useForm();
 
     const toggleFormHandler = (item) => {
@@ -264,7 +285,12 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     const onSubmitServiceHandler = async data => {
         dispatch(loader());
         try {
-            const {data: response} = await axiosInstance.post('startups/product-service', {...data, is_editing: true}, {
+            let formData = new FormData();
+            Object.keys(data).forEach(dataItem => formData.append(dataItem, data[dataItem]));
+            if (!(productImages.length > 0 && productImages[0].hasOwnProperty('source'))) {
+                productImages.forEach(pImage => formData.append('product_images[]', pImage));
+            }
+            const {data: response} = await axiosInstance.post('startups/product-service', formData, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -515,14 +541,10 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                         <button className="startup-link-view" id="product-services-btn">
                             Product and Services <img src="/images/icon/product-service-icon.svg" alt=""/>
                         </button>
-                        <button
-                            className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
-                            id="finance-btn">
+                        <button className="startup-link-view" id="finance-btn">
                             Finance <img src="/images/icon/finance-white-icon.svg" alt=""/>
                         </button>
-                        <button
-                            className={`startup-link-view ${!hasPermission && userType !== 'Startup' ? 'fade-out' : ''}`}
-                            id="marketing-summary-btn">
+                        <button className="startup-link-view" id="marketing-summary-btn">
                             Marketing Summary <img src="/images/icon/market-summary-white.svg" alt=""/>
                         </button>
                         <button
@@ -604,7 +626,10 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                 <option value="$2,000,000 and above">$2,000,000 and above
                                                 </option>
                                             </select>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
+                                            <button className="btn btn-xs mr-2" type={"button"}
+                                                    onClick={() => setFund(false)}>Cancel
+                                            </button>
+                                            <button className="btn btn-xs" type={"submit"}>Update</button>
                                         </form>
                                     }
                                 </div>
@@ -635,7 +660,10 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                                                     value={industry.id}
                                                 >{industry.industry}</option>)}
                                             </select>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
+                                            <button className="btn btn-xs mr-2" type={"button"}
+                                                    onClick={() => setIndustry(false)}>Cancel
+                                            </button>
+                                            <button className="btn btn-xs" type={"submit"}>Update</button>
                                         </form>
                                     }
 
@@ -653,7 +681,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
 
                                     {
                                         !toggleCompanyStage && <p className="text-capitalize">
-                                            {startupProf.company.company_stage}
+                                            {startupProf.product_services.company_stage}
                                         </p>
                                     }
 
@@ -661,14 +689,17 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                         toggleCompanyStage && <form onSubmit={handleSubmit(onSubmitServiceHandler)}
                                                                     className="profile-details overview-form w-100">
                                             <select name="company_stage" ref={register}
-                                                    defaultValue={startupProf.company.company_stage}>
+                                                    defaultValue={startupProf.product_services.company_stage}>
                                                 <option value="">Select Stage</option>
                                                 <option value="concept">Concept</option>
                                                 <option value="early stage">Early stage</option>
                                                 <option value="scaling">Scaling</option>
                                                 <option value="established">Established</option>
                                             </select>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
+                                            <button className="btn btn-xs mr-2" type={"button"}
+                                                    onClick={() => setCompanyStage(false)}>Cancel
+                                            </button>
+                                            <button className="btn btn-xs" type={"submit"}>Update</button>
                                         </form>
                                     }
                                 </div>
@@ -714,7 +745,10 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                             <input name="product_name" ref={register} className="full-width edit-input"
                                                    type="text"
                                                    defaultValue={startupProf.product_services.product_name}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
+                                            <button className="btn btn-xs mr-2" type={"button"}
+                                                    onClick={() => setProductName(false)}>Cancel
+                                            </button>
+                                            <button className="btn btn-xs" type={"submit"}>Update</button>
                                         </form>
                                     }
                                 </div>
@@ -740,11 +774,23 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                     {
                                         toggleProductImages && <form onSubmit={handleSubmit(onSubmitServiceHandler)}
                                                                      className="profile-details overview-form w-100">
-                                            <input name="product_images" ref={register}
-                                                   className="full-width edit-input"
-                                                   type="text"
-                                                   defaultValue={startupProf.product_services.hasOwnProperty('product_image_array') ? startupProf.product_services.product_image_string : null}/>
-                                            <button className="btn btn-sm" type={"submit"}>Update</button>
+                                            <FilePond
+                                                files={productImages}
+                                                allowMultiple={true}
+                                                labelIdle="Product Images (Click here to upload)"
+                                                name="files"
+                                                onupdatefiles={fileItems => {
+                                                    setProdImages(fileItems.map(fileItem => fileItem.file))
+                                                }}
+                                            />
+                                            {/*<input name="product_images" ref={register}*/}
+                                            {/*       className="full-width edit-input"*/}
+                                            {/*       type="text"*/}
+                                            {/*       defaultValue={startupProf.product_services.hasOwnProperty('product_image_array') ? startupProf.product_services.product_image_string : null}/>*/}
+                                            <button className="btn btn-xs mr-2" type={"button"}
+                                                    onClick={() => setProductImages(false)}>Cancel
+                                            </button>
+                                            <button className="btn btn-xs" type={"submit"}>Update</button>
                                         </form>
                                     }
                                 </div>
@@ -766,18 +812,23 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                             {
                                                 !toggleProductVideo && <div className="player-thumbnail"
                                                                             onClick={() => dispatch(showVideoViewer(startupProf.product_services.product_video_url))}>
-                                                    <div dangerouslySetInnerHTML={createMarkup(startupProf.product_services.product_video_url)} />
+                                                    <div
+                                                        dangerouslySetInnerHTML={createMarkup(startupProf.product_services.product_video_url)}/>
                                                 </div>
                                             }
                                             {
                                                 toggleProductVideo &&
                                                 <form onSubmit={handleSubmit(onSubmitServiceHandler)}
                                                       className="profile-details overview-form w-100">
+                                                    <span className="small">Enter Youtube Embed Code</span>
                                                     <input name="product_video_url" ref={register}
                                                            className="full-width edit-input"
                                                            type="text"
                                                            defaultValue={startupProf.product_services.product_video_url}/>
-                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                    <button className="btn btn-xs mr-2" type={"button"}
+                                                            onClick={() => setProductVideo(false)}>Cancel
+                                                    </button>
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
                                                 </form>
                                             }
                                         </div>
@@ -795,18 +846,23 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                             {
                                                 !togglePitchVideo && <div className="player-thumbnail"
                                                                           onClick={() => dispatch(showVideoViewer(startupProf.product_services.pitch_video_url))}>
-                                                    <div dangerouslySetInnerHTML={createMarkup(startupProf.product_services.pitch_video_url)} />
+                                                    <div
+                                                        dangerouslySetInnerHTML={createMarkup(startupProf.product_services.pitch_video_url)}/>
                                                 </div>
                                             }
                                             {
                                                 togglePitchVideo &&
                                                 <form onSubmit={handleSubmit(onSubmitServiceHandler)}
                                                       className="profile-details overview-form w-100">
+                                                    <span className="small">Enter Youtube Embed Code</span>
                                                     <input name="pitch_video_url" ref={register}
                                                            className="full-width edit-input"
                                                            type="text"
                                                            defaultValue={startupProf.product_services.pitch_video_url}/>
-                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                    <button className="btn btn-xs mr-2" type={"button"}
+                                                            onClick={() => setPitchVideo(false)}>Cancel
+                                                    </button>
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
                                                 </form>
                                             }
                                         </div>
@@ -829,17 +885,20 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
 
                                             {
                                                 toggleValueProposition &&
-                                                <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                <form onSubmit={handleSubmit(onSubmitServiceHandler)}
                                                       className="profile-details overview-form w-100">
                                                         <textarea name="value_proposition" ref={register} rows="5"
                                                                   className="full-width edit-input"
-                                                                  defaultValue={startupProf.company.value_proposition}/>
-                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                                  defaultValue={startupProf.product_services.value_proposition}/>
+                                                    <button className="btn btn-xs mr-2" type={"button"}
+                                                            onClick={() => setValueProposition(false)}>Cancel
+                                                    </button>
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
                                                 </form>
                                             }
-                                            <div className="text-right">
-                                                <a href="#">Read more</a>
-                                            </div>
+                                            {/*<div className="text-right">*/}
+                                            {/*    <a href="#">Read more</a>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
                                 </div>
@@ -852,7 +911,8 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                         <div
                             className="request-access d-flex flex-column align-items-center justify-content-center w-100">
                             <img src="/images/icon/lock.svg" alt=""/>
-                            <button className="btn" onClick={requestPermissionHandler}>Request Permission</button>
+                            {pendingPermission && <p className="permission-requested">Profile Permission Requested!</p>}
+                            {!hasPermission && !pendingPermission && <button className="btn" onClick={requestPermissionHandler}>Request Permission</button>}
                         </div>
                     }
 
@@ -885,12 +945,13 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                         <option value="Growth capital">Growth capital</option>
                                                         <option value="Bridging Capital">Bridging capital</option>
                                                     </select>
-                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                    <button className="btn btn-xs mr-2" type={"button"} onClick={() => setCapitalFor(false)}>Cancel</button>
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
                                                 </form>
                                             }
-                                            <div className="text-right">
-                                                <a href="#">Read more</a>
-                                            </div>
+                                            {/*<div className="text-right">*/}
+                                            {/*    <a href="#">Read more</a>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
 
@@ -913,12 +974,13 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                         <textarea ref={register} name="summary" rows="5"
                                                                   className="full-width edit-input"
                                                                   defaultValue={startupProf.company.summary}/>
-                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                    <button className="btn btn-xs mr-2" type={"button"} onClick={() => setBusinessSummary(false)}>Cancel</button>
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
                                                 </form>
                                             }
-                                            <div className="text-right">
-                                                <a href="#">Read more</a>
-                                            </div>
+                                            {/*<div className="text-right">*/}
+                                            {/*    <a href="#">Read more</a>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
                                 </div>
@@ -946,12 +1008,13 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                         <textarea ref={register} name="addressable_market" rows="5"
                                                                   className="full-width edit-input"
                                                                   defaultValue={startupProf.market.addressable_market}/>
-                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                    <button className="btn btn-xs mr-2" type={"button"} onClick={() => setAddressableMarket(false)}>Cancel</button>
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
                                                 </form>
                                             }
-                                            <div className="text-right">
-                                                <a href="#">Read more</a>
-                                            </div>
+                                            {/*<div className="text-right">*/}
+                                            {/*    <a href="#">Read more</a>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
 
@@ -974,12 +1037,13 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                         <textarea ref={register} name="marketing_strategy" rows="5"
                                                                   className="full-width edit-input"
                                                                   defaultValue={startupProf.market.marketing_strategy}/>
-                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                    <button className="btn btn-xs mr-2" type={"button"} onClick={() => setMarketingStrategy(false)}>Cancel</button>
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
                                                 </form>
                                             }
-                                            <div className="text-right">
-                                                <a href="#">Read more</a>
-                                            </div>
+                                            {/*<div className="text-right">*/}
+                                            {/*    <a href="#">Read more</a>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
 
@@ -1002,12 +1066,15 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                         <textarea ref={register} name="company_competitors" rows="5"
                                                                   className="full-width edit-input"
                                                                   defaultValue={startupProf.market.company_competitors}/>
-                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                    <button className="btn btn-xs mr-2" type={"button"}
+                                                            onClick={() => setCompanyCompetitors(false)}>Cancel
+                                                    </button>
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
                                                 </form>
                                             }
-                                            <div className="text-right">
-                                                <a href="#">Read more</a>
-                                            </div>
+                                            {/*<div className="text-right">*/}
+                                            {/*    <a href="#">Read more</a>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
 
@@ -1029,12 +1096,13 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                         <textarea ref={register} name="competitive_advantage" rows="5"
                                                                   className="full-width edit-input"
                                                                   defaultValue={startupProf.market.competitive_advantage}/>
-                                                    <button className="btn btn-sm" type={"submit"}>Update</button>
+                                                    <button className="btn btn-xs mr-2" type={"button"} onClick={() => setCompetitiveAdvantage(false)}>Cancel</button>
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
                                                 </form>
                                             }
-                                            <div className="text-right">
-                                                <a href="#">Read more</a>
-                                            </div>
+                                            {/*<div className="text-right">*/}
+                                            {/*    <a href="#">Read more</a>*/}
+                                            {/*</div>*/}
                                         </div>
                                     </div>
                                 </div>
@@ -1049,10 +1117,11 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                             <div className="startup-ratings-section">
                                 <div className="startup-ratings">
                                     <span className="mr-5">Rate Startup</span>
-                                    <div className="rater-js" data-rate-value={starRating.total_rating} />
+                                    <div className="rater-js" data-rate-value={starRating.overall_rating}/>
                                     <span className="rate-total">{starRating.formatted_rating}</span>
                                 </div>
-                                <span className="rating-count">{starRating.total_rating} {starRating.total_rating > 1 ? 'Ratings' : 'Rating'}</span>
+                                <span
+                                    className="rating-count">{starRating.total_rating} {starRating.total_rating > 1 ? 'Ratings' : 'Rating'}</span>
                             </div>
                         </div>
 

@@ -22,6 +22,12 @@ export default function SignupForm({countries, userTypes, query}) {
             dispatch(storeAuth(data))
             dispatch(showNotifier('Account registration successful!'));
             dispatch(loader());
+            const redirectToEvent = localStorage.getItem('redirectBackToEvents');
+            if (redirectToEvent) {
+                localStorage.removeItem('redirectBackToEvents');
+                Router.push(redirectToEvent);
+                return;
+            }
             if (accountType === 2) {
                 Router.push('/profile/edit-levels');
             } else {
@@ -120,7 +126,7 @@ export default function SignupForm({countries, userTypes, query}) {
 
                         {
                             accountType === 2 && <>
-                                <select ref={register({required: 'This field is required'})} className="w-100"
+                                <select ref={register({required: 'This field is required'})} className="w-100 select-opt"
                                         name="startup_type_id">
                                     <option value="">Team Composition</option>
                                     <option value="1">Female Owned</option>

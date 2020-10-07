@@ -85,7 +85,7 @@ export default function ProfileFive({startup}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <input type="number"
+                                                    <input type="text"
                                                            ref={register({required: 'This field is required'})}
                                                            placeholder="Target market percentage?"
                                                            defaultValue={hasMarketing() ? startup.market.percentage_of_market : ''}

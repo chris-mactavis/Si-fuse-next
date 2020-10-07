@@ -1,7 +1,7 @@
 import Layout from "../components/layout";
 import Head from "next/head";
 import React, {useEffect, useState} from "react";
-import {auth, profileMiddleWare} from "../components/hoc/auth";
+import {auth} from "../components/hoc/auth";
 import axiosInstance from "../config/axios";
 import {compose} from "redux";
 import {User} from "../utils/User";
@@ -25,6 +25,7 @@ const Discover = ({userType, data, industries, countries}) => {
     const [nextUrl, setNextUrl] = useState(links.next);
     const [lastPage, setLastPage] = useState(meta.last_page);
     const [currentPage, setCurrentPage] = useState(meta.current_page);
+    const [lastFilter, setLastFilter] = useState();
     const dispatch = useDispatch();
 
     const {register, handleSubmit} = useForm();
@@ -42,8 +43,10 @@ const Discover = ({userType, data, industries, countries}) => {
 
     const filterHandler = async data => {
         dispatch(loader());
+        setLastFilter(data);
         try {
-            const {data: response} = await axiosInstance.post('investors/filter-discover', {...data, paginate: 4}, {
+            const {data: response} = await axiosInstance.get(`investors/filter-discover?company_stage=${data.company_stage}&country=${data.country}&industry=${data.industry}&investment_ask=${data.investment_ask}&team_size=${data.team_size}&paginate=10`, {
+            // const {data: response} = await axiosInstance.post('investors/filter-discover', {...data, paginate: 10}, {
                 headers: {
                     Authorization: `Bearer ${Token()}`
                 }
@@ -63,8 +66,9 @@ const Discover = ({userType, data, industries, countries}) => {
     const nextPageHandler = async e => {
         e.preventDefault();
         dispatch(loader());
+        const data = lastFilter;
         try {
-            const {data: response} = await axiosInstance.get(`${nextUrl}&paginate=4`, {
+            const {data: response} = await axiosInstance.get(`${nextUrl}&company_stage=${data.company_stage}&country=${data.country}&industry=${data.industry}&investment_ask=${data.investment_ask}&team_size=${data.team_size}&paginate=10`, {
                 headers: {
                     'Authorization': `Bearer ${Token()}`
                 }
@@ -96,13 +100,13 @@ const Discover = ({userType, data, industries, countries}) => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-3">
-                        <h5>Filter By:</h5>
+                        <h5 className="filter">Filter By:</h5>
 
                         <div className="row">
                             <div className="col-12">
                                 <form className="profile-details w-100" onSubmit={handleSubmit(filterHandler)}>
 
-                                    <p className="mb-0">Industry</p>
+                                    <p className="mb-2 label-head">Industry</p>
                                     <select
                                         ref={register}
                                         className="w-100 full-width" name="industry">
@@ -113,7 +117,7 @@ const Discover = ({userType, data, industries, countries}) => {
                                         }
                                     </select>
 
-                                    <p className="mb-0">Country</p>
+                                    <p className="mb-2 mt-3 label-head">Country</p>
                                     <select
                                         ref={register}
                                         className="w-100 full-width" name="country">
@@ -125,7 +129,7 @@ const Discover = ({userType, data, industries, countries}) => {
                                     </select>
 
 
-                                    <p className="mb-0">Company Stage</p>
+                                    <p className="mb-3 mt-3 label-head">Company Stage</p>
                                     <label className="checkout-label">
                                         <input type="radio" name="company_stage" value="concept"
                                                ref={register}
@@ -155,7 +159,7 @@ const Discover = ({userType, data, industries, countries}) => {
                                         Established
                                     </label>
 
-                                    <p className="mb-0">Team Size</p>
+                                    <p className="mb-3 label-head">Team Size</p>
 
                                     <label className="checkout-label">
                                         <input type="radio" name="team_size"
@@ -179,7 +183,7 @@ const Discover = ({userType, data, industries, countries}) => {
                                         50 and above
                                     </label>
 
-                                    <p className="mb-0">Investment Ask</p>
+                                    <p className="mb-2 label-head">Investment Ask</p>
                                     <select
                                         ref={register}
                                         className="w-100 full-width mb-4" name="investment_ask">
@@ -199,7 +203,7 @@ const Discover = ({userType, data, industries, countries}) => {
 
 
                                     <button className="btn btn-sm" type="submit">Apply Filter</button>
-                                    <button className="btn btn-sm mt-0 mt-md-2 ml-3 ml-md-0" type="reset" onClick={resetFilterHandler}>Reset
+                                    <button className="btn btn-sm mt-0 mt-md-3 ml-3 ml-md-0" type="reset" onClick={resetFilterHandler}>Reset
                                         Filter
                                     </button>
                                 </form>
@@ -276,7 +280,7 @@ Discover.getInitialProps = async (ctx) => {
     }
 
     const userType = user.user_type.user_type;
-    const url = userType === 'Investor' ? '/investors/discover?paginate=4' : '/startups/discover?paginate=4';
+    const url = userType === 'Investor' ? '/investors/discover?paginate=10' : '/startups/discover?paginate=10';
 
     try {
         const {data} = await axiosInstance.get(url, {

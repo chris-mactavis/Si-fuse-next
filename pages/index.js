@@ -8,6 +8,7 @@ import {resetCurrentState} from "../store/actions/profile";
 import {useDispatch} from "react-redux";
 import Token from "../utils/Token";
 import Slider from "react-slick";
+import Router from 'next/router';
 
 const Home = ({events, blogs}) => {
     const dispatch = useDispatch();
@@ -118,6 +119,14 @@ const Home = ({events, blogs}) => {
         }
     }
 
+    const investorsSignupHandler = () => {
+        Router.push(isLoggedIn ? '/profile' : '/signup?for=investors');
+    }
+
+    const startupSignupHandler = () => {
+        Router.push(isLoggedIn ? '/profile' : '/signup?for=startups');
+    }
+
     return <Layout
         page="Home"
         headerContent={<HeaderContent/>}
@@ -132,7 +141,7 @@ const Home = ({events, blogs}) => {
             <div className="container">
                 <div className="row mb-md-5 pb-5 pb-md-0">
                     <div className="col-lg-9 col-12 mx-auto">
-                        <div className="row">
+                        <div onClick={investorsSignupHandler} className="row cursor-pointer">
                             <div
                                 className="col-lg-6 col-sm-7 col-12 mx-auto d-flex align-items-center justify-content-end">
                                 <div className="investors">
@@ -163,7 +172,7 @@ const Home = ({events, blogs}) => {
 
                 <div className="row">
                     <div className="col-lg-9 mx-auto">
-                        <div className="row">
+                        <div onClick={startupSignupHandler} className="row cursor-pointer">
                             <div className="col-lg-6 d-none d-lg-block">
                                 <img className="img-fluid" src="images/home-startup.png" alt=""/>
                             </div>

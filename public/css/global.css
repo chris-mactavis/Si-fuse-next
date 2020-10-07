@@ -404,6 +404,12 @@ form.sign-up select:not(multiple) {
   border-radius: 0;
   border-bottom: 2px solid;
 }
+form.sign-up select.select-opt option {
+  margin: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
 form.profile-details {
   margin: 0 auto;
   /* Firefox */
@@ -411,11 +417,17 @@ form.profile-details {
 form.profile-details .slim {
   background: rgba(236, 239, 241, 0.5);
 }
+form.profile-details .label-head {
+  color: #D32907;
+}
 form.profile-details iframe {
   width: 100%;
 }
 form.profile-details .input-group-container {
   margin-bottom: 20px;
+}
+form.profile-details .input-group-container .multi-select {
+  z-index: 100;
 }
 form.profile-details .team-founders + .team-founders {
   margin-top: 10px;
@@ -428,7 +440,7 @@ form.profile-details input, form.profile-details textarea, form.profile-details 
   border-top: 0;
   border-right: 0;
   border-bottom: 1px solid #6B6B6B;
-  padding: 6px 10px;
+  padding: 6px 0;
   outline: none;
   background: #f4f5f7;
   resize: none;
@@ -651,6 +663,7 @@ form.profile-details .select2.investor-country-code {
 form.recovery-pwd {
   background: #fff;
   margin: 0 auto;
+  padding: 20px 0 0 20px;
   /* Firefox */
 }
 form.recovery-pwd .faded {
@@ -773,6 +786,11 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 .btn.btn-sm {
   padding: 10px 20px;
   font-size: 12px;
+}
+.btn.btn-xs {
+  padding: 5px 7px;
+  font-size: 12px;
+  letter-spacing: 0.2rem;
 }
 @media only screen and (max-width: 576px) {
   .btn {
@@ -982,6 +1000,9 @@ section.image-text .startups p {
 section.image-text .startups a {
   justify-content: flex-start;
 }
+section.image-text .cursor-pointer {
+  cursor: pointer !important;
+}
 section.events {
   padding: 60px 0;
   background: #F8F8F8;
@@ -1040,6 +1061,11 @@ section.events .background-text h5 {
   font-weight: bold;
   margin-bottom: 5px;
   height: 50px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 section.events .background-text p:nth-child(2) {
   font-size: 1.3rem;
@@ -1279,6 +1305,9 @@ section.discover .card .img-wrapper {
   padding: 15px;
   position: relative;
 }
+section.discover .filter {
+  color: #3E3E3E;
+}
 @media only screen and (max-width: 576px) {
   section.single-post {
     padding: 40px 0;
@@ -1410,6 +1439,37 @@ section.single-post .content #register-free {
 }
 section.single-post .content #register-pay {
   display: none;
+}
+section.single-post .social-share p {
+  margin: 40px 0 10px;
+  color: black;
+}
+section.single-post .react-share__ShareButton {
+  margin-right: 20px;
+}
+section.single-post .react-share__ShareButton svg {
+  width: 30px;
+  height: 30px;
+}
+section.single-post .likely__widget {
+  cursor: pointer;
+  margin-right: 20px;
+}
+section.single-post .likely__button {
+  margin-left: 5px;
+  display: none;
+}
+section.single-post .likely__icon {
+  border: 1px solid #cecece;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+section.single-post .likely__icon:hover {
+  background: #cecece;
 }
 section.modal {
   padding-top: 300px;
@@ -2167,6 +2227,9 @@ section.startup-content .request-access .btn {
   align-self: center;
   justify-self: center;
 }
+section.startup-content .request-access .permission-requested {
+  z-index: 10;
+}
 section.startup-content .startup-comments .comment {
   display: flex;
   flex-direction: column;
@@ -2208,6 +2271,8 @@ section.startup-content .startup-ratings-section .rating-count {
 }
 section.timeline article, section.connections article, section.discover article {
   background: white;
+  z-index: 200;
+  position: relative;
 }
 section.timeline article h4, section.connections article h4, section.discover article h4 {
   text-transform: none;
@@ -2281,7 +2346,7 @@ section.timeline article .tags .tag, section.connections article .tags .tag, sec
   text-transform: uppercase;
   border-radius: 10px;
   display: inline-block;
-  margin: 8px 0;
+  margin: 8px 2px;
 }
 @media only screen and (max-width: 576px) {
   section.forgot-password {
@@ -2465,8 +2530,9 @@ input:focus, textarea:focus, select:focus, option:focus button {
 }
 
 .complete-registration {
-  padding: 20px 40px;
-  background: #D32907;
+  font-size: 14px;
+  padding: 8px 20px;
+  background: #e57373;
   color: white;
   text-align: center;
   cursor: pointer;
@@ -2475,12 +2541,12 @@ input:focus, textarea:focus, select:focus, option:focus button {
 .notification {
   position: fixed;
   display: flex;
-  top: 110px;
+  top: 10px;
   right: -40px;
-  z-index: 100;
+  z-index: 0;
   opacity: 0;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
-  padding: 20px 50px 20px 115px;
+  padding: 10px 50px 10px 85px;
   transition: 0.3s all;
   color: white;
 }
@@ -2495,21 +2561,22 @@ input:focus, textarea:focus, select:focus, option:focus button {
   transform: translateY(-50%);
 }
 .notification.success {
-  background-color: green;
+  background-color: #4CAF50;
 }
 .notification.success::before {
   background-image: url("/images/icon/tick.svg");
 }
 .notification.danger {
-  background-color: #D12B19;
+  background-color: #f44336;
 }
 .notification.danger::before {
   background-image: url("/images/icon/alert-white.svg");
 }
 .notification.show {
   display: block;
-  right: 65px;
+  right: 45px;
   opacity: 1;
+  z-index: 100;
 }
 .notification span {
   cursor: pointer;
@@ -2731,6 +2798,8 @@ footer .footer-content {
   padding: 6rem 0 2rem;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), black), url(/images/footer-bg.png);
   background-size: cover;
+  z-index: 200;
+  position: relative;
 }
 footer .footer-content h5 {
   text-transform: uppercase;

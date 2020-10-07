@@ -136,6 +136,10 @@ section {
         justify-content: flex-start;
       }
     }
+
+    .cursor-pointer {
+      cursor: pointer !important;
+    }
   }
 
   &.events {
@@ -210,6 +214,11 @@ section {
         font-weight: $bold;
         margin-bottom: 5px;
         height: 50px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        overflow: hidden;
         //margin-bottom: 20px;
 
         @include media("mobile") {
@@ -537,6 +546,10 @@ section {
         position: relative;
       }
     }
+
+    .filter {
+      color: #3E3E3E;
+    }
   }
 
   &.single-post {
@@ -693,6 +706,49 @@ section {
         display: none;
       }
 
+    }
+
+    .social-share {
+      p {
+        margin: 40px 0 10px;
+        color: black;
+      }
+    }
+
+    .react-share__ShareButton {
+      margin-right: 20px;
+
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    
+    .likely {
+
+      &__widget {
+        cursor: pointer;
+        margin-right: 20px;
+      }
+
+      &__button {
+        margin-left: 5px;
+        display: none;
+      }
+
+      &__icon {
+        border: 1px solid #cecece;
+        border-radius: 50px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background: #cecece;
+        }
+      }
     }
   }
 
@@ -1696,6 +1752,10 @@ section {
         justify-self: center;
       }
 
+      .permission-requested {
+        z-index: 10;
+      }
+
       margin-top: -122px;
     }
 
@@ -1757,6 +1817,8 @@ section {
 
     article {
       background: white;
+      z-index: 200;
+      position: relative;
 
       h4 {
         text-transform: none;
@@ -1845,7 +1907,7 @@ section {
           text-transform: uppercase;
           border-radius: 10px;
           display: inline-block;
-          margin: 8px 0;
+          margin: 8px 2px;
         }
       }
     }

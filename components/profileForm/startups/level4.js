@@ -10,8 +10,9 @@ import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {showNotifier} from "../../../store/actions/notifier";
 import {setStartupData} from "../../../store/actions/startupProfile";
+import Router from "next/router";
 
-const Level4 = ({startup}) => {
+const Level4 = ({startup, isEditingLevel}) => {
     const {register, handleSubmit} = useForm();
 
     const dispatch = useDispatch();
@@ -41,6 +42,10 @@ const Level4 = ({startup}) => {
             })
             dispatch(setStartupData(response.data));
             dispatch(loader());
+            if (isEditingLevel) {
+                Router.push('/profile');
+                return;
+            }
             dispatch(incrementCurrentLevelState());
         } catch (e) {
             console.log(e);
@@ -55,7 +60,7 @@ const Level4 = ({startup}) => {
                     <div className="white-bg">
                         <div className="row">
                             <div className="col-md-9 mx-auto">
-                                <LevelHeader isLevel/>
+                                {!isEditingLevel && <LevelHeader isLevel/>}
 
                                 <InfoBox heading="Market" text="What are your proof that a large pool of customers experiences this problem?"/>
 

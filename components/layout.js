@@ -13,6 +13,7 @@ import {fetchNotifications} from "../store/actions/notification";
 import Particles from "react-particles-js";
 import Router from "next/router";
 import Cookies from "js-cookie";
+import NProgress from "next-nprogress/component";
 
 export default function Layout({children, page, headerClass, headerContent, redBar = false, whiteAccount = false, footer = true}) {
     const isLoggedIn = useSelector(state => state.auth.loggedIn);
@@ -58,6 +59,7 @@ export default function Layout({children, page, headerClass, headerContent, redB
                 <link rel="stylesheet" type="text/css" href="/css/global.css"/>
                 <link rel="stylesheet" type="text/css" href="/slim/slim.min.css"/>
                 <link rel="stylesheet" type="text/css" href="/css/filepond.css"/>
+                <link rel="stylesheet" type="text/css" href="/css/likely.css"/>
                 <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
                 <link rel="stylesheet" type="text/css" href="/css/react-drop-n-crop.min.css"/>
                 <link rel="stylesheet" type="text/css" href="/css/filepond-plugin-image-preview.css"/>
@@ -70,6 +72,7 @@ export default function Layout({children, page, headerClass, headerContent, redB
                         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
                         crossOrigin="anonymous"/>
                 <script type="text/javascript" src="/slick/slick.min.js"/>
+                <script type="text/javascript" src="/js/likely.js"/>
                 <script src="/js/bootstrap.min.js"/>
                 <script src="/js/main.js"/>
             </Head>

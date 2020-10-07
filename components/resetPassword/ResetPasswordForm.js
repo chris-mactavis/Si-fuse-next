@@ -49,9 +49,9 @@ export default function ResetPasswordForm({tokenIsValid, reason, token = null}) 
             {/*</p>*/}
 
             {tokenIsValid
-                ? <form className="profile-details" onSubmit={handleSubmit(newPasswordHandler)}>
+                ? <form className="sign-up" onSubmit={handleSubmit(newPasswordHandler)}>
                     <input ref={register({required: 'This field is required'})} type="password"
-                           className="full-width mb-0" id="password" name="password"
+                           className="w-100 mb-0" id="password" name="password"
                            placeholder="New Password"/>
                     {errors.password && <Error>{errors.password.message}</Error>}
 
@@ -59,11 +59,11 @@ export default function ResetPasswordForm({tokenIsValid, reason, token = null}) 
                         required: 'This field is required',
                         validate: value => value === watch('password') || 'The passwords do not match'
                     })} type="password"
-                           className="full-width mb-0 mt-4" id="confirm-password" name="confirm_password"
+                           className="w-100 mb-0 mt-4" id="confirm-password" name="confirm_password"
                            placeholder="Re enter Password"/>
                     {errors.confirm_password && <Error>{errors.confirm_password.message}</Error>}
 
-                    <button className="btn btn-sm w-100 mt-5" type={"submit"}>RESET</button>
+                    <button className="btn btn-white w-100 mt-5" type={"submit"}>RESET</button>
                 </form>
                 : <>
                     <div className="reset-password-message text-center">
