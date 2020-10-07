@@ -1,7 +1,7 @@
 import Layout from "../components/layout";
 import Head from "next/head";
 import React, {useEffect, useState} from "react";
-import {auth, profileMiddleWare} from "../components/hoc/auth";
+import {auth} from "../components/hoc/auth";
 import axiosInstance from "../config/axios";
 import {compose} from "redux";
 import {User} from "../utils/User";

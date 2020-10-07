@@ -11,7 +11,7 @@ import {showNotifier} from "../../../store/actions/notifier";
 import Router from "next/router";
 import {setStartupData} from "../../../store/actions/startupProfile";
 
-const Level8 = ({startup}) => {
+const Level8 = ({startup, isEditingLevel}) => {
     const {register, handleSubmit} = useForm();
 
     const dispatch = useDispatch();
@@ -41,6 +41,10 @@ const Level8 = ({startup}) => {
             })
             dispatch(setStartupData(response.data));
             dispatch(loader());
+            if (isEditingLevel) {
+                Router.push('/profile');
+                return;
+            }
             Router.push('/profile/edit');
         } catch (e) {
             console.log(e);
@@ -55,7 +59,7 @@ const Level8 = ({startup}) => {
                     <div className="white-bg">
                         <div className="row">
                             <div className="col-md-9 mx-auto">
-                                <LevelHeader isLevel/>
+                                {!isEditingLevel && <LevelHeader isLevel/>}
 
                                 <InfoBox heading="Investor Exit"
                                          text="What proof do you have that provides liquidity to your investors?"/>

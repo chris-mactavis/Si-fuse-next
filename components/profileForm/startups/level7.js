@@ -10,8 +10,9 @@ import Token from "../../../utils/Token";
 import {showNotifier} from "../../../store/actions/notifier";
 import {incrementCurrentLevelState} from "../../../store/actions/profile";
 import {setStartupData} from "../../../store/actions/startupProfile";
+import Router from "next/router";
 
-const Level7 = ({startup}) => {
+const Level7 = ({startup, isEditingLevel}) => {
     const {register, handleSubmit} = useForm();
 
     const dispatch = useDispatch();
@@ -41,6 +42,10 @@ const Level7 = ({startup}) => {
             })
             dispatch(setStartupData(response.data));
             dispatch(loader());
+            if (isEditingLevel) {
+                Router.push('/profile');
+                return;
+            }
             dispatch(incrementCurrentLevelState());
         } catch (e) {
             console.log(e);
@@ -55,7 +60,7 @@ const Level7 = ({startup}) => {
                     <div className="white-bg">
                         <div className="row">
                             <div className="col-md-9 mx-auto">
-                                <LevelHeader isLevel/>
+                                {!isEditingLevel && <LevelHeader isLevel/>}
 
                                 <InfoBox heading="Scale" text="What scale are you operating at?"/>
 

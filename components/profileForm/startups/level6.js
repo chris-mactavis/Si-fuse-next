@@ -10,8 +10,9 @@ import Token from "../../../utils/Token";
 import {showNotifier} from "../../../store/actions/notifier";
 import {incrementCurrentLevelState} from "../../../store/actions/profile";
 import {setStartupData} from "../../../store/actions/startupProfile";
+import Router from "next/router";
 
-const Level6 = ({startup}) => {
+const Level6 = ({startup, isEditingLevel}) => {
     const {register, handleSubmit} = useForm();
 
     const dispatch = useDispatch();
@@ -41,6 +42,10 @@ const Level6 = ({startup}) => {
             })
             dispatch(setStartupData(response.data));
             dispatch(loader());
+            if (isEditingLevel) {
+                Router.push('/profile');
+                return;
+            }
             dispatch(incrementCurrentLevelState());
         } catch (e) {
             console.log(e);
@@ -56,7 +61,7 @@ const Level6 = ({startup}) => {
                         <div className="row">
                             <div className="col-md-9 mx-auto">
 
-                                <LevelHeader isLevel/>
+                                {!isEditingLevel && <LevelHeader isLevel/>}
 
                                 <InfoBox heading="Team" text="What kind of team do you have or building?"/>
 

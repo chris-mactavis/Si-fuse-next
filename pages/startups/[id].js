@@ -6,7 +6,7 @@ import Token from "../../utils/Token";
 import Profile from "../../components/Profile";
 import {User} from "../../utils/User";
 
-export default function SingleStartup({startup: {profile, company, level, product_services: services, finance, market, comments: startupComments, rating}, id, isConnected, profileContent, loggedInUser, hasPermission}) {
+export default function SingleStartup({startup: {profile, company, level, product_services: services, finance, market, comments: startupComments, rating}, id, isConnected, profileContent, loggedInUser, hasPermission, pendingPermission}) {
     console.log(startupComments);
     return <>
         <Layout headerContent={null} headerClass="page-header no-bg" redBar>
@@ -17,7 +17,7 @@ export default function SingleStartup({startup: {profile, company, level, produc
 
             <Profile profile={profile} company={company} services={services} finance={finance} level={level}
                      market={market} userType="startup" id={id} isConnected={isConnected}
-                     profileContent={profileContent} loggedInUser={loggedInUser} hasPermission={hasPermission} startupComments={startupComments} rating={rating}/>
+                     profileContent={profileContent} loggedInUser={loggedInUser} hasPermission={hasPermission} pendingPermission={pendingPermission} startupComments={startupComments} rating={rating}/>
         </Layout>
         <style jsx>{`
             .services-stage {
@@ -45,6 +45,7 @@ SingleStartup.getInitialProps = async (ctx) => {
         id,
         profileContent,
         loggedInUser,
-        hasPermission: response.has_permission
+        hasPermission: response.has_permission,
+        pendingPermission: response.pending_permission,
     }
 }

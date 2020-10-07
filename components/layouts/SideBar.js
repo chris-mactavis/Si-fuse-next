@@ -7,6 +7,7 @@ import Router from 'next/router';
 import {User} from "../../utils/User";
 import {showNotifier} from "../../store/actions/notifier";
 import SingleNotification from "../notifications/single-notification";
+import {setIsEditingLevels} from "../../store/actions/profile";
 
 export default function SideBar({isLoggedIn = false}) {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function SideBar({isLoggedIn = false}) {
                 case window.location.pathname === '/discover':
                     activePage = 'discover';
                     break;
-                case window.location.pathname === 'about-us':
+                case window.location.pathname === '/about-us':
                     activePage = 'about-us';
                     break;
                 case window.location.pathname.includes('blog'):
@@ -52,6 +53,7 @@ export default function SideBar({isLoggedIn = false}) {
 
     const logoutHandler = () => {
         dispatch(logout());
+        dispatch(setIsEditingLevels(false));
         dispatch(showNotifier('Logged Out'));
         Router.push('/');
     }

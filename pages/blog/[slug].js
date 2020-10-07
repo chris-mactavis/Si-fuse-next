@@ -1,10 +1,29 @@
 import Layout from "../../components/layout";
 import Head from "next/head";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import axiosInstance from "../../config/axios";
+import Disqus from "disqus-react";
+import {TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon, LinkedinIcon, LinkedinShareButton, TelegramIcon, TelegramShareButton, WhatsappIcon, WhatsappShareButton} from "react-share";
+
 
 export default function SingleBlog({blog}) {
+
     const createMarkup = () => ({__html: blog.content});
+    const [windowLocation, setWindowLocation] = useState(null);
+
+    const disqusShortName = 'localhost-3000-ftz2u4hnja';
+    const disqusConfig = {
+        url: "http://localhost:3000",
+        identifier: blog.id,
+        title: blog.title
+    };
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setWindowLocation(window.location.href);
+        }
+    }, [])
+
     return <Layout page="SingleBlog" headerContent={null} headerClass="page-header no-bg" redBar>
         <Head>
             <title>{blog.title}</title>
@@ -29,6 +48,18 @@ export default function SingleBlog({blog}) {
                                         </div>
 
                                         <div dangerouslySetInnerHTML={createMarkup()}/>
+
+                                        <div className="social-share">
+                                            <p>Share:</p>
+
+                                            <TwitterShareButton url={windowLocation} title={blog.title}><TwitterIcon /></TwitterShareButton>
+                                            <FacebookShareButton url={windowLocation} title={blog.title}><FacebookIcon /></FacebookShareButton>
+                                            <LinkedinShareButton url={windowLocation} title={blog.title}><LinkedinIcon /></LinkedinShareButton>
+                                            <TelegramShareButton url={windowLocation} title={blog.title}><TelegramIcon /></TelegramShareButton>
+                                            <WhatsappShareButton url={windowLocation} title={blog.title}><WhatsappIcon /></WhatsappShareButton>
+
+                                        </div>
+                                        <Disqus.DiscussionEmbed shortname={disqusShortName} config={disqusConfig}/>
                                     </div>
                                 </div>
                             </div>
