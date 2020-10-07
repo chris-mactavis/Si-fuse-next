@@ -1,11 +1,10 @@
 import React from "react";
 import {getFairness, startupLevel} from "../../helpers";
 import {useDispatch} from "react-redux";
-import {setCurrentLevelState} from "../../store/actions/profile";
+import {setCurrentLevelState, setIsEditingLevels} from "../../store/actions/profile";
 import Router from "next/router";
 
 const StartupProfileLevels = ({hasEdit = false, startupLevel, levelKeys, index, fairness}) => {
-
     const dispatch = useDispatch();
 
     const getLevelName = (name) => {
@@ -30,6 +29,8 @@ const StartupProfileLevels = ({hasEdit = false, startupLevel, levelKeys, index, 
     }
 
     const goToLevel = level => {
+        dispatch(setIsEditingLevels(true));
+        dispatch(setCurrentLevelState(level + 1));
         Router.push('/profile/edit-levels');
     }
 

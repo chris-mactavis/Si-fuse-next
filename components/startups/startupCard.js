@@ -110,6 +110,7 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
                             </div>
                         </div>
                     </div>
+                    
                     <div className="col-md-3 mt-5">
                         <ul className="tags-container">
                             {company.industry && <li className="tags">{company.industry}</li>}
@@ -120,7 +121,7 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
                                 <li className="tags">{finance.geographical_focus}</li>}
                             {finance.revenue_type && <li className="tags">{finance.revenue_type}</li>}
                             {finance.growth_projection && <li className="tags">{finance.growth_projection}</li>}
-                            {company.clients_serviced && <li className="tags">{company.clients_serviced}</li>}
+                            {(company.clients_serviced && company.clients_serviced !== 'null') && <li className="tag">{company.clients_serviced}</li>}
                             {finance.investor_type && <li className="tags">{finance.investor_type}</li>}
                             {/* {finance.funding_stage && <li className="tags">{finance.funding_stage}</li>} */}
                         </ul>
