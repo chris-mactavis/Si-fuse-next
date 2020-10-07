@@ -11,9 +11,9 @@ export default function SingleBlog({blog}) {
     const createMarkup = () => ({__html: blog.content});
     const [windowLocation, setWindowLocation] = useState(null);
 
-    const disqusShortName = 'localhost-3000-ftz2u4hnja';
+    const disqusShortName = 'si-fuse';
     const disqusConfig = {
-        url: "http://localhost:3000",
+        url: "http://sifuse.com",
         identifier: blog.id,
         title: blog.title
     };
