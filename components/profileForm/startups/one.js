@@ -26,11 +26,8 @@ export default function ProfileOne({industries, startup, locations}) {
         return Array.from({length}, (_, k) => k + 0);
     }
 
-    console.log(members);
-
     const randomNumber = () => {
         const randN = Math.floor((Math.random() * 1000000) + 1);
-        console.log(randN);
         return randN;
     };
 
@@ -44,8 +41,6 @@ export default function ProfileOne({industries, startup, locations}) {
     const removeMember = index => {
         const prevMembers = [...members];
         prevMembers.splice(index, 1);
-        // console.log(prevMembers);
-        // return
         setMembers(state => prevMembers);
         setValue(randomNumber());
     }
