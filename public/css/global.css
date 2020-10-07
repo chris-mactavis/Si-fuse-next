@@ -1465,7 +1465,8 @@ section.startup-levels .investor-levels p {
 section.startup-content p {
   margin-bottom: 15px; }
 section.startup-content .profile-name {
-  font-size: 20px; }
+  font-size: 20px;
+  color: #000; }
 section.startup-content .startup-sidebar {
   width: 350px;
   z-index: 100; }
@@ -1481,15 +1482,21 @@ section.startup-content .startup-sidebar {
       width: 100%;
       margin-bottom: 30px; } }
   section.startup-content .startup-sidebar .profile-content {
-    padding: 5px 0;
     background: #fff;
-    text-align: center; }
+    padding: 15px 30px;
+    border-radius: 8px; }
+    section.startup-content .startup-sidebar .profile-content .head-info {
+      padding-bottom: 15px;
+      border-bottom: 1px solid #C4C4C4;
+      margin-bottom: 15px; }
     section.startup-content .startup-sidebar .profile-content .img-profile {
       width: 60px;
-      margin-bottom: 15px;
-      cursor: pointer; }
+      cursor: pointer;
+      margin-right: 10px;
+      border-radius: 50%; }
     section.startup-content .startup-sidebar .profile-content .social-icons {
-      margin-bottom: 10px; }
+      margin-bottom: 10px;
+      margin-top: 20px; }
       section.startup-content .startup-sidebar .profile-content .social-icons a {
         margin-right: 10px; }
     section.startup-content .startup-sidebar .profile-content button {
@@ -1741,19 +1748,16 @@ section.startup-content .startup-ratings-section {
   section.startup-content .startup-ratings-section .rating-count {
     align-self: flex-end;
     font-size: 13px; }
+section.timeline-bg {
+  background: #F8F8F8; }
 section.timeline article, section.connections article, section.discover article {
-  background: white;
   z-index: 200;
-  position: relative; }
+  position: relative;
+  padding: 30px;
+  background: #ECEFF1;
+  border-radius: 8px; }
   section.timeline article .startcard-logo, section.connections article .startcard-logo, section.discover article .startcard-logo {
     border-radius: 50%; }
-  section.timeline article h4, section.connections article h4, section.discover article h4 {
-    text-transform: none;
-    font-weight: 400;
-    text-align: center;
-    border-bottom: 1px solid #ccc;
-    padding: 15px 0 10px;
-    margin-bottom: 0; }
   section.timeline article .rating-star-text, section.connections article .rating-star-text, section.discover article .rating-star-text {
     font-size: 20px;
     color: #3E3E3E;
@@ -1761,42 +1765,65 @@ section.timeline article, section.connections article, section.discover article 
     section.timeline article .rating-star-text img, section.connections article .rating-star-text img, section.discover article .rating-star-text img {
       margin-right: 5px; }
   section.timeline article h3, section.connections article h3, section.discover article h3 {
-    color: #000; }
-  section.timeline article .fair, section.connections article .fair, section.discover article .fair {
-    position: relative; }
-    section.timeline article .fair::before, section.connections article .fair::before, section.discover article .fair::before {
-      content: '';
-      background: #F46210;
-      width: 33%; }
-  section.timeline article .good, section.connections article .good, section.discover article .good {
-    position: relative; }
-    section.timeline article .good::before, section.connections article .good::before, section.discover article .good::before {
-      content: '';
-      background: #F4C210;
-      width: 66%; }
-  section.timeline article .perfect, section.connections article .perfect, section.discover article .perfect {
-    position: relative; }
-    section.timeline article .perfect::before, section.connections article .perfect::before, section.discover article .perfect::before {
-      content: '';
-      background: #47F658;
-      width: 66%; }
+    color: #000;
+    padding-top: 25px; }
   section.timeline article .card-level, section.connections article .card-level, section.discover article .card-level {
-    background: beige;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.35);
     padding: 15px 15px 5px;
     border-radius: 6px;
-    position: relative; }
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px; }
     section.timeline article .card-level::before, section.connections article .card-level::before, section.discover article .card-level::before {
       content: '';
       background-color: #C4C4C4;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 5px;
+      height: 7px;
+      position: absolute; }
+    section.timeline article .card-level .fair::before, section.connections article .card-level .fair::before, section.discover article .card-level .fair::before {
       position: absolute;
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px; }
+      content: '';
+      background: #F46210;
+      width: 33%;
+      height: 7px;
+      bottom: 0;
+      left: 0; }
+    section.timeline article .card-level .good::before, section.connections article .card-level .good::before, section.discover article .card-level .good::before {
+      position: absolute;
+      content: '';
+      background: #F4C210;
+      width: 66%;
+      height: 7px;
+      bottom: 0;
+      left: 0; }
+    section.timeline article .card-level .perfect::before, section.connections article .card-level .perfect::before, section.discover article .card-level .perfect::before {
+      position: absolute;
+      content: '';
+      background: #47F678;
+      width: 100%;
+      height: 7px;
+      bottom: 0;
+      left: 0; }
     section.timeline article .card-level p, section.connections article .card-level p, section.discover article .card-level p {
-      color: #000; }
+      color: #000;
+      text-transform: capitalize;
+      margin-bottom: 10px;
+      font-size: 13px; }
+  section.timeline article .tags-container, section.connections article .tags-container, section.discover article .tags-container {
+    padding-left: 0; }
+    section.timeline article .tags-container .tags, section.connections article .tags-container .tags, section.discover article .tags-container .tags {
+      text-align: left;
+      height: 100%;
+      padding: 2px 10px;
+      border-left: 4px solid #5653F2;
+      color: #000;
+      box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.35);
+      font-size: 13px;
+      background: #fff;
+      margin-bottom: 10px; }
   section.timeline article .startup-logo, section.connections article .startup-logo, section.discover article .startup-logo {
     margin: 0 auto;
     display: block;
@@ -1834,19 +1861,6 @@ section.timeline article, section.connections article, section.discover article 
     border-right: 1px solid #ccc; }
     section.timeline article .tagging-container, section.connections article .tagging-container, section.discover article .tagging-container {
       padding: 15px; }
-  section.timeline article .tags, section.connections article .tags, section.discover article .tags {
-    text-align: center;
-    height: 100%;
-    padding: 10px; }
-    section.timeline article .tags .tag, section.connections article .tags .tag, section.discover article .tags .tag {
-      background: #51B8D9;
-      padding: 2px 10px;
-      color: white;
-      font-size: 12px;
-      text-transform: uppercase;
-      border-radius: 10px;
-      display: inline-block;
-      margin: 8px 2px; }
 @media only screen and (max-width: 576px) {
   section.forgot-password {
     padding: 60px 0 60px; } }

@@ -475,7 +475,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                 <div className="col-md-4">
                     <div className="startup-sidebar" id="sidebar-scroller">
                         <div className="profile-content">
-                            <img id="viewer-image"
+                            {/* <img id="viewer-image"
                                  onClick={() => dispatch(showImageViewer(startupProf.company.logo_url))}
                                  src={startupProf.company.logo_url} alt="" className="img-fluid img-profile"/>
 
@@ -529,8 +529,47 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                             }
 
                             {(!hasEdit && !connected) &&
+                            <button onClick={connectHandler} className="btn">Connect</button>} */}
+
+                            <div className="head-info d-flex align-items-center">
+                                <img id="viewer-image"
+                                    onClick={() => dispatch(showImageViewer(startupProf.company.logo_url))}
+                                    src={startupProf.company.logo_url} alt="" className="img-fluid img-profile" />
+                                <p className="profile-name mb-0">
+                                    {startupProf.company.name}
+                                </p>
+                            </div>
+                            <p><img className="location-img" src="/images/icon/location.svg" alt=""/> Lagos, Nigeria</p>
+                            <p>{startupProf.company.website}</p>
+                            <p>{startupProf.company.phone}</p>
+                            <div className="social-icons">
+                                <a href={`https://facebook.com/${startupProf.company.facebook}`}
+                                   target="_blank">
+                                    <img src="/images/icon/fb-colored.svg" alt=""/>
+                                </a>
+                                <a href={`https://linkedin.com/in/${startupProf.company.linkedin}`}
+                                   target="_blank">
+                                    <img src="/images/icon/lnkd-colored.svg" alt=""/>
+                                </a>
+                                <a href={`https://instagram.com/${startupProf.company.instagram}`}
+                                   target="_blank">
+                                    <img src="/images/icon/ig-colored.svg" alt=""/>
+                                </a>
+                                <a href={`https://twitter.com/${startupProf.company.twitter}`}
+                                   target="_blank">
+                                    <img src="/images/icon/twt-colored.svg" alt=""/>
+                                </a>
+                            </div>
+                            {(!hasEdit && !connected) &&
                             <button onClick={connectHandler} className="btn">Connect</button>}
                         </div>
+                        
+                        <div className="profile-content">
+                            <div className="d-flex">
+                                
+                            </div>
+                        </div>
+
                         <button className="startup-link-view" id="overview-btn">
                             Overview <img src="/images/icon/pie-chart.svg" alt=""/>
                         </button>
