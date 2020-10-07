@@ -65,18 +65,23 @@ const Discover = ({userType, data, industries, countries}) => {
 
     const nextPageHandler = async e => {
         e.preventDefault();
+
         dispatch(loader());
+        const loadMoreY = document.getElementById('load-more').getBoundingClientRect().top + window.scrollY;
         const data = lastFilter;
+        const url = data
+            ? `${nextUrl}&company_stage=${data.company_stage}&country=${data.country}&industry=${data.industry}&investment_ask=${data.investment_ask}&team_size=${data.team_size}&paginate=10`
+            : `${nextUrl}&paginate=10`;
         try {
-            const {data: response} = await axiosInstance.get(`${nextUrl}&company_stage=${data.company_stage}&country=${data.country}&industry=${data.industry}&investment_ask=${data.investment_ask}&team_size=${data.team_size}&paginate=10`, {
+            const {data: response} = await axiosInstance.get(url, {
                 headers: {
                     'Authorization': `Bearer ${Token()}`
                 }
             });
-            console.log(response);
             setStartups(state => state.concat(response.data));
             setNextUrl(response.links.next);
             setLastPage(response.meta.last_page);
+            window.scrollTo(null, loadMoreY);
             setCurrentPage(response.meta.current_page);
             dispatch(loader());
         } catch (error) {
@@ -100,13 +105,13 @@ const Discover = ({userType, data, industries, countries}) => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-3">
-                        <h5 className="filter">Filter By:</h5>
+                        <h4 className="filter">Filter Result</h4>
 
                         <div className="row">
                             <div className="col-12">
                                 <form className="profile-details w-100" onSubmit={handleSubmit(filterHandler)}>
 
-                                    <p className="mb-2 label-head">Industry</p>
+                                    <p className="label-head">Industry</p>
                                     <select
                                         ref={register}
                                         className="w-100 full-width" name="industry">
@@ -117,7 +122,7 @@ const Discover = ({userType, data, industries, countries}) => {
                                         }
                                     </select>
 
-                                    <p className="mb-2 mt-3 label-head">Country</p>
+                                    <p className="label-head">Country</p>
                                     <select
                                         ref={register}
                                         className="w-100 full-width" name="country">
@@ -129,7 +134,7 @@ const Discover = ({userType, data, industries, countries}) => {
                                     </select>
 
 
-                                    <p className="mb-3 mt-3 label-head">Company Stage</p>
+                                    <p className="label-head">Company Stage</p>
                                     <label className="checkout-label">
                                         <input type="radio" name="company_stage" value="concept"
                                                ref={register}
@@ -159,7 +164,7 @@ const Discover = ({userType, data, industries, countries}) => {
                                         Established
                                     </label>
 
-                                    <p className="mb-3 label-head">Team Size</p>
+                                    <p className="label-head">Team Size</p>
 
                                     <label className="checkout-label">
                                         <input type="radio" name="team_size"
@@ -183,7 +188,7 @@ const Discover = ({userType, data, industries, countries}) => {
                                         50 and above
                                     </label>
 
-                                    <p className="mb-2 label-head">Investment Ask</p>
+                                    <p className="label-head">Investment Ask</p>
                                     <select
                                         ref={register}
                                         className="w-100 full-width mb-4" name="investment_ask">
@@ -241,7 +246,7 @@ const Discover = ({userType, data, industries, countries}) => {
                         {
                             currentPage < lastPage
                                 ? <div className="text-center button mt-5">
-                                    <a href="#" onClick={nextPageHandler} className="btn">Load more</a>
+                                    <a href="#" id="load-more" onClick={nextPageHandler} className="btn">Load more</a>
                                 </div>
                                 : null
                         }

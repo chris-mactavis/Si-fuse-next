@@ -25,6 +25,14 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
         }, 1000);
     }, []);
 
+    const getClientsServiced = clientsServiced => {
+        if (clientsServiced) {
+            let clients = JSON.parse(clientsServiced);
+            return clients.join(', ');
+        }
+        return '';
+    }
+
     return <div className="row mb-5 pointer" onClick={() => Router.push('/startups/[id]', `/startups/${slug}`)}>
         <div className="col">
             <article>
@@ -178,7 +186,7 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
                                 <span className="tag">{finance.geographical_focus}</span>}
                                 {finance.revenue_type && <span className="tag">{finance.revenue_type}</span>}
                                 {finance.growth_projection && <span className="tag">{finance.growth_projection}</span>}
-                                {(company.clients_serviced && company.clients_serviced !== 'null') && <span className="tag">{company.clients_serviced}</span>}
+                                {(company.clients_serviced && company.clients_serviced !== 'null') && <span className="tag">{getClientsServiced(company.clients_serviced)}</span>}
                                 {finance.investor_type && <span className="tag">{finance.investor_type}</span>}
                                 {finance.funding_stage && <span className="tag">{finance.funding_stage}</span>}
                             </div>

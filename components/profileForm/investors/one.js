@@ -189,7 +189,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
                                                     <div className="col-6">
                                                         <div className="facebook social mb-10">
                                                             <input ref={register}
-                                                                   name="facebook" type="text"
+                                                                   name="facebook" type="url"
                                                                    className="w-100"
                                                                    defaultValue={hasProfile() ? investor.profile.facebook : ''}
                                                                    placeholder="Facebook url"/>
@@ -200,7 +200,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
 
                                                     <div className="pl-0 col-6">
                                                         <div className="instagram social mb-10">
-                                                            <input ref={register} name="instagram" type="text"
+                                                            <input ref={register} name="instagram" type="url"
                                                                    className="w-100"
                                                                    defaultValue={hasProfile() ? investor.profile.instagram : ''}
                                                                    placeholder="Instagram url"/>
@@ -209,7 +209,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
 
                                                     <div className="col-6">
                                                         <div className="twitter social">
-                                                            <input ref={register} name="twitter" type="text"
+                                                            <input ref={register} name="twitter" type="url"
                                                                    className="w-100"
                                                                    defaultValue={hasProfile() ? investor.profile.twitter : ''}
                                                                    placeholder="Twitter url"/>
@@ -218,7 +218,7 @@ const InvestorBasicInfo = ({investor, locations}) => {
 
                                                     <div className="col-6 pl-0">
                                                         <div className="linked-in social">
-                                                            <input ref={register} name="linkedin" type="text"
+                                                            <input ref={register} name="linkedin" type="url"
                                                                    className="w-100"
                                                                    defaultValue={hasProfile() ? investor.profile.linkedin : ''}
                                                                    placeholder="LinkedIn url"/>

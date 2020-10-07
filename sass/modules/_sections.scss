@@ -548,7 +548,7 @@ section {
     }
 
     .filter {
-      color: #3E3E3E;
+      color: $red;
     }
   }
 
@@ -1360,19 +1360,20 @@ section {
         }
 
         button {
-          background: transparent;
+          background: $red;
           border: 1px solid $red;
-          color: $red;
-          padding: 5px 13px;
+          color: #fff;
+          padding: 2px 8px;
+          font-size: 13px;
 
-          &:hover {
-            background: $red;
-            color: #fff;
+          // &:hover {
+          //   background: $red;
+          //   color: #fff;
 
-            //.bold-text {
-            //  font-weight: 600;
-            //  margin-bottom: 1rem;
-          }
+          //   //.bold-text {
+          //   //  font-weight: 600;
+          //   //  margin-bottom: 1rem;
+          // }
         }
 
         .edit-profile-btn {
@@ -1820,6 +1821,10 @@ section {
       z-index: 200;
       position: relative;
 
+      .startcard-logo {
+        border-radius: 50%;
+      }
+
       h4 {
         text-transform: none;
         font-weight: 400;
@@ -1827,6 +1832,75 @@ section {
         border-bottom: 1px solid #ccc;
         padding: 15px 0 10px;
         margin-bottom: 0;
+      }
+
+      .rating-star-text {
+        font-size: 20px;
+        color: $color-black;
+        margin-bottom: 0;
+
+        img {
+          margin-right: 5px;
+        }
+      }
+
+      h3 {
+        color: #000;
+        // line-height: 30px;
+      }
+
+      .fair {
+        position: relative;
+
+        &::before {
+          content: '';
+          background: #F46210;
+          width: 33%;
+        }
+      }
+
+      .good {
+        position: relative;
+
+        &::before {
+          content: '';
+          background: #F4C210;
+          width: 66%;
+        }
+      }
+
+      .perfect {
+        position: relative;
+
+        &::before {
+          content: '';
+          background: #47F658;
+          width: 66%;
+        }
+      }
+
+      .card-level {
+        background: beige;
+        padding: 15px 15px 5px;
+        border-radius: 6px;
+        position: relative;
+
+        &::before {
+          content: '';
+          background-color: $background-grey ;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 5px;
+          position: absolute;
+          border-bottom-left-radius: 6px;
+          border-bottom-right-radius: 6px
+        }
+
+        p {
+          color: #000;
+        }
+
       }
 
       .startup-logo {
