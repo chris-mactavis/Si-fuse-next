@@ -25,7 +25,7 @@ const EditLevels = ({startup}) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(setCurrentLevelState(startup.profile_level_stage));
+        // dispatch(setCurrentLevelState(startup.profile_level_stage));
     }, []);
 
     const currentProfileStage = useSelector(state => state.profile.currentLevelState);

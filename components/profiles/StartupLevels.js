@@ -5,7 +5,6 @@ import {setCurrentLevelState} from "../../store/actions/profile";
 import Router from "next/router";
 
 const StartupProfileLevels = ({hasEdit = false, startupLevel, levelKeys, index, fairness}) => {
-
     const dispatch = useDispatch();
 
     const getLevelName = (name) => {
@@ -30,6 +29,9 @@ const StartupProfileLevels = ({hasEdit = false, startupLevel, levelKeys, index, 
     }
 
     const goToLevel = level => {
+        console.log(level);
+        localStorage.setItem('showCurrentLevelOnly', level + 1);
+        dispatch(setCurrentLevelState(level + 1));
         Router.push('/profile/edit-levels');
     }
 

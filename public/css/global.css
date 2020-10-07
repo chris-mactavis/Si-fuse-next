@@ -2227,6 +2227,9 @@ section.startup-content .request-access .btn {
   align-self: center;
   justify-self: center;
 }
+section.startup-content .request-access .permission-requested {
+  z-index: 10;
+}
 section.startup-content .startup-comments .comment {
   display: flex;
   flex-direction: column;
@@ -2529,7 +2532,7 @@ input:focus, textarea:focus, select:focus, option:focus button {
 .complete-registration {
   font-size: 14px;
   padding: 8px 20px;
-  background: #D32907;
+  background: #e57373;
   color: white;
   text-align: center;
   cursor: pointer;

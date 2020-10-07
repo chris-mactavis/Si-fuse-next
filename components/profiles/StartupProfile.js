@@ -14,9 +14,8 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const StartupProfile = ({rating, startupComments, company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, hasPermission, isConnected}) => {
+const StartupProfile = ({rating, startupComments, company, services: product_services, finance, market, level, profile, hasEdit = false, profileContent: {startup, industries, locations, stages}, loggedInUser, pendingPermission: pendingPerm, hasPermission, isConnected}) => {
     const dispatch = useDispatch();
-
     const createMarkup = (content) => ({__html: content});
 
     let levelKeys = [];
@@ -24,6 +23,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     const userType = loggedInUser.user_type.user_type;
 
     const [connected, setConnected] = useState(isConnected);
+    const [pendingPermission, setPendingPermission] = useState(pendingPerm);
 
     let theStartupComments = userType === 'Investor' ? startupComments : startup.comments;
 
@@ -57,6 +57,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                     Authorization: `Bearer ${Token()}`
                 }
             })
+            setPendingPermission(true);
             dispatch(loader());
             dispatch(showNotifier('Profile request sent!'));
         } catch (e) {
@@ -910,7 +911,8 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                         <div
                             className="request-access d-flex flex-column align-items-center justify-content-center w-100">
                             <img src="/images/icon/lock.svg" alt=""/>
-                            <button className="btn" onClick={requestPermissionHandler}>Request Permission</button>
+                            {pendingPermission && <p className="permission-requested">Profile Permission Requested!</p>}
+                            {!hasPermission && !pendingPermission && <button className="btn" onClick={requestPermissionHandler}>Request Permission</button>}
                         </div>
                     }
 
