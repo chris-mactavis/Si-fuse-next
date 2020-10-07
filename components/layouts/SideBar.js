@@ -27,7 +27,7 @@ export default function SideBar({isLoggedIn = false}) {
                 case window.location.pathname === '/discover':
                     activePage = 'discover';
                     break;
-                case window.location.pathname === 'about-us':
+                case window.location.pathname === '/about-us':
                     activePage = 'about-us';
                     break;
                 case window.location.pathname.includes('blog'):

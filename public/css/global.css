@@ -1440,6 +1440,37 @@ section.single-post .content #register-free {
 section.single-post .content #register-pay {
   display: none;
 }
+section.single-post .social-share p {
+  margin: 40px 0 10px;
+  color: black;
+}
+section.single-post .react-share__ShareButton {
+  margin-right: 20px;
+}
+section.single-post .react-share__ShareButton svg {
+  width: 30px;
+  height: 30px;
+}
+section.single-post .likely__widget {
+  cursor: pointer;
+  margin-right: 20px;
+}
+section.single-post .likely__button {
+  margin-left: 5px;
+  display: none;
+}
+section.single-post .likely__icon {
+  border: 1px solid #cecece;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+section.single-post .likely__icon:hover {
+  background: #cecece;
+}
 section.modal {
   padding-top: 300px;
 }
