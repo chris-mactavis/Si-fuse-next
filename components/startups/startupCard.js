@@ -178,7 +178,7 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
                                 <span className="tag">{finance.geographical_focus}</span>}
                                 {finance.revenue_type && <span className="tag">{finance.revenue_type}</span>}
                                 {finance.growth_projection && <span className="tag">{finance.growth_projection}</span>}
-                                {company.clients_serviced && <span className="tag">{company.clients_serviced}</span>}
+                                {(company.clients_serviced && company.clients_serviced !== 'null') && <span className="tag">{company.clients_serviced}</span>}
                                 {finance.investor_type && <span className="tag">{finance.investor_type}</span>}
                                 {finance.funding_stage && <span className="tag">{finance.funding_stage}</span>}
                             </div>

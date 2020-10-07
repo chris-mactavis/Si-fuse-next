@@ -10,8 +10,9 @@ import axiosInstance from "../../../config/axios";
 import Token from "../../../utils/Token";
 import {showNotifier} from "../../../store/actions/notifier";
 import {setStartupData} from "../../../store/actions/startupProfile";
+import Router from "next/router";
 
-const Level3 = ({startup}) => {
+const Level3 = ({startup, isEditingLevel}) => {
     const {register, handleSubmit} = useForm();
 
     const dispatch = useDispatch();
@@ -40,6 +41,10 @@ const Level3 = ({startup}) => {
             })
             dispatch(setStartupData(response.data));
             dispatch(loader());
+            if (isEditingLevel) {
+                Router.push('/profile');
+                return;
+            }
             dispatch(incrementCurrentLevelState());
         } catch (e) {
             console.log(e);
@@ -54,7 +59,7 @@ const Level3 = ({startup}) => {
                     <div className="white-bg">
                         <div className="row">
                             <div className="col-md-9 mx-auto">
-                                <LevelHeader isLevel/>
+                                {!isEditingLevel && <LevelHeader isLevel/>}
 
                                 <InfoBox heading="Products" text="Do you have a well developed products and feedback mechanics?"/>
 
