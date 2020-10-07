@@ -7,6 +7,7 @@ export const SET_CURRENT_STATE = 'SET_CURRENT_STATE';
 export const SET_CURRENT_LEVEL_STATE = 'SET_CURRENT_LEVEL_STATE';
 export const SET_COMPANY_PROFILE_IMAGE = 'SET_COMPANY_PROFILE_IMAGE';
 export const SET_INVESTOR_IMAGE = 'SET_INVESTOR_IMAGE';
+export const SET_EDIT_LEVELS = 'SET_EDIT_LEVELS';
 
 export const incrementCurrentState = () => ({
     type: INCREMENT_CURRENT_STATE
@@ -45,4 +46,9 @@ export const setCompanyProfileImage = props => ({
 export const setInvestorProfileImage = props => ({
     type: SET_INVESTOR_IMAGE,
     props
+})
+
+export const setIsEditingLevels = isEditing => ({
+    type: SET_EDIT_LEVELS,
+    isEditing
 })

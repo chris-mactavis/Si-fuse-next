@@ -7,6 +7,7 @@ import Router from 'next/router';
 import {User} from "../../utils/User";
 import {showNotifier} from "../../store/actions/notifier";
 import SingleNotification from "../notifications/single-notification";
+import {setIsEditingLevels} from "../../store/actions/profile";
 
 export default function SideBar({isLoggedIn = false}) {
     const dispatch = useDispatch();
@@ -52,6 +53,7 @@ export default function SideBar({isLoggedIn = false}) {
 
     const logoutHandler = () => {
         dispatch(logout());
+        dispatch(setIsEditingLevels(false));
         dispatch(showNotifier('Logged Out'));
         Router.push('/');
     }
