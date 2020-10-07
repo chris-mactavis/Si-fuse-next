@@ -54,19 +54,19 @@ const InvestorProfile = ({profile, interests, connections}) => {
                                      src={profile.profile_pic_url} alt="" className="img-fluid img-profile"/>
 
                                 <div className="social-icons">
-                                    <a href={`https://facebook.com/${profile.facebook}`}
+                                    <a href={`${profile.facebook}`}
                                        target="_blank">
                                         <img src="/images/icon/fb.svg" alt=""/>
                                     </a>
-                                    <a href={`https://linkedin.com/in/${profile.linkedin}`}
+                                    <a href={`${profile.linkedin}`}
                                        target="_blank">
                                         <img src="/images/icon/lnkd.svg" alt=""/>
                                     </a>
-                                    <a href={`https://instagram.com/${profile.instagram}`}
+                                    <a href={`${profile.instagram}`}
                                        target="_blank">
                                         <img src="/images/icon/ig.svg" alt=""/>
                                     </a>
-                                    <a href={`https://twitter.com/${profile.twitter}`}
+                                    <a href={`${profile.twitter}`}
                                        target="_blank" className="mr-0">
                                         <img src="/images/icon/twt.svg" alt=""/>
                                     </a>
