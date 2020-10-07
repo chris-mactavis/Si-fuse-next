@@ -12,7 +12,7 @@ import startupProfile from "../store/reducers/startupProfile";
 import investorProfile from "../store/reducers/investorProfile";
 import notifications from "../store/reducers/notification";
 import {addStartups} from "../store/actions/discover";
-import "nprogress/nprogress.css";
+// import "nprogress/nprogress.css";
 import dynamic from "next/dynamic";
 
 const TopProgressBar = dynamic(
