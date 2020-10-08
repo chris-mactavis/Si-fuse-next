@@ -16,26 +16,33 @@ import {setStartupData} from "../../../store/actions/startupProfile";
 
 export default function ProfileOne({industries, startup, locations}) {
     const dispatch = useDispatch();
-    const [members, setMembers] = useState(startup.company && startup.company.hasOwnProperty('teams') ? startup.company.teams : [{member: '', role: ''}]);
+    const [members, setMembers] = useState(startup.company && startup.company.hasOwnProperty('teams') ? startup.company.teams : [{
+        member: '',
+        role: ''
+    }]);
     const [adminError, setAdminError] = useState();
     const [value, setValue] = useState();
-    console.log(members);
     const createArrayWithNumbers = length => {
         return Array.from({length}, (_, k) => k + 0);
     }
 
-    const addMember = (index) => {
+    const randomNumber = () => {
+        const randN = Math.floor((Math.random() * 1000000) + 1);
+        return randN;
+    };
+
+    const addMember = index => {
         const prevMembers = members;
-        members.splice(index + 1, 0, {member: '', role: ''});
-        setMembers(members);
-        setValue(index);
+        prevMembers.splice(index + 1, 0, {id: randomNumber(), member: '', role: ''});
+        setMembers(prevMembers);
+        setValue(randomNumber());
     }
 
     const removeMember = index => {
         const prevMembers = [...members];
         prevMembers.splice(index, 1);
-        setMembers(prevMembers);
-        setValue(index);
+        setMembers(state => prevMembers);
+        setValue(randomNumber());
     }
 
     const clientServicedOptions = [
@@ -56,10 +63,9 @@ export default function ProfileOne({industries, startup, locations}) {
     const {register, handleSubmit, errors, getValues, formState, triggerValidation} = useForm();
     const [profilePicture, setProfilePicture] = useState(hasCompany() ? startup.company.logo_url : '');
     const getAdminError = type => adminError && adminError.hasOwnProperty(type) ? adminError[type][0] : '';
-    const [clientServiced, setClientServiced] = useState(hasCompany() ? (JSON.parse(startup.company.clients_serviced) || []): []);
+    const [clientServiced, setClientServiced] = useState(hasCompany() ? (JSON.parse(startup.company.clients_serviced) || []) : []);
     const [clientServicedError, setClientServicedError] = useState('');
     const [profilePicError, setProfilePicError] = useState(null);
-    console.log(profilePicture);
     const submitHandler = async data => {
         setProfilePicError(null);
         if (!profilePicture) {
@@ -80,6 +86,7 @@ export default function ProfileOne({industries, startup, locations}) {
             }
         });
         data.team.forEach(t => formData.append('team[]', t));
+        data.role.forEach(r => formData.append('role[]', r));
         formData.append('logo', profilePicture[0]);
         clientServiced.forEach(cs => formData.append('clients_serviced[]', cs));
         dispatch(loader());
@@ -91,7 +98,10 @@ export default function ProfileOne({industries, startup, locations}) {
             });
             dispatch(setStartupData(response.data));
             dispatch(loader());
-            dispatch(setCompanyProfileImage({companyProfileImage: response.data.company.logo_url, companyName: data.name}));
+            dispatch(setCompanyProfileImage({
+                companyProfileImage: response.data.company.logo_url,
+                companyName: data.name
+            }));
             dispatch(incrementCurrentState());
         } catch (e) {
             console.log(e)
@@ -134,12 +144,15 @@ export default function ProfileOne({industries, startup, locations}) {
                                                           label="Company logo <br> (Click here to upload)"
                                                           push={true}
                                                     >
-                                                        <img src={hasCompany() ? (startup.company.logo_url || null) : null} alt=""/>
+                                                        <img
+                                                            src={hasCompany() ? (startup.company.logo_url || null) : null}
+                                                            alt=""/>
                                                         <input type="file" name="foo"/>
                                                     </Slim>
                                                 }
 
-                                                <span className="d-block" id="profile-pic-error">{(errors.logo || profilePicError) &&
+                                                <span className="d-block"
+                                                      id="profile-pic-error">{(errors.logo || profilePicError) &&
                                                 <Error>Please upload a profile picture!</Error>}</span>
                                             </div>
 
@@ -327,10 +340,13 @@ export default function ProfileOne({industries, startup, locations}) {
                                                                        defaultValue={s.role}/>
 
                                                                 <div className="d-flex">
-                                                                    <div className="team-button mr-3"
-                                                                         onClick={() => removeMember(index)}>
-                                                                        <img src="/images/icon/minus.svg"/>
-                                                                    </div>
+                                                                    {
+                                                                        members.length > 1 &&
+                                                                        <div className="team-button mr-3"
+                                                                             onClick={() => removeMember(index)}>
+                                                                            <img src="/images/icon/minus.svg"/>
+                                                                        </div>
+                                                                    }
 
                                                                     <div className="team-button"
                                                                          onClick={() => addMember(index)}>
@@ -418,7 +434,8 @@ export default function ProfileOne({industries, startup, locations}) {
                                                         onChange={(val) => setClientServiced(val ? val.map(v => v.value) : [])}
                                                         isMulti
                                                     />
-                                                    {clientServicedError && <ErrorSpan>{clientServicedError}</ErrorSpan>}
+                                                    {clientServicedError &&
+                                                    <ErrorSpan>{clientServicedError}</ErrorSpan>}
                                                 </div>
 
                                                 <div className="input-group-container">
@@ -444,7 +461,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                             </button>
 
                                             <button className="btn next ml-auto" type="submit">
-                                               Save <span/>
+                                                Save <span/>
                                             </button>
                                         </div>
                                     </form>

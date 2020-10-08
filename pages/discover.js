@@ -65,18 +65,23 @@ const Discover = ({userType, data, industries, countries}) => {
 
     const nextPageHandler = async e => {
         e.preventDefault();
+
         dispatch(loader());
+        const loadMoreY = document.getElementById('load-more').getBoundingClientRect().top + window.scrollY;
         const data = lastFilter;
+        const url = data
+            ? `${nextUrl}&company_stage=${data.company_stage}&country=${data.country}&industry=${data.industry}&investment_ask=${data.investment_ask}&team_size=${data.team_size}&paginate=10`
+            : `${nextUrl}&paginate=10`;
         try {
-            const {data: response} = await axiosInstance.get(`${nextUrl}&company_stage=${data.company_stage}&country=${data.country}&industry=${data.industry}&investment_ask=${data.investment_ask}&team_size=${data.team_size}&paginate=10`, {
+            const {data: response} = await axiosInstance.get(url, {
                 headers: {
                     'Authorization': `Bearer ${Token()}`
                 }
             });
-            console.log(response);
             setStartups(state => state.concat(response.data));
             setNextUrl(response.links.next);
             setLastPage(response.meta.last_page);
+            window.scrollTo(null, loadMoreY);
             setCurrentPage(response.meta.current_page);
             dispatch(loader());
         } catch (error) {
@@ -241,7 +246,7 @@ const Discover = ({userType, data, industries, countries}) => {
                         {
                             currentPage < lastPage
                                 ? <div className="text-center button mt-5">
-                                    <a href="#" onClick={nextPageHandler} className="btn">Load more</a>
+                                    <a href="#" id="load-more" onClick={nextPageHandler} className="btn">Load more</a>
                                 </div>
                                 : null
                         }

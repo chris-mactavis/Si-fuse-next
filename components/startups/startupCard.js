@@ -25,6 +25,14 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
         }, 1000);
     }, []);
 
+    const getClientsServiced = clientsServiced => {
+        if (clientsServiced) {
+            let clients = JSON.parse(clientsServiced);
+            return clients.join(', ');
+        }
+        return '';
+    }
+
     return <div className="row mb-5 pointer" onClick={() => Router.push('/startups/[id]', `/startups/${slug}`)}>
         <div className="col">
             <article>
