@@ -1317,8 +1317,46 @@ section {
       margin-bottom: 15px;
     }
 
-    .profile-name {
+    .level-img {
+      margin-bottom: 10px;
+    }
+
+    .level-name {
+      text-transform: capitalize;
+      color: #0F122B;
       font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .profile-name {
+      font-size: 16px;
+      color: #0F122B;
+    }
+
+    .startup-heading {
+      margin-bottom: 30px;
+
+      .overview-border {
+        padding: 23px 23px 0;
+        background: #fff;
+        border-radius: 8px;
+      }
+
+      .startup-description-others {
+        background: #fff;
+      }
+
+      .perfect {
+          border-left: 10px solid rgba(23, 221, 23, 0.5);
+      }
+
+      .good {
+        border-left: 10px solid RGBA(255, 214, 0, 0.5);
+      }
+
+      .fair {
+        border-left: 10px solid RGBA(255, 109, 0, 0.5);
+      }
     }
 
     .startup-sidebar {
@@ -1341,18 +1379,27 @@ section {
       }
 
       .profile-content {
-        padding: 5px 0;
         background: #fff;
-        text-align: center;
+        padding: 15px 30px;
+        border-radius: 8px;
+
+        .head-info {
+          padding-bottom: 15px;
+          border-bottom: 1px solid #C4C4C4;
+          margin-bottom: 15px;
+        }
 
         .img-profile {
           width: 60px;
-          margin-bottom: 15px;
+          // margin-bottom: 15px;
           cursor: pointer;
+          margin-right: 10px;
+          border-radius: 50%;
         }
 
         .social-icons {
           margin-bottom: 10px;
+          margin-top: 20px;
 
           a {
             margin-right: 10px;
@@ -1360,11 +1407,11 @@ section {
         }
 
         button {
-          background: $red;
-          border: 1px solid $red;
-          color: #fff;
-          padding: 2px 8px;
-          font-size: 13px;
+          // background: $red;
+          // border: 1px solid $red;
+          color: #5E6072;
+          padding: 15px 0;
+          font-size: 16px;
 
           // &:hover {
           //   background: $red;
@@ -1418,12 +1465,16 @@ section {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 15px 20px;
-        background: $red;
+        // justify-content: space-between;
+        // padding: 15px 20px;
+        background: transparent;
         border: none;
-        text-transform: uppercase;
+        // text-transform: uppercase;
         margin-bottom: 2px;
+
+        img {
+          margin-right: 10px;
+        }
 
         @media only screen and (max-width: $desktop_width) {
           padding: 15px 10px;
@@ -1440,19 +1491,29 @@ section {
 
     h5 {
       font-family: $firasans;
-      color: $red;
+      color: #5E6072;
       margin-bottom: 20px;
-      font-weight: 600;
-      text-transform: uppercase;
+      font-weight: 500;
+      // text-transform: uppercase;
     }
 
     .startup-description {
-      background: #fff;
+      background: #ECEFF1;
       padding: 20px 20px;
       margin-bottom: 30px;
+      border-radius: 8px;
+
+      .p-name {
+        color: #0F122B;
+        font-size: 20px;
+      }
+
+      .overview-sub-text {
+        color: #0F122B;
+      }
 
       img {
-        margin-bottom: 20px;
+        margin-right: 5px;
       }
 
       .player-thumbnail {
@@ -1510,7 +1571,8 @@ section {
         top: 20px;
         right: 35px;
         cursor: pointer;
-        display: none;
+        display: block;
+        z-index: 100;
 
         @media only screen and (max-width: $desktop_width) {
           display: block;
@@ -1526,13 +1588,13 @@ section {
         font-weight: normal;
       }
 
-      .color-green {
-        color: $color-green;
-      }
+      // .color-green {
+      //   color: $color-green;
+      // }
 
-      .p-move-down {
-        margin-bottom: 22px;
-      }
+      // .p-move-down {
+      //   margin-bottom: 22px;
+      // }
 
       .product-img-list {
 
@@ -1666,7 +1728,8 @@ section {
 
         p {
           text-transform: capitalize;
-          font-weight: 600;
+          color: #0F122B;
+          font-size: 20px;
           margin-bottom: 10px;
         }
 
@@ -1710,6 +1773,7 @@ section {
           margin-bottom: 9px;
           position: relative;
           padding-left: 22px;
+          margin-left: 10px;
 
           &::before {
             content: '';
@@ -1737,7 +1801,7 @@ section {
           right: 0;
           top: 30px;
           bottom: 0;
-          background-image: linear-gradient(to bottom, transparent, white, white, white);
+          background-image: linear-gradient(to bottom, transparent, #fff);
         }
       }
     }
@@ -1813,26 +1877,33 @@ section {
 
   }
 
+  &.timeline-bg {
+    background: #F8F8F8;
+  }
+
   &.timeline, &.connections, &.discover {
     @extend .bg;
 
     article {
-      background: white;
+      // background: white;
       z-index: 200;
       position: relative;
+      padding: 30px;
+      background: #ECEFF1;
+      border-radius: 8px;
 
       .startcard-logo {
         border-radius: 50%;
       }
 
-      h4 {
-        text-transform: none;
-        font-weight: 400;
-        text-align: center;
-        border-bottom: 1px solid #ccc;
-        padding: 15px 0 10px;
-        margin-bottom: 0;
-      }
+      // h4 {
+      //   text-transform: none;
+      //   font-weight: 400;
+      //   text-align: center;
+      //   border-bottom: 1px solid #ccc;
+      //   padding: 15px 0 10px;
+      //   margin-bottom: 0;
+      // }
 
       .rating-star-text {
         font-size: 20px;
@@ -1846,44 +1917,19 @@ section {
 
       h3 {
         color: #000;
+        padding-top: 25px;
         // line-height: 30px;
       }
 
-      .fair {
-        position: relative;
-
-        &::before {
-          content: '';
-          background: #F46210;
-          width: 33%;
-        }
-      }
-
-      .good {
-        position: relative;
-
-        &::before {
-          content: '';
-          background: #F4C210;
-          width: 66%;
-        }
-      }
-
-      .perfect {
-        position: relative;
-
-        &::before {
-          content: '';
-          background: #47F658;
-          width: 66%;
-        }
-      }
-
+      
       .card-level {
-        background: beige;
+        background-color: #fff;
+        box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.35);
         padding: 15px 15px 5px;
         border-radius: 6px;
         position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
 
         &::before {
           content: '';
@@ -1891,16 +1937,73 @@ section {
           bottom: 0;
           left: 0;
           width: 100%;
-          height: 5px;
+          height: 7px;
           position: absolute;
-          border-bottom-left-radius: 6px;
-          border-bottom-right-radius: 6px
         }
+
+        .fair {
+
+          &::before {
+            position: absolute;
+            content: '';
+            background: #F46210;
+            width: 33%;
+            height: 7px;
+            bottom: 0;
+            left: 0;
+          }
+        }
+
+        .good {
+        
+          &::before {
+            position: absolute;
+            content: '';
+            background: #F4C210;
+            width: 66%;
+            height: 7px;
+            bottom: 0;
+            left: 0;
+          }
+        }
+  
+        .perfect {
+  
+          &::before {
+            position: absolute;
+            content: '';
+            background: #47F678;
+            width: 100%;
+            height: 7px;
+            bottom: 0;
+            left: 0;
+          }
+        }
+  
 
         p {
           color: #000;
+          text-transform: capitalize;
+          margin-bottom: 10px;
+          font-size: 13px;
         }
 
+      }
+
+      .tags-container {
+        padding-left: 0;
+
+        .tags {
+          text-align: left;
+          height: 100%;
+          padding: 2px 10px;
+          border-left: 4px solid #5653F2;
+          color: #000;
+          box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.35);
+          font-size: 13px;
+          background: #fff;
+          margin-bottom: 10px;
+        }
       }
 
       .startup-logo {
@@ -1968,22 +2071,22 @@ section {
         }
       }
 
-      .tags {
-        text-align: center;
-        height: 100%;
-        padding: 10px;
+      // .tags {
+      //   text-align: center;
+      //   height: 100%;
+      //   padding: 10px;
 
-        .tag {
-          background: $light-blue;
-          padding: 2px 10px;
-          color: white;
-          font-size: 12px;
-          text-transform: uppercase;
-          border-radius: 10px;
-          display: inline-block;
-          margin: 8px 2px;
-        }
-      }
+      //   .tag {
+      //     background: $light-blue;
+      //     padding: 2px 10px;
+      //     color: white;
+      //     font-size: 12px;
+      //     text-transform: uppercase;
+      //     border-radius: 10px;
+      //     display: inline-block;
+      //     margin: 8px 2px;
+      //   }
+      // }
     }
   }
 
@@ -2034,7 +2137,7 @@ section {
   }
 
   &.investors-bg {
-    background: #ECEFF1;
+    background: #F8F8F8;
   }
 
   &.faqs {
