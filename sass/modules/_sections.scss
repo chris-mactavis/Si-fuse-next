@@ -1317,9 +1317,46 @@ section {
       margin-bottom: 15px;
     }
 
-    .profile-name {
+    .level-img {
+      margin-bottom: 10px;
+    }
+
+    .level-name {
+      text-transform: capitalize;
+      color: #0F122B;
       font-size: 20px;
-      color: #000;
+      margin-bottom: 10px;
+    }
+
+    .profile-name {
+      font-size: 16px;
+      color: #0F122B;
+    }
+
+    .startup-heading {
+      margin-bottom: 30px;
+
+      .overview-border {
+        padding: 23px 23px 0;
+        background: #fff;
+        border-radius: 8px;
+      }
+
+      .startup-description-others {
+        background: #fff;
+      }
+
+      .perfect {
+          border-left: 10px solid rgba(23, 221, 23, 0.5);
+      }
+
+      .good {
+        border-left: 10px solid RGBA(255, 214, 0, 0.5);
+      }
+
+      .fair {
+        border-left: 10px solid RGBA(255, 109, 0, 0.5);
+      }
     }
 
     .startup-sidebar {
@@ -1370,11 +1407,11 @@ section {
         }
 
         button {
-          background: $red;
-          border: 1px solid $red;
-          color: #fff;
-          padding: 2px 8px;
-          font-size: 13px;
+          // background: $red;
+          // border: 1px solid $red;
+          color: #5E6072;
+          padding: 15px 0;
+          font-size: 16px;
 
           // &:hover {
           //   background: $red;
@@ -1428,12 +1465,16 @@ section {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 15px 20px;
-        background: $red;
+        // justify-content: space-between;
+        // padding: 15px 20px;
+        background: transparent;
         border: none;
-        text-transform: uppercase;
+        // text-transform: uppercase;
         margin-bottom: 2px;
+
+        img {
+          margin-right: 10px;
+        }
 
         @media only screen and (max-width: $desktop_width) {
           padding: 15px 10px;
@@ -1450,19 +1491,29 @@ section {
 
     h5 {
       font-family: $firasans;
-      color: $red;
+      color: #5E6072;
       margin-bottom: 20px;
-      font-weight: 600;
-      text-transform: uppercase;
+      font-weight: 500;
+      // text-transform: uppercase;
     }
 
     .startup-description {
-      background: #fff;
+      background: #ECEFF1;
       padding: 20px 20px;
       margin-bottom: 30px;
+      border-radius: 8px;
+
+      .p-name {
+        color: #0F122B;
+        font-size: 20px;
+      }
+
+      .overview-sub-text {
+        color: #0F122B;
+      }
 
       img {
-        margin-bottom: 20px;
+        margin-right: 5px;
       }
 
       .player-thumbnail {
@@ -1520,7 +1571,8 @@ section {
         top: 20px;
         right: 35px;
         cursor: pointer;
-        display: none;
+        display: block;
+        z-index: 100;
 
         @media only screen and (max-width: $desktop_width) {
           display: block;
@@ -1536,13 +1588,13 @@ section {
         font-weight: normal;
       }
 
-      .color-green {
-        color: $color-green;
-      }
+      // .color-green {
+      //   color: $color-green;
+      // }
 
-      .p-move-down {
-        margin-bottom: 22px;
-      }
+      // .p-move-down {
+      //   margin-bottom: 22px;
+      // }
 
       .product-img-list {
 
@@ -1676,7 +1728,8 @@ section {
 
         p {
           text-transform: capitalize;
-          font-weight: 600;
+          color: #0F122B;
+          font-size: 20px;
           margin-bottom: 10px;
         }
 
@@ -1720,6 +1773,7 @@ section {
           margin-bottom: 9px;
           position: relative;
           padding-left: 22px;
+          margin-left: 10px;
 
           &::before {
             content: '';
@@ -1747,7 +1801,7 @@ section {
           right: 0;
           top: 30px;
           bottom: 0;
-          background-image: linear-gradient(to bottom, transparent, white, white, white);
+          background-image: linear-gradient(to bottom, transparent, #fff);
         }
       }
     }
@@ -2083,7 +2137,7 @@ section {
   }
 
   &.investors-bg {
-    background: #ECEFF1;
+    background: #F8F8F8;
   }
 
   &.faqs {
