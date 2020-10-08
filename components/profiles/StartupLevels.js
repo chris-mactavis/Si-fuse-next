@@ -36,8 +36,8 @@ const StartupProfileLevels = ({hasEdit = false, startupLevel, levelKeys, index, 
 
     return <div className="row">
         <div className="col-md-12">
-            <div className="startup-description">
-                {hasEdit &&
+            <div className={`startup-description startup-description-others ${getFairness(fairness)}`}>
+                {/* {hasEdit &&
                 <img onClick={() => goToLevel(index)} className="edit-icon"
                      title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
                 <div className="row">
@@ -52,6 +52,28 @@ const StartupProfileLevels = ({hasEdit = false, startupLevel, levelKeys, index, 
                     </div>
 
                     <div className="col-md-8">
+                        <div className="startup-level-content">
+                            <ul>
+                                {startupLevel.map((lvl, index) => <li key={index}>{lvl}</li>)}
+                            </ul>
+                        </div>
+                    </div>
+                </div> */}
+                    {/* My own code */}
+                {hasEdit &&
+                <img onClick={() => goToLevel(index)} className="edit-icon"
+                     title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className={`d-flex align-items-center side-content`}>
+                            <img className="mr-2" src={`/images/icon/startup-level-${levelKeys[index]}.svg`}
+                                 alt=""/>
+                            <p className="p-0 level-name">{getLevelName(levelKeys[index])}</p>
+                            {/* <div className="grade">{getFairness(fairness)}</div> */}
+                        </div>
+                    </div>
+
+                    <div className="col-md-12">
                         <div className="startup-level-content">
                             <ul>
                                 {startupLevel.map((lvl, index) => <li key={index}>{lvl}</li>)}

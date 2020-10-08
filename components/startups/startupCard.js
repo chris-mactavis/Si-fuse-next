@@ -37,160 +37,102 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
         <div className="col">
             <article>
                 <div className="row">
-                    <div className="col">
-                        <h4>{company.name}</h4>
-                        {/*<div>*/}
-                        {/*    <div className="rater-js" data-rate-value="6"/>*/}
-                        {/*    <span className="rate-total">{starRating.formatted_rating}</span>*/}
-                        {/*    <br/>*/}
-                        {/*    <span className="rating-count">{starRating.total_rating} {starRating.total_rating > 1 ? 'Ratings' : 'Rating'}</span>*/}
-                        {/*</div>*/}
+                    <div className="col-md-2 text-center text-sm-left">
+                        <div>
+                            <img className="img-fluid startcard-logo" src={company.logo_url} alt="" />
+                        </div>
+                    </div>
+                    <div className="col-md-10">
+                        <h3>{company.name}</h3>
+                        <div className="d-flex flex-wrap align-items-center">
+                            <p className="rating-star-text d-flex mr-4"><img className="img-fluid" src="/images/icon/rating-star.svg" alt=""/>Rating {starRating.formatted_rating} ({starRating.total_rating} {starRating.total_rating > 0 ? 'Ratings' : 'Rating'})</p>
+                            <p className="rating-star-text d-flex"><img className="img-fluid" src="/images/icon/comments-orange.svg" alt=""/>0 Comments</p>
+                        </div>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3 d-flex align-items-center">
-                        <img className="img-fluid startup-logo" src={company.logo_url} alt=""/>
-                    </div>
-
-                    <div className="col-md-6 d-flex align-items-center tagging">
-                        <div className="tagging-container">
-                            <div className="row">
-                                <div className="col-4">
-                                    <div className={`level ${getFairness(team)}`}>
-                                        <div className="text">
-                                            <img className="icon"
-                                                 src="/images/icon/startup-level-team.svg"
-                                                 alt=""/>
-                                            <span>Team</span>
-                                        </div>
-
-                                        <p className="grade">{getFairness(team)}</p>
-                                    </div>
+                    <div className="col-md-9 mt-5">
+                        <div className="row">
+                            <div className="col-md-4">
+                                <div className="card-level">
+                                    <div className={`${getFairness(team)}`}></div>
+                                    <p><img src="images/icon/team-icon-img.svg" alt="" className="img-fluid mr-2"/>Team</p>
+                                    <p className="mb-2">{`${getFairness(team)}`}</p>
                                 </div>
-
-                                <div className="col-4">
-                                    <div className={`level ${getFairness(problem)}`}>
-                                        <div className="text">
-                                            <img className="icon"
-                                                 src="/images/icon/startup-level-problem.svg"
-                                                 alt=""/>
-                                            <span>Problem</span>
-                                        </div>
-
-                                        <p className="grade">{getFairness(problem)}</p>
-                                    </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="card-level">
+                                    <div className={`${getFairness(problem)}`}></div>
+                                    <p><img src="images/icon/problem-icon-img.svg" alt="" className="img-fluid mr-2" />Problem</p>
+                                    <p className="mb-2">{`${getFairness(problem)}`}</p>
                                 </div>
-
-                                <div className="col-4">
-                                    <div className={`level ${getFairness(vision)}`}>
-                                        <div className="text">
-                                            <img className="icon"
-                                                 src="/images/icon/startup-level-vision.svg"
-                                                 alt=""/>
-                                            <span>Value prop.</span>
-                                        </div>
-
-                                        <p className="grade">{getFairness(vision)}</p>
-                                    </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="card-level">
+                                    <div className={`${getFairness(vision)}`}></div>
+                                    <p><img src="images/icon/value-icon-img.svg" alt="" className="img-fluid mr-2" />Value prop.</p>
+                                    <p className="mb-2">{`${getFairness(vision)}`}</p>
                                 </div>
-
-                                <div className="col-4">
-                                    <div className={`level ${getFairness(market)}`}>
-                                        <div className="text">
-                                            <img className="icon"
-                                                 src="/images/icon/startup-level-market.svg"
-                                                 alt=""/>
-                                            <span>Market</span>
-                                        </div>
-
-                                        <p className="grade">{getFairness(market)}</p>
-                                    </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="card-level">
+                                    <div className={`${getFairness(market)}`}></div>
+                                    <p><img src="images/icon/market-img-icon.svg" alt="" className="img-fluid mr-2" />Market</p>
+                                    <p className="mb-2">{`${getFairness(market)}`}</p>
                                 </div>
-
-                                <div className="col-4">
-                                    <div className={`level ${getFairness(business_model)}`}>
-                                        <div className="text">
-                                            <img className="icon"
-                                                 src="/images/icon/startup-level-business_model.svg"
-                                                 alt=""/>
-                                            <span>Model</span>
-                                        </div>
-
-                                        <p className="grade">{getFairness(business_model)}</p>
-                                    </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="card-level">
+                                    <div className={`${getFairness(business_model)}`}></div>
+                                    <p><img src="images/icon/model-icon-img.svg" alt="" className="img-fluid mr-2" />Model</p>
+                                    <p className="mb-2">{`${getFairness(business_model)}`}</p>
                                 </div>
-
-                                <div className="col-4">
-                                    <div className={`level ${getFairness(scale)}`}>
-                                        <div className="text">
-                                            <img className="icon"
-                                                 src="/images/icon/startup-level-scale.svg"
-                                                 alt=""/>
-                                            <span>Scale</span>
-                                        </div>
-
-                                        <p className="grade">{getFairness(scale)}</p>
-                                    </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="card-level">
+                                    <div className={`${getFairness(scale)}`}></div>
+                                    <p><img src="images/icon/scale-icon-img.svg" alt="" className="img-fluid mr-2" />Scale</p>
+                                    <p className="mb-2">{`${getFairness(scale)}`}</p>
                                 </div>
-
-                                <div className="col-4">
-                                    <div className={`level ${getFairness(vision)}`}>
-                                        <div className="text">
-                                            <img className="icon"
-                                                 src="/images/icon/startup-level-vision.svg"
-                                                 alt=""/>
-                                            <span>Vision</span>
-                                        </div>
-
-                                        <p className="grade">{getFairness(vision)}</p>
-                                    </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="card-level">
+                                    <div className={`${getFairness(vision)}`}></div>
+                                    <p><img src="images/icon/vision-icon-img.svg" alt="" className="img-fluid mr-2" />Vision</p>
+                                    <p className="mb-2">{`${getFairness(vision)}`}</p>
                                 </div>
-
-                                <div className="col-4">
-                                    <div className={`level ${getFairness(investor_exit)}`}>
-                                        <div className="text">
-                                            <img className="icon"
-                                                 src="/images/icon/startup-level-investor_exit.svg"
-                                                 alt=""/>
-                                            <span>Exit Strategy</span>
-                                        </div>
-
-                                        <p className="grade">{getFairness(investor_exit)}</p>
-                                    </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="card-level">
+                                    <div className={`${getFairness(investor_exit)}`}></div>
+                                    <p><img src="images/icon/strategy-icon-img.svg" alt="" className="img-fluid mr-2" />Exit Strategy</p>
+                                    <p className="mb-2">{`${getFairness(investor_exit)}`}</p>
                                 </div>
-
-                                <div className="col-4">
-                                    <div className={`level ${getFairness(products)}`}>
-                                        <div className="text">
-                                            <img className="icon"
-                                                 src="/images/icon/startup-level-products.svg"
-                                                 alt=""/>
-                                            <span>Product</span>
-                                        </div>
-
-                                        <p className="grade">{getFairness(products)}</p>
-                                    </div>
+                            </div>
+                            <div className="col-md-4">
+                                <div className="card-level">
+                                    <div className={`${getFairness(products)}`}></div>
+                                    <p><img src="images/icon/product-icon-img.svg" alt="" className="img-fluid mr-2" />Product</p>
+                                    <p className="mb-2">{`${getFairness(products)}`}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div className="col-md-3">
-                        <div className="tags d-flex align-items-center">
-                            <div>
-                                {company.industry && <span className="tag">{company.industry}</span>}
-                                {finance.capital_needed_for &&
-                                <span className="tag">{finance.capital_needed_for}</span>}
-                                {finance.funding_stage && <span className="tag">{finance.funding_stage}</span>}
-                                {finance.geographical_focus &&
-                                <span className="tag">{finance.geographical_focus}</span>}
-                                {finance.revenue_type && <span className="tag">{finance.revenue_type}</span>}
-                                {finance.growth_projection && <span className="tag">{finance.growth_projection}</span>}
-                                {(company.clients_serviced && company.clients_serviced !== 'null') && <span className="tag">{getClientsServiced(company.clients_serviced)}</span>}
-                                {finance.investor_type && <span className="tag">{finance.investor_type}</span>}
-                                {finance.funding_stage && <span className="tag">{finance.funding_stage}</span>}
-                            </div>
-                        </div>
+                    
+                    <div className="col-md-3 mt-5">
+                        <ul className="tags-container">
+                            {company.industry && <li className="tags">{company.industry}</li>}
+                            {finance.capital_needed_for &&
+                                <li className="tags">{finance.capital_needed_for}</li>}
+                            {finance.funding_stage && <li className="tags">{finance.funding_stage}</li>}
+                            {finance.geographical_focus &&
+                                <li className="tags">{finance.geographical_focus}</li>}
+                            {finance.revenue_type && <li className="tags">{finance.revenue_type}</li>}
+                            {finance.growth_projection && <li className="tags">{finance.growth_projection}</li>}
+                            {(company.clients_serviced && company.clients_serviced !== 'null') && <li className="tags">{company.clients_serviced}</li>}
+                            {finance.investor_type && <li className="tags">{finance.investor_type}</li>}
+                            {/* {finance.funding_stage && <li className="tags">{finance.funding_stage}</li>} */}
+                        </ul>
                     </div>
                 </div>
             </article>

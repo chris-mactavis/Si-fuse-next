@@ -17,7 +17,7 @@ const Timeline = ({data}) => {
             <script src="/js/rater.min.js"/>
         </Head>
 
-        <section className="timeline">
+        <section className="timeline timeline-bg ">
             <div className="container">
 
                 {

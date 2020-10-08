@@ -11,6 +11,7 @@ import {startupLevel} from "../../helpers";
 import {FilePond, registerPlugin} from "react-filepond";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import Slider from "react-slick";
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
@@ -45,7 +46,42 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
             }
             return '';
         })
-    }
+    };
+
+    const settingsStartup = {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: true,
+        // autoplay: true,
+        dots: true,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 1071,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    dots: true,
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    dots: true,
+                }
+            },
+        ]
+    };
 
     const requestPermissionHandler = async () => {
         dispatch(loader());
@@ -476,7 +512,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                 <div className="col-md-4">
                     <div className="startup-sidebar" id="sidebar-scroller">
                         <div className="profile-content">
-                            <img id="viewer-image"
+                            {/* <img id="viewer-image"
                                  onClick={() => dispatch(showImageViewer(startupProf.company.logo_url))}
                                  src={startupProf.company.logo_url} alt="" className="img-fluid img-profile"/>
 
@@ -530,9 +566,63 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                             }
 
                             {(!hasEdit && !connected) &&
+                            <button onClick={connectHandler} className="btn">Connect</button>} */}
+
+                            <div className="head-info d-flex align-items-center">
+                                <img id="viewer-image"
+                                    onClick={() => dispatch(showImageViewer(startupProf.company.logo_url))}
+                                    src={startupProf.company.logo_url} alt="" className="img-fluid img-profile" />
+                                <p className="profile-name mb-0">
+                                    {startupProf.company.name}
+                                </p>
+                            </div>
+                            <p><img className="location-img" src="/images/icon/location.svg" alt=""/> Lagos, Nigeria</p>
+                            <p>{startupProf.company.website}</p>
+                            <p>{startupProf.company.phone}</p>
+                            <div className="social-icons">
+                                <a href={`https://facebook.com/${startupProf.company.facebook}`}
+                                   target="_blank">
+                                    <img src="/images/icon/fb-colored.svg" alt=""/>
+                                </a>
+                                <a href={`https://linkedin.com/in/${startupProf.company.linkedin}`}
+                                   target="_blank">
+                                    <img src="/images/icon/lnkd-colored.svg" alt=""/>
+                                </a>
+                                <a href={`https://instagram.com/${startupProf.company.instagram}`}
+                                   target="_blank">
+                                    <img src="/images/icon/ig-colored.svg" alt=""/>
+                                </a>
+                                <a href={`https://twitter.com/${startupProf.company.twitter}`}
+                                   target="_blank">
+                                    <img src="/images/icon/twt-colored.svg" alt=""/>
+                                </a>
+                            </div>
+                            {(!hasEdit && !connected) &&
                             <button onClick={connectHandler} className="btn">Connect</button>}
                         </div>
-                        <button className="startup-link-view" id="overview-btn">
+                        
+                        <div className="profile-content mt-5">
+                            <button className="startup-link-view" id="overview-btn">
+                                 <img className="img-fluid" src="/images/icon/startup-lev-eye.svg" alt=""/>Overview
+                            </button>
+                            <button className="startup-link-view" id="startup-level-btn">
+                                 <img className="img-fluid" src="/images/icon/startup-lev-icon.svg" alt=""/>Startup Level
+                            </button>
+                            <button className="startup-link-view" id="product-services-btn">
+                                 <img className="img-fluid" src="/images/icon/prod-and-serv-icon.svg" alt=""/>Product and Services
+                            </button>
+                            <button className="startup-link-view" id="finance-btn">
+                                 <img className="img-fluid" src="/images/icon/fin-icon.svg" alt=""/>Finance
+                            </button>
+                            <button className="startup-link-view" id="marketing-summary-btn">
+                                 <img className="img-fluid" src="/images/icon/mark-sum-icon.svg" alt=""/>Market Summary
+                            </button>
+                            <button className="startup-link-view" id="comments-btn">
+                                 <img className="img-fluid" src="/images/icon/comments-icon-link.svg" alt=""/>Comments
+                            </button>
+                        </div>
+
+                        {/* <button className="startup-link-view" id="overview-btn">
                             Overview <img src="/images/icon/pie-chart.svg" alt=""/>
                         </button>
                         <button className="startup-link-view" id="startup-level-btn">
@@ -550,7 +640,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                         <button
                             className="startup-link-view" id="comments-btn">
                             Comments <img src="/images/icon/market-summary-white.svg" alt=""/>
-                        </button>
+                        </button> */}
                     </div>
                 </div>
 
@@ -593,117 +683,129 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                         {/*</div>*/}
 
                         <div className="row">
-                            <div className="col-md-4">
-                                <div className="startup-description text-center text-md-left">
-                                    {hasEdit &&
-                                    <img onClick={() => toggleFormHandler('fund')} className="edit-icon" title="Edit"
-                                         src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/fund.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Target Fund
-                                    </p>
-                                    {
-                                        !toggleFund && <p className="color-green">
-                                            {startupProf.finance.investment_ask}
-                                        </p>
-                                    }
-                                    {
-                                        toggleFund && <form onSubmit={handleSubmit(onSubmitFinanceHandler)}
-                                                            className="profile-details overview-form w-100">
-                                            <select name="investment_ask"
-                                                    ref={register}
-                                                    defaultValue={startupProf.finance.investment_ask}>
-                                                <option value="">What is your investment ask?</option>
-                                                <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                                                <option value="$10,000 - $50,000">$10,000 - $50,000</option>
-                                                <option value="$50,000 - $100,000">$50,000 - $100,000</option>
-                                                <option value="$100,000 - $250,000">$100,000 - $250,000</option>
-                                                <option value="$250,000 - $1,000,000">$250,000 - $1,000,000
+                            {/* <div className="row"> */}
+                                <div className="col-md-12 overview-border">
+                                    <Slider {...settingsStartup}>
+                                        <div className="col-md-4">
+                                        <div className="startup-description">
+                                            {hasEdit &&
+                                                <img onClick={() => toggleFormHandler('fund')} className="edit-icon" title="Edit"
+                                                    src="/images/icon/pencil-icon.svg" alt="" />}
+                                            <div className="d-flex align-items-center mb-5">
+                                                <img src="/images/icon/targ-fund-new.svg" alt="" />
+                                                <p className="profile-name mb-0">
+                                                    Target Fund
+                                                </p>
+                                            </div>
+                                            {
+                                                !toggleFund && <p className="overview-sub-text">
+                                                    {startupProf.finance.investment_ask}
+                                                </p>
+                                            }
+                                            {
+                                                toggleFund && <form onSubmit={handleSubmit(onSubmitFinanceHandler)}
+                                                    className="profile-details overview-form w-100">
+                                                    <select name="investment_ask"
+                                                        ref={register}
+                                                        defaultValue={startupProf.finance.investment_ask}>
+                                                        <option value="">What is your investment ask?</option>
+                                                        <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                                                        <option value="$10,000 - $50,000">$10,000 - $50,000</option>
+                                                        <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                                                        <option value="$100,000 - $250,000">$100,000 - $250,000</option>
+                                                        <option value="$250,000 - $1,000,000">$250,000 - $1,000,000
                                                 </option>
-                                                <option value="$1,000,000 - $2,000,000">$1,000,000 -
-                                                    $2,000,000
+                                                        <option value="$1,000,000 - $2,000,000">$1,000,000 -
+                                                        $2,000,000
                                                 </option>
-                                                <option value="$2,000,000 and above">$2,000,000 and above
+                                                        <option value="$2,000,000 and above">$2,000,000 and above
                                                 </option>
-                                            </select>
-                                            <button className="btn btn-xs mr-2" type={"button"}
-                                                    onClick={() => setFund(false)}>Cancel
+                                                    </select>
+                                                    <button className="btn btn-xs mr-2" type={"button"}
+                                                        onClick={() => setFund(false)}>Cancel
+                                                    </button>
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </div>
+                                        <div className="col-md-4">
+                                        <div className="startup-description">
+                                            {hasEdit && <img onClick={() => toggleFormHandler('industry')} className="edit-icon"
+                                                title="Edit" src="/images/icon/pencil-icon.svg" alt="" />}
+                                            <div className="d-flex align-items-center mb-5">
+                                                <img src="/images/icon/ind-icon-new.svg" alt="" />
+                                                <p className="profile-name mb-0">
+                                                    Industry
+                                                </p>
+                                            </div>
+
+                                            {
+                                                !toggleIndustry && <p className="overview-sub-text">
+                                                    <span className="industry-span">{startupProf.company.industry}</span>
+                                                </p>
+                                            }
+
+                                            {
+                                                toggleIndustry && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                    className="profile-details overview-form w-100">
+                                                    <select name="industry_id" ref={register}
+                                                        defaultValue={startupProf.company.industry_id}>
+                                                        <option value="">Select Industry</option>
+                                                        {industries.map(industry => <option key={industry.id}
+                                                            value={industry.id}
+                                                        >{industry.industry}</option>)}
+                                                    </select>
+                                                    <button className="btn btn-xs mr-2" type={"button"}
+                                                        onClick={() => setIndustry(false)}>Cancel
                                             </button>
-                                            <button className="btn btn-xs" type={"submit"}>Update</button>
-                                        </form>
-                                    }
+                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
+                                                </form>
+                                            }
+
+                                        </div>
+                                        </div>
+                                        <div className="col-md-4">
+                                            <div className="startup-description">
+                                                {hasEdit &&
+                                                    <img onClick={() => toggleFormHandler('companyStage')} className="edit-icon"
+                                                        title="Edit" src="/images/icon/pencil-icon.svg" alt="" />}
+                                                <div className="d-flex align-items-center mb-5">
+                                                    <img src="/images/icon/com-stage-icon-new.svg" alt="" />
+                                                    <p className="profile-name mb-0">
+                                                        Company Stage
+                                                    </p>
+                                                </div>
+
+                                                {
+                                                    !toggleCompanyStage && <p className="text-capitalize overview-sub-text">
+                                                        {startupProf.product_services.company_stage}
+                                                    </p>
+                                                }
+
+                                                {
+                                                    toggleCompanyStage && <form onSubmit={handleSubmit(onSubmitServiceHandler)}
+                                                        className="profile-details overview-form w-100">
+                                                        <select name="company_stage" ref={register}
+                                                            defaultValue={startupProf.product_services.company_stage}>
+                                                            <option value="">Select Stage</option>
+                                                            <option value="concept">Concept</option>
+                                                            <option value="early stage">Early stage</option>
+                                                            <option value="scaling">Scaling</option>
+                                                            <option value="established">Established</option>
+                                                        </select>
+                                                        <button className="btn btn-xs mr-2" type={"button"}
+                                                            onClick={() => setCompanyStage(false)}>Cancel
+                                                        </button>
+                                                        <button className="btn btn-xs" type={"submit"}>Update</button>
+                                                    </form>
+                                                }
+                                            </div>
+                                        </div>
+                                        
+                                    </Slider>
                                 </div>
-                            </div>
-
-                            <div className="col-md-4">
-                                <div className="startup-description text-center text-md-left">
-                                    {hasEdit && <img onClick={() => toggleFormHandler('industry')} className="edit-icon"
-                                                     title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/industry.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Industry
-                                    </p>
-
-                                    {
-                                        !toggleIndustry && <p className="p-move-down">
-                                            <span className="industry-span">{startupProf.company.industry}</span>
-                                        </p>
-                                    }
-
-                                    {
-                                        toggleIndustry && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
-                                                                className="profile-details overview-form w-100">
-                                            <select name="industry_id" ref={register}
-                                                    defaultValue={startupProf.company.industry_id}>
-                                                <option value="">Select Industry</option>
-                                                {industries.map(industry => <option key={industry.id}
-                                                                                    value={industry.id}
-                                                >{industry.industry}</option>)}
-                                            </select>
-                                            <button className="btn btn-xs mr-2" type={"button"}
-                                                    onClick={() => setIndustry(false)}>Cancel
-                                            </button>
-                                            <button className="btn btn-xs" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="startup-description text-center text-md-left">
-                                    {hasEdit &&
-                                    <img onClick={() => toggleFormHandler('companyStage')} className="edit-icon"
-                                         title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/company-stage.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Company Stage
-                                    </p>
-
-                                    {
-                                        !toggleCompanyStage && <p className="text-capitalize">
-                                            {startupProf.product_services.company_stage}
-                                        </p>
-                                    }
-
-                                    {
-                                        toggleCompanyStage && <form onSubmit={handleSubmit(onSubmitServiceHandler)}
-                                                                    className="profile-details overview-form w-100">
-                                            <select name="company_stage" ref={register}
-                                                    defaultValue={startupProf.product_services.company_stage}>
-                                                <option value="">Select Stage</option>
-                                                <option value="concept">Concept</option>
-                                                <option value="early stage">Early stage</option>
-                                                <option value="scaling">Scaling</option>
-                                                <option value="established">Established</option>
-                                            </select>
-                                            <button className="btn btn-xs mr-2" type={"button"}
-                                                    onClick={() => setCompanyStage(false)}>Cancel
-                                            </button>
-                                            <button className="btn btn-xs" type={"submit"}>Update</button>
-                                        </form>
-                                    }
-                                </div>
-                            </div>
+                            {/* </div> */}
                         </div>
                     </div>
 
@@ -725,17 +827,18 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                         id="productServices">
                         <h5>Products and Services</h5>
                         <div className="row">
-                            <div className="col-md-4">
-                                <div className="startup-description text-center text-md-left">
+                            <div className="col-12">
+                                <div className="startup-description startup-description-others text-center text-md-left">
                                     {hasEdit &&
                                     <img onClick={() => toggleFormHandler('productName')} className="edit-icon"
                                          title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                    <img src="/images/icon/product-name.svg" alt=""/>
-                                    <p className="profile-name">
-                                        Product Name
+                                    {/* <img src="/images/icon/product-name.svg" alt=""/> */}
+                                    <div className="d-flex align-items-center">
+                                    <p className="profile-name mr-4">
+                                        Product Name:
                                     </p>
                                     {
-                                        !toggleProductName && <p>
+                                        !toggleProductName && <p className="p-name">
                                             {startupProf.product_services.product_name}
                                         </p>
                                     }
@@ -751,13 +854,14 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                             <button className="btn btn-xs" type={"submit"}>Update</button>
                                         </form>
                                     }
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="col-md-8">
-                                <div className="startup-description">
-                                    <img className="edit-icon" onClick={() => toggleFormHandler('productImages')}
-                                         title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
+                            <div className="col-12">
+                                <div className="startup-description startup-description-others">
+                                {hasEdit && <img className="edit-icon" onClick={() => toggleFormHandler('productImages')}
+                                         title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
                                     <p className="profile-name">
                                         Product Images
                                     </p>
@@ -800,11 +904,11 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                             (userType === 'Startup' || hasPermission) &&
                             <>
                                 <div className="row">
-                                    <div className="col-md-6">
-                                        <div className="startup-description">
+                                    <div className="col-12">
+                                        <div className="startup-description startup-description-others">
                                             <img className="edit-icon" onClick={() => toggleFormHandler('productVideo')}
                                                  title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
-                                            <img src="/images/icon/play.svg" alt=""/>
+                                            {/* <img src="/images/icon/play.svg" alt=""/> */}
                                             <p className="profile-name">
                                                 Product Video
                                             </p>
@@ -834,11 +938,11 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                         </div>
                                     </div>
 
-                                    <div className="col-md-6">
-                                        <div className="startup-description">
+                                    <div className="col-12">
+                                        <div className="startup-description startup-description-others">
                                             <img onClick={() => toggleFormHandler('pitchVideo')} className="edit-icon"
                                                  title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>
-                                            <img src="/images/icon/play.svg" alt=""/>
+                                            {/* <img src="/images/icon/play.svg" alt=""/> */}
                                             <p className="profile-name">
                                                 Pitch Video
                                             </p>
@@ -871,17 +975,35 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
 
                                 <div className="row">
                                     <div className="col-12">
-                                        <div className="startup-description">
+                                        <div className="startup-description startup-description-others">
                                             {hasEdit &&
                                             <img onClick={() => toggleFormHandler('valueProposition')}
                                                  className="edit-icon"
                                                  title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                            <img src="/images/icon/book.svg" alt=""/>
-                                            <p className="profile-name">
+                                            {/* <img src="/images/icon/book.svg" alt=""/> */}
+                                            {/* <p className="profile-name">
                                                 Value Proposition
                                             </p>
                                             {!toggleValueProposition &&
-                                            <p className="text-description">{startupProf.product_services.value_proposition}</p>}
+                                            <p className="text-description">{startupProf.product_services.value_proposition}</p>} */}
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className={`d-flex align-items-center side-content`}>
+                                                        <img className="mr-2 level-img" src={`/images/icon/startup-level-problem.svg`}
+                                                            alt="" />
+                                                        <p className="p-0 level-name"> Value Proposition</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="startup-level-content">
+                                                        {/* <ul> */}
+                                                            {!toggleValueProposition &&
+                                                                <p className="ml-2">{startupProf.product_services.value_proposition}</p>}
+                                                        {/* </ul> */}
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             {
                                                 toggleValueProposition &&
@@ -923,16 +1045,34 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                 <h5>Finance</h5>
                                 <div className="row">
                                     <div className="col-12">
-                                        <div className="startup-description">
+                                        <div className="startup-description startup-description-others">
                                             {hasEdit &&
                                             <img onClick={() => toggleFormHandler('capitalFor')} className="edit-icon"
                                                  title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                            <img src="/images/icon/finance.svg" alt=""/>
+                                            {/* <img src="/images/icon/finance.svg" alt=""/>
                                             <p className="profile-name">
                                                 Capital Needed For
                                             </p>
                                             {!toggleCapitalFor &&
-                                            <p className="text-description">{startupProf.finance.capital_needed_for}</p>}
+                                            <p className="text-description">{startupProf.finance.capital_needed_for}</p>} */}
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className={`d-flex align-items-center side-content`}>
+                                                        <img className="mr-2 level-img" src={`/images/icon/startup-level-capital-need.svg`}
+                                                            alt="" />
+                                                        <p className="p-0 level-name">Capital Needed For</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="startup-level-content">
+                                                        {/* <ul> */}
+                                                            {!toggleValueProposition &&
+                                                                <p className="ml-2">{startupProf.finance.capital_needed_for}</p>}
+                                                        {/* </ul> */}
+                                                    </div>
+                                                </div>
+                                            </div>
                                             {
                                                 toggleCapitalFor &&
                                                 <form onSubmit={handleSubmit(onSubmitFinanceHandler)}
@@ -956,17 +1096,35 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                     </div>
 
                                     <div className="col-12">
-                                        <div className="startup-description">
+                                        <div className="startup-description startup-description-others">
                                             {hasEdit &&
                                             <img onClick={() => toggleFormHandler('businessSummary')}
                                                  className="edit-icon"
                                                  title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                            <img src="/images/icon/book.svg" alt=""/>
+                                            {/* <img src="/images/icon/book.svg" alt=""/>
                                             <p className="profile-name">
                                                 Business Summary
                                             </p>
                                             {!toggleBusinessSummary &&
-                                            <p className="text-description">{startupProf.company.summary}</p>}
+                                            <p className="text-description">{startupProf.company.summary}</p>} */}
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className={`d-flex align-items-center side-content`}>
+                                                        <img className="mr-2 level-img" src={`/images/icon/startup-level-biz-sum.svg`}
+                                                            alt="" />
+                                                        <p className="p-0 level-name">Business Summary</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="startup-level-content">
+                                                        {/* <ul> */}
+                                                            {!toggleValueProposition &&
+                                                                <p className="ml-2">{startupProf.company.summary}</p>}
+                                                        {/* </ul> */}
+                                                    </div>
+                                                </div>
+                                            </div>
                                             {
                                                 toggleBusinessSummary &&
                                                 <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
@@ -990,17 +1148,35 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                 <h5>Marketing Summary</h5>
                                 <div className="row">
                                     <div className="col-12">
-                                        <div className="startup-description">
+                                        <div className="startup-description startup-description-others">
                                             {hasEdit &&
                                             <img onClick={() => toggleFormHandler('addressableMarket')}
                                                  className="edit-icon"
                                                  title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                            <img src="/images/icon/address-market.svg" alt=""/>
+                                            {/* <img src="/images/icon/address-market.svg" alt=""/>
                                             <p className="profile-name">
                                                 Adressable Market
                                             </p>
                                             {!toggleAddressableMarket &&
-                                            <p className="text-description text-capitalize">{startupProf.market.addressable_market}</p>}
+                                            <p className="text-description text-capitalize">{startupProf.market.addressable_market}</p>} */}
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className={`d-flex align-items-center side-content`}>
+                                                        <img className="mr-2 level-img" src={`/images/icon/startup-level-mark-sum.svg`}
+                                                            alt="" />
+                                                        <p className="p-0 level-name">Adressable Market</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="startup-level-content">
+                                                        {/* <ul> */}
+                                                            {!toggleValueProposition &&
+                                                                <p className="ml-2">{startupProf.market.addressable_market}</p>}
+                                                        {/* </ul> */}
+                                                    </div>
+                                                </div>
+                                            </div>
                                             {
                                                 toggleAddressableMarket &&
                                                 <form onSubmit={handleSubmit(onSubmitMarketHandler)}
@@ -1019,17 +1195,35 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                     </div>
 
                                     <div className="col-12">
-                                        <div className="startup-description">
+                                        <div className="startup-description startup-description-others">
                                             {hasEdit &&
                                             <img onClick={() => toggleFormHandler('marketingStrategy')}
                                                  className="edit-icon"
                                                  title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                            <img src="/images/icon/marketing-summary.svg" alt=""/>
+                                            {/* <img src="/images/icon/marketing-summary.svg" alt=""/>
                                             <p className="profile-name">
                                                 Marketing Strategy
                                             </p>
                                             {!toggleMarketingStrategy &&
-                                            <p className="text-description text-capitalize">{startupProf.market.marketing_strategy}</p>}
+                                            <p className="text-description text-capitalize">{startupProf.market.marketing_strategy}</p>} */}
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className={`d-flex align-items-center side-content`}>
+                                                        <img className="mr-2 level-img" src={`/images/icon/startup-level-team.svg`}
+                                                            alt="" />
+                                                        <p className="p-0 level-name">Marketing Strategy</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="startup-level-content">
+                                                        {/* <ul> */}
+                                                            {!toggleValueProposition &&
+                                                                <p className="ml-2">{startupProf.market.marketing_strategy}</p>}
+                                                        {/* </ul> */}
+                                                    </div>
+                                                </div>
+                                            </div>
                                             {
                                                 toggleMarketingStrategy &&
                                                 <form onSubmit={handleSubmit(onSubmitMarketHandler)}
@@ -1048,17 +1242,35 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                     </div>
 
                                     <div className="col-12">
-                                        <div className="startup-description">
+                                        <div className="startup-description startup-description-others">
                                             {hasEdit &&
                                             <img onClick={() => toggleFormHandler('companyCompetitors')}
                                                  className="edit-icon"
                                                  title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                            <img src="/images/icon/marketing-summary.svg" alt=""/>
+                                            {/* <img src="/images/icon/marketing-summary.svg" alt=""/>
                                             <p className="profile-name">
                                                 Company Competitors
                                             </p>
                                             {!toggleCompanyCompetitors &&
-                                            <p className="text-description text-capitalize">{startupProf.market.company_competitors}</p>}
+                                            <p className="text-description text-capitalize">{startupProf.market.company_competitors}</p>} */}
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className={`d-flex align-items-center side-content`}>
+                                                        <img className="mr-2 level-img" src={`/images/icon/startup-level-compt-com.svg`}
+                                                            alt="" />
+                                                        <p className="p-0 level-name"> Company Competitors</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="startup-level-content">
+                                                        {/* <ul> */}
+                                                            {!toggleValueProposition &&
+                                                                <p className="ml-2">{startupProf.market.company_competitors}</p>}
+                                                        {/* </ul> */}
+                                                    </div>
+                                                </div>
+                                            </div>
                                             {
                                                 toggleCompanyCompetitors &&
                                                 <form onSubmit={handleSubmit(onSubmitMarketHandler)}
@@ -1079,16 +1291,34 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                     </div>
 
                                     <div className="col-12">
-                                        <div className="startup-description">
+                                        <div className="startup-description startup-description-others">
                                             {hasEdit && <img onClick={() => toggleFormHandler('competitiveAdvantage')}
                                                              className="edit-icon"
                                                              title="Edit" src="/images/icon/pencil-icon.svg" alt=""/>}
-                                            <img src="/images/icon/marketing-summary.svg" alt=""/>
+                                            {/* <img src="/images/icon/marketing-summary.svg" alt=""/>
                                             <p className="profile-name">
                                                 Competitive Advantage
                                             </p>
                                             {!toggleCompetitiveAdvantage &&
-                                            <p className="text-description text-capitalize">{startupProf.market.competitive_advantage}</p>}
+                                            <p className="text-description text-capitalize">{startupProf.market.competitive_advantage}</p>} */}
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className={`d-flex align-items-center side-content`}>
+                                                        <img className="mr-2 level-img" src={`/images/icon/startup-level-com-adv.svg`}
+                                                            alt="" />
+                                                        <p className="p-0 level-name">Competitive Advantage</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <div className="startup-level-content">
+                                                        {/* <ul> */}
+                                                            {!toggleValueProposition &&
+                                                                <p className="ml-2">{startupProf.market.competitive_advantage}</p>}
+                                                        {/* </ul> */}
+                                                    </div>
+                                                </div>
+                                            </div>
                                             {
                                                 toggleCompetitiveAdvantage &&
                                                 <form onSubmit={handleSubmit(onSubmitMarketHandler)}

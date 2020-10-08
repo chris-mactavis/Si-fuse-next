@@ -259,7 +259,7 @@ const Home = ({events, blogs}) => {
                 </div>
             </div>
 
-            <div className="container-fluid px-0">
+            <div className="container-fluid">
                 <div className="row posts-slider">
                     <div className="col-md-12">
                         <Slider {...settingsBlog}>
