@@ -122,7 +122,7 @@ const Discover = ({userType, data, industries, countries}) => {
                                         }
                                     </select>
 
-                                    <p className="label-head">Country</p>
+                                    <p className="label-head">Country of Operation</p>
                                     <select
                                         ref={register}
                                         className="w-100 full-width" name="country">
