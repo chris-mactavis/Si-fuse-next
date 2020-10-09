@@ -26,35 +26,6 @@ export default function Events({event, countries}) {
         setShowRegister(true);
     }
 
-    // useEffect(() => {
-    //     if (showRegister) {
-    //         function formatState(state) {
-    //             if (!state.id) {
-    //                 return state.text;
-    //             }
-    //
-    //             const baseUrl = locations.find(location => location.id === +state.id).flag
-    //
-    //             const $state = $(
-    //                 '<span><img class="img-flag" /> <span></span></span>'
-    //             );
-    //
-    //             // Use .text() instead of HTML string concatenation to avoid script injection issues
-    //             $state.find("span").text(state.text.split('-')[0]);
-    //             $state.find("img").attr("src", baseUrl);
-    //
-    //             return $state;
-    //         };
-    //
-    //         $(".select2").select2({
-    //             templateSelection: formatState
-    //         });
-    //         // setTimeout(() => {
-    //         //
-    //         // }, 2000);
-    //     }
-    // }, [showRegister]);
-
     const submitHandler = async data => {
         if (!Token()) {
             localStorage.setItem('redirectBackToEvents', `/events/${event.slug}`);
@@ -100,10 +71,6 @@ export default function Events({event, countries}) {
                 customer_phone: phone,
                 currency: "NGN",
                 txref: "event-" + id,
-                // meta: [{
-                //     metaname: "flightID",
-                //     metavalue: "AP1234"
-                // }],
                 onclose: function () {
                 },
                 callback: function (response) {
@@ -129,15 +96,12 @@ export default function Events({event, countries}) {
         setCountryFlag(country.flag);
     }
 
-    // useEffect(() => {
-    //     console.log(event);
-    // }, [])
-
     return <>
         <Layout page="SingleEvent" headerContent={null} headerClass="page-header no-bg" redBar>
             <Head>
                 <title>{event.title}</title>
-                <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+                <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"/>
+                <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer/>
             </Head>
 
             <section className="single-post">
@@ -157,12 +121,26 @@ export default function Events({event, countries}) {
                                                     <p><img src="/images/icon/time.svg"
                                                             alt=""/> {event.date_formatted_alt}
                                                     </p>
-                                                    <p><img src="/images/icon/date.svg" alt=""/> 12:00 - 2:00 (CAT)</p>
+                                                    {/*<p><img src="/images/icon/date.svg" alt=""/> 12:00 - 2:00 (CAT)</p>*/}
                                                     <p><img src="/images/icon/location.svg"
                                                             alt=""/> {event.location + ', ' + event.country + '.'}</p>
+
+                                                    {
+                                                        !event.expired && <div title="Add to Calendar" className="addeventatc">
+                                                            Add to Calendar
+                                                            <span className="start">{event.date_for_calendar + ' ' + '08:00'}</span>
+                                                            <span className="end">{event.date_for_calendar + ' ' + '16:00'}</span>
+                                                            <span className="timezone">Africa/Lagos</span>
+                                                            <span className="title">{event.title}</span>
+                                                            <span className="description">{event.title}</span>
+                                                            <span className="location">{event.location + ', ' + event.country + '.'}</span>
+                                                        </div>
+                                                    }
                                                 </div>
                                                 <p className="color-red">{event.is_free ? 'Free' : 'Paid'} Event</p>
                                             </div>
+
+
 
                                             <h5>About this Event</h5>
 

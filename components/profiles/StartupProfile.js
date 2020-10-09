@@ -12,6 +12,7 @@ import {FilePond, registerPlugin} from "react-filepond";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import Slider from "react-slick";
+import Error from "../UI/ErrorSpan";
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
@@ -191,6 +192,8 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     const [toggleProductVideo, setProductVideo] = useState(false);
     const [togglePitchVideo, setPitchVideo] = useState(false);
     const [togglePhone, setPhone] = useState(false);
+    const [toggleLocation, setLocation] = useState(false);
+    const [toggleWebsite, setWebsite] = useState(false);
     const [starRating, setStarRating] = useState(startupRating || {
         formatted_rating: 0,
         overall_rating: 0,
@@ -200,7 +203,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     const [startupProf, setStartupProfile] = useState({company, product_services, finance, market, profile, level});
     const [productImages, setProdImages] = useState(startup.product_services ? startup.product_services.product_image_array.map(img => ({source: img})) : []);
 
-    const {register, handleSubmit, reset} = useForm();
+    const {register, handleSubmit, reset, errors} = useForm();
 
     const toggleFormHandler = (item) => {
         closeAllForms();
@@ -237,6 +240,10 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                 return setPitchVideo(state => !state);
             case 'phone':
                 return setPhone(state => !state);
+            case 'location':
+                return setLocation(state => !state);
+            case 'website':
+                return setWebsite(state => !state);
             default:
                 return true;
         }
@@ -259,6 +266,8 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
         setProductVideo(false);
         setPitchVideo(false);
         setPhone(false);
+        setLocation(false);
+        setWebsite(false);
     }
 
     const onSubmitHandler = async data => {
@@ -576,8 +585,74 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                     {startupProf.company.name}
                                 </p>
                             </div>
-                            <p><img className="location-img" src="/images/icon/location.svg" alt=""/> Lagos, Nigeria</p>
-                            <p>{startupProf.company.website}</p>
+                            <p>
+                                <div className="d-flex justify-content-between">
+                                    {
+                                        !toggleLocation && <span><img className="location-img" src="/images/icon/location.svg" alt=""/> {startupProf.company.address}, {startupProf.company.location}</span>
+                                    }
+                                    {
+                                        toggleLocation && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                                   className="profile-details overview-form w-100">
+                                            <input name="address" ref={register} className="full-width edit-input"
+                                                   type="text"
+                                                   defaultValue={startupProf.company.address}/>
+                                            <select ref={register({required: 'Please select a Location'})}
+                                                    name="location_id" id=""
+                                                    defaultValue={startupProf.company.location_id}>
+                                                <option value="">Country</option>
+                                                {locations.filter(country => country.continent_code === 'AF').map(({country, id}) =>
+                                                    <option value={id} key={id}>{country}</option>)}
+                                            </select>
+                                            <button className="btn btn-xs mr-2 profile-edit-btn" type={"button"}
+                                                    onClick={() => setLocation(false)}>Cancel
+                                            </button>
+                                            <button className="btn btn-xs profile-edit-btn" type={"submit"}>Update</button>
+                                        </form>
+                                    }
+                                    {
+                                        (hasEdit && !toggleLocation) && <img onClick={() => toggleFormHandler('location')} className="edit-icon cursor-pointer"
+                                                        title="Edit" src="/images/icon/pencil-icon.svg" alt="" />
+                                    }
+                                </div>
+
+                            </p>
+                            <p>
+                                <div className="d-flex justify-content-between">
+                                    {
+                                        !toggleWebsite && <span>{startupProf.company.website}</span>
+                                    }
+                                    {
+                                        toggleWebsite && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                                className="profile-details overview-form w-100">
+                                            <input
+                                                name="website"
+                                                ref={register({
+                                                    required: 'Please enter a website url',
+                                                    pattern: {
+                                                        value: /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+                                                        message: 'Please enter a valid URL'
+                                                    }
+                                                })}
+                                                className="full-width edit-input"
+                                                type="text"
+                                                placeholder="Company website"
+                                                defaultValue={startupProf.company.website}/>
+                                            <span className="d-block">
+                                                {errors.website && <Error>{errors.website.message}</Error>}
+                                            </span>
+
+                                            <button className="btn btn-xs mr-2 profile-edit-btn" type={"button"}
+                                                    onClick={() => setWebsite(false)}>Cancel
+                                            </button>
+                                            <button className="btn btn-xs profile-edit-btn" type={"submit"}>Update</button>
+                                        </form>
+                                    }
+                                    {
+                                        (hasEdit && !toggleWebsite) && <img onClick={() => toggleFormHandler('website')} className="edit-icon cursor-pointer"
+                                                                             title="Edit" src="/images/icon/pencil-icon.svg" alt="" />
+                                    }
+                                </div>
+                            </p>
                             <p>{startupProf.company.phone}</p>
                             <div className="social-icons">
                                 <a href={`https://facebook.com/${startupProf.company.facebook}`}

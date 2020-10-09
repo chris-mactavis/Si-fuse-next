@@ -1987,6 +1987,13 @@ section.startup-content .startup-sidebar .profile-content button {
   padding: 15px 0;
   font-size: 16px;
 }
+section.startup-content .startup-sidebar .profile-content button.profile-edit-btn {
+  padding: 5px 7px;
+  font-size: 12px;
+}
+section.startup-content .startup-sidebar .profile-content button.profile-edit-btn:hover {
+  color: white;
+}
 section.startup-content .startup-sidebar .profile-content .edit-profile-btn {
   background: #D32907;
   border: none;
