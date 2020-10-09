@@ -471,6 +471,10 @@ header {
           //font-family: $league-spartan;
           color: #BF8C83;
 
+          &:hover {
+            color: #fff !important;
+          }
+
           @include media("mobile") {
             font-size: 28px;
           }
