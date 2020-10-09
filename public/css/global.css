@@ -1549,11 +1549,11 @@ section.startup-content .startup-heading {
   section.startup-content .startup-heading .startup-description-others {
     background: #fff; }
   section.startup-content .startup-heading .perfect {
-    border-left: 10px solid rgba(23, 221, 23, 0.5); }
+    border-left: 10px solid #17dd17; }
   section.startup-content .startup-heading .good {
-    border-left: 10px solid RGBA(255, 214, 0, 0.5); }
+    border-left: 10px solid RGBA(255, 214, 0, 1); }
   section.startup-content .startup-heading .fair {
-    border-left: 10px solid RGBA(255, 109, 0, 0.5); }
+    border-left: 10px solid RGBA(255, 109, 0, 1); }
 section.startup-content .startup-sidebar {
   width: 350px;
   z-index: 100; }
@@ -1588,8 +1588,10 @@ section.startup-content .startup-sidebar {
         margin-right: 10px; }
     section.startup-content .startup-sidebar .profile-content button {
       color: #5E6072;
-      padding: 15px 0;
-      font-size: 16px; }
+      padding: 10px 10px;
+      font-size: 10px; }
+      section.startup-content .startup-sidebar .profile-content button:hover {
+        color: #fff; }
       section.startup-content .startup-sidebar .profile-content button.profile-edit-btn, section.startup-content .startup-sidebar .profile-content button.connect-btn {
         padding: 5px 7px;
         font-size: 12px; }
@@ -1624,7 +1626,12 @@ section.startup-content .startup-sidebar {
     align-items: center;
     background: transparent;
     border: none;
-    margin-bottom: 2px; }
+    margin-bottom: 2px;
+    transition: all .2s; }
+    section.startup-content .startup-sidebar .startup-link-view:hover {
+      color: #D32907 !important; }
+      section.startup-content .startup-sidebar .startup-link-view:hover img {
+        filter: invert(20%) sepia(67%) saturate(5510%) hue-rotate(16deg) brightness(92%) contrast(104%); }
     section.startup-content .startup-sidebar .startup-link-view img {
       margin-right: 10px; }
     @media only screen and (max-width: 992px) {
@@ -2721,6 +2728,8 @@ header .sidebar {
       header .sidebar ul li a {
         font-size: 32px;
         color: #BF8C83; }
+        header .sidebar ul li a:hover {
+          color: #fff !important; }
         @media only screen and (max-width: 576px) {
           header .sidebar ul li a {
             font-size: 28px; } }
