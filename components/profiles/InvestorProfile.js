@@ -180,7 +180,7 @@ const InvestorProfile = ({profile, interests, connections}) => {
                         <div className="row">
                             <div className="col-12">
                                 <div className="startup-description">
-                                    <img src="/images/icon/book.svg" alt=""/>
+                                    <img src="/images/icon/about-me-icon.svg" alt=""/>
                                     <p className="profile-name">
                                         About Me
                                     </p>
