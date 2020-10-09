@@ -852,35 +852,35 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                 {hasEdit &&
                                                     <img onClick={() => toggleFormHandler('companyStage')} className="edit-icon"
                                                         title="Edit" src="/images/icon/pencil-icon.svg" alt="" />}
-                                                <div className="d-flex align-items-center mb-5">
-                                                    <img src="/images/icon/com-stage-icon-new.svg" alt="" />
-                                                    <p className="profile-name mb-0">
-                                                        Company Stage
-                                                    </p>
+                                                    <div className="d-flex align-items-center mb-5">
+                                                        <img src="/images/icon/com-stage-icon-new.svg" alt="" />
+                                                        <p className="profile-name mb-0">
+                                                            Company Stage
+                                                        </p>
+                                                    </div>
+                                                    {
+                                                        !toggleCompanyStage && <p className="text-capitalize overview-sub-text">
+                                                            {startupProf.company.company_stage}
+                                                        </p>
+                                                    }
+                                                    {
+                                                        toggleCompanyStage && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                            className="profile-details overview-form w-100">
+                                                            <select name="company_stage" ref={register}
+                                                                defaultValue={startupProf.company.company_stage}>
+                                                                <option value="">Select Stage</option>
+                                                                <option value="concept">Concept</option>
+                                                                <option value="early stage">Early stage</option>
+                                                                <option value="scaling">Scaling</option>
+                                                                <option value="established">Established</option>
+                                                            </select>
+                                                            <button className="btn btn-xs mr-2" type={"button"}
+                                                                onClick={() => setCompanyStage(false)}>Cancel
+                                                            </button>
+                                                            <button className="btn btn-xs" type={"submit"}>Update</button>
+                                                        </form>
+                                                    }
                                             </div>
-                                                {
-                                                    !toggleCompanyStage && <p className="text-capitalize overview-sub-text">
-                                                        {startupProf.company.company_stage}
-                                                    </p>
-                                                }
-
-                                                {
-                                                    toggleCompanyStage && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
-                                                        className="profile-details overview-form w-100">
-                                                        <select name="company_stage" ref={register}
-                                                            defaultValue={startupProf.company.company_stage}>
-                                                            <option value="">Select Stage</option>
-                                                            <option value="concept">Concept</option>
-                                                            <option value="early stage">Early stage</option>
-                                                            <option value="scaling">Scaling</option>
-                                                            <option value="established">Established</option>
-                                                        </select>
-                                                        <button className="btn btn-xs mr-2" type={"button"}
-                                                            onClick={() => setCompanyStage(false)}>Cancel
-                                                        </button>
-                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
-                                                </form>
-                                            }
                                         </div>
                                         <div className="col-md-4">
                                             <div className="startup-description">
