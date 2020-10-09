@@ -71,7 +71,7 @@ export default function SideBar({isLoggedIn = false}) {
                         <a className={activeLink === 'home' ? 'active' : ''}>Home</a>
                     </Link>
                 </li>
-                {
+                {   
                     loggedInUser && loggedInUser.user_type.user_type === 'Investor'
                         ? <li>
                             <Link href="/discover">
@@ -151,6 +151,12 @@ export default function SideBar({isLoggedIn = false}) {
                                                         className="img-fluid"/> Connections</a>
                                             </Link>
                                         </li>
+                                        <li>
+                                            <Link href="/discover">
+                                                <a><img src="/images/icon/discover-icon.svg" alt=""
+                                                        className="img-fluid"/> Discover</a>
+                                            </Link>
+                                        </li>
                                     </>
                                     : null
                             }
@@ -181,7 +187,7 @@ export default function SideBar({isLoggedIn = false}) {
                             }
                             {
                                 notifications.length === 0 && <li>
-                                    <p className="head-text"><img src="/images/icon/empty.svg" alt="" /> Notification Empty</p>
+                                    <p className="head-text"><img src="/images/icon/empty.svg" alt="" /> No Notifications Yet</p>
                                     <p className="msg-text">Your notifications will appear here.</p>
                                 </li>
                             }
