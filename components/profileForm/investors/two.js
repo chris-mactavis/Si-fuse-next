@@ -38,7 +38,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
 
     const investmentTypeOptions = [
         {value: 'Equity', label: 'Equity'},
-        {value: 'Safe', label: 'Safe'},
+        {value: 'SAFE', label: 'SAFE'},
         {value: 'Debt Financing', label: 'Debt Financing'},
         {value: 'Convertible Notes', label: 'Convertible Notes'},
         {value: 'Grants', label: 'Grants'},
@@ -145,7 +145,7 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                             <div className="col-md-4">
                                                 <img className="img-fluid" src={savedInvestorProfileImage || (investor.profile ? investor.profile.profile_pic_url : '')} alt=""/>
                                                 <br/>
-                                                <h5 className="mt-2">{savedInvestorProfileName || (investor.profile ? (investor.profile.user.first_name + ' ' + investor.profile.user.last_name) : '')}</h5>
+                                                <h5 className="mt-2 text-center">{savedInvestorProfileName || (investor.profile ? (investor.profile.user.first_name + ' ' + investor.profile.user.last_name) : '')}</h5>
                                             </div>
 
                                             <div className="col-md-8">
@@ -258,7 +258,6 @@ const InvestorPreference = ({investor, industries, stages}) => {
                                                             references
                                                         </option>
                                                         <option value="Traction">Traction</option>
-                                                        <option value="Good quality materials">Good quality materials</option>
                                                         <option value="Good quality materials">Good quality materials</option>
                                                         <option value="Due diligence">Due diligence</option>
                                                         <option value="Online demo">Online demo</option>
