@@ -124,9 +124,15 @@ export default function Events({event, countries}) {
                                                     {/*<p><img src="/images/icon/date.svg" alt=""/> 12:00 - 2:00 (CAT)</p>*/}
                                                     <p><img src="/images/icon/location.svg"
                                                             alt=""/> {event.location + ', ' + event.country + '.'}</p>
-
                                                     {
-                                                        !event.expired && <div title="Add to Calendar" className="addeventatc">
+                                                        event.map_link && <a href={event.map_link} target="_blank"
+                                                        className="btn btn-xs mr-3 mt-0">
+                                                            <img src="/images/icon/location.svg"
+                                                                 alt=""/> Get Directions
+                                                        </a>
+                                                    }
+                                                    {
+                                                        !event.expired && <div title="Add to Calendar" className="addeventatc event-button">
                                                             Add to Calendar
                                                             <span className="start">{event.date_for_calendar + ' ' + '08:00'}</span>
                                                             <span className="end">{event.date_for_calendar + ' ' + '16:00'}</span>

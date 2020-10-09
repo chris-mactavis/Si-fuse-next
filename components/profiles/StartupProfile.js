@@ -889,7 +889,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                     <img onClick={() => toggleFormHandler('teamSize')} className="edit-icon"
                                                         title="Edit" src="/images/icon/pencil-icon.svg" alt="" />}
                                                 <div className="d-flex align-items-center mb-5">
-                                                    <img src="/images/icon/com-stage-icon-new.svg" alt="" />
+                                                    <img src="/images/icon/com-team-size-icon-new.svg" alt="" />
                                                     <p className="profile-name mb-0">
                                                         Team Size
                                                     </p>
