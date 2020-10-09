@@ -55,6 +55,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
         arrows: true,
         // autoplay: true,
         dots: true,
+        infinite: false,
         responsive: [
             {
                 breakpoint: 1200,
@@ -194,6 +195,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     const [togglePhone, setPhone] = useState(false);
     const [toggleLocation, setLocation] = useState(false);
     const [toggleWebsite, setWebsite] = useState(false);
+    const [toggleTeamSize, setTeamSize] = useState(false);
     const [starRating, setStarRating] = useState(startupRating || {
         formatted_rating: 0,
         overall_rating: 0,
@@ -244,6 +246,8 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                 return setLocation(state => !state);
             case 'website':
                 return setWebsite(state => !state);
+            case 'teamSize':
+                return setTeamSize(state => !state);
             default:
                 return true;
         }
@@ -268,6 +272,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
         setPhone(false);
         setLocation(false);
         setWebsite(false);
+        setTeamSize(false);
     }
 
     const onSubmitHandler = async data => {
@@ -762,83 +767,83 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                 <div className="col-md-12 overview-border">
                                     <Slider {...settingsStartup}>
                                         <div className="col-md-4">
-                                        <div className="startup-description">
-                                            {hasEdit &&
-                                                <img onClick={() => toggleFormHandler('fund')} className="edit-icon" title="Edit"
-                                                    src="/images/icon/pencil-icon.svg" alt="" />}
-                                            <div className="d-flex align-items-center mb-5">
-                                                <img src="/images/icon/targ-fund-new.svg" alt="" />
-                                                <p className="profile-name mb-0">
-                                                    Target Fund
-                                                </p>
+                                            <div className="startup-description">
+                                                {hasEdit &&
+                                                    <img onClick={() => toggleFormHandler('fund')} className="edit-icon" title="Edit"
+                                                        src="/images/icon/pencil-icon.svg" alt="" />}
+                                                <div className="d-flex align-items-center mb-5">
+                                                    <img src="/images/icon/targ-fund-new.svg" alt="" />
+                                                    <p className="profile-name mb-0">
+                                                        Target Fund
+                                                    </p>
+                                                </div>
+                                                {
+                                                    !toggleFund && <p className="overview-sub-text">
+                                                        {startupProf.finance.investment_ask}
+                                                    </p>
+                                                }
+                                                {
+                                                    toggleFund && <form onSubmit={handleSubmit(onSubmitFinanceHandler)}
+                                                        className="profile-details overview-form w-100">
+                                                        <select name="investment_ask"
+                                                            ref={register}
+                                                            defaultValue={startupProf.finance.investment_ask}>
+                                                            <option value="">What is your investment ask?</option>
+                                                            <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                                                            <option value="$10,000 - $50,000">$10,000 - $50,000</option>
+                                                            <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                                                            <option value="$100,000 - $250,000">$100,000 - $250,000</option>
+                                                            <option value="$250,000 - $1,000,000">$250,000 - $1,000,000
+                                                    </option>
+                                                            <option value="$1,000,000 - $2,000,000">$1,000,000 -
+                                                            $2,000,000
+                                                    </option>
+                                                            <option value="$2,000,000 and above">$2,000,000 and above
+                                                    </option>
+                                                        </select>
+                                                        <button className="btn btn-xs mr-2" type={"button"}
+                                                            onClick={() => setFund(false)}>Cancel
+                                                        </button>
+                                                        <button className="btn btn-xs" type={"submit"}>Update</button>
+                                                    </form>
+                                                }
                                             </div>
-                                            {
-                                                !toggleFund && <p className="overview-sub-text">
-                                                    {startupProf.finance.investment_ask}
-                                                </p>
-                                            }
-                                            {
-                                                toggleFund && <form onSubmit={handleSubmit(onSubmitFinanceHandler)}
-                                                    className="profile-details overview-form w-100">
-                                                    <select name="investment_ask"
-                                                        ref={register}
-                                                        defaultValue={startupProf.finance.investment_ask}>
-                                                        <option value="">What is your investment ask?</option>
-                                                        <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                                                        <option value="$10,000 - $50,000">$10,000 - $50,000</option>
-                                                        <option value="$50,000 - $100,000">$50,000 - $100,000</option>
-                                                        <option value="$100,000 - $250,000">$100,000 - $250,000</option>
-                                                        <option value="$250,000 - $1,000,000">$250,000 - $1,000,000
-                                                </option>
-                                                        <option value="$1,000,000 - $2,000,000">$1,000,000 -
-                                                        $2,000,000
-                                                </option>
-                                                        <option value="$2,000,000 and above">$2,000,000 and above
-                                                </option>
-                                                    </select>
-                                                    <button className="btn btn-xs mr-2" type={"button"}
-                                                        onClick={() => setFund(false)}>Cancel
-                                                    </button>
-                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
-                                                </form>
-                                            }
                                         </div>
-                                    </div>
                                         <div className="col-md-4">
-                                        <div className="startup-description">
-                                            {hasEdit && <img onClick={() => toggleFormHandler('industry')} className="edit-icon"
-                                                title="Edit" src="/images/icon/pencil-icon.svg" alt="" />}
-                                            <div className="d-flex align-items-center mb-5">
-                                                <img src="/images/icon/ind-icon-new.svg" alt="" />
-                                                <p className="profile-name mb-0">
-                                                    Industry
-                                                </p>
+                                            <div className="startup-description">
+                                                {hasEdit && <img onClick={() => toggleFormHandler('industry')} className="edit-icon"
+                                                    title="Edit" src="/images/icon/pencil-icon.svg" alt="" />}
+                                                <div className="d-flex align-items-center mb-5">
+                                                    <img src="/images/icon/ind-icon-new.svg" alt="" />
+                                                    <p className="profile-name mb-0">
+                                                        Industry
+                                                    </p>
+                                                </div>
+
+                                                {
+                                                    !toggleIndustry && <p className="overview-sub-text">
+                                                        <span className="industry-span">{startupProf.company.industry}</span>
+                                                    </p>
+                                                }
+
+                                                {
+                                                    toggleIndustry && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                        className="profile-details overview-form w-100">
+                                                        <select name="industry_id" ref={register}
+                                                            defaultValue={startupProf.company.industry_id}>
+                                                            <option value="">Select Industry</option>
+                                                            {industries.map(industry => <option key={industry.id}
+                                                                value={industry.id}
+                                                            >{industry.industry}</option>)}
+                                                        </select>
+                                                        <button className="btn btn-xs mr-2" type={"button"}
+                                                            onClick={() => setIndustry(false)}>Cancel
+                                                </button>
+                                                        <button className="btn btn-xs" type={"submit"}>Update</button>
+                                                    </form>
+                                                }
+
                                             </div>
-
-                                            {
-                                                !toggleIndustry && <p className="overview-sub-text">
-                                                    <span className="industry-span">{startupProf.company.industry}</span>
-                                                </p>
-                                            }
-
-                                            {
-                                                toggleIndustry && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
-                                                    className="profile-details overview-form w-100">
-                                                    <select name="industry_id" ref={register}
-                                                        defaultValue={startupProf.company.industry_id}>
-                                                        <option value="">Select Industry</option>
-                                                        {industries.map(industry => <option key={industry.id}
-                                                            value={industry.id}
-                                                        >{industry.industry}</option>)}
-                                                    </select>
-                                                    <button className="btn btn-xs mr-2" type={"button"}
-                                                        onClick={() => setIndustry(false)}>Cancel
-                                            </button>
-                                                    <button className="btn btn-xs" type={"submit"}>Update</button>
-                                                </form>
-                                            }
-
-                                        </div>
                                         </div>
                                         <div className="col-md-4">
                                             <div className="startup-description">
@@ -854,15 +859,15 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
 
                                                 {
                                                     !toggleCompanyStage && <p className="text-capitalize overview-sub-text">
-                                                        {startupProf.product_services.company_stage}
+                                                        {startupProf.company.company_stage}
                                                     </p>
                                                 }
 
                                                 {
-                                                    toggleCompanyStage && <form onSubmit={handleSubmit(onSubmitServiceHandler)}
+                                                    toggleCompanyStage && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
                                                         className="profile-details overview-form w-100">
                                                         <select name="company_stage" ref={register}
-                                                            defaultValue={startupProf.product_services.company_stage}>
+                                                            defaultValue={startupProf.company.company_stage}>
                                                             <option value="">Select Stage</option>
                                                             <option value="concept">Concept</option>
                                                             <option value="early stage">Early stage</option>
@@ -871,6 +876,42 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                         </select>
                                                         <button className="btn btn-xs mr-2" type={"button"}
                                                             onClick={() => setCompanyStage(false)}>Cancel
+                                                        </button>
+                                                        <button className="btn btn-xs" type={"submit"}>Update</button>
+                                                    </form>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div className="col-md-4">
+                                            <div className="startup-description">
+                                                {hasEdit &&
+                                                    <img onClick={() => toggleFormHandler('teamSize')} className="edit-icon"
+                                                        title="Edit" src="/images/icon/pencil-icon.svg" alt="" />}
+                                                <div className="d-flex align-items-center mb-5">
+                                                    <img src="/images/icon/com-stage-icon-new.svg" alt="" />
+                                                    <p className="profile-name mb-0">
+                                                        Team Size
+                                                    </p>
+                                                </div>
+
+                                                {
+                                                    !toggleTeamSize && <p className="text-capitalize overview-sub-text">
+                                                        {startupProf.company.no_of_team}
+                                                    </p>
+                                                }
+
+                                                {
+                                                    toggleTeamSize && <form onSubmit={handleSubmit(onSubmitCompanyHandler)}
+                                                        className="profile-details overview-form w-100">
+                                                        <select name="no_of_team" ref={register}
+                                                            defaultValue={startupProf.company.no_of_team}>
+                                                            <option value="">Team size</option>
+                                                            <option value="1-10">1 - 10</option>
+                                                            <option value="11-50">11 - 50</option>
+                                                            <option value="50 and above">50 and above</option>
+                                                        </select>
+                                                        <button className="btn btn-xs mr-2" type={"button"}
+                                                            onClick={() => setTeamSize(false)}>Cancel
                                                         </button>
                                                         <button className="btn btn-xs" type={"submit"}>Update</button>
                                                     </form>
