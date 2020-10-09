@@ -5,7 +5,7 @@ import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
 import {showNotifier} from "../../store/actions/notifier";
 
-const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}) => {
+const StartupCard = ({startup: {company, finance, level, profile, slug, rating, comments}}) => {
     const {team, products, investor_exit, vision, scale, business_model, market, problem} = startupLevel(level);
 
     const [starRating, setStarRating] = useState(rating || {formatted_rating: 0, overall_rating: 0, total_rating: 0});
@@ -46,7 +46,7 @@ const StartupCard = ({startup: {company, finance, level, profile, slug, rating}}
                         <h3>{company.name}</h3>
                         <div className="d-flex flex-wrap align-items-center">
                             <p className="rating-star-text d-flex mr-4"><img className="img-fluid" src="/images/icon/rating-star.svg" alt=""/>Rating {starRating.formatted_rating} ({starRating.total_rating} {starRating.total_rating > 0 ? 'Ratings' : 'Rating'})</p>
-                            <p className="rating-star-text d-flex"><img className="img-fluid" src="/images/icon/comments-orange.svg" alt=""/>0 Comments</p>
+                            <p className="rating-star-text d-flex"><img className="img-fluid" src="/images/icon/comments-orange.svg" alt=""/>{comments.length} {comments.length === 1 ? 'comment' : "comments"}</p>
                         </div>
                     </div>
                 </div>

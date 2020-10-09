@@ -1413,7 +1413,7 @@ section {
           padding: 15px 0;
           font-size: 16px;
 
-          &.profile-edit-btn {
+          &.profile-edit-btn, &.connect-btn {
             padding: 5px 7px;
             font-size: 12px;
             &:hover {
@@ -1829,7 +1829,7 @@ section {
         z-index: 10;
       }
 
-      margin-top: -122px;
+      margin-top: -150px;
     }
 
     .startup-comments {

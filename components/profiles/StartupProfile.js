@@ -96,6 +96,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                 }
             })
             setPendingPermission(true);
+            setConnected(true);
             dispatch(loader());
             dispatch(showNotifier('Profile request sent!'));
         } catch (e) {
@@ -678,7 +679,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                 </a>
                             </div>
                             {(!hasEdit && !connected) &&
-                            <button onClick={connectHandler} className="btn">Connect</button>}
+                            <button onClick={connectHandler} className="btn connect-btn mt-4">Connect</button>}
                         </div>
                         
                         <div className="profile-content mt-5">
