@@ -14,30 +14,30 @@ const InvestorProfile = ({profile, interests, connections}) => {
         const overviewBtn = $('#overview-btn');
         const connectionsBtn = $('#connections-btn');
 
-        if ($(window).width() > 768) {
-            $(window).scroll(function (e) {
-                const $el = $('#sidebar-scroller');
-                const isPositionFixed = ($el.css('position') === 'fixed');
-                if ($(this).scrollTop() > 140 && !isPositionFixed) {
-                    $el.css({'position': 'fixed', 'top': '0px'});
-                }
-                if ($(this).scrollTop() < 140 && isPositionFixed) {
-                    $el.css({'position': 'static', 'top': '0px'});
-                }
-            })
-        }
+        // if ($(window).width() > 768) {
+        //     $(window).scroll(function (e) {
+        //         const $el = $('#sidebar-scroller');
+        //         const isPositionFixed = ($el.css('position') === 'fixed');
+        //         if ($(this).scrollTop() > 140 && !isPositionFixed) {
+        //             $el.css({'position': 'fixed', 'top': '0px'});
+        //         }
+        //         if ($(this).scrollTop() < 140 && isPositionFixed) {
+        //             $el.css({'position': 'static', 'top': '0px'});
+        //         }
+        //     })
+        // }
 
-        overviewBtn.click(function () {
-            $('html, body').animate({
-                scrollTop: $('#overview').offset().top - 20
-            }, 1000);
-        });
+        // overviewBtn.click(function () {
+        //     $('html, body').animate({
+        //         scrollTop: $('#overview').offset().top - 20
+        //     }, 1000);
+        // });
 
-        connectionsBtn.click(function () {
-            $('html, body').animate({
-                scrollTop: $('#connections').offset().top - 20
-            }, 1000);
-        });
+        // connectionsBtn.click(function () {
+        //     $('html, body').animate({
+        //         scrollTop: $('#connections').offset().top - 20
+        //     }, 1000);
+        // });
     });
 
     return <>
@@ -80,14 +80,14 @@ const InvestorProfile = ({profile, interests, connections}) => {
                                     onClick={() => Router.push('/profile/edit')}>Edit Profile
                             </button>
                             </div>
-                            <div className="profile-content mt-5">
+                            {/* <div className="profile-content mt-5">
                                 <button className="startup-link-view" id="overview-btn">
                                     <img className="img-fluid" src="/images/icon/startup-lev-eye.svg" alt="" />Overview
                                 </button>
                                 <button className="startup-link-view" id="connections-btn">
                                    <img src="/images/icon/startup-level-icon-connect.svg" alt=""/>  Connections 
                                 </button>
-                            </div>
+                            </div> */}
                             
                         </div>
                     </div>
