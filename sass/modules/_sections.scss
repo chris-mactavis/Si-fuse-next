@@ -53,7 +53,7 @@ section {
           width: 33rem;
           z-index: -1;
           height: .7rem;
-          background: $red;
+          background: $gold;
 
           @include media("tablet") {
             left: -3px;
@@ -152,6 +152,10 @@ section {
 
     .event-slider {
       position: relative;
+    }
+
+    .home-event{
+      padding: 0 15px;
     }
 
     //h2 {

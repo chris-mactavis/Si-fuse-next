@@ -447,7 +447,7 @@ form.profile-details input, form.profile-details textarea, form.profile-details 
   resize: none;
 }
 form.profile-details input:focus, form.profile-details input:active, form.profile-details textarea:focus, form.profile-details textarea:active, form.profile-details select:focus, form.profile-details select:active, form.profile-details .select2:focus, form.profile-details .select2:active, form.profile-details .multi-select:focus, form.profile-details .multi-select:active {
-  border-color: #D32907;
+  border-color: #e54d14;
 }
 form.profile-details input::placeholder, form.profile-details textarea::placeholder, form.profile-details select::placeholder, form.profile-details .select2::placeholder, form.profile-details .multi-select::placeholder {
   color: #3E3E3E;
@@ -564,12 +564,12 @@ form.profile-details .checkout-label .checkout-custom::after {
   -o-transition: all 0.3s ease-out;
 }
 form.profile-details .checkout-label input:checked ~ .checkout-custom {
-  background-color: #D32907;
+  background-color: #e54d14;
   -webkit-transform: rotate(0deg) scale(1);
   -ms-transform: rotate(0deg) scale(1);
   transform: rotate(0deg) scale(1);
   opacity: 1;
-  border: 2px solid #D32907;
+  border: 2px solid #e54d14;
 }
 form.profile-details .checkout-label input:checked ~ .checkout-custom::after {
   -webkit-transform: rotate(45deg) scale(1);
@@ -715,7 +715,7 @@ form.recovery-pwd .del {
   border: 0;
   outline: none;
   background: transparent;
-  color: #D32907;
+  color: #e54d14;
   margin-bottom: 4rem;
   padding: 0;
   text-transform: uppercase;
@@ -726,7 +726,7 @@ form.recovery-pwd .del {
   }
 }
 form.recovery-pwd p {
-  color: #D32907;
+  color: #e54d14;
   font-size: 1.5rem;
   margin-bottom: 0;
 }
@@ -753,7 +753,7 @@ form.event-register .w-sm-2 {
   }
 }
 form.event-register span {
-  color: #D32907;
+  color: #e54d14;
   font-weight: bold;
 }
 form.event-register span.col-green {
@@ -807,7 +807,7 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
   left: 0;
   height: 100%;
   width: 3px;
-  background-color: #D32907;
+  background-color: #e54d14;
   color: #fff;
   -webkit-transform: scaleY(0);
   transform: scaleY(0);
@@ -824,7 +824,7 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 }
 .btn:hover {
   color: #fff;
-  border-color: #D32907;
+  border-color: #e54d14;
 }
 
 .btn-white {
@@ -839,7 +839,7 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
   left: 0;
   height: 100%;
   width: 3px;
-  background-color: #D32907;
+  background-color: #e54d14;
   color: white;
   -webkit-transform: scaleY(0);
   transform: scaleY(0);
@@ -856,7 +856,7 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 }
 .btn-white:hover {
   color: white;
-  border-color: #D32907;
+  border-color: #e54d14;
 }
 
 .team-button {
@@ -890,7 +890,7 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
   left: 0;
   height: 100%;
   width: 3px;
-  background-color: #D32907;
+  background-color: #e54d14;
   color: #fff;
   -webkit-transform: scaleY(0);
   transform: scaleY(0);
@@ -907,7 +907,7 @@ form.overview-form textarea, form.overview-form input, form.overview-form select
 }
 .single-post .event-button:hover {
   color: #fff !important;
-  border-color: #D32907 !important;
+  border-color: #e54d14 !important;
 }
 .single-post .event-button .addeventatc_icon {
   top: 5px !important;
@@ -970,7 +970,7 @@ section.image-text .investors h2::before {
   width: 33rem;
   z-index: -1;
   height: 0.7rem;
-  background: #D32907;
+  background: #EBC345;
 }
 @media only screen and (max-width: 992px) {
   section.image-text .investors h2::before {
@@ -1004,7 +1004,7 @@ section.image-text .investors p {
 section.image-text .investors a {
   display: flex;
   align-items: center;
-  color: #D32907;
+  color: #e54d14;
   text-transform: uppercase;
   text-align: right;
   justify-content: flex-end;
@@ -1062,6 +1062,9 @@ section.events {
 }
 section.events .event-slider {
   position: relative;
+}
+section.events .home-event {
+  padding: 0 15px;
 }
 section.events .card {
   border: none;
@@ -1354,7 +1357,7 @@ section.discover .card .img-wrapper {
   position: relative;
 }
 section.discover .filter {
-  color: #D32907;
+  color: #e54d14;
 }
 @media only screen and (max-width: 576px) {
   section.single-post {
@@ -1479,7 +1482,7 @@ section.single-post .content .event-category p img {
   margin-right: 0.5rem;
 }
 section.single-post .content .event-category .color-red {
-  color: #D32907;
+  color: #e54d14;
   text-transform: uppercase;
 }
 section.single-post .content #register-free {
@@ -1569,15 +1572,15 @@ section.profile .numbers .number {
   width: 3rem;
   height: 3rem;
   display: flex;
-  border: 3px solid #D32907;
+  border: 3px solid #e54d14;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   font-weight: 600;
-  color: #D32907;
+  color: #e54d14;
 }
 section.profile .numbers p {
-  color: #D32907;
+  color: #e54d14;
   font-weight: bold;
   margin-left: 5rem;
 }
@@ -1602,7 +1605,7 @@ section.profile .only::before {
   left: 13px;
   width: 0.4rem;
   height: 90%;
-  background: #D32907;
+  background: #e54d14;
   opacity: 0.5;
 }
 section.profile .only::after {
@@ -1612,7 +1615,7 @@ section.profile .only::after {
   left: 13px;
   width: 0.4rem;
   height: 90%;
-  background: #D32907;
+  background: #e54d14;
   opacity: 0.5;
 }
 section.profile .fade {
@@ -1700,7 +1703,7 @@ section.message-read .open-message .msg {
 section.message-read .open-message button {
   background: none;
   border: 0;
-  color: #D32907;
+  color: #e54d14;
   outline: none;
   text-transform: uppercase;
   font-weight: bold;
@@ -1770,7 +1773,7 @@ section.startup-levels .steps-wrapper .steps .step {
   position: relative;
 }
 section.startup-levels .steps-wrapper .steps .step.is-checked .label {
-  color: #D32907;
+  color: #e54d14;
 }
 section.startup-levels .steps-wrapper .steps .step.is-clickable {
   cursor: pointer;
@@ -1802,7 +1805,7 @@ section.startup-levels .steps-wrapper .steps .step .circles .bigger-circle.is-ch
   left: -1px;
   width: 20px;
   height: 20px;
-  background-color: #D32907;
+  background-color: #e54d14;
   content: "";
   border-radius: 50%;
 }
@@ -1833,7 +1836,7 @@ section.startup-levels .steps-wrapper .progress {
   width: 0;
   max-width: calc(100% + 18px);
   height: 3px;
-  background-color: #D32907;
+  background-color: #e54d14;
   border-radius: 1px;
   transition: all 0.2s ease-in-out;
 }
@@ -2045,7 +2048,7 @@ section.startup-content .startup-sidebar .profile-content button.profile-edit-bt
   color: white;
 }
 section.startup-content .startup-sidebar .profile-content .edit-profile-btn {
-  background: #D32907;
+  background: #e54d14;
   border: none;
   color: #fff;
   padding: 5px 7px;
@@ -2083,7 +2086,7 @@ section.startup-content .startup-sidebar .startup-link-view {
   transition: all 0.2s;
 }
 section.startup-content .startup-sidebar .startup-link-view:hover {
-  color: #D32907 !important;
+  color: #e54d14 !important;
 }
 section.startup-content .startup-sidebar .startup-link-view:hover img {
   filter: invert(20%) sepia(67%) saturate(5510%) hue-rotate(16deg) brightness(92%) contrast(104%);
@@ -2567,7 +2570,7 @@ section.faqs article {
   margin-bottom: 50px;
 }
 section.faqs article h4 {
-  color: #D32907;
+  color: #e54d14;
   text-transform: none;
   margin-bottom: 10px;
 }
@@ -2599,7 +2602,7 @@ section.about .white-bg {
 section.about .red-bg {
   padding: 60px 0;
   margin-bottom: 10rem;
-  background: #D32907;
+  background: #e54d14;
 }
 section.about h5 {
   font-weight: bold;
@@ -2651,7 +2654,7 @@ section.contact-us form textarea {
   resize: none;
 }
 section .rate-select-layer span, section .rate-select-layer span:hover {
-  color: #D32907;
+  color: #e54d14;
 }
 
 * {
@@ -3016,7 +3019,7 @@ nav.navbar .active-bar::before {
   content: "";
   width: 10px;
   height: 10px;
-  background: #D32907;
+  background: #e54d14;
   border-radius: 50%;
   position: absolute;
   top: 0;
@@ -3185,8 +3188,8 @@ header.homepage .header-wrapper h1 {
   }
 }
 header.homepage .header-wrapper h1 div.changing-text span {
-  background: #fff;
-  color: #D32907;
+  background: transparent;
+  color: #EBC345;
   line-height: 0.9;
   display: inline-block;
   padding: 6px 12px 6px;
@@ -3429,10 +3432,10 @@ header.no-bg {
   height: auto;
 }
 header.no-bg nav.navbar ul.navbar-nav li.nav-item .nav-link {
-  color: #D32907;
+  color: #e54d14;
 }
 header.no-bg nav.navbar ul.navbar-nav li.nav-item .nav-link:after {
-  background-color: #D32907;
+  background-color: #e54d14;
 }
 header.open-startup {
   background: #F8F8F8 url(/images/startup-profile-bg.svg);
@@ -3626,7 +3629,7 @@ header .notification-container ul li p {
   margin-bottom: 10px;
 }
 header .notification-container ul li .head-text {
-  color: #D32907;
+  color: #e54d14;
   font-weight: bold;
 }
 header .notification-container ul li .head-text img {
@@ -3653,12 +3656,12 @@ header .notification-container ul li button {
   outline: none;
 }
 header .notification-container ul li .accept-btn {
-  border: 2px solid #D32907;
-  color: #D32907;
+  border: 2px solid #e54d14;
+  color: #e54d14;
 }
 header .notification-container ul li .accept-btn:hover {
   color: #fff;
-  background-color: #D32907;
+  background-color: #e54d14;
 }
 header .notification-container ul li .decline-btn {
   border: 2px solid #989898;

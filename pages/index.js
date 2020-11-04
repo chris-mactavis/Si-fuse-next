@@ -50,7 +50,7 @@ const Home = ({events, blogs}) => {
     };
 
     const settingsBlog = {
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
         arrows: false,
         dots: true,
@@ -259,12 +259,12 @@ const Home = ({events, blogs}) => {
                 </div>
             </div>
 
-            <div className="container-fluid">
+            <div className="container">
                 <div className="row posts-slider">
                     <div className="col-md-12">
                         <Slider {...settingsBlog}>
                             {
-                                blogs.map(({slug, id, title, image}) => <div className="col-md-3 px-0" key={id}>
+                                blogs.map(({slug, id, title, image}) => <div className="col-md-4 px-0" key={id}>
                                         <Link href="blog/[slug]" as={`blog/${slug}`}>
                                             <a className="post"
                                                style={{backgroundImage: `url(${image})`}}>
