@@ -169,7 +169,7 @@ const InvestorProfile = ({profile, interests, connections}) => {
                                        <p className="text-capitalize overview-sub-text">
                                             {JSON.parse(interests.investment_type).join(', ')}
                                         </p>
-                                    </div>
+                                    </div> 
                                 </div>
 
                                 <div className="col-lg-4">
