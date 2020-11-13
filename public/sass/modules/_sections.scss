@@ -53,7 +53,7 @@ section {
           width: 33rem;
           z-index: -1;
           height: .7rem;
-          background: $red;
+          background: $gold;
 
           @include media("tablet") {
             left: -3px;
@@ -99,9 +99,9 @@ section {
 
         img {
           margin-left: 1rem;
-          height: 14px;
+          height: 30px;
           position: relative;
-          top: -2px;
+          top: -1px;
         }
       }
     }
@@ -154,6 +154,10 @@ section {
       position: relative;
     }
 
+    .home-event{
+      padding: 0 15px;
+    }
+
     //h2 {
     //  margin-bottom: 2rem;
     //
@@ -168,15 +172,22 @@ section {
       cursor: pointer;
       margin-bottom: 3rem;
 
-      &:hover .view {
-        opacity: 1;
-        transition: all .2s;
+      &:hover {
+        .view {
+          opacity: 1;
+          transition: all .2s;
+        }
+
+        .card-img-top {
+          filter: brightness(.3);
+          transition: all .2s;
+        }
+
+        h5{
+          color: $red;
+        }
       }
 
-      &:hover .card-img-top {
-        filter: brightness(.3);
-        transition: all .2s;
-      }
 
       .card-img-top {
         position: relative;
@@ -463,15 +474,23 @@ section {
       color: $color-black;
       display: block;
 
-      &:hover .view {
-        opacity: 1;
-        transition: all 0.2s;
+      &:hover {
+        .view {
+          opacity: 1;
+          transition: all 0.2s;
+        }
+
+        .card-img-top {
+          filter: brightness(0.3);
+          transition: all 0.2s;
+        }
+
+        h5{
+          color: $red;
+        }
       }
 
-      &:hover .card-img-top {
-        filter: brightness(0.3);
-        transition: all 0.2s;
-      }
+
 
       .card-img-top {
         position: relative;
@@ -1340,6 +1359,10 @@ section {
         padding: 23px 23px 0;
         background: #fff;
         border-radius: 8px;
+
+        .slick-dots li button::before, .slick-dots li.slick-active button::before {
+          color: $red;
+        }
       }
 
       .startup-description-others {
@@ -1411,7 +1434,7 @@ section {
           // border: 1px solid $red;
           color: #5E6072;
           padding: 10px 10px;
-          font-size: 10px;
+          font-size: 16px;
 
 
           &:hover {
@@ -1487,14 +1510,11 @@ section {
 
         &:hover {
           color: $red !important;
-
-          img {
-            filter: invert(20%) sepia(67%) saturate(5510%) hue-rotate(16deg) brightness(92%) contrast(104%);
-          }
         }
 
         img {
           margin-right: 10px;
+          filter: invert(20%) sepia(67%) saturate(5510%) hue-rotate(16deg) brightness(92%) contrast(104%);
         }
 
         @media only screen and (max-width: $desktop_width) {
@@ -1605,7 +1625,7 @@ section {
       }
 
       a {
-        color: #0008C4;
+        color: $red;
         font-weight: normal;
       }
 
@@ -1746,6 +1766,7 @@ section {
       .side-content {
         img {
           margin-bottom: 10px;
+          //filter: invert(38%) sepia(79%) saturate(2831%) hue-rotate(350deg) brightness(92%) contrast(91%);
         }
 
         p {
@@ -2263,6 +2284,14 @@ section {
     form {
       //padding: 0 7rem;
 
+      textarea {
+        border: none;
+        border-bottom: 2px solid $grey;
+        outline: none;
+        //padding: 1rem;
+        resize: none;
+      }
+
       input, textarea, button {
         margin-top: 40px;
         margin-bottom: 0 !important;
@@ -2270,13 +2299,10 @@ section {
         @include media("mobile") {
           margin-top: 20px;
         }
-      }
 
-      textarea {
-        border: 2px solid $color-black-2;
-        outline: none;
-        padding: 1rem;
-        resize: none;
+        &:focus, &:active{
+          border-color: $red;
+        }
       }
     }
   }

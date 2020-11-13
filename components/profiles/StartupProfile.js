@@ -50,7 +50,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     };
 
     const settingsStartup = {
-        slidesToShow: 3,
+        slidesToShow: 3.2,
         slidesToScroll: 1,
         arrows: true,
         // autoplay: true,
@@ -768,7 +768,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                             <div className="col-12">
                                 <div className="overview-border">
                                     <Slider {...settingsStartup}>
-                                        <div className="col-md-4">
+                                        <div className="col-md-4 pr-0">
                                             <div className="startup-description">
                                                 {hasEdit &&
                                                     <img onClick={() => toggleFormHandler('fund')} className="edit-icon" title="Edit"
@@ -812,7 +812,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                             
                                             </div>
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-4 pr-0">
                                             <div className="startup-description">
                                                 {hasEdit && <img onClick={() => toggleFormHandler('industry')} className="edit-icon"
                                                     title="Edit" src="/images/icon/pencil-icon.svg" alt="" />}
@@ -847,7 +847,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                 }
                                             </div>
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-4 pr-0">
                                             <div className="startup-description">
                                                 {hasEdit &&
                                                     <img onClick={() => toggleFormHandler('companyStage')} className="edit-icon"
@@ -882,7 +882,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                     }
                                             </div>
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-4 pr-0">
                                             <div className="startup-description">
                                                 {hasEdit &&
                                                     <img onClick={() => toggleFormHandler('teamSize')} className="edit-icon"

@@ -44,7 +44,9 @@ $bold           : bold;
 // Colors
 
 $dark-brown   : #811A06;
-$red   : #D32907;
+$red   : #E14C22;
+$gold  : #EBC345;
+$green : #35B283;
 $trans-red: #F4C9C1;
 $grey   : #9B9B9B;
 $light-grey   : #F8F8F8;
@@ -54,5 +56,5 @@ $color-black  : #3E3E3E;
 $color-black-2  : #6B6B6B;
 $background-grey : #C4C4C4;
 $color-green :  #04CF00;
-$orange-red   : #D32907;
-$blue-grey:   #ECEFF1
+$orange-red   : $red;
+$blue-grey:   #ECEFF1;

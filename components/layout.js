@@ -49,14 +49,16 @@ export default function Layout({children, page, headerClass, headerContent, redB
                 <meta name="description" content=""/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-                <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png"/>
-                <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png"/>
-                <link rel="icon" type="image/png" sizes="16x16"
-                      href="/images/favicon/favicon-16x16.png"/>
+                <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png"/>
+                <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png"/>
+                <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png"/>
+                <link rel="manifest" href="images/favicon/site.webmanifest"/>
+                <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5"/>
+                <meta name="msapplication-TileColor" content="#ffffff"/>
+                <meta name="theme-color" content="#ffffff"/>
 
-                <link rel="stylesheet"
-                      href="/css/bootstrap.min.css"/>
-                <link rel="stylesheet" type="text/css" href="/css/global.css"/>
+                <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+                <link rel="stylesheet" type="text/css" href="/css/main.css"/>
                 <link rel="stylesheet" type="text/css" href="/slim/slim.min.css"/>
                 <link rel="stylesheet" type="text/css" href="/css/filepond.css"/>
                 <link rel="stylesheet" type="text/css" href="/css/likely.css"/>
@@ -65,12 +67,8 @@ export default function Layout({children, page, headerClass, headerContent, redB
                 <link rel="stylesheet" type="text/css" href="/css/filepond-plugin-image-preview.css"/>
 
                 <link rel="stylesheet" type="text/css" href="/slick/slick.css"/>
-                <link rel="stylesheet" type="text/css"
-                      href="/slick/slick-theme.css"/>
-
-                <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-                        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-                        crossOrigin="anonymous"/>
+                <link rel="stylesheet" type="text/css" href="/slick/slick-theme.css"/>
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossOrigin="anonymous"/>
                 <script type="text/javascript" src="/slick/slick.min.js"/>
                 <script type="text/javascript" src="/js/likely.js"/>
                 <script src="/js/bootstrap.min.js"/>
@@ -85,7 +83,8 @@ export default function Layout({children, page, headerClass, headerContent, redB
 
             {
                 user ? (!user.has_profile &&
-                    <div className="complete-registration" onClick={goToProfile}>Please Complete Your Profile</div>) : null
+                    <div className="complete-registration" onClick={goToProfile}>Please Complete Your
+                        Profile</div>) : null
             }
 
             <header className={headerClass}>

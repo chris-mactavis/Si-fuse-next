@@ -88,8 +88,8 @@ header {
           //max-width: 900px;
 
           span {
-            background: #fff;
-            color: $red;
+            background: transparent;
+            color: $gold;
             line-height: 0.9;
             display: inline-block;
             padding: 6px 12px 6px;
@@ -397,7 +397,7 @@ header {
 
   //Sidebar 1
   .sidebar {
-    background-color: $dark-brown;
+    background-color: $gold;
     position: fixed;
     top: 0;
     right: -700px;
@@ -469,7 +469,7 @@ header {
         a {
           font-size: 32px;
           //font-family: $league-spartan;
-          color: #BF8C83;
+          //color: #BF8C83;
 
           &:hover {
             color: #fff !important;
@@ -498,7 +498,7 @@ header {
     display: none;
     width: max-content;
     height: auto;
-    background: #fff;
+    background: $gold;
     z-index: 110;
     position: absolute;
     left: 67px;
@@ -587,10 +587,8 @@ header {
       padding: 0;
 
       li {
-        padding-top: 10px;
-        padding-bottom: 10px;
         background-color: #fff;
-        padding: 20px;
+        padding: 10px 20px;
         margin-bottom: 15px;
 
         &:hover {
@@ -603,7 +601,7 @@ header {
 
         .head-text {
           color: $orange-red;
-          font-weight: $bold;
+          //font-weight: $bold;
 
           img {
             margin-right: 5px;
