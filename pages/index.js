@@ -156,8 +156,7 @@ const Home = ({events, blogs}) => {
                                     {
                                         !isLoggedIn &&
                                         <Link href={isLoggedIn ? '/profile' : '/signup?for=investors'}>
-                                            <a className="link">Get started <img src="images/icon/arrow-right.png"
-                                                                                 alt=""/></a>
+                                            <a className="link">Get started <img src="images/icon/arrow-right.png" /></a>
                                         </Link>
                                     }
                                 </div>
@@ -190,8 +189,7 @@ const Home = ({events, blogs}) => {
                                     </p>
                                     {
                                         !isLoggedIn && <Link href={isLoggedIn ? '/profile' : '/signup?for=startups'}>
-                                            <a className="link">Get started <img src="images/icon/arrow-right.png"
-                                                                                 alt=""/></a>
+                                            <a className="link">Get started <img src="images/icon/arrow-right.png" /></a>
                                         </Link>
                                     }
                                 </div>
@@ -211,7 +209,7 @@ const Home = ({events, blogs}) => {
                 </div>
 
                 <div className="row event-slider">
-                    <div className="col-md-12">
+                    <div className="col-md-12 px-0">
                         <Slider {...settingsEvent}>
                             {events.map(({id, date_formatted, image_thumbnail, country, title, slug}) => <div className="col-md-4"
                                                                                                     key={id}>
