@@ -68,25 +68,25 @@ const Level4 = ({startup, isEditingLevel}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M1')}
-                                               value="M1::Our team is aware of our overall potential market size and the market share allocated to our business proposition."/>
+                                               value="M1::We know our potential market size and the market share allocated to us."/>
                                         <span className="checkout-custom"/>
-                                        Our team is aware of our overall potential market size and the market share allocated to our business proposition.
+                                        We know our potential market size and the market share allocated to us.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M2')}
-                                               value="M2::We are very much aware of relevant regulations that bounds our market & have a strategic approach for compliance."/>
+                                               value="M2::We know the relevant regulations that binds our market & have a strategic approach for compliance."/>
                                         <span className="checkout-custom"/>
-                                        We are very much aware of relevant regulations that bounds our market & have a strategic approach for compliance.
+                                        We know the relevant regulations that binds our market & have a strategic approach for compliance.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M3')}
-                                               value="M3::Early sales income shows proof that we ender value to our target market."/>
+                                               value="M3::Initial sales income shows that we offer value to our target market."/>
                                         <span className="checkout-custom"/>
-                                        Early sales income shows proof that we ender value to our target market.
+                                        Initial sales income shows that we offer value to our target market.
                                     </label>
 
                                     <label className="checkout-label">
@@ -100,9 +100,9 @@ const Level4 = ({startup, isEditingLevel}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M5')}
-                                               value="M5::Large-scale associates/partners have showed interest in distribution, marketing, sales, etc., of our products"/>
+                                               value="M5::Large-scale businesses/partners have showed interest in the distribution, marketing, sales, etc., of our products."/>
                                         <span className="checkout-custom"/>
-                                        Large-scale associates/partners have showed interest in distribution, marketing, sales, etc., of our products
+                                        Large-scale businesses/partners have showed interest in the distribution, marketing, sales, etc., of our products.
                                     </label>
 
                                     <label className="checkout-label">
@@ -116,25 +116,25 @@ const Level4 = ({startup, isEditingLevel}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M7')}
-                                               value="M7::Our process for driving sales/selling a products is very efficients and surpasses industry standard."/>
+                                               value="M7::We have a strong sales strategy for our products that surpasses industry standard."/>
                                         <span className="checkout-custom"/>
-                                        Our process for driving sales/selling a products is very efficients and surpasses industry standard.
+                                        We have a strong sales strategy for our products that surpasses industry standard.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M8')}
-                                               value="M8::Our partnership for distribution, marketing and business growth is rock solid/ We can boast of rock solid partnership for distribution, marketing and  business growth."/>
+                                               value="M8::We have strong partnership for distribution, marketing and business growth."/>
                                         <span className="checkout-custom"/>
-                                        Our partnership for distribution, marketing and business growth is rock solid/ We can boast of rock solid partnership for distribution, marketing and  business growth.
+                                        We have strong partnership for distribution, marketing and business growth.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="market"
                                                defaultChecked={market().includes('M9')}
-                                               value="M9::We have a clear vision on how we want to dorminate the industry with our product."/>
+                                               value="M9::We have a clear vision on how we want to dominate the industry with our product."/>
                                         <span className="checkout-custom"/>
-                                        We have a clear vision on how we want to dorminate the industry with our product.
+                                        We have a clear vision on how we want to dominate the industry with our product.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>

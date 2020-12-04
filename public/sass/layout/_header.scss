@@ -1,6 +1,6 @@
 header {
   &.homepage {
-    background: #222;
+    background: $gold;
     height: 80vh;
     background-size: cover;
     position: relative;
@@ -89,7 +89,7 @@ header {
 
           span {
             background: transparent;
-            color: $gold;
+            color: $color-black;
             line-height: 0.9;
             display: inline-block;
             padding: 6px 12px 6px;

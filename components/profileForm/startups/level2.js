@@ -69,33 +69,33 @@ const Level2 = ({startup, isEditingLevel}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V1')}
-                                               value="V1::Our team has developed a theory on how to address this industry need."/>
+                                               value="V1::We have a vision to address the industry need."/>
                                         <span className="checkout-custom"/>
-                                        Our team has developed a theory on how to address this industry need.
+                                        We have a vision to address the industry need.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V2')}
-                                               value="V2::The rapid adoption of our creative solution by potential customers proves that we addressing a painpoint."/>
+                                               value="V2::The rapid adoption of our solution by potential consumers proves we understand our consumers pain point."/>
                                         <span className="checkout-custom"/>
-                                        The rapid adoption of our creative solution by potential customers proves that we addressing a painpoint.
+                                        The rapid adoption of our solution by potential consumers proves we understand our consumers pain point.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V3')}
-                                               value="V3::Our team has proof that customers will pay a certain amount for our creative solution."/>
+                                               value="V3::Customers are willing to pay a certain amount for our solution."/>
                                         <span className="checkout-custom"/>
-                                        Our team has proof that customers will pay a certain amount for our creative solution.
+                                        Customers are willing to pay a certain amount for our solution.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V4')}
-                                               value="V4::Our customer feedback indicates that our creative solution is way more preferable than others because of our superior offerings."/>
+                                               value="V4::Our solution is currently preferred to other similar solution because of our superior offering."/>
                                         <span className="checkout-custom"/>
-                                        Our customer feedback indicates that our creative solution is way more preferable than others because of our superior offerings.
+                                        Our solution is currently preferred to other solution because of our superior offering.
                                     </label>
 
                                     <label className="checkout-label">
@@ -109,33 +109,33 @@ const Level2 = ({startup, isEditingLevel}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V6')}
-                                               value="V6::Our team have started making sales far beyond our preliminary target consumers. Which was expected!"/>
+                                               value="V6::We have started making sales of beyond our initial customers."/>
                                         <span className="checkout-custom"/>
-                                        Our team have started making sales far beyond our preliminary target consumers. Which was expected!
+                                        We have started making sales of beyond our initial customers.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V7')}
-                                               value="V7::A lot of the sales made in the early market were primarily from returning consumers."/>
+                                               value="V7::A lot of our sales now are primarily from returning customers."/>
                                         <span className="checkout-custom"/>
-                                        A lot of the sales made in the early market were primarily from returning consumers.
+                                        A lot of our sales now are primarily from returning customers.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V8')}
-                                               value="V8::Customers are renewing or repurchasing without a good deal of marketing effort."/>
+                                               value="V8::There is an increase in returning customers without a good deal of marketing effort."/>
                                         <span className="checkout-custom"/>
-                                        Customers are renewing or repurchasing without a good deal of marketing effort.
+                                        There is an increase in returning customers without a good deal of marketing effort.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="vision"
                                                defaultChecked={vision().includes('V9')}
-                                               value="V9::Our creative solution is identified as a leading solution to this industry need."/>
+                                               value="V9::Our solution is identified as an industry leader in solving our industry need."/>
                                         <span className="checkout-custom"/>
-                                        Our creative solution is identified as a leading solution to this industry need.
+                                        Our solution is identified as an industry leader in solving our industry need.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>

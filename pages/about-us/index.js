@@ -82,22 +82,16 @@ const aboutUs = () => {
                         <div className="red-bg">
                             <div className="row">
                                 <div className="col-md-8 offset-md-2 d-flex flex-column justify-content-center">
-                                    <h3 className="mb-3 text-white text-center">Our Story As Told By The Founder</h3>
+                                    <h3 className="mb-3 text-black text-center">Our Story As Told By The Founder</h3>
 
                                     <img className="text-center mb-5" src="/images/about-us-3.svg"/>
 
-                                    <p>
+                                    <p className="text-black">
                                         Our dream is to bridge the growing gap between female-led startups and
-                                        investors,
-                                        over
-                                        some past few years there has been an increase in investments in Africa
-                                        especially
-                                        female-led tech startups. We are creating a platform where startups and
-                                        investors
-                                        can
-                                        interact to foster a higher level of innovation and make great social impact on
-                                        the
-                                        continent. We are creating a support ecosystem to accelerate and optimize talent
+                                        investors, over some past few years there has been an increase in investments in Africa
+                                        especially female-led tech startups. We are creating a platform where startups and
+                                        investors can interact to foster a higher level of innovation and make great social impact on
+                                        the continent. We are creating a support ecosystem to accelerate and optimize talent
                                         development in a developing continent.
                                     </p>
                                 </div>

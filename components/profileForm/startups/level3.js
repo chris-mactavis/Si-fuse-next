@@ -67,25 +67,25 @@ const Level3 = ({startup, isEditingLevel}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="products"
                                                defaultChecked={products().includes('PR1')}
-                                               value="PR1::Despite not having a lo-fi prototype, our team has the capacity to build one."/>
+                                               value="PR1::We have the capability of building a lo-fi prototype but don't have one yet."/>
                                         <span className="checkout-custom"/>
-                                        Despite not having a lo-fi prototype, our team has the capacity to build one.
+                                        We have the capability of building a lo-fi prototype but don't have one yet.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="products"
                                                defaultChecked={products().includes('PR2')}
-                                               value="PR2::Our team have successfully developed a lo-fi prototype. The functionality isn't up to par yet!"/>
+                                               value="PR2::We have successfully developed a lo-fi prototype."/>
                                         <span className="checkout-custom"/>
-                                        Our team have successfully developed a lo-fi prototype. The functionality isn't up to par yet!
+                                        Our team have successfully developed a lo-fi prototype.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="products"
                                                defaultChecked={products().includes('PR3')}
-                                               value="PR3::Our team have successfully developed a functional prototype (after rigour testing) and a featured product roadmap for upgrades."/>
+                                               value="PR3::We have successfully developed a functional prototype (after rigour testing) with product roadmap for upgrades."/>
                                         <span className="checkout-custom"/>
-                                        Our team have successfully developed a functional prototype (after rigour testing) and a featured product roadmap for upgrades.
+                                        We have successfully developed a functional prototype (after rigour testing) with product roadmap for upgrades.
                                     </label>
 
                                     <label className="checkout-label">
@@ -99,41 +99,41 @@ const Level3 = ({startup, isEditingLevel}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="products"
                                                defaultChecked={products().includes('PR5')}
-                                               value="PR5::Our product (creative solution) is nearly ready for mainstream distribution"/>
+                                               value="PR5::Our product (solution) is almost ready for market distribution."/>
                                         <span className="checkout-custom"/>
-                                        Our product (creative solution) is nearly ready for mainstream distribution
+                                        Our product (solution) is almost ready for market distribution.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="products"
                                                defaultChecked={products().includes('PR6')}
-                                               value="PR6::Our key product is complete and currently in mainstream market. Our team are also collecting feedbacks for product enhancement."/>
+                                               value="PR6::Our product is complete and in mainstream market. We are currently collecting feedback for product enhancement."/>
                                         <span className="checkout-custom"/>
-                                        Our key product is complete and currently in mainstream market. Our team are also collecting feedbacks for product enhancement.
+                                        Our product is complete and in mainstream market. We are currently collecting feedback for product enhancement.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="products"
                                                defaultChecked={products().includes('PR7')}
-                                               value="PR7::Our product is developed for improvement & with feedbacks collected, new product propositions are currently in the works."/>
+                                               value="PR7::With feedback collected, we have started developing new product propositions."/>
                                         <span className="checkout-custom"/>
-                                        Our product is developed for improvement & with feedbacks collected, new product propositions are currently in the works.
+                                        With feedback collected, we have started developing new product propositions.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="products"
                                                defaultChecked={products().includes('PR8')}
-                                               value="PR8::With new product propositions, our product is successfully dealing with substantial growth."/>
+                                               value="PR8::With new product propositions, we are ready for substantial growth."/>
                                         <span className="checkout-custom"/>
-                                        With new product propositions, our product is successfully dealing with substantial growth.
+                                        With new product propositions, we are ready for substantial growth.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="products"
                                                defaultChecked={products().includes('PR9')}
-                                               value="PR9::Our product is being identified as an industry leader because of our outstanding product offerings."/>
+                                               value="PR9::Our product is identified as an industry leader because of our product offerings."/>
                                         <span className="checkout-custom"/>
-                                        Our product is being identified as an industry leader because of our outstanding product offerings.
+                                        Our product is identified as an industry leader because of our product offerings.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>
