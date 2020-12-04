@@ -70,41 +70,41 @@ const Level6 = ({startup, isEditingLevel}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC1')}
-                                               value="TC1::Our team is made up of 2 or more co-founders with varying competences."/>
+                                               value="TC1::Our team consists of 2 or more co-founders with different competences."/>
                                         <span className="checkout-custom"/>
-                                        Our team is made up of 2 or more co-founders with varying competences.
+                                        Our team consists of 2 or more co-founders with different competences.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC2')}
-                                               value="TC2::Our team consist of individuals that have experience in the problem."/>
+                                               value="TC2::Our team consists of individuals that have vast industry experiences."/>
                                         <span className="checkout-custom"/>
-                                        Our team consist of individuals that have experience in the problem.
+                                        Our team consists of individuals that have vast industry experiences.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC3')}
-                                               value="TC3::Our team consist of individuals that can develop the product that solves the problem and understands the supply chain."/>
+                                               value="TC3::Our team consist of individuals that can develop a product or services that solves the problem and understands the supply chain."/>
                                         <span className="checkout-custom"/>
-                                        Our team consist of individuals that can develop the product that solves the problem and understands the supply chain.
+                                        Our team consists of individuals that can develop a product or services that solves the problem and understands the supply chain.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC4')}
-                                               value="TC4::We understand how our marketplace operates & have a robust industry contacts."/>
+                                               value="TC4::We understand how our marketplace operates & have robust industry contacts."/>
                                         <span className="checkout-custom"/>
-                                        We understand how our marketplace operates & have a robust industry contacts.
+                                        We understand how our marketplace operates & have robust industry contacts.
                                     </label>
 
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC5')}
-                                               value="TC5::Our team have a good understanding of how sales work, and have a strategic approach for market penetration."/>
+                                               value="TC5::Our team have a good understanding of how sales works, and have a strategic approach for market penetration."/>
                                         <span className="checkout-custom"/>
-                                        Our team have a good understanding of how sales work, and have a strategic approach for market penetration.
+                                        Our team has a good understanding of how sales works, and have a strategic approach for market penetration.
                                     </label>
 
                                     <label className="checkout-label">
@@ -134,9 +134,9 @@ const Level6 = ({startup, isEditingLevel}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="team"
                                                defaultChecked={team().includes('TC9')}
-                                               value="TC9::Our team is ready to negotiate a merger, acquisition, or IPO."/>
+                                               value="TC9::Our team has experience in negotiating a merger, acquisition, or IPO if need be."/>
                                         <span className="checkout-custom"/>
-                                        Our team is ready to negotiate a merger, acquisition, or IPO.
+                                        Our team has experience in negotiating a merger, acquisition, or IPO if need be.
                                     </label>
 
                                     <LevelButtonsComponent nextHandler={handleSubmit(nextPageHandler)}/>

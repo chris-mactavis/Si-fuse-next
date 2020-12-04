@@ -2,6 +2,7 @@
   position: fixed;
   bottom: 100px;
   right: 105px;
+  z-index: 10000;
 
   button {
     height: 50px;
@@ -26,11 +27,13 @@
       font-size: unset;
       opacity: 1;
       display: inline-block;
-      background: url(/images/icon/up-arrow.png) no-repeat center;
-      background-size: cover;
+      background: url(/images/icon/arrow-up.png) no-repeat center;
+      background-size: 30px;
       height: 50px;
       width: 50px;
       position: absolute;
+      border: 2px solid $red;
+      border-radius: 50%;
     }
   }
 }

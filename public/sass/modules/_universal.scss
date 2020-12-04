@@ -10,6 +10,10 @@
   }
 }
 
+.slick-dots li button::before {
+  color: $red !important;
+}
+
 input:focus, textarea:focus, select:focus, option:focus button{
   outline: none !important;
 }
@@ -42,7 +46,7 @@ input:focus, textarea:focus, select:focus, option:focus button{
 .complete-registration {
   font-size: 14px;
   padding: 8px 20px;
-  background: #e57373;
+  background: $green;
   color: white;
   text-align: center;
   cursor: pointer;
@@ -122,7 +126,6 @@ input:focus, textarea:focus, select:focus, option:focus button{
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
 
 
 //.filepond--drop-label {

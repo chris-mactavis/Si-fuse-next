@@ -125,9 +125,9 @@ const Level8 = ({startup, isEditingLevel}) => {
                                     <label className="checkout-label">
                                         <input ref={register} type="checkbox" name="investor_exit"
                                                defaultChecked={investorExit().includes('I8')}
-                                               value="I8::There have been acquisition offers thrown at our team that was declined already. or We've previously declined acquisition offer made at us."/>
+                                               value="I8::We've previously declined acquisition offer made at us."/>
                                         <span className="checkout-custom"/>
-                                        There have been acquisition offers thrown at our team that was declined already. or We've previously declined acquisition offer made at us.
+                                        We've previously declined acquisition offer made at us.
                                     </label>
 
                                     <label className="checkout-label">
