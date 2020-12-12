@@ -1353,24 +1353,33 @@ section {
 
     .profile-name {
       font-size: 16px;
-      color: #0F122B;
+      color: #5E6072;
     }
 
     .startup-heading {
       margin-bottom: 30px;
 
       .overview-border {
-        padding: 23px 23px 0;
+        padding: 24px 24px 32px 9px;
         background: #fff;
         border-radius: 8px;
 
         .slick-dots li button::before, .slick-dots li.slick-active button::before {
           color: $red;
         }
+
+        .startup-description{
+          margin-bottom: 0;
+        }
       }
 
       .startup-description-others {
         background: #fff;
+        padding: 20px 20px 5px;
+
+        .edit-icon{
+          right: 30px !important;
+        }
       }
 
       .perfect {
@@ -1409,6 +1418,12 @@ section {
         background: #fff;
         padding: 15px 30px;
         border-radius: 8px;
+
+        .edit-icon{
+          height: 16px;
+          top: 5px;
+          position: relative;
+        }
 
         .head-info {
           padding-bottom: 15px;
@@ -1545,8 +1560,8 @@ section {
     .startup-description {
       background: #ECEFF1;
       padding: 20px 20px;
-      margin-bottom: 30px;
       border-radius: 8px;
+      margin-bottom: 30px;
 
       .p-name {
         color: #0F122B;
@@ -1555,6 +1570,7 @@ section {
 
       .overview-sub-text {
         color: #0F122B;
+        margin-bottom: 0;
       }
 
       img {
@@ -1613,11 +1629,12 @@ section {
 
       .edit-icon {
         position: absolute;
-        top: 20px;
-        right: 35px;
+        top: 24px;
+        right: 16px;
         cursor: pointer;
         display: block;
         z-index: 100;
+        height: 16px;
 
         @media only screen and (max-width: $desktop_width) {
           display: block;
@@ -1764,7 +1781,10 @@ section {
     .startup-level {
       .startup-description {
         padding: 30px;
-        
+
+        .startup-level-content{
+          margin-top: 10px;
+        }
       }
 
       .side-content {

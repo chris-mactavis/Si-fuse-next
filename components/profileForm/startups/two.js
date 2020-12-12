@@ -144,7 +144,7 @@ export default function ProfileTwo({startup}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <input ref={register({required: 'This field is required'})}
+                                                    <input ref={register({})}
                                                            type="text"
                                                            onKeyUp={(e) => setProductVideo(e.target.value)}
                                                            className="full-width" name="product_video_url"
@@ -157,7 +157,7 @@ export default function ProfileTwo({startup}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <input ref={register({required: 'This field is required'})}
+                                                    <input ref={register({})}
                                                            type="text"
                                                            onKeyUp={(e) => setPitchVideo(e.target.value)}
                                                            className="full-width" name="pitch_video_url"

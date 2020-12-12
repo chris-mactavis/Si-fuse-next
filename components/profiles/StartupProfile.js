@@ -50,7 +50,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
     };
 
     const settingsStartup = {
-        slidesToShow: 3.2,
+        slidesToShow: 2.2,
         slidesToScroll: 1,
         arrows: true,
         // autoplay: true,
@@ -661,22 +661,25 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                             </p>
                             <p>{startupProf.company.phone}</p>
                             <div className="social-icons">
-                                <a href={`https://facebook.com/${startupProf.company.facebook}`}
+                                {startupProf.company.facebook && <a href={`https://facebook.com/${startupProf.company.facebook}`}
                                    target="_blank">
                                     <img src="/images/icon/fb-colored.svg" alt=""/>
-                                </a>
-                                <a href={`https://linkedin.com/in/${startupProf.company.linkedin}`}
+                                </a>}
+
+                                {startupProf.company.linkedin && <a href={`https://linkedin.com/in/${startupProf.company.linkedin}`}
                                    target="_blank">
                                     <img src="/images/icon/lnkd-colored.svg" alt=""/>
-                                </a>
-                                <a href={`https://instagram.com/${startupProf.company.instagram}`}
+                                </a>}
+
+                                {startupProf.company.instagram && <a href={`https://instagram.com/${startupProf.company.instagram}`}
                                    target="_blank">
                                     <img src="/images/icon/ig-colored.svg" alt=""/>
-                                </a>
-                                <a href={`https://twitter.com/${startupProf.company.twitter}`}
+                                </a>}
+
+                                {startupProf.company.twitter && <a href={`https://twitter.com/${startupProf.company.twitter}`}
                                    target="_blank">
                                     <img src="/images/icon/twt-colored.svg" alt=""/>
-                                </a>
+                                </a>}
                             </div>
                             {(!hasEdit && !connected) &&
                             <button onClick={connectHandler} className="btn connect-btn mt-4">Connect</button>}
@@ -1281,7 +1284,7 @@ const StartupProfile = ({rating, startupComments, company, services: product_ser
                                                     <div className={`d-flex align-items-center side-content`}>
                                                         <img className="mr-2 level-img" src={`/images/icon/startup-level-mark-sum.svg`}
                                                             alt="" />
-                                                        <p className="p-0 level-name">Adressable Market</p>
+                                                        <p className="p-0 level-name">Addressable Market</p>
                                                     </div>
                                                 </div>
 

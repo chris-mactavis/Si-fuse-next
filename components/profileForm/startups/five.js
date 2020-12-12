@@ -76,7 +76,7 @@ export default function ProfileFive({startup}) {
                                             <div className="col-md-8">
                                                 <div className="input-group-container">
                                                     <textarea ref={register({required: 'This field is required'})}
-                                                              placeholder="What is your addressable market?"
+                                                              placeholder="What is your addressable market? (this is the revenue opportunity available to your product/services)"
                                                               defaultValue={hasMarketing() ? startup.market.addressable_market : ''}
                                                               className="full-width" name="addressable_market" id=""
                                                               rows="4"/>

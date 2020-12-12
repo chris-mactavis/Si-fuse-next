@@ -364,7 +364,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                         <div className="col-6">
                                                             <div className="facebook social mb-10">
                                                                 <input
-                                                                    ref={register({required: 'This field is required'})}
+                                                                    ref={register}
                                                                     name="facebook" type="text"
                                                                     className="w-100"
                                                                     defaultValue={hasCompany() ? startup.company.facebook : ''}
@@ -377,7 +377,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                         <div className="pl-0 col-6">
                                                             <div className="instagram social mb-10">
                                                                 <input
-                                                                    ref={register({required: 'This field is required'})}
+                                                                    ref={register}
                                                                     name="instagram" type="text"
                                                                     className="w-100"
                                                                     defaultValue={hasCompany() ? startup.company.instagram : ''}
@@ -390,7 +390,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                         <div className="col-6">
                                                             <div className="twitter social">
                                                                 <input
-                                                                    ref={register({required: 'This field is required'})}
+                                                                    ref={register}
                                                                     name="twitter" type="text"
                                                                     className="w-100"
                                                                     defaultValue={hasCompany() ? startup.company.twitter : ''}
@@ -403,7 +403,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                         <div className="pl-0 col-6">
                                                             <div className="linked-in social">
                                                                 <input
-                                                                    ref={register({required: 'This field is required'})}
+                                                                    ref={register}
                                                                     name="linkedin" type="text"
                                                                     className="w-100"
                                                                     defaultValue={hasCompany() ? startup.company.linkedin : ''}
@@ -416,7 +416,7 @@ export default function ProfileOne({industries, startup, locations}) {
                                                 </div>
 
                                                 <div className="input-group-container">
-                                                    <textarea ref={register({required: 'This field is required'})}
+                                                    <textarea ref={register({})}
                                                               className="full-width mt-0" name="summary"
                                                               id="" cols="30"
                                                               defaultValue={hasCompany() ? startup.company.summary : ''}
