@@ -32,7 +32,9 @@ export default function Connections({connections}) {
                 }
 
                 {
-                    connections.length === 0 && <span>No Connections!</span>
+                    connections.length === 0 && <p>
+                        Hi there, you currently don't have any connections. Over time this would change and you would be prompted when you have a new connection request. Thanks.
+                    </p>
                 }
 
                 {/*<div class="text-center button mt-5">*/}

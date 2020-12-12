@@ -441,7 +441,7 @@ form.profile-details input, form.profile-details textarea, form.profile-details 
   border-top: 0;
   border-right: 0;
   border-bottom: 1px solid #6B6B6B;
-  padding: 6px 0;
+  padding: 6px 10px;
   outline: none;
   background: #f4f5f7;
   resize: none;
@@ -1976,21 +1976,28 @@ section.startup-content .level-name {
 }
 section.startup-content .profile-name {
   font-size: 16px;
-  color: #0F122B;
+  color: #5E6072;
 }
 section.startup-content .startup-heading {
   margin-bottom: 30px;
 }
 section.startup-content .startup-heading .overview-border {
-  padding: 23px 23px 0;
+  padding: 24px 24px 32px 9px;
   background: #fff;
   border-radius: 8px;
 }
 section.startup-content .startup-heading .overview-border .slick-dots li button::before, section.startup-content .startup-heading .overview-border .slick-dots li.slick-active button::before {
   color: #E14C22;
 }
+section.startup-content .startup-heading .overview-border .startup-description {
+  margin-bottom: 0;
+}
 section.startup-content .startup-heading .startup-description-others {
   background: #fff;
+  padding: 20px 20px 5px;
+}
+section.startup-content .startup-heading .startup-description-others .edit-icon {
+  right: 30px !important;
 }
 section.startup-content .startup-heading .perfect {
   border-left: 10px solid #17dd17;
@@ -2026,6 +2033,11 @@ section.startup-content .startup-sidebar .profile-content {
   background: #fff;
   padding: 15px 30px;
   border-radius: 8px;
+}
+section.startup-content .startup-sidebar .profile-content .edit-icon {
+  height: 16px;
+  top: 5px;
+  position: relative;
 }
 section.startup-content .startup-sidebar .profile-content .head-info {
   padding-bottom: 15px;
@@ -2124,8 +2136,8 @@ section.startup-content h5 {
 section.startup-content .startup-description {
   background: #ECEFF1;
   padding: 20px 20px;
-  margin-bottom: 30px;
   border-radius: 8px;
+  margin-bottom: 30px;
 }
 section.startup-content .startup-description .p-name {
   color: #0F122B;
@@ -2133,6 +2145,7 @@ section.startup-content .startup-description .p-name {
 }
 section.startup-content .startup-description .overview-sub-text {
   color: #0F122B;
+  margin-bottom: 0;
 }
 section.startup-content .startup-description img {
   margin-right: 5px;
@@ -2164,11 +2177,12 @@ section.startup-content .startup-description .industry-paragraph .industry-span 
 }
 section.startup-content .startup-description .edit-icon {
   position: absolute;
-  top: 20px;
-  right: 35px;
+  top: 24px;
+  right: 16px;
   cursor: pointer;
   display: block;
   z-index: 100;
+  height: 16px;
 }
 @media only screen and (max-width: 992px) {
   section.startup-content .startup-description .edit-icon {
@@ -2268,6 +2282,9 @@ section.startup-content .investors-description .investors-profile .edit-investor
 }
 section.startup-content .startup-level .startup-description {
   padding: 30px;
+}
+section.startup-content .startup-level .startup-description .startup-level-content {
+  margin-top: 10px;
 }
 section.startup-content .startup-level .side-content img {
   margin-bottom: 10px;

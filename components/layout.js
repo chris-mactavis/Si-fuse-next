@@ -81,11 +81,15 @@ export default function Layout({children, page, headerClass, headerContent, redB
 
             <ImageViewer/>
 
+            {/*{*/}
+            {/*    user ? (!user.has_profile &&*/}
+            {/*        <div className="complete-registration" onClick={goToProfile}>Please Complete Your Profile (15 mins. approx.)</div>) : null*/}
+            {/*}*/}
+
             {
-                user ? (!user.has_profile &&
-                    <div className="complete-registration" onClick={goToProfile}>Please Complete Your
-                        Profile</div>) : null
+                (!user.has_profile && user.user_type.id === 1) ? <div className="complete-registration" onClick={goToProfile}>Please Complete Your Profile (5 mins. approx.)</div> : <div className="complete-registration" onClick={goToProfile}>Please Complete Your Profile (15 mins. approx.)</div>
             }
+
 
             <header className={headerClass}>
 

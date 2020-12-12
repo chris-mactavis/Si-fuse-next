@@ -27,9 +27,10 @@ const Timeline = ({data}) => {
                 }
 
                 {
-                    startups.length === 0 && <div className="col-md-4">
-                        No startups!
-                    </div>
+                    startups.length === 0 && <div className="col-md-4"><p>
+                        Hi, thank you for joining SI Fuse as an investor. At the moment there is no startup on your timeline.
+                        Once a Startup matches your profile, you will be prompted. Thanks.
+                    </p></div>
                 }
             </div>
         </section>
