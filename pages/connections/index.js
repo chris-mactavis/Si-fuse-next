@@ -4,6 +4,7 @@ import React from "react";
 import axiosInstance from "../../config/axios";
 import Token from "../../utils/Token";
 import StartupCard from "../../components/startups/startupCard";
+import Link from 'next/link';
 
 export default function Connections({connections}) {
 
@@ -33,7 +34,7 @@ export default function Connections({connections}) {
 
                 {
                     connections.length === 0 && <p>
-                        Hi there, you currently don't have any connections. Over time this would change and you would be prompted when you have a new connection request. Thanks.
+                        Hi there, you currently don't have any connections. Over time this would change and you would be prompted when you have a new connection request. <Link href="/discover"><a>Click here</a></Link> to add startups to your connections.
                     </p>
                 }
 
