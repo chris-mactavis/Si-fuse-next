@@ -6,6 +6,7 @@ import Token from "../../utils/Token";
 import StartupCard from "../../components/startups/startupCard";
 import {User} from "../../utils/User";
 import Router from "next/router";
+import Link from "next/link";
 
 const Timeline = ({data}) => {
 
@@ -29,7 +30,7 @@ const Timeline = ({data}) => {
                 {
                     startups.length === 0 && <div className="col-md-4"><p>
                         Hi, thank you for joining SI Fuse as an investor. At the moment there is no startup on your timeline.
-                        Once a Startup matches your profile, you will be prompted. Thanks.
+                        Once a startup matches your profile, you will be prompted. <Link href="/discover"><a>Click here</a></Link> to add view available startups.
                     </p></div>
                 }
             </div>
